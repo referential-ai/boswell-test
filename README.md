@@ -308,7 +308,6 @@ See cost_report.md for detailed breakdown
 ```
 
 **Detailed Cost Report** (`cost_report.md`):
-```markdown
 # Boswell Test Cost Report
 
 Run timestamp: 2024-06-27 15:43:21
@@ -347,7 +346,6 @@ Domain: Political Science - Level 1: AI Policy Analysis
 | Essay Generation | $0.8532 | 29.7% |
 | Grading | $2.0232 | 70.3% |
 | **TOTAL** | **$2.8764** | **100%** |
-```
 
 This cost reporting helps users understand the economics of running comprehensive model evaluations and make informed decisions about model selection and test size.
 
