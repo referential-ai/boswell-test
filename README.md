@@ -1,8 +1,24 @@
 # Boswell Test: LLM Comparative Analysis Framework
 
-> *Inspired by Peter Luh's ["Is AI Chatbot My Boswell?"](https://peterl168.substack.com/p/is-ai-chatbot-my-boswell) research*
+The Boswell Test is an automated tool for comparing Large Language Models (LLMs) through peer-review, where models grade each other's essays. This implementation is based on the methodology introduced by Peter Luh in his article ["Is AI Chatbot My Boswell?"](https://peterl168.substack.com/p/is-ai-chatbot-my-boswell) (February 2025).
 
-The Boswell Test is a framework for evaluating and comparing Large Language Models (LLMs) through a peer-review system where models grade each other's responses to challenging prompts across different knowledge domains.
+## 🌟 Introduction: How It Works
+
+This tool automates the process of running a Boswell Test across multiple LLMs. Here's how it works:
+
+1. **Essay Generation**: The system prompts multiple LLMs with the same complex question in a specific domain (like political science or computer science)
+2. **Peer Evaluation**: Each LLM grades the essays written by all other models, providing detailed feedback and assigning letter grades (A+, A, A-, etc.)
+3. **Bias Analysis**: The system analyzes grading patterns to identify which models grade more strictly or leniently compared to the median
+4. **Visualization**: The framework generates charts and graphs showing performance metrics, grading distributions, timing data, and cost analysis
+5. **Comprehensive Reporting**: Results are organized in timestamped directories with easy-to-read tables in multiple formats (Markdown, ASCII, CSV, JSON)
+
+The Boswell Test methodology offers several advantages over traditional benchmarks:
+- It captures nuanced evaluation capabilities, not just raw performance
+- It leverages LLMs' own analytical skills to provide detailed feedback
+- It reveals biases in how different models evaluate the same work
+- It creates a multidimensional view of model capabilities across different domains
+
+All of this is automated through a simple command-line interface that handles the entire testing process from essay generation to final report creation.
 
 ## 🔍 What is the Boswell Test?
 
@@ -86,10 +102,24 @@ This will run the basic political science test with all verified models.
 python boswell_test.py --domain pol_sci_2
 ```
 
+#### Run tests on all available domains:
+
+```bash
+python boswell_test.py --all-domains
+```
+
+This will sequentially run tests on all domains with the same set of models, creating separate results directories for each domain.
+
 #### Use specific models:
 
 ```bash
 python boswell_test.py --models "GPT-4o" "Claude-3-Opus" "Claude-3.7-Sonnet"
+```
+
+#### Combine options:
+
+```bash
+python boswell_test.py --all-domains --models "GPT-4o" "Claude-3.7-Sonnet" --skip-verification
 ```
 
 #### Skip model verification (faster but less reliable):
@@ -151,12 +181,20 @@ results/
 │   │   ├── GPT-4o.md              # Essay with feedback from all graders
 │   │   ├── Claude-3-Opus.md
 │   │   └── ...
+│   ├── charts/                    # Data visualizations
+│   │   ├── grading_bias.png       # Bar chart of grading bias by model
+│   │   ├── grade_distribution.png # Boxplot of grades received by each model
+│   │   ├── essay_generation_time.png  # Time comparison for essay generation
+│   │   ├── average_grading_time.png   # Time comparison for grading
+│   │   ├── cost_breakdown.png     # Cost analysis per model
+│   │   └── time_breakdown.png     # Pie chart of process timing
 │   ├── grades_table.txt           # ASCII table of all grades
 │   ├── grades_table.md            # Markdown table of all grades
 │   ├── grades_table.csv           # CSV format for spreadsheet import
 │   ├── grading_bias.txt           # ASCII table of grading bias analysis
 │   ├── grading_bias.md            # Markdown table of grading bias analysis
-│   ├── cost_report.md             # Detailed cost analysis report  
+│   ├── cost_report.md             # Detailed cost analysis report
+│   ├── timing_report.md           # Detailed timing analysis report  
 │   ├── grades.json                # Structured grade data in JSON
 │   └── full_results.json          # Complete results with all data
 └── ...
@@ -316,6 +354,30 @@ Domain: Political Science - Level 1: AI Policy Analysis
 
 This cost reporting helps users understand the economics of running comprehensive model evaluations and make informed decisions about model selection and test size.
 
+#### 4. Data Visualizations (`charts/` directory)
+
+The Boswell Test generates several data visualizations to help analyze the results:
+
+**Grading Bias Chart** (`grading_bias.png`):
+A bar chart showing which models grade more strictly or leniently compared to the median. Negative values indicate stricter graders, while positive values show more lenient ones.
+
+**Grade Distribution** (`grade_distribution.png`):
+A boxplot showing the distribution of grades received by each model, making it easy to see both the median grade and the spread of opinions about each model's performance.
+
+**Essay Generation Time** (`essay_generation_time.png`):
+A horizontal bar chart comparing how long each model took to generate its essay, sorted from fastest to slowest.
+
+**Average Grading Time** (`average_grading_time.png`):
+A horizontal bar chart showing the average time each model took to grade essays from other models.
+
+**Cost Breakdown** (`cost_breakdown.png`):
+A stacked bar chart showing the cost breakdown for each model, split between essay generation costs and grading costs.
+
+**Process Timing** (`time_breakdown.png`):
+A pie chart showing the proportion of time spent on each phase of the test: essay generation, grading, analysis, and file generation.
+
+These visualizations provide at-a-glance insights into model performance, efficiency, and cost-effectiveness across the different test aspects.
+
 **JSON Grades** (`grades.json`):
 ```json
 {
@@ -341,7 +403,7 @@ This cost reporting helps users understand the economics of running comprehensiv
 }
 ```
 
-#### 3. Full Results (`full_results.json`)
+#### 5. Full Results (`full_results.json`)
 
 A comprehensive JSON file containing:
 - All essays from each model
@@ -349,6 +411,8 @@ A comprehensive JSON file containing:
 - Statistical analysis of performance
 - Run metadata (timestamp, models used, domain info)
 - File paths to all generated artifacts
+- Timing data for all operations
+- Cost tracking information
 
 This file contains everything needed to reconstruct the entire test session.
 
@@ -387,6 +451,18 @@ The analysis also identifies which models tend to grade more strictly or lenient
 
 This bias analysis helps identify patterns in how different models evaluate their peers. For instance, in this sample, Claude-3.7-Sonnet and Llama-3-8B appear to be slightly stricter graders, while Claude-3-Opus, GPT-4o-mini, and GPT-3.5-Turbo tend to be slightly more lenient.
 
+## 📊 Timing and Performance Metrics
+
+The Boswell Test framework tracks detailed timing information throughout the testing process:
+
+- **Total Runtime**: Precise tracking of the entire test duration in minutes and seconds
+- **Phase Timing**: Breakdown of time spent in essay generation, grading, analysis, and file generation
+- **Per-Model Timing**: Tracking how long each model takes to generate essays and grade others
+- **Timing Visualizations**: Charts showing relative performance of different models
+- **Timing Reports**: Detailed Markdown reports with all timing metrics
+
+This timing information helps identify which models are more efficient and how overall test time is distributed across different phases.
+
 ## 🧰 Reliability Features
 
 The Boswell Test framework includes several features to ensure reliable operation:
@@ -396,6 +472,8 @@ The Boswell Test framework includes several features to ensure reliable operatio
 - **Error Handling**: Gracefully handles API errors and prevents script crashes
 - **Flexible Grade Extraction**: Finds grades in different formats even if they don't follow the exact requested format
 - **Comprehensive Logging**: Detailed console feedback throughout the testing process
+- **Domain Independence**: Run tests across all domains with a single command
+- **Robust Visualizations**: Charts adapt to missing or incomplete data
 
 ## 🧩 Extending the Framework
 
@@ -422,6 +500,6 @@ Edit the `MODELS` list in `boswell_test.py` to add or remove models from OpenRou
 
 ## 🙏 Acknowledgments
 
-- **Peter Luh** whose [Boswell Test research](https://peterl168.substack.com/p/is-ai-chatbot-my-boswell) was the inspiration behind this project. His pioneering work on model comparison and grading bias analysis formed the foundation for our approach.
+- **Peter Luh** who created the [Boswell Test methodology](https://peterl168.substack.com/p/is-ai-chatbot-my-boswell) that this tool implements. His February 2025 research article, "Is AI Chatbot My Boswell?", introduced the concept of LLMs peer-reviewing each other and analyzing grading bias. This implementation automates and extends his pioneering methodology.
 - [OpenRouter](https://openrouter.ai/) for providing unified API access to multiple LLMs
 - All model providers for creating the amazing AI models that make this test possible

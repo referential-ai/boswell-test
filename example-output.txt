@@ -1,0 +1,611 @@
+(venv) ➜  botwell python boswell_test.py
+Starting Boswell Test for domain 'pol_sci_1'...
+Using all available models
+Verifying available models...
+  Testing model: GPT-4o...
+  ✅ Model GPT-4o verified and available
+  Testing model: Claude-3.7-Sonnet...
+  ✅ Model Claude-3.7-Sonnet verified and available
+  Testing model: o3-mini-high...
+  ✅ Model o3-mini-high verified and available
+  Testing model: Gemini Flash 1.5...
+  ✅ Model Gemini Flash 1.5 verified and available
+
+Step 1: Collecting essays from each model for domain 'Political Science - Level 1 AI Policy Analysis'...
+  Requesting essay from GPT-4o...
+  Received essay from GPT-4o (5377 characters) ($0.0015, 1049 tokens) in 24.08s
+  Requesting essay from Claude-3.7-Sonnet...
+  Received essay from Claude-3.7-Sonnet (5187 characters) ($0.0014, 1012 tokens) in 18.92s
+  Requesting essay from o3-mini-high...
+  Received essay from o3-mini-high (5318 characters) ($0.0032, 2231 tokens) in 12.13s
+  Requesting essay from Gemini Flash 1.5...
+  Received essay from Gemini Flash 1.5 (5018 characters) ($0.0013, 945 tokens) in 5.87s
+
+Step 2: Grading essays...
+  GPT-4o grading Claude-3.7-Sonnet's essay...
+  GPT-4o gave Claude-3.7-Sonnet a grade of B+ ($0.0009) in 8.90s
+  GPT-4o grading o3-mini-high's essay...
+  GPT-4o gave o3-mini-high a grade of A- ($0.0010) in 12.65s
+  GPT-4o grading Gemini Flash 1.5's essay...
+  GPT-4o gave Gemini Flash 1.5 a grade of B ($0.0010) in 7.18s
+  Claude-3.7-Sonnet grading GPT-4o's essay...
+  Claude-3.7-Sonnet gave GPT-4o a grade of B+ ($0.0013) in 10.71s
+  Claude-3.7-Sonnet grading o3-mini-high's essay...
+  Claude-3.7-Sonnet gave o3-mini-high a grade of B+ ($0.0011) in 8.71s
+  Claude-3.7-Sonnet grading Gemini Flash 1.5's essay...
+  Claude-3.7-Sonnet gave Gemini Flash 1.5 a grade of B+ ($0.0012) in 12.19s
+  o3-mini-high grading GPT-4o's essay...
+  o3-mini-high gave GPT-4o a grade of B+ ($0.0031) in 11.31s
+  o3-mini-high grading Claude-3.7-Sonnet's essay...
+  o3-mini-high gave Claude-3.7-Sonnet a grade of A- ($0.0034) in 16.12s
+  o3-mini-high grading Gemini Flash 1.5's essay...
+  o3-mini-high gave Gemini Flash 1.5 a grade of A- ($0.0032) in 11.97s
+  Gemini Flash 1.5 grading GPT-4o's essay...
+  Gemini Flash 1.5 gave GPT-4o a grade of B ($0.0008) in 1.76s
+  Gemini Flash 1.5 grading Claude-3.7-Sonnet's essay...
+  Gemini Flash 1.5 gave Claude-3.7-Sonnet a grade of B- ($0.0007) in 1.54s
+  Gemini Flash 1.5 grading o3-mini-high's essay...
+  Gemini Flash 1.5 gave o3-mini-high a grade of B+ ($0.0009) in 2.07s
+
+Step 3: Calculating summary statistics...
+
+Step 4: Creating results directory and saving artifacts...
+  Saved essay and feedback for GPT-4o to results/20250226-144216-pol_sci_1/essays/GPT-4o.md
+  Saved essay and feedback for Claude-3.7-Sonnet to results/20250226-144216-pol_sci_1/essays/Claude-3.7-Sonnet.md
+  Saved essay and feedback for o3-mini-high to results/20250226-144216-pol_sci_1/essays/o3-mini-high.md
+  Saved essay and feedback for Gemini Flash 1.5 to results/20250226-144216-pol_sci_1/essays/Gemini Flash 1.5.md
+  Generating formatted tables...
+/Users/alan/Projects/_referential/botwell/boswell_test.py:1018: MatplotlibDeprecationWarning: The 'labels' parameter of boxplot() has been renamed 'tick_labels' since Matplotlib 3.9; support for the old name will be dropped in 3.11.
+  plt.boxplot([numeric_grades[model] for model in models],
+  Visualizations saved to results/20250226-144216-pol_sci_1/charts
+
+Results saved to results/20250226-144216-pol_sci_1/full_results.json
+  All results saved to results/20250226-144216-pol_sci_1 directory
+
+=== SUMMARY OF RESULTS ===
+Model                | Median Grade | Grades Received
+----------------------------------------------------------------------
+GPT-4o               | B+           | B+, B+, B
+Claude-3.7-Sonnet    | B+           | B+, A-, B-
+o3-mini-high         | B+           | A-, B+, B+
+Gemini Flash 1.5     | B+           | B, B+, A-
+
+=== GRADING BIAS ANALYSIS ===
+Overall Median Grade: B+
+Model                | Median Given | Grading Bias              | Bias Value
+----------------------------------------------------------------------
+GPT-4o               | B+           | Neutral                   | 0.00
+Claude-3.7-Sonnet    | B+           | Neutral                   | 0.00
+o3-mini-high         | A-           | Lenient (+1 grade)        | 0.40
+Gemini Flash 1.5     | B            | Slightly Strict (-1/3 grade) | -0.30
+
+=== COST SUMMARY ===
+Total Cost: $0.0261
+Total Tokens: 26,028
+Total Duration: 166.09 seconds
+Essay Generation: $0.0074 (28.4%)
+Grading: $0.0187 (71.6%)
+See cost_report.md for detailed breakdown
+
+=== TIMING INFORMATION ===
+Total Run Time: 3m 18.1s
+Essay Generation: 65.0s
+Grading: 117.2s
+Analysis: 0.0s
+File Generation: 1.4s
+
+=== SAVED ESSAY FILES ===
+GPT-4o               | results/20250226-144216-pol_sci_1/essays/GPT-4o.md
+Claude-3.7-Sonnet    | results/20250226-144216-pol_sci_1/essays/Claude-3.7-Sonnet.md
+o3-mini-high         | results/20250226-144216-pol_sci_1/essays/o3-mini-high.md
+Gemini Flash 1.5     | results/20250226-144216-pol_sci_1/essays/Gemini Flash 1.5.md
+
+=== VISUALIZATIONS ===
+Data visualizations available in: results/20250226-144216-pol_sci_1/charts/
+- Grading bias chart
+- Grade distribution boxplot
+- Essay generation timing comparison
+- Grading time comparison
+- Cost breakdown
+- Process timing breakdown
+
+Boswell Test completed!
+  - Full results directory: results/20250226-144216-pol_sci_1
+  - Tables directory: results/20250226-144216-pol_sci_1/grades_table.*
+  - Essays directory: results/20250226-144216-pol_sci_1/essays/
+  - Visualizations: results/20250226-144216-pol_sci_1/charts/
+(venv) ➜  botwell python boswell_test.py --all-domains
+Starting Boswell Test for ALL available domains (4 domains)...
+Using all available models
+
+======================================================================
+=== Running test for domain: Political Science - Level 1: AI Policy Analysis ===
+======================================================================
+
+Verifying available models...
+  Testing model: GPT-4o...
+  ✅ Model GPT-4o verified and available
+  Testing model: Claude-3.7-Sonnet...
+  ✅ Model Claude-3.7-Sonnet verified and available
+  Testing model: o3-mini-high...
+  ✅ Model o3-mini-high verified and available
+  Testing model: Gemini Flash 1.5...
+  ✅ Model Gemini Flash 1.5 verified and available
+
+Step 1: Collecting essays from each model for domain 'Political Science - Level 1 AI Policy Analysis'...
+  Requesting essay from GPT-4o...
+  Received essay from GPT-4o (5437 characters) ($0.0014, 994 tokens) in 21.61s
+  Requesting essay from Claude-3.7-Sonnet...
+  Received essay from Claude-3.7-Sonnet (5042 characters) ($0.0014, 993 tokens) in 19.45s
+  Requesting essay from o3-mini-high...
+  Received essay from o3-mini-high (5824 characters) ($0.0035, 2406 tokens) in 13.01s
+  Requesting essay from Gemini Flash 1.5...
+  Received essay from Gemini Flash 1.5 (5184 characters) ($0.0013, 967 tokens) in 6.17s
+
+Step 2: Grading essays...
+  GPT-4o grading Claude-3.7-Sonnet's essay...
+  GPT-4o gave Claude-3.7-Sonnet a grade of A- ($0.0009) in 6.76s
+  GPT-4o grading o3-mini-high's essay...
+  GPT-4o gave o3-mini-high a grade of B+ ($0.0010) in 8.14s
+  GPT-4o grading Gemini Flash 1.5's essay...
+  GPT-4o gave Gemini Flash 1.5 a grade of A- ($0.0010) in 8.46s
+  Claude-3.7-Sonnet grading GPT-4o's essay...
+  Claude-3.7-Sonnet gave GPT-4o a grade of B+ ($0.0012) in 9.05s
+  Claude-3.7-Sonnet grading o3-mini-high's essay...
+  Claude-3.7-Sonnet gave o3-mini-high a grade of B+ ($0.0013) in 10.29s
+  Claude-3.7-Sonnet grading Gemini Flash 1.5's essay...
+  Claude-3.7-Sonnet gave Gemini Flash 1.5 a grade of B+ ($0.0012) in 10.11s
+  o3-mini-high grading GPT-4o's essay...
+  o3-mini-high gave GPT-4o a grade of B+ ($0.0040) in 14.50s
+  o3-mini-high grading Claude-3.7-Sonnet's essay...
+  o3-mini-high gave Claude-3.7-Sonnet a grade of A- ($0.0043) in 15.88s
+  o3-mini-high grading Gemini Flash 1.5's essay...
+  o3-mini-high gave Gemini Flash 1.5 a grade of A- ($0.0028) in 9.57s
+  Gemini Flash 1.5 grading GPT-4o's essay...
+  Gemini Flash 1.5 gave GPT-4o a grade of B- ($0.0007) in 1.43s
+  Gemini Flash 1.5 grading Claude-3.7-Sonnet's essay...
+  Gemini Flash 1.5 gave Claude-3.7-Sonnet a grade of B- ($0.0006) in 1.22s
+  Gemini Flash 1.5 grading o3-mini-high's essay...
+  Gemini Flash 1.5 gave o3-mini-high a grade of B- ($0.0009) in 2.38s
+
+Step 3: Calculating summary statistics...
+
+Step 4: Creating results directory and saving artifacts...
+  Saved essay and feedback for GPT-4o to results/20250226-144914-pol_sci_1/essays/GPT-4o.md
+  Saved essay and feedback for Claude-3.7-Sonnet to results/20250226-144914-pol_sci_1/essays/Claude-3.7-Sonnet.md
+  Saved essay and feedback for o3-mini-high to results/20250226-144914-pol_sci_1/essays/o3-mini-high.md
+  Saved essay and feedback for Gemini Flash 1.5 to results/20250226-144914-pol_sci_1/essays/Gemini Flash 1.5.md
+  Generating formatted tables...
+/Users/alan/Projects/_referential/botwell/boswell_test.py:1018: MatplotlibDeprecationWarning: The 'labels' parameter of boxplot() has been renamed 'tick_labels' since Matplotlib 3.9; support for the old name will be dropped in 3.11.
+  plt.boxplot([numeric_grades[model] for model in models],
+  Visualizations saved to results/20250226-144914-pol_sci_1/charts
+
+Results saved to results/20250226-144914-pol_sci_1/full_results.json
+  All results saved to results/20250226-144914-pol_sci_1 directory
+
+Results saved to boswell_results_pol_sci_1.json
+
+=== SUMMARY OF RESULTS ===
+Model                | Median Grade | Grades Received
+----------------------------------------------------------------------
+GPT-4o               | B+           | B+, B+, B-
+Claude-3.7-Sonnet    | A-           | A-, A-, B-
+o3-mini-high         | B+           | B+, B+, B-
+Gemini Flash 1.5     | A-           | A-, B+, A-
+
+=== GRADING BIAS ANALYSIS ===
+Overall Median Grade: B+
+Model                | Median Given | Grading Bias              | Bias Value
+----------------------------------------------------------------------
+GPT-4o               | A-           | Lenient (+1 grade)        | 0.40
+Claude-3.7-Sonnet    | B+           | Neutral                   | 0.00
+o3-mini-high         | A-           | Lenient (+1 grade)        | 0.40
+Gemini Flash 1.5     | B-           | Strict (-1 grade)         | -0.60
+
+=== COST SUMMARY ===
+Total Cost: $0.0275
+Total Tokens: 27,117
+Total Duration: 158.01 seconds
+Essay Generation: $0.0076 (27.7%)
+Grading: $0.0199 (72.3%)
+See cost_report.md for detailed breakdown
+
+=== TIMING INFORMATION ===
+Total Run Time: 3m 11.6s
+Essay Generation: 64.3s
+Grading: 109.8s
+Analysis: 0.0s
+File Generation: 1.0s
+
+=== SAVED ESSAY FILES ===
+GPT-4o               | results/20250226-144914-pol_sci_1/essays/GPT-4o.md
+Claude-3.7-Sonnet    | results/20250226-144914-pol_sci_1/essays/Claude-3.7-Sonnet.md
+o3-mini-high         | results/20250226-144914-pol_sci_1/essays/o3-mini-high.md
+Gemini Flash 1.5     | results/20250226-144914-pol_sci_1/essays/Gemini Flash 1.5.md
+
+=== VISUALIZATIONS ===
+Data visualizations available in: results/20250226-144914-pol_sci_1/charts/
+- Grading bias chart
+- Grade distribution boxplot
+- Essay generation timing comparison
+- Grading time comparison
+- Cost breakdown
+- Process timing breakdown
+
+Test for domain 'pol_sci_1' completed!
+  - Full results directory: results/20250226-144914-pol_sci_1
+  - Tables directory: results/20250226-144914-pol_sci_1/grades_table.*
+  - Essays directory: results/20250226-144914-pol_sci_1/essays/
+  - Visualizations: results/20250226-144914-pol_sci_1/charts/
+
+======================================================================
+=== Running test for domain: Political Science - Level 2: AI Governance Analysis ===
+======================================================================
+
+Verifying available models...
+  Testing model: GPT-4o...
+  ✅ Model GPT-4o verified and available
+  Testing model: Claude-3.7-Sonnet...
+  ✅ Model Claude-3.7-Sonnet verified and available
+  Testing model: o3-mini-high...
+  ✅ Model o3-mini-high verified and available
+  Testing model: Gemini Flash 1.5...
+  ✅ Model Gemini Flash 1.5 verified and available
+
+Step 1: Collecting essays from each model for domain 'Political Science - Level 2 AI Governance Analysis'...
+  Requesting essay from GPT-4o...
+  Received essay from GPT-4o (6366 characters) ($0.0017, 1289 tokens) in 31.41s
+  Requesting essay from Claude-3.7-Sonnet...
+  Received essay from Claude-3.7-Sonnet (5331 characters) ($0.0016, 1206 tokens) in 21.08s
+  Requesting essay from o3-mini-high...
+  Received essay from o3-mini-high (8603 characters) ($0.0038, 2674 tokens) in 15.81s
+  Requesting essay from Gemini Flash 1.5...
+  Received essay from Gemini Flash 1.5 (6353 characters) ($0.0017, 1279 tokens) in 7.12s
+
+Step 2: Grading essays...
+  GPT-4o grading Claude-3.7-Sonnet's essay...
+  GPT-4o gave Claude-3.7-Sonnet a grade of B+ ($0.0013) in 9.50s
+  GPT-4o grading o3-mini-high's essay...
+  GPT-4o gave o3-mini-high a grade of B+ ($0.0016) in 7.12s
+  GPT-4o grading Gemini Flash 1.5's essay...
+  GPT-4o gave Gemini Flash 1.5 a grade of B ($0.0014) in 12.92s
+  Claude-3.7-Sonnet grading GPT-4o's essay...
+  Claude-3.7-Sonnet gave GPT-4o a grade of B ($0.0016) in 13.58s
+  Claude-3.7-Sonnet grading o3-mini-high's essay...
+  Claude-3.7-Sonnet gave o3-mini-high a grade of B ($0.0020) in 17.05s
+  Claude-3.7-Sonnet grading Gemini Flash 1.5's essay...
+  Claude-3.7-Sonnet gave Gemini Flash 1.5 a grade of B ($0.0016) in 13.04s
+  o3-mini-high grading GPT-4o's essay...
+  o3-mini-high gave GPT-4o a grade of A- ($0.0040) in 15.97s
+  o3-mini-high grading Claude-3.7-Sonnet's essay...
+  o3-mini-high gave Claude-3.7-Sonnet a grade of A ($0.0052) in 24.01s
+  o3-mini-high grading Gemini Flash 1.5's essay...
+  o3-mini-high gave Gemini Flash 1.5 a grade of A- ($0.0040) in 42.01s
+  Gemini Flash 1.5 grading GPT-4o's essay...
+  Gemini Flash 1.5 gave GPT-4o a grade of B- ($0.0010) in 1.82s
+  Gemini Flash 1.5 grading Claude-3.7-Sonnet's essay...
+  Gemini Flash 1.5 gave Claude-3.7-Sonnet a grade of B ($0.0009) in 1.96s
+  Gemini Flash 1.5 grading o3-mini-high's essay...
+  Gemini Flash 1.5 gave o3-mini-high a grade of B ($0.0012) in 1.87s
+
+Step 3: Calculating summary statistics...
+
+Step 4: Creating results directory and saving artifacts...
+  Saved essay and feedback for GPT-4o to results/20250226-145221-pol_sci_2/essays/GPT-4o.md
+  Saved essay and feedback for Claude-3.7-Sonnet to results/20250226-145221-pol_sci_2/essays/Claude-3.7-Sonnet.md
+  Saved essay and feedback for o3-mini-high to results/20250226-145221-pol_sci_2/essays/o3-mini-high.md
+  Saved essay and feedback for Gemini Flash 1.5 to results/20250226-145221-pol_sci_2/essays/Gemini Flash 1.5.md
+  Generating formatted tables...
+/Users/alan/Projects/_referential/botwell/boswell_test.py:1018: MatplotlibDeprecationWarning: The 'labels' parameter of boxplot() has been renamed 'tick_labels' since Matplotlib 3.9; support for the old name will be dropped in 3.11.
+  plt.boxplot([numeric_grades[model] for model in models],
+  Visualizations saved to results/20250226-145221-pol_sci_2/charts
+
+Results saved to results/20250226-145221-pol_sci_2/full_results.json
+  All results saved to results/20250226-145221-pol_sci_2 directory
+
+Results saved to boswell_results_pol_sci_2.json
+
+=== SUMMARY OF RESULTS ===
+Model                | Median Grade | Grades Received
+----------------------------------------------------------------------
+GPT-4o               | B            | B, A-, B-
+Claude-3.7-Sonnet    | B+           | B+, A, B
+o3-mini-high         | B            | B+, B, B
+Gemini Flash 1.5     | B            | B, B, A-
+
+=== GRADING BIAS ANALYSIS ===
+Overall Median Grade: B
+Model                | Median Given | Grading Bias              | Bias Value
+----------------------------------------------------------------------
+GPT-4o               | B+           | Slightly Lenient (+1/3 grade) | 0.30
+Claude-3.7-Sonnet    | B            | Neutral                   | 0.00
+o3-mini-high         | A-           | Very Lenient (+2 grades)  | 0.70
+Gemini Flash 1.5     | B            | Neutral                   | 0.00
+
+=== COST SUMMARY ===
+Total Cost: $0.0345
+Total Tokens: 35,378
+Total Duration: 236.25 seconds
+Essay Generation: $0.0088 (25.5%)
+Grading: $0.0257 (74.5%)
+See cost_report.md for detailed breakdown
+
+=== TIMING INFORMATION ===
+Total Run Time: 4m 25.0s
+Essay Generation: 79.4s
+Grading: 172.9s
+Analysis: 0.0s
+File Generation: 0.9s
+
+=== SAVED ESSAY FILES ===
+GPT-4o               | results/20250226-145221-pol_sci_2/essays/GPT-4o.md
+Claude-3.7-Sonnet    | results/20250226-145221-pol_sci_2/essays/Claude-3.7-Sonnet.md
+o3-mini-high         | results/20250226-145221-pol_sci_2/essays/o3-mini-high.md
+Gemini Flash 1.5     | results/20250226-145221-pol_sci_2/essays/Gemini Flash 1.5.md
+
+=== VISUALIZATIONS ===
+Data visualizations available in: results/20250226-145221-pol_sci_2/charts/
+- Grading bias chart
+- Grade distribution boxplot
+- Essay generation timing comparison
+- Grading time comparison
+- Cost breakdown
+- Process timing breakdown
+
+Test for domain 'pol_sci_2' completed!
+  - Full results directory: results/20250226-145221-pol_sci_2
+  - Tables directory: results/20250226-145221-pol_sci_2/grades_table.*
+  - Essays directory: results/20250226-145221-pol_sci_2/essays/
+  - Visualizations: results/20250226-145221-pol_sci_2/charts/
+
+======================================================================
+=== Running test for domain: Computer Science - Level 1: Algorithm Analysis ===
+======================================================================
+
+Verifying available models...
+  Testing model: GPT-4o...
+  ✅ Model GPT-4o verified and available
+  Testing model: Claude-3.7-Sonnet...
+  ✅ Model Claude-3.7-Sonnet verified and available
+  Testing model: o3-mini-high...
+  ✅ Model o3-mini-high verified and available
+  Testing model: Gemini Flash 1.5...
+  ✅ Model Gemini Flash 1.5 verified and available
+
+Step 1: Collecting essays from each model for domain 'Computer Science - Level 1: Algorithm Analysis'...
+  Requesting essay from GPT-4o...
+  Received essay from GPT-4o (4159 characters) ($0.0014, 1071 tokens) in 32.06s
+  Requesting essay from Claude-3.7-Sonnet...
+  Received essay from Claude-3.7-Sonnet (4434 characters) ($0.0019, 1371 tokens) in 21.23s
+  Requesting essay from o3-mini-high...
+  Received essay from o3-mini-high (4830 characters) ($0.0021, 1498 tokens) in 13.47s
+  Requesting essay from Gemini Flash 1.5...
+  Received essay from Gemini Flash 1.5 (4277 characters) ($0.0015, 1107 tokens) in 6.52s
+
+Step 2: Grading essays...
+  GPT-4o grading Claude-3.7-Sonnet's essay...
+  GPT-4o gave Claude-3.7-Sonnet a grade of A ($0.0012) in 6.10s
+  GPT-4o grading o3-mini-high's essay...
+  GPT-4o gave o3-mini-high a grade of A ($0.0011) in 5.58s
+  GPT-4o grading Gemini Flash 1.5's essay...
+  GPT-4o gave Gemini Flash 1.5 a grade of A- ($0.0011) in 5.16s
+  Claude-3.7-Sonnet grading GPT-4o's essay...
+  Claude-3.7-Sonnet gave GPT-4o a grade of A- ($0.0016) in 13.35s
+  Claude-3.7-Sonnet grading o3-mini-high's essay...
+  Claude-3.7-Sonnet gave o3-mini-high a grade of A ($0.0015) in 11.19s
+  Claude-3.7-Sonnet grading Gemini Flash 1.5's essay...
+  Claude-3.7-Sonnet gave Gemini Flash 1.5 a grade of A- ($0.0014) in 11.35s
+  o3-mini-high grading GPT-4o's essay...
+  o3-mini-high gave GPT-4o a grade of A ($0.0029) in 15.10s
+  o3-mini-high grading Claude-3.7-Sonnet's essay...
+  o3-mini-high gave Claude-3.7-Sonnet a grade of A+ ($0.0051) in 21.15s
+  o3-mini-high grading Gemini Flash 1.5's essay...
+  o3-mini-high gave Gemini Flash 1.5 a grade of A ($0.0036) in 16.54s
+  Gemini Flash 1.5 grading GPT-4o's essay...
+  Gemini Flash 1.5 gave GPT-4o a grade of B+ ($0.0008) in 1.84s
+  Gemini Flash 1.5 grading Claude-3.7-Sonnet's essay...
+  Gemini Flash 1.5 gave Claude-3.7-Sonnet a grade of B+ ($0.0008) in 1.72s
+  Gemini Flash 1.5 grading o3-mini-high's essay...
+  Gemini Flash 1.5 gave o3-mini-high a grade of A- ($0.0009) in 1.63s
+
+Step 3: Calculating summary statistics...
+
+Step 4: Creating results directory and saving artifacts...
+  Saved essay and feedback for GPT-4o to results/20250226-145652-comp_sci_1/essays/GPT-4o.md
+  Saved essay and feedback for Claude-3.7-Sonnet to results/20250226-145652-comp_sci_1/essays/Claude-3.7-Sonnet.md
+  Saved essay and feedback for o3-mini-high to results/20250226-145652-comp_sci_1/essays/o3-mini-high.md
+  Saved essay and feedback for Gemini Flash 1.5 to results/20250226-145652-comp_sci_1/essays/Gemini Flash 1.5.md
+  Generating formatted tables...
+/Users/alan/Projects/_referential/botwell/boswell_test.py:1018: MatplotlibDeprecationWarning: The 'labels' parameter of boxplot() has been renamed 'tick_labels' since Matplotlib 3.9; support for the old name will be dropped in 3.11.
+  plt.boxplot([numeric_grades[model] for model in models],
+  Visualizations saved to results/20250226-145652-comp_sci_1/charts
+
+Results saved to results/20250226-145652-comp_sci_1/full_results.json
+  All results saved to results/20250226-145652-comp_sci_1 directory
+
+Results saved to boswell_results_comp_sci_1.json
+
+=== SUMMARY OF RESULTS ===
+Model                | Median Grade | Grades Received
+----------------------------------------------------------------------
+GPT-4o               | A-           | A-, A, B+
+Claude-3.7-Sonnet    | A            | A, A+, B+
+o3-mini-high         | A            | A, A, A-
+Gemini Flash 1.5     | A-           | A-, A-, A
+
+=== GRADING BIAS ANALYSIS ===
+Overall Median Grade: A
+Model                | Median Given | Grading Bias              | Bias Value
+----------------------------------------------------------------------
+GPT-4o               | A            | Neutral                   | 0.15
+Claude-3.7-Sonnet    | A-           | Neutral                   | -0.15
+o3-mini-high         | A            | Neutral                   | 0.15
+Gemini Flash 1.5     | B+           | Strict (-1 grade)         | -0.55
+
+=== COST SUMMARY ===
+Total Cost: $0.0287
+Total Tokens: 29,026
+Total Duration: 183.99 seconds
+Essay Generation: $0.0068 (23.9%)
+Grading: $0.0218 (76.1%)
+See cost_report.md for detailed breakdown
+
+=== TIMING INFORMATION ===
+Total Run Time: 3m 38.6s
+Essay Generation: 77.3s
+Grading: 122.7s
+Analysis: 0.0s
+File Generation: 0.9s
+
+=== SAVED ESSAY FILES ===
+GPT-4o               | results/20250226-145652-comp_sci_1/essays/GPT-4o.md
+Claude-3.7-Sonnet    | results/20250226-145652-comp_sci_1/essays/Claude-3.7-Sonnet.md
+o3-mini-high         | results/20250226-145652-comp_sci_1/essays/o3-mini-high.md
+Gemini Flash 1.5     | results/20250226-145652-comp_sci_1/essays/Gemini Flash 1.5.md
+
+=== VISUALIZATIONS ===
+Data visualizations available in: results/20250226-145652-comp_sci_1/charts/
+- Grading bias chart
+- Grade distribution boxplot
+- Essay generation timing comparison
+- Grading time comparison
+- Cost breakdown
+- Process timing breakdown
+
+Test for domain 'comp_sci_1' completed!
+  - Full results directory: results/20250226-145652-comp_sci_1
+  - Tables directory: results/20250226-145652-comp_sci_1/grades_table.*
+  - Essays directory: results/20250226-145652-comp_sci_1/essays/
+  - Visualizations: results/20250226-145652-comp_sci_1/charts/
+
+======================================================================
+=== Running test for domain: Computer Science - Level 2: System Design ===
+======================================================================
+
+Verifying available models...
+  Testing model: GPT-4o...
+  ✅ Model GPT-4o verified and available
+  Testing model: Claude-3.7-Sonnet...
+  ✅ Model Claude-3.7-Sonnet verified and available
+  Testing model: o3-mini-high...
+  ✅ Model o3-mini-high verified and available
+  Testing model: Gemini Flash 1.5...
+  ✅ Model Gemini Flash 1.5 verified and available
+
+Step 1: Collecting essays from each model for domain 'Computer Science - Level 2: System Design'...
+  Requesting essay from GPT-4o...
+  Received essay from GPT-4o (5498 characters) ($0.0016, 1221 tokens) in 26.11s
+  Requesting essay from Claude-3.7-Sonnet...
+  Received essay from Claude-3.7-Sonnet (4994 characters) ($0.0017, 1317 tokens) in 20.23s
+  Requesting essay from o3-mini-high...
+  Received essay from o3-mini-high (8517 characters) ($0.0042, 2924 tokens) in 20.99s
+  Requesting essay from Gemini Flash 1.5...
+  Received essay from Gemini Flash 1.5 (6393 characters) ($0.0019, 1416 tokens) in 8.38s
+
+Step 2: Grading essays...
+  GPT-4o grading Claude-3.7-Sonnet's essay...
+  GPT-4o gave Claude-3.7-Sonnet a grade of A- ($0.0015) in 13.05s
+  GPT-4o grading o3-mini-high's essay...
+  GPT-4o gave o3-mini-high a grade of B+ ($0.0019) in 14.15s
+  GPT-4o grading Gemini Flash 1.5's essay...
+  GPT-4o gave Gemini Flash 1.5 a grade of B+ ($0.0016) in 12.61s
+  Claude-3.7-Sonnet grading GPT-4o's essay...
+  Claude-3.7-Sonnet gave GPT-4o a grade of B ($0.0021) in 16.88s
+  Claude-3.7-Sonnet grading o3-mini-high's essay...
+  Claude-3.7-Sonnet gave o3-mini-high a grade of A- ($0.0026) in 19.68s
+  Claude-3.7-Sonnet grading Gemini Flash 1.5's essay...
+  Claude-3.7-Sonnet gave Gemini Flash 1.5 a grade of B+ ($0.0022) in 18.53s
+  o3-mini-high grading GPT-4o's essay...
+  o3-mini-high gave GPT-4o a grade of A- ($0.0046) in 27.20s
+  o3-mini-high grading Claude-3.7-Sonnet's essay...
+  o3-mini-high gave Claude-3.7-Sonnet a grade of B ($0.0069) in 65.53s
+  o3-mini-high grading Gemini Flash 1.5's essay...
+  o3-mini-high gave Gemini Flash 1.5 a grade of A- ($0.0043) in 47.33s
+  Gemini Flash 1.5 grading GPT-4o's essay...
+  Gemini Flash 1.5 gave GPT-4o a grade of B+ ($0.0016) in 4.49s
+  Gemini Flash 1.5 grading Claude-3.7-Sonnet's essay...
+  Gemini Flash 1.5 gave Claude-3.7-Sonnet a grade of B+ ($0.0017) in 4.89s
+  Gemini Flash 1.5 grading o3-mini-high's essay...
+  Gemini Flash 1.5 gave o3-mini-high a grade of B+ ($0.0018) in 4.07s
+
+Step 3: Calculating summary statistics...
+
+Step 4: Creating results directory and saving artifacts...
+  Saved essay and feedback for GPT-4o to results/20250226-150109-comp_sci_2/essays/GPT-4o.md
+  Saved essay and feedback for Claude-3.7-Sonnet to results/20250226-150109-comp_sci_2/essays/Claude-3.7-Sonnet.md
+  Saved essay and feedback for o3-mini-high to results/20250226-150109-comp_sci_2/essays/o3-mini-high.md
+  Saved essay and feedback for Gemini Flash 1.5 to results/20250226-150109-comp_sci_2/essays/Gemini Flash 1.5.md
+  Generating formatted tables...
+/Users/alan/Projects/_referential/botwell/boswell_test.py:1018: MatplotlibDeprecationWarning: The 'labels' parameter of boxplot() has been renamed 'tick_labels' since Matplotlib 3.9; support for the old name will be dropped in 3.11.
+  plt.boxplot([numeric_grades[model] for model in models],
+  Visualizations saved to results/20250226-150109-comp_sci_2/charts
+
+Results saved to results/20250226-150109-comp_sci_2/full_results.json
+  All results saved to results/20250226-150109-comp_sci_2 directory
+
+Results saved to boswell_results_comp_sci_2.json
+
+=== SUMMARY OF RESULTS ===
+Model                | Median Grade | Grades Received
+----------------------------------------------------------------------
+GPT-4o               | B+           | B, A-, B+
+Claude-3.7-Sonnet    | B+           | A-, B, B+
+o3-mini-high         | B+           | B+, A-, B+
+Gemini Flash 1.5     | B+           | B+, B+, A-
+
+=== GRADING BIAS ANALYSIS ===
+Overall Median Grade: B+
+Model                | Median Given | Grading Bias              | Bias Value
+----------------------------------------------------------------------
+GPT-4o               | B+           | Neutral                   | 0.00
+Claude-3.7-Sonnet    | B+           | Neutral                   | 0.00
+o3-mini-high         | A-           | Lenient (+1 grade)        | 0.40
+Gemini Flash 1.5     | B+           | Neutral                   | 0.00
+
+=== COST SUMMARY ===
+Total Cost: $0.0424
+Total Tokens: 41,360
+Total Duration: 324.10 seconds
+Essay Generation: $0.0095 (22.3%)
+Grading: $0.0329 (77.7%)
+See cost_report.md for detailed breakdown
+
+=== TIMING INFORMATION ===
+Total Run Time: 6m 36.7s
+Essay Generation: 79.7s
+Grading: 260.4s
+Analysis: 0.0s
+File Generation: 0.9s
+
+=== SAVED ESSAY FILES ===
+GPT-4o               | results/20250226-150109-comp_sci_2/essays/GPT-4o.md
+Claude-3.7-Sonnet    | results/20250226-150109-comp_sci_2/essays/Claude-3.7-Sonnet.md
+o3-mini-high         | results/20250226-150109-comp_sci_2/essays/o3-mini-high.md
+Gemini Flash 1.5     | results/20250226-150109-comp_sci_2/essays/Gemini Flash 1.5.md
+
+=== VISUALIZATIONS ===
+Data visualizations available in: results/20250226-150109-comp_sci_2/charts/
+- Grading bias chart
+- Grade distribution boxplot
+- Essay generation timing comparison
+- Grading time comparison
+- Cost breakdown
+- Process timing breakdown
+
+Test for domain 'comp_sci_2' completed!
+  - Full results directory: results/20250226-150109-comp_sci_2
+  - Tables directory: results/20250226-150109-comp_sci_2/grades_table.*
+  - Essays directory: results/20250226-150109-comp_sci_2/essays/
+  - Visualizations: results/20250226-150109-comp_sci_2/charts/
+
+======================================================================
+=== ALL DOMAIN TESTS COMPLETED ===
+======================================================================
+Summary of all domain test results:
+  - Political Science - Level 1: AI Policy Analysis: results/20250226-144914-pol_sci_1
+  - Political Science - Level 2: AI Governance Analysis: results/20250226-145221-pol_sci_2
+  - Computer Science - Level 1: Algorithm Analysis: results/20250226-145652-comp_sci_1
+  - Computer Science - Level 2: System Design: results/20250226-150109-comp_sci_2
+
+Boswell Test for all domains has been completed!
+(venv) ➜  botwell 

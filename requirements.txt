@@ -1,0 +1,4 @@
+# Core dependencies
+matplotlib>=3.10.0
+numpy>=2.2.0
+requests>=2.32.0
