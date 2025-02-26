@@ -251,13 +251,12 @@ Claude-S  |   B+   |   A    |   ---    |   A-   |
 ```
 
 **Markdown Table** (`grades_table.md`):
-```markdown
 | Model | GPT-4o | Claude | Claude-S | Median Grade |
 |-------|--------|--------|----------|--------------|
 | GPT-4o | --- | A- | B+ | B+ |
 | Claude | A | --- | A- | A- |
 | Claude-S | B+ | A | --- | A- |
-```
+
 
 **CSV Table** (`grades_table.csv`):
 ```csv
@@ -283,14 +282,12 @@ OVERALL   |      B+      | Baseline               |
 ```
 
 **Markdown Table** (`grading_bias.md`):
-```markdown
 | Model | Median Given | Grading Bias | Numeric Bias |
 |-------|-------------|-------------|-------------|
 | GPT-4o | B+ | Slightly Strict (-1/3 grade) | -0.33 |
 | Claude | A | Lenient (+1 grade) | 0.35 |
 | Claude-S | B+ | Neutral | -0.05 |
 | **OVERALL** | B+ | **Baseline** | 0.00 |
-```
 
 This analysis helps identify potential biases in how different models evaluate the same content. For example, some models might consistently grade more strictly or leniently than others.
 
