@@ -53,7 +53,7 @@ The framework includes multiple testing domains, each with different difficulty 
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/botwell.git
+   git clone https://github.com/alanwilhelm/botwell.git
    cd botwell
    ```
 
@@ -298,54 +298,66 @@ The framework provides detailed cost tracking and analysis:
 **Cost Summary Table** (console output):
 ```
 === COST SUMMARY ===
-Total Cost: $2.8764
-Total Tokens: 184,392
-Total Duration: 45.28 seconds
+Total Cost: $1.2086
+Total Tokens: 1,316,454
+Total Duration: 14145.40 seconds
 
-Essay Generation: $0.8532 (29.7%)
-Grading: $2.0232 (70.3%)
+Essay Generation: $0.0519 (4.3%)
+Grading: $1.1567 (95.7%)
 See cost_report.md for detailed breakdown
 ```
 
 **Detailed Cost Report** (`cost_report.md`):
 # Boswell Test Cost Report
 
-Run timestamp: 2024-06-27 15:43:21
-Domain: Political Science - Level 1: AI Policy Analysis
+Run timestamp: 2025-02-26 18:13:58
+Domain: Computer Science - Level 2: System Design
 
 ## Summary
-- **Total cost**: $2.8764
-- **Total tokens**: 184,392
-- **Total duration**: 45.28 seconds
+- **Total cost**: $1.2086
+- **Total tokens**: 1,316,454
+- **Total duration**: 14145.40 seconds
 
 ## Essay Generation Costs
 | Model | Tokens | Cost | Duration (s) |
 |-------|--------|------|--------------|
-| GPT-4o | 12,586 | $0.2517 | 3.21 |
-| Claude-3-Opus | 11,328 | $0.2832 | 4.55 |
-| Claude-3-Sonnet | 8,642 | $0.1037 | 2.88 |
-| Claude-3.7-Sonnet | 7,924 | $0.0951 | 2.65 |
-| GPT-4o-mini | 10,547 | $0.0843 | 2.10 |
-| GPT-3.5-Turbo | 6,824 | $0.0352 | 1.93 |
-| **TOTAL** | | **$0.8532** | |
+| GPT-3.5-Turbo | 818 | $0.0010 | 4.81 |
+| Llama-3-8B | 1,227 | $0.0016 | 9.89 |
+| GPT-4o-mini | 1,380 | $0.0019 | 12.84 |
+| GPT-4o | 1,263 | $0.0017 | 31.38 |
+| Claude-3-Opus | 1,320 | $0.0018 | 37.39 |
+| Claude-3-Sonnet | 1,642 | $0.0022 | 27.32 |
+| Claude-3.7-Sonnet | 1,465 | $0.0020 | 23.52 |
+| Gemini Flash 1.5 | 1,336 | $0.0018 | 7.79 |
+| Gemini Pro 1.5 | 1,263 | $0.0017 | 20.03 |
+| o1 | 2,428 | $0.0034 | 23.17 |
+| o1-mini | 1,996 | $0.0028 | 9.05 |
+| o3-mini-high | 2,219 | $0.0031 | 20.61 |
+| **TOTAL** | | **$0.0519** | |
 
 ## Grading Costs
 | Grader | Essays Graded | Total Tokens | Total Cost | Avg. Cost per Essay |
 |--------|---------------|--------------|------------|---------------------|
-| GPT-4o | 6 | 28,634 | $0.5727 | $0.0954 |
-| Claude-3-Opus | 6 | 29,128 | $0.7282 | $0.1214 |
-| Claude-3-Sonnet | 6 | 24,715 | $0.2966 | $0.0494 |
-| Claude-3.7-Sonnet | 6 | 22,982 | $0.2758 | $0.0460 |
-| GPT-4o-mini | 6 | 18,452 | $0.1476 | $0.0246 |
-| GPT-3.5-Turbo | 6 | 12,630 | $0.0023 | $0.0004 |
-| **TOTAL** | | | **$2.0232** | |
+| GPT-3.5-Turbo | 22 | 36,612 | $0.0223 | $0.0010 |
+| Llama-3-8B | 22 | 41,110 | $0.0294 | $0.0013 |
+| GPT-4o-mini | 22 | 47,626 | $0.0392 | $0.0018 |
+| GPT-4o | 22 | 45,577 | $0.0360 | $0.0016 |
+| Claude-3-Opus | 22 | 51,693 | $0.0401 | $0.0018 |
+| Claude-3-Sonnet | 22 | 47,799 | $0.0346 | $0.0016 |
+| Claude-3.7-Sonnet | 22 | 56,741 | $0.0478 | $0.0022 |
+| Gemini Flash 1.5 | 22 | 43,615 | $0.0325 | $0.0015 |
+| Gemini Pro 1.5 | 22 | 46,950 | $0.0374 | $0.0017 |
+| o1 | 22 | 79,314 | $0.0873 | $0.0040 |
+| o1-mini | 22 | 74,479 | $0.0774 | $0.0035 |
+| o3-mini-high | 22 | 96,650 | $0.1133 | $0.0051 |
+| **TOTAL** | | | **$1.1567** | |
 
 ## Cost Breakdown by Phase
 | Phase | Cost | Percentage |
 |-------|------|------------|
-| Essay Generation | $0.8532 | 29.7% |
-| Grading | $2.0232 | 70.3% |
-| **TOTAL** | **$2.8764** | **100%** |
+| Essay Generation | $0.0519 | 4.3% |
+| Grading | $1.1567 | 95.7% |
+| **TOTAL** | **$1.2086** | **100%** |
 
 This cost reporting helps users understand the economics of running comprehensive model evaluations and make informed decisions about model selection and test size.
 
@@ -411,46 +423,111 @@ A comprehensive JSON file containing:
 
 This file contains everything needed to reconstruct the entire test session.
 
-## 📈 Sample Results
+## 📈 Latest Results (February 2025)
 
 ### Performance Grades
 
-Below is a sample of results from a Boswell Test run, showing median grades and individual evaluations:
+Below are results from a recent Boswell Test run in the Computer Science domain (system design - February 2025), showing median grades for each model:
 
-| Model              | Median Grade | Grades Received      |
-|--------------------|--------------|----------------------|
-| GPT-4o             | A-           | A, A-, B+, B+, B+, B+, A, A- |
-| Claude-3-Opus      | B+           | B+, A, B+, A-, B+, N/A, B+, A- |
-| Claude-3-Sonnet    | B+           | B+, A-, B+, B+, B+, B+, A-, A- |
-| Claude-3.7-Sonnet  | A-           | A-, A-, A, B+, B+, A-, A-, A- |
-| GPT-4o-mini        | B+           | A-, A, A-, B+, B+, B+, A, B+ |
-| Llama-3-8B         | B+           | B, A-, A-, B-, B-, B+, A-, B |
-| GPT-3.5-Turbo      | B+           | B+, A-, A-, B-, B, B, B+, B |
-| o3-mini-high       | A-           | A, A, A, B+, B+, A-, B+, A- |
+| Model                                  | Median Grade | Sample of Grades Received                  |
+|----------------------------------------|--------------|-------------------------------------------|
+| GPT-3.5-Turbo                          | B+           | A, A-, B+, B, B+, B-, B, B-, B+, A-       |
+| Llama-3-8B                             | B+           | A, B+, B-, B-, C+, B, B-, B, B+, A        |
+| GPT-4o-mini                            | B+           | A-, A, B+, B, B+, B-, A-, B+, B, A-       |
+| GPT-4o                                 | B+           | A, A-, B+, B, B+, B-, A-, B+, B, A-       |
+| Claude-3-Opus                          | B+           | A, B+, B+, B+, B, A-, B+, B+, B-, A-      |
+| Claude-3-Sonnet                        | B+           | A, A, B+, B+, B, B-, B+, B, B-, A-        |
+| Claude-3.7-Sonnet                      | A-           | A-, B+, A-, B+, A-, B+, A-, B+, A-, A     |
+| Claude-3.7-Sonnet-thinking             | A-           | A-, B-, A-, B+, A-, B+, A, B+, B+, A      |
+| Gemini Flash 1.5                       | B+           | A-, B+, B+, B, B+, B, A-, B+, B+, A-      |
+| Gemini Pro 1.5                         | B+           | A, B+, B+, B, B+, B+, A-, B-, B+, A-      |
+| o1                                     | A-           | A-, A+, B, B+, A-, B+, A-, B+, A-, A      |
+| o1-mini                                | B+           | A, B+, A-, B, B+, B+, A, B+, B+, A-       |
+| o3-mini-high                           | B+           | A, B+, A-, A-, A-, B+, A-, B+, B+, A-     |
 
 ### Grading Bias Analysis
 
 The analysis also identifies which models tend to grade more strictly or leniently:
 
-| Model              | Median Given | Grading Bias       | Numeric Bias |
-|--------------------|--------------|-------------------|-------------|
-| GPT-4o             | B+           | Neutral           | -0.05 |
-| Claude-3-Opus      | A-           | Slightly Lenient  | 0.20 |
-| Claude-3-Sonnet    | B+           | Neutral           | 0.00 |
-| Claude-3.7-Sonnet  | B            | Slightly Strict   | -0.27 |
-| GPT-4o-mini        | A-           | Slightly Lenient  | 0.15 |
-| Llama-3-8B         | B            | Slightly Strict   | -0.30 |
-| GPT-3.5-Turbo      | A-           | Slightly Lenient  | 0.25 |
-| o3-mini-high       | B+           | Neutral           | 0.02 |
-| **OVERALL**        | B+           | **Baseline**      | 0.00 |
+| Model                               | Median Given | Grading Bias       | Numeric Bias |
+|-------------------------------------|--------------|-------------------|-------------|
+| GPT-3.5-Turbo                       | A            | Lenient (+1 grade) | 0.55 |
+| Llama-3-8B                          | B+           | Neutral           | 0.00 |
+| GPT-4o-mini                         | B+           | Neutral           | 0.00 |
+| GPT-4o                              | B+           | Slightly Lenient  | 0.20 |
+| Claude-3-Opus                       | B+           | Neutral           | 0.00 |
+| Claude-3-Sonnet                     | A-           | Lenient (+1 grade) | 0.40 |
+| Claude-3.7-Sonnet                   | B            | Slightly Strict   | -0.30 |
+| Claude-3.7-Sonnet-thinking          | B            | Slightly Strict   | -0.30 |
+| Gemini Flash 1.5                    | B            | Slightly Strict   | -0.30 |
+| Gemini Pro 1.5                      | B-           | Strict (-1 grade) | -0.60 |
+| o1                                  | A-           | Lenient (+1 grade) | 0.40 |
+| o1-mini                             | B+           | Neutral           | 0.00 |
+| o3-mini-high                        | A-           | Lenient (+1 grade) | 0.40 |
+| **OVERALL**                         | B+           | **Baseline**      | 0.00 |
 
-This bias analysis helps identify patterns in how different models evaluate their peers. For instance, in this sample, Claude-3.7-Sonnet and Llama-3-8B appear to be slightly stricter graders, while Claude-3-Opus, GPT-4o-mini, and GPT-3.5-Turbo tend to be slightly more lenient.
+This bias analysis helps identify patterns in how different models evaluate their peers. For instance, in this sample from the Computer Science domain, models like Gemini Pro 1.5, Claude-3.7-Sonnet, and Gemini Flash 1.5 appear to be stricter graders, while GPT-3.5-Turbo, Claude-3-Sonnet, o1, and o3-mini-high tend to be more lenient.
 
 ## 📊 Timing and Performance Metrics
 
-The Boswell Test framework tracks detailed timing information throughout the testing process:
+The Boswell Test framework tracks detailed timing information throughout the testing process. From our most recent Computer Science domain test (February 2025):
 
-- **Total Runtime**: Precise tracking of the entire test duration in minutes and seconds
+### Essay Generation Timing
+| Model | Duration (s) |
+|-------|-------------|
+| GPT-3.5-Turbo | 4.81 |
+| Gemini Flash 1.5 | 7.79 |
+| o1-mini | 9.05 |
+| Llama-3-8B | 9.89 |
+| Perplexity: Llama 3.1 Sonar 8B Online | 9.21 |
+| Qwen-Turbo | 11.10 |
+| GPT-4o-mini | 12.84 |
+| grok-beta | 15.99 |
+| Gemini Pro 1.5 | 20.03 |
+| grok2-1212 | 20.52 |
+| o3-mini-high | 20.61 |
+| o1 | 23.17 |
+| Claude-3.7-Sonnet | 23.52 |
+| Claude-3-Sonnet | 27.32 |
+| DeepSeek-Distill-Qwen-32b | 29.60 |
+| GPT-4o | 31.39 |
+| Perplexity: Llama 3.1 Sonar 70B | 36.41 |
+| Claude-3-Opus | 37.39 |
+| Qwen-Plus | 40.88 |
+| Qwen-Max | 41.51 |
+| Perplexity: Llama 3.1 Sonar 405B Online | 42.94 |
+| Claude-3.7-Sonnet-thinking | 54.95 |
+| DeepSeek-R1-Full | 343.05 |
+
+### Average Grading Time Per Essay
+| Grader | Avg. Seconds per Essay |
+|--------|------------------------|
+| GPT-3.5-Turbo | 2.60 |
+| Gemini Flash 1.5 | 3.71 |
+| Llama-3-8B | 5.95 |
+| Perplexity: Llama 3.1 Sonar 8B Online | 8.05 |
+| Qwen-Turbo | 8.52 |
+| GPT-4o-mini | 8.62 |
+| o1-mini | 11.11 |
+| Claude-3-Sonnet | 11.42 |
+| Gemini Pro 1.5 | 12.78 |
+| grok-beta | 12.37 |
+| GPT-4o | 14.87 |
+| Perplexity: Llama 3.1 Sonar 70B | 15.10 |
+| grok2-1212 | 16.37 |
+| o1 | 19.38 |
+| Claude-3.7-Sonnet | 18.36 |
+| o3-mini-high | 27.12 |
+| Qwen-Plus | 29.98 |
+| DeepSeek-Distill-Qwen-32b | 32.94 |
+| Perplexity: Llama 3.1 Sonar 405B Online | 33.43 |
+| Claude-3-Opus | 24.58 |
+| Claude-3.7-Sonnet-thinking | 39.86 |
+| Qwen-Max | 38.38 |
+| DeepSeek-R1-Full | 207.74 |
+
+The framework provides:
+- **Total Runtime**: Precise tracking of the entire test duration
 - **Phase Timing**: Breakdown of time spent in essay generation, grading, analysis, and file generation
 - **Per-Model Timing**: Tracking how long each model takes to generate essays and grade others
 - **Timing Visualizations**: Charts showing relative performance of different models
@@ -471,6 +548,8 @@ The Boswell Test framework includes several features to ensure reliable and effi
 - **Comprehensive Logging**: Detailed console feedback throughout the testing process
 - **Domain Independence**: Run tests across all domains with a single command
 - **Robust Visualizations**: Charts adapt to missing or incomplete data
+- **Model Diversity**: Supports a wide range of models from different providers
+- **Scaling**: Successfully tested with 20+ models in parallel
 
 ## 🧩 Extending the Framework
 
@@ -495,15 +574,17 @@ Edit the `MODELS` list in `boswell_test.py` to add or remove models from OpenRou
 
 Running a full Boswell Test across multiple models and domains can be resource-intensive:
 
-- **API Costs**: A complete run with 20+ models across all domains can cost approximately $20-30 in OpenRouter credits
-- **Runtime**: With concurrency enabled, a full test run takes approximately 1 hour (vs. several hours without concurrency)
+- **API Costs**: A complete run with 20+ models across all domains can cost approximately $5-10 in OpenRouter credits
+- **Runtime**: With concurrency enabled, a full test run takes approximately 4-5 hours for all four domains with 20+ models
 - **Resource Usage**: The framework is optimized for I/O-bound operations and efficiently manages multiple concurrent API calls
 - **Output Size**: Results are comprehensive, with a full run generating several megabytes of data artifacts
+- **Token Usage**: A complete run with 20+ models generates over 5 million tokens across all domains
 
 You can customize the test scope to reduce costs:
 - Run tests on a single domain instead of all domains
 - Select a smaller subset of models to test
 - Use the `--skip-verification` flag to bypass the model verification step
+- Consider using more efficient models for testing routines
 
 ## 📝 License
 
