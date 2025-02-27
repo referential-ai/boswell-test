@@ -33,7 +33,7 @@ wheels/
 *.egg
 
 # Generated results
-results/
+# results/
 boswell_results*.json
 openrouter_models.json
 
