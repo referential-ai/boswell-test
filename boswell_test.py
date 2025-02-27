@@ -35,7 +35,7 @@ if not API_KEY:
     sys.exit(1)
 
 # Model configurations - customize as needed
-# Only models verified to work with OpenRouter are included by default
+# Only models verified to work with OpenRouter are included
 MODELS = [
     {"name": "GPT-4o", "model_id": "openai/gpt-4o"},
     {"name": "Claude-3-Opus", "model_id": "anthropic/claude-3-opus"},
