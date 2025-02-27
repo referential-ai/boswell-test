@@ -1,0 +1,970 @@
+{
+  "timestamp": "20250226-230935",
+  "aggregated_data": {
+    "model_scores": {
+      "o1-mini": {
+        "domain_scores": {
+          "pol_sci_1": 92.1,
+          "pol_sci_2": 91.5,
+          "comp_sci_1": 95.8,
+          "comp_sci_2": 92.2
+        },
+        "domain_components": {
+          "pol_sci_1": {
+            "performance": 86.04651162790698,
+            "evaluation": 100.0,
+            "efficiency": 95.32423042710582
+          },
+          "pol_sci_2": {
+            "performance": 86.04651162790698,
+            "evaluation": 100.0,
+            "efficiency": 92.3722186542176
+          },
+          "comp_sci_1": {
+            "performance": 93.02325581395348,
+            "evaluation": 100.0,
+            "efficiency": 96.58749909877673
+          },
+          "comp_sci_2": {
+            "performance": 86.04651162790698,
+            "evaluation": 100.0,
+            "efficiency": 95.70738240558467
+          }
+        },
+        "average_boswell_quotient": 92.9,
+        "rank": 1,
+        "aggregated_components": {
+          "performance": 87.79069767441861,
+          "evaluation": 100.0,
+          "efficiency": 94.9978326464212
+        },
+        "consistency": 95.7,
+        "domain_count": 4,
+        "best_domain": "comp_sci_1",
+        "worst_domain": "pol_sci_2"
+      },
+      "GPT-3.5-Turbo": {
+        "domain_scores": {
+          "pol_sci_1": 87.8,
+          "pol_sci_2": 63.4,
+          "comp_sci_1": 96.2,
+          "comp_sci_2": 72.6
+        },
+        "domain_components": {
+          "pol_sci_1": {
+            "performance": 76.74418604651163,
+            "evaluation": 100.0,
+            "efficiency": 96.92457374448546
+          },
+          "pol_sci_2": {
+            "performance": 69.76744186046511,
+            "evaluation": 29.999999999999986,
+            "efficiency": 97.44524211196654
+          },
+          "comp_sci_1": {
+            "performance": 93.02325581395348,
+            "evaluation": 100.0,
+            "efficiency": 98.52396128971924
+          },
+          "comp_sci_2": {
+            "performance": 69.76744186046511,
+            "evaluation": 59.999999999999964,
+            "efficiency": 98.3877098129318
+          }
+        },
+        "average_boswell_quotient": 80.0,
+        "rank": 16,
+        "aggregated_components": {
+          "performance": 77.32558139534883,
+          "evaluation": 72.49999999999999,
+          "efficiency": 97.82037173977577
+        },
+        "consistency": 67.19999999999999,
+        "domain_count": 4,
+        "best_domain": "comp_sci_1",
+        "worst_domain": "pol_sci_2"
+      },
+      "Llama-3-8B": {
+        "domain_scores": {
+          "pol_sci_1": 75.5,
+          "pol_sci_2": 84.0,
+          "comp_sci_1": 92.4,
+          "comp_sci_2": 84.3
+        },
+        "domain_components": {
+          "pol_sci_1": {
+            "performance": 76.74418604651163,
+            "evaluation": 59.999999999999964,
+            "efficiency": 95.45469206359655
+          },
+          "pol_sci_2": {
+            "performance": 69.76744186046511,
+            "evaluation": 100.0,
+            "efficiency": 95.61596356130235
+          },
+          "comp_sci_1": {
+            "performance": 86.04651162790698,
+            "evaluation": 100.0,
+            "efficiency": 96.91165438625296
+          },
+          "comp_sci_2": {
+            "performance": 69.76744186046511,
+            "evaluation": 100.0,
+            "efficiency": 97.29428842209518
+          }
+        },
+        "average_boswell_quotient": 84.05,
+        "rank": 12,
+        "aggregated_components": {
+          "performance": 75.5813953488372,
+          "evaluation": 89.99999999999999,
+          "efficiency": 96.31914960831176
+        },
+        "consistency": 83.1,
+        "domain_count": 4,
+        "best_domain": "comp_sci_1",
+        "worst_domain": "pol_sci_1"
+      },
+      "GPT-4o-mini": {
+        "domain_scores": {
+          "pol_sci_1": 80.0,
+          "pol_sci_2": 78.0,
+          "comp_sci_1": 95.8,
+          "comp_sci_2": 87.4
+        },
+        "domain_components": {
+          "pol_sci_1": {
+            "performance": 86.04651162790698,
+            "evaluation": 59.999999999999964,
+            "efficiency": 95.10120349251551
+          },
+          "pol_sci_2": {
+            "performance": 76.74418604651163,
+            "evaluation": 70.00000000000001,
+            "efficiency": 93.36813456118972
+          },
+          "comp_sci_1": {
+            "performance": 93.02325581395348,
+            "evaluation": 100.0,
+            "efficiency": 96.5246569643932
+          },
+          "comp_sci_2": {
+            "performance": 76.74418604651163,
+            "evaluation": 100.0,
+            "efficiency": 95.25919620494909
+          }
+        },
+        "average_boswell_quotient": 85.3,
+        "rank": 7,
+        "aggregated_components": {
+          "performance": 83.13953488372093,
+          "evaluation": 82.5,
+          "efficiency": 95.06329780576188
+        },
+        "consistency": 82.2,
+        "domain_count": 4,
+        "best_domain": "comp_sci_1",
+        "worst_domain": "pol_sci_2"
+      },
+      "Claude-3-Sonnet": {
+        "domain_scores": {
+          "pol_sci_1": 77.6,
+          "pol_sci_2": 65.0,
+          "comp_sci_1": 95.3,
+          "comp_sci_2": 74.8
+        },
+        "domain_components": {
+          "pol_sci_1": {
+            "performance": 76.74418604651163,
+            "evaluation": 70.00000000000001,
+            "efficiency": 91.1988279974396
+          },
+          "pol_sci_2": {
+            "performance": 76.74418604651163,
+            "evaluation": 29.999999999999986,
+            "efficiency": 87.95470971079695
+          },
+          "comp_sci_1": {
+            "performance": 93.02325581395348,
+            "evaluation": 100.0,
+            "efficiency": 93.8116821960773
+          },
+          "comp_sci_2": {
+            "performance": 76.74418604651163,
+            "evaluation": 59.999999999999964,
+            "efficiency": 92.07559303094268
+          }
+        },
+        "average_boswell_quotient": 78.175,
+        "rank": 18,
+        "aggregated_components": {
+          "performance": 80.81395348837209,
+          "evaluation": 64.99999999999999,
+          "efficiency": 91.26020323381414
+        },
+        "consistency": 69.7,
+        "domain_count": 4,
+        "best_domain": "comp_sci_1",
+        "worst_domain": "pol_sci_2"
+      },
+      "grok-beta": {
+        "domain_scores": {
+          "pol_sci_1": 76.9,
+          "pol_sci_2": 86.6,
+          "comp_sci_1": 86.5,
+          "comp_sci_2": 87.2
+        },
+        "domain_components": {
+          "pol_sci_1": {
+            "performance": 81.3953488372093,
+            "evaluation": 59.999999999999964,
+            "efficiency": 91.2368045738467
+          },
+          "pol_sci_2": {
+            "performance": 76.74418604651163,
+            "evaluation": 100.0,
+            "efficiency": 91.12898316602255
+          },
+          "comp_sci_1": {
+            "performance": 93.02325581395348,
+            "evaluation": 70.00000000000001,
+            "efficiency": 94.72472065111441
+          },
+          "comp_sci_2": {
+            "performance": 76.74418604651163,
+            "evaluation": 100.0,
+            "efficiency": 94.03891392030252
+          }
+        },
+        "average_boswell_quotient": 84.3,
+        "rank": 9,
+        "aggregated_components": {
+          "performance": 81.97674418604652,
+          "evaluation": 82.5,
+          "efficiency": 92.78235557782155
+        },
+        "consistency": 89.7,
+        "domain_count": 4,
+        "best_domain": "comp_sci_2",
+        "worst_domain": "pol_sci_1"
+      },
+      "Claude-3.7-Sonnet": {
+        "domain_scores": {
+          "pol_sci_1": 79.0,
+          "pol_sci_2": 72.1,
+          "comp_sci_1": 86.1,
+          "comp_sci_2": 86.8
+        },
+        "domain_components": {
+          "pol_sci_1": {
+            "performance": 86.04651162790698,
+            "evaluation": 59.999999999999964,
+            "efficiency": 89.63668729949758
+          },
+          "pol_sci_2": {
+            "performance": 86.04651162790698,
+            "evaluation": 40.000000000000036,
+            "efficiency": 85.14174611998601
+          },
+          "comp_sci_1": {
+            "performance": 93.02325581395348,
+            "evaluation": 70.00000000000001,
+            "efficiency": 92.75554383321851
+          },
+          "comp_sci_2": {
+            "performance": 76.74418604651163,
+            "evaluation": 100.0,
+            "efficiency": 91.95571456857347
+          }
+        },
+        "average_boswell_quotient": 81.0,
+        "rank": 15,
+        "aggregated_components": {
+          "performance": 85.46511627906978,
+          "evaluation": 67.5,
+          "efficiency": 89.8724229553189
+        },
+        "consistency": 85.3,
+        "domain_count": 4,
+        "best_domain": "comp_sci_2",
+        "worst_domain": "pol_sci_2"
+      },
+      "DeepSeek-Distill-Qwen-32b": {
+        "domain_scores": {
+          "pol_sci_1": 68.9,
+          "pol_sci_2": 84.8,
+          "comp_sci_1": 90.4,
+          "comp_sci_2": 85.3
+        },
+        "domain_components": {
+          "pol_sci_1": {
+            "performance": 39.53488372093023,
+            "evaluation": 100.0,
+            "efficiency": 95.47300349617669
+          },
+          "pol_sci_2": {
+            "performance": 76.74418604651163,
+            "evaluation": 100.0,
+            "efficiency": 82.2670995077026
+          },
+          "comp_sci_1": {
+            "performance": 86.04651162790698,
+            "evaluation": 100.0,
+            "efficiency": 87.12991060342608
+          },
+          "comp_sci_2": {
+            "performance": 76.74418604651163,
+            "evaluation": 100.0,
+            "efficiency": 84.77658288744638
+          }
+        },
+        "average_boswell_quotient": 82.35,
+        "rank": 13,
+        "aggregated_components": {
+          "performance": 69.76744186046511,
+          "evaluation": 100.0,
+          "efficiency": 87.41164912368794
+        },
+        "consistency": 78.5,
+        "domain_count": 4,
+        "best_domain": "comp_sci_1",
+        "worst_domain": "pol_sci_1"
+      },
+      "Qwen-Turbo": {
+        "domain_scores": {
+          "pol_sci_1": 91.9,
+          "pol_sci_2": 85.3,
+          "comp_sci_1": 95.8,
+          "comp_sci_2": 87.5
+        },
+        "domain_components": {
+          "pol_sci_1": {
+            "performance": 86.04651162790698,
+            "evaluation": 100.0,
+            "efficiency": 94.26895651725141
+          },
+          "pol_sci_2": {
+            "performance": 73.25581395348837,
+            "evaluation": 100.0,
+            "efficiency": 93.34500235553674
+          },
+          "comp_sci_1": {
+            "performance": 93.02325581395348,
+            "evaluation": 100.0,
+            "efficiency": 96.51002638253286
+          },
+          "comp_sci_2": {
+            "performance": 76.74418604651163,
+            "evaluation": 100.0,
+            "efficiency": 95.80920512072692
+          }
+        },
+        "average_boswell_quotient": 90.125,
+        "rank": 2,
+        "aggregated_components": {
+          "performance": 82.26744186046511,
+          "evaluation": 100.0,
+          "efficiency": 94.98329759401199
+        },
+        "consistency": 89.5,
+        "domain_count": 4,
+        "best_domain": "comp_sci_1",
+        "worst_domain": "pol_sci_2"
+      },
+      "GPT-4o": {
+        "domain_scores": {
+          "pol_sci_1": 76.4,
+          "pol_sci_2": 85.2,
+          "comp_sci_1": 95.0,
+          "comp_sci_2": 80.6
+        },
+        "domain_components": {
+          "pol_sci_1": {
+            "performance": 81.3953488372093,
+            "evaluation": 59.999999999999964,
+            "efficiency": 88.56013466401468
+          },
+          "pol_sci_2": {
+            "performance": 76.74418604651163,
+            "evaluation": 100.0,
+            "efficiency": 84.18287606978754
+          },
+          "comp_sci_1": {
+            "performance": 93.02325581395348,
+            "evaluation": 100.0,
+            "efficiency": 92.26655875665189
+          },
+          "comp_sci_2": {
+            "performance": 76.74418604651163,
+            "evaluation": 79.99999999999999,
+            "efficiency": 91.10566457051456
+          }
+        },
+        "average_boswell_quotient": 84.3,
+        "rank": 10,
+        "aggregated_components": {
+          "performance": 81.97674418604652,
+          "evaluation": 84.99999999999999,
+          "efficiency": 89.02880851524216
+        },
+        "consistency": 81.4,
+        "domain_count": 4,
+        "best_domain": "comp_sci_1",
+        "worst_domain": "pol_sci_1"
+      },
+      "grok2-1212": {
+        "domain_scores": {
+          "pol_sci_1": 90.9,
+          "pol_sci_2": 73.8,
+          "comp_sci_1": 95.3,
+          "comp_sci_2": 86.8
+        },
+        "domain_components": {
+          "pol_sci_1": {
+            "performance": 86.04651162790698,
+            "evaluation": 100.0,
+            "efficiency": 89.48856413847895
+          },
+          "pol_sci_2": {
+            "performance": 76.74418604651163,
+            "evaluation": 59.999999999999964,
+            "efficiency": 87.37601895562597
+          },
+          "comp_sci_1": {
+            "performance": 93.02325581395348,
+            "evaluation": 100.0,
+            "efficiency": 93.97749758264422
+          },
+          "comp_sci_2": {
+            "performance": 76.74418604651163,
+            "evaluation": 100.0,
+            "efficiency": 92.2313324249344
+          }
+        },
+        "average_boswell_quotient": 86.7,
+        "rank": 6,
+        "aggregated_components": {
+          "performance": 83.13953488372093,
+          "evaluation": 89.99999999999999,
+          "efficiency": 90.76835327542088
+        },
+        "consistency": 78.5,
+        "domain_count": 4,
+        "best_domain": "comp_sci_1",
+        "worst_domain": "pol_sci_2"
+      },
+      "Gemini Flash 1.5": {
+        "domain_scores": {
+          "pol_sci_1": 62.5,
+          "pol_sci_2": 69.8,
+          "comp_sci_1": 75.1,
+          "comp_sci_2": 87.9
+        },
+        "domain_components": {
+          "pol_sci_1": {
+            "performance": 86.04651162790698,
+            "evaluation": 0,
+            "efficiency": 97.46437865956086
+          },
+          "pol_sci_2": {
+            "performance": 76.74418604651163,
+            "evaluation": 40.000000000000036,
+            "efficiency": 97.28598320084052
+          },
+          "comp_sci_1": {
+            "performance": 93.02325581395348,
+            "evaluation": 29.999999999999986,
+            "efficiency": 98.0885011674032
+          },
+          "comp_sci_2": {
+            "performance": 76.74418604651163,
+            "evaluation": 100.0,
+            "efficiency": 97.67474634657603
+          }
+        },
+        "average_boswell_quotient": 73.825,
+        "rank": 22,
+        "aggregated_components": {
+          "performance": 83.13953488372093,
+          "evaluation": 42.50000000000001,
+          "efficiency": 97.62840234359516
+        },
+        "consistency": 74.6,
+        "domain_count": 4,
+        "best_domain": "comp_sci_2",
+        "worst_domain": "pol_sci_1"
+      },
+      "Perplexity: Llama 3.1 Sonar 8B Online": {
+        "domain_scores": {
+          "pol_sci_1": 75.4,
+          "pol_sci_2": 83.6,
+          "comp_sci_1": 83.3,
+          "comp_sci_2": 75.6
+        },
+        "domain_components": {
+          "pol_sci_1": {
+            "performance": 76.74418604651163,
+            "evaluation": 59.999999999999964,
+            "efficiency": 95.2184010314007
+          },
+          "pol_sci_2": {
+            "performance": 69.76744186046511,
+            "evaluation": 100.0,
+            "efficiency": 93.58586803499733
+          },
+          "comp_sci_1": {
+            "performance": 86.04651162790698,
+            "evaluation": 70.00000000000001,
+            "efficiency": 96.6275343097551
+          },
+          "comp_sci_2": {
+            "performance": 76.74418604651163,
+            "evaluation": 59.999999999999964,
+            "efficiency": 96.00025400230024
+          }
+        },
+        "average_boswell_quotient": 79.475,
+        "rank": 17,
+        "aggregated_components": {
+          "performance": 77.32558139534883,
+          "evaluation": 72.49999999999999,
+          "efficiency": 95.35801434461334
+        },
+        "consistency": 91.80000000000001,
+        "domain_count": 4,
+        "best_domain": "pol_sci_2",
+        "worst_domain": "pol_sci_1"
+      },
+      "Claude-3-Opus": {
+        "domain_scores": {
+          "pol_sci_1": 89.5,
+          "pol_sci_2": 88.7,
+          "comp_sci_1": 91.1,
+          "comp_sci_2": 86.1
+        },
+        "domain_components": {
+          "pol_sci_1": {
+            "performance": 86.04651162790698,
+            "evaluation": 100.0,
+            "efficiency": 82.2245025457457
+          },
+          "pol_sci_2": {
+            "performance": 86.04651162790698,
+            "evaluation": 100.0,
+            "efficiency": 78.59415419909607
+          },
+          "comp_sci_1": {
+            "performance": 86.04651162790698,
+            "evaluation": 100.0,
+            "efficiency": 90.25118612965663
+          },
+          "comp_sci_2": {
+            "performance": 76.74418604651163,
+            "evaluation": 100.0,
+            "efficiency": 88.48692087625055
+          }
+        },
+        "average_boswell_quotient": 88.85,
+        "rank": 3,
+        "aggregated_components": {
+          "performance": 83.72093023255815,
+          "evaluation": 100.0,
+          "efficiency": 84.88919093768723
+        },
+        "consistency": 95.0,
+        "domain_count": 4,
+        "best_domain": "comp_sci_1",
+        "worst_domain": "comp_sci_2"
+      },
+      "Gemini Pro 1.5": {
+        "domain_scores": {
+          "pol_sci_1": 74.6,
+          "pol_sci_2": 68.4,
+          "comp_sci_1": 86.3,
+          "comp_sci_2": 69.0
+        },
+        "domain_components": {
+          "pol_sci_1": {
+            "performance": 76.74418604651163,
+            "evaluation": 59.999999999999964,
+            "efficiency": 91.30571768609747
+          },
+          "pol_sci_2": {
+            "performance": 76.74418604651163,
+            "evaluation": 40.000000000000036,
+            "efficiency": 90.27653187835898
+          },
+          "comp_sci_1": {
+            "performance": 93.02325581395348,
+            "evaluation": 70.00000000000001,
+            "efficiency": 94.06862056689232
+          },
+          "comp_sci_2": {
+            "performance": 76.74418604651163,
+            "evaluation": 40.000000000000036,
+            "efficiency": 93.11103132769372
+          }
+        },
+        "average_boswell_quotient": 74.575,
+        "rank": 20,
+        "aggregated_components": {
+          "performance": 80.81395348837209,
+          "evaluation": 52.500000000000014,
+          "efficiency": 92.19047536476063
+        },
+        "consistency": 82.10000000000001,
+        "domain_count": 4,
+        "best_domain": "comp_sci_1",
+        "worst_domain": "pol_sci_2"
+      },
+      "o1": {
+        "domain_scores": {
+          "pol_sci_1": 88.6,
+          "pol_sci_2": 78.3,
+          "comp_sci_1": 95.2,
+          "comp_sci_2": 74.5
+        },
+        "domain_components": {
+          "pol_sci_1": {
+            "performance": 81.3953488372093,
+            "evaluation": 100.0,
+            "efficiency": 89.63374342635407
+          },
+          "pol_sci_2": {
+            "performance": 81.3953488372093,
+            "evaluation": 70.00000000000001,
+            "efficiency": 83.03671975086101
+          },
+          "comp_sci_1": {
+            "performance": 93.02325581395348,
+            "evaluation": 100.0,
+            "efficiency": 93.19199358211074
+          },
+          "comp_sci_2": {
+            "performance": 76.74418604651163,
+            "evaluation": 59.999999999999964,
+            "efficiency": 90.67400465565302
+          }
+        },
+        "average_boswell_quotient": 84.15,
+        "rank": 11,
+        "aggregated_components": {
+          "performance": 83.13953488372093,
+          "evaluation": 82.5,
+          "efficiency": 89.1341153537447
+        },
+        "consistency": 79.3,
+        "domain_count": 4,
+        "best_domain": "comp_sci_1",
+        "worst_domain": "comp_sci_2"
+      },
+      "Qwen-Plus": {
+        "domain_scores": {
+          "pol_sci_1": 89.8,
+          "pol_sci_2": 84.6,
+          "comp_sci_1": 94.3,
+          "comp_sci_2": 86.1
+        },
+        "domain_components": {
+          "pol_sci_1": {
+            "performance": 86.04651162790698,
+            "evaluation": 100.0,
+            "efficiency": 83.95296613967463
+          },
+          "pol_sci_2": {
+            "performance": 76.74418604651163,
+            "evaluation": 100.0,
+            "efficiency": 80.93966024161296
+          },
+          "comp_sci_1": {
+            "performance": 93.02325581395348,
+            "evaluation": 100.0,
+            "efficiency": 88.72056518507168
+          },
+          "comp_sci_2": {
+            "performance": 76.74418604651163,
+            "evaluation": 100.0,
+            "efficiency": 88.73816626535692
+          }
+        },
+        "average_boswell_quotient": 88.69999999999999,
+        "rank": 4,
+        "aggregated_components": {
+          "performance": 83.13953488372093,
+          "evaluation": 100.0,
+          "efficiency": 85.58783945792905
+        },
+        "consistency": 90.3,
+        "domain_count": 4,
+        "best_domain": "comp_sci_1",
+        "worst_domain": "pol_sci_2"
+      },
+      "Qwen-Max": {
+        "domain_scores": {
+          "pol_sci_1": 83.4,
+          "pol_sci_2": 76.4,
+          "comp_sci_1": 84.6,
+          "comp_sci_2": 84.9
+        },
+        "domain_components": {
+          "pol_sci_1": {
+            "performance": 86.04651162790698,
+            "evaluation": 79.99999999999999,
+            "efficiency": 81.68596809163822
+          },
+          "pol_sci_2": {
+            "performance": 81.3953488372093,
+            "evaluation": 70.00000000000001,
+            "efficiency": 73.3733071178682
+          },
+          "comp_sci_1": {
+            "performance": 93.02325581395348,
+            "evaluation": 70.00000000000001,
+            "efficiency": 85.66167394305977
+          },
+          "comp_sci_2": {
+            "performance": 76.74418604651163,
+            "evaluation": 100.0,
+            "efficiency": 82.56085085785352
+          }
+        },
+        "average_boswell_quotient": 82.325,
+        "rank": 14,
+        "aggregated_components": {
+          "performance": 84.30232558139535,
+          "evaluation": 80.0,
+          "efficiency": 80.82045000260493
+        },
+        "consistency": 91.5,
+        "domain_count": 4,
+        "best_domain": "comp_sci_2",
+        "worst_domain": "pol_sci_2"
+      },
+      "o3-mini-high": {
+        "domain_scores": {
+          "pol_sci_1": 90.1,
+          "pol_sci_2": 77.0,
+          "comp_sci_1": 94.5,
+          "comp_sci_2": 78.9
+        },
+        "domain_components": {
+          "pol_sci_1": {
+            "performance": 86.04651162790698,
+            "evaluation": 100.0,
+            "efficiency": 85.60608596998946
+          },
+          "pol_sci_2": {
+            "performance": 86.04651162790698,
+            "evaluation": 59.999999999999964,
+            "efficiency": 80.13329898287108
+          },
+          "comp_sci_1": {
+            "performance": 93.02325581395348,
+            "evaluation": 100.0,
+            "efficiency": 89.8668061402328
+          },
+          "comp_sci_2": {
+            "performance": 86.04651162790698,
+            "evaluation": 59.999999999999964,
+            "efficiency": 89.56598673382335
+          }
+        },
+        "average_boswell_quotient": 85.125,
+        "rank": 8,
+        "aggregated_components": {
+          "performance": 87.79069767441861,
+          "evaluation": 79.99999999999999,
+          "efficiency": 86.29304445672918
+        },
+        "consistency": 82.5,
+        "domain_count": 4,
+        "best_domain": "comp_sci_1",
+        "worst_domain": "pol_sci_2"
+      },
+      "Perplexity: Llama 3.1 Sonar 405B Online": {
+        "domain_scores": {
+          "pol_sci_1": 84.1,
+          "pol_sci_2": 58.5,
+          "comp_sci_1": 80.8,
+          "comp_sci_2": 72.4
+        },
+        "domain_components": {
+          "pol_sci_1": {
+            "performance": 76.74418604651163,
+            "evaluation": 100.0,
+            "efficiency": 78.55845536762517
+          },
+          "pol_sci_2": {
+            "performance": 69.76744186046511,
+            "evaluation": 29.999999999999986,
+            "efficiency": 73.28432348997495
+          },
+          "comp_sci_1": {
+            "performance": 86.04651162790698,
+            "evaluation": 70.00000000000001,
+            "efficiency": 83.64650397524449
+          },
+          "comp_sci_2": {
+            "performance": 76.74418604651163,
+            "evaluation": 59.999999999999964,
+            "efficiency": 80.35055191829028
+          }
+        },
+        "average_boswell_quotient": 73.95,
+        "rank": 21,
+        "aggregated_components": {
+          "performance": 77.32558139534883,
+          "evaluation": 64.99999999999999,
+          "efficiency": 78.95995868778373
+        },
+        "consistency": 74.4,
+        "domain_count": 4,
+        "best_domain": "pol_sci_1",
+        "worst_domain": "pol_sci_2"
+      },
+      "DeepSeek-R1-Full": {
+        "domain_scores": {
+          "pol_sci_1": 87.1,
+          "pol_sci_2": 91.3,
+          "comp_sci_1": 90.0,
+          "comp_sci_2": 85.7
+        },
+        "domain_components": {
+          "pol_sci_1": {
+            "performance": 86.04651162790698,
+            "evaluation": 100.0,
+            "efficiency": 70.2256834875114
+          },
+          "pol_sci_2": {
+            "performance": 86.04651162790698,
+            "evaluation": 100.0
+          },
+          "comp_sci_1": {
+            "performance": 93.02325581395348,
+            "evaluation": 85.00000000000001
+          },
+          "comp_sci_2": {
+            "performance": 86.04651162790698,
+            "evaluation": 85.00000000000001
+          }
+        },
+        "average_boswell_quotient": 88.525,
+        "rank": 5,
+        "aggregated_components": {
+          "performance": 87.79069767441861,
+          "evaluation": 92.5,
+          "efficiency": 70.2256834875114
+        },
+        "consistency": 94.4,
+        "domain_count": 4,
+        "best_domain": "pol_sci_2",
+        "worst_domain": "comp_sci_2"
+      },
+      "Claude-3.7-Sonnet-thinking": {
+        "domain_scores": {
+          "pol_sci_1": 73.4,
+          "pol_sci_2": 67.0,
+          "comp_sci_1": 84.2,
+          "comp_sci_2": 79.2
+        },
+        "domain_components": {
+          "pol_sci_1": {
+            "performance": 86.04651162790698,
+            "evaluation": 59.999999999999964,
+            "efficiency": 61.78988458053057
+          },
+          "pol_sci_2": {
+            "performance": 86.04651162790698,
+            "evaluation": 40.000000000000036,
+            "efficiency": 59.77153872745081
+          },
+          "comp_sci_1": {
+            "performance": 93.02325581395348,
+            "evaluation": 70.00000000000001,
+            "efficiency": 83.40159884587777
+          },
+          "comp_sci_2": {
+            "performance": 86.04651162790698,
+            "evaluation": 70.00000000000001,
+            "efficiency": 75.82637673145717
+          }
+        },
+        "average_boswell_quotient": 75.95,
+        "rank": 19,
+        "aggregated_components": {
+          "performance": 87.79069767441861,
+          "evaluation": 60.00000000000001,
+          "efficiency": 70.19734972132908
+        },
+        "consistency": 82.8,
+        "domain_count": 4,
+        "best_domain": "comp_sci_1",
+        "worst_domain": "pol_sci_2"
+      },
+      "Perplexity: Llama 3.1 Sonar 70B": {
+        "domain_scores": {
+          "pol_sci_1": 79.1,
+          "pol_sci_2": 61.6,
+          "comp_sci_1": 79.4,
+          "comp_sci_2": 66.1
+        },
+        "domain_components": {
+          "pol_sci_1": {
+            "performance": 76.74418604651163,
+            "evaluation": 100.0,
+            "efficiency": 53.691867519382264
+          },
+          "pol_sci_2": {
+            "performance": 76.74418604651163,
+            "evaluation": 59.999999999999964,
+            "efficiency": 26.1006769502024
+          },
+          "comp_sci_1": {
+            "performance": 89.53488372093024,
+            "evaluation": 84.99999999999997,
+            "efficiency": 45.50674382141433
+          },
+          "comp_sci_2": {
+            "performance": 76.74418604651163,
+            "evaluation": 59.999999999999964,
+            "efficiency": 48.618458266161554
+          }
+        },
+        "average_boswell_quotient": 71.55,
+        "rank": 23,
+        "aggregated_components": {
+          "performance": 79.94186046511628,
+          "evaluation": 76.24999999999997,
+          "efficiency": 43.479436639290135
+        },
+        "consistency": 82.19999999999999,
+        "domain_count": 4,
+        "best_domain": "comp_sci_1",
+        "worst_domain": "pol_sci_2"
+      }
+    },
+    "domains_analyzed": [
+      "pol_sci_1",
+      "pol_sci_2",
+      "comp_sci_1",
+      "comp_sci_2"
+    ],
+    "component_weights": {
+      "performance": 0.5,
+      "evaluation": 0.3,
+      "efficiency": 0.2
+    }
+  },
+  "source_domains": [
+    "pol_sci_1",
+    "pol_sci_2",
+    "comp_sci_1",
+    "comp_sci_2"
+  ],
+  "domain_descriptions": {
+    "pol_sci_1": "Political Science - Level 1: AI Policy Analysis",
+    "pol_sci_2": "Political Science - Level 2: AI Governance Analysis",
+    "comp_sci_1": "Computer Science - Level 1: Algorithm Analysis",
+    "comp_sci_2": "Computer Science - Level 2: System Design"
+  }
+}
