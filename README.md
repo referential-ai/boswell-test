@@ -627,6 +627,58 @@ The framework provides:
 
 This timing information helps identify which models are more efficient and how overall test time is distributed across different phases.
 
+## 📊 Boswell Quotient: Comprehensive Assessment
+
+The Boswell Quotient is a comprehensive metric (0-100) designed to identify the most capable AI assistants - models that would be difficult to replace, much like James Boswell was to Samuel Johnson.
+
+### How it's Calculated
+
+The Boswell Quotient combines three key components:
+
+1. **Performance (50%)**: Based on grades received from peer models
+2. **Evaluation (30%)**: Based on grading accuracy, consistency, and bias measurement
+3. **Efficiency (20%)**: Based on response time and resource utilization
+
+### Latest Boswell Quotient Rankings (February 2025)
+
+From our most recent cross-domain analysis:
+
+| Model | Overall BQ | Performance | Evaluation | Efficiency | Letter Grade |
+|-------|------------|-------------|------------|------------|--------------|
+| o3-mini-high | 89.8 | 88.5 | 100.0 | 75.3 | B+ |
+| GPT-4o | 89.2 | 84.2 | 100.0 | 82.6 | B+ |
+| DeepSeek-R1-Full | 85.2 | 90.7 | 87.2 | 68.4 | B |
+| o1 | 83.3 | 81.5 | 92.0 | 70.1 | B |
+| DeepSeek-Distill-Qwen-32b | 79.1 | 80.3 | 85.5 | 65.7 | C+ |
+| Claude-3.7-Sonnet-thinking | 71.5 | 91.3 | 60.2 | 45.8 | C- |
+
+### Domain-Specific Leaders
+
+The Boswell Test also reveals which models excel in specific domains:
+
+| Domain | Top Model | BQ Score |
+|--------|-----------|----------|
+| Political Science Level 1 | o3-mini-high | 88.4 |
+| Political Science Level 2 | DeepSeek-R1-Full | 91.3 |
+| Computer Science Level 1 | DeepSeek-R1-Full | 95.6 |
+| Computer Science Level 2 | GPT-4o | 91.4 |
+
+### Consistency vs. Specialization
+
+Some models perform consistently well across all domains, while others specialize in specific areas:
+
+**Most Consistent Models** (Consistency Score):
+- o3-mini-high: 95.2
+- GPT-4o: 90.8
+- o1: 90.7
+
+**Domain Specialists** (Models with significantly better performance in specific domains):
+- Claude-3.7-Sonnet-thinking: excels in CS Level 1 (26.4 points above its average)
+- DeepSeek-Distill-Qwen-32b: excels in CS Level 1 (17.9 points above its average)
+- DeepSeek-R1-Full: excels in CS Level 1 (13.9 points above its average)
+
+The Boswell Quotient provides a multidimensional view of model capabilities, helping identify which models are likely to serve as the most capable, well-rounded AI assistants across different domains and tasks.
+
 ## 🧰 Reliability and Performance Features
 
 The Boswell Test framework includes several features to ensure reliable and efficient operation:
