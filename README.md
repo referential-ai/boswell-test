@@ -1,5 +1,7 @@
 # Boswell Test: LLM Comparative Analysis Framework
 
+![Boswell Test Domain Comparison](results/20250226-211057-aggregate-small-set/charts/domain_comparison.png)
+
 The Boswell Test is an automated tool for comparing Large Language Models (LLMs) through peer-review, where models grade each other's essays. This implementation is based on the methodology introduced by Peter Luh in his article ["Is AI Chatbot My Boswell?"](https://peterl168.substack.com/p/is-ai-chatbot-my-boswell) (February 2025).
 
 ## 🌟 Introduction: How It Works
@@ -643,7 +645,18 @@ The Boswell Quotient combines three key components:
 
 From our most recent cross-domain analysis:
 
-| Model | Overall BQ | Performance | Evaluation | Efficiency | Letter Grade |
+| Rank | Model | Boswell Quotient | Grade | Domain Count | Consistency | Best Domain | Worst Domain |
+|------|-------|-----------------|-------|--------------|-------------|------------|-------------|
+| 1 | o3-mini-high | 89.8 | B+ | 4 | 95.2 | Computer Science - Level 1: Algorithm Analysis | Political Science - Level 2: AI Governance Analysis |
+| 2 | GPT-4o | 89.2 | B+ | 4 | 90.8 | Computer Science - Level 1: Algorithm Analysis | Political Science - Level 2: AI Governance Analysis |
+| 3 | DeepSeek-R1-Full | 85.2 | B | 4 | 80.7 | Computer Science - Level 1: Algorithm Analysis | Computer Science - Level 2: System Design |
+| 4 | o1 | 83.3 | B | 4 | 90.7 | Computer Science - Level 2: System Design | Political Science - Level 2: AI Governance Analysis |
+| 5 | DeepSeek-Distill-Qwen-32b | 79.1 | C+ | 4 | 80.8 | Computer Science - Level 1: Algorithm Analysis | Political Science - Level 2: AI Governance Analysis |
+| 6 | Claude-3.7-Sonnet-thinking | 71.5 | C- | 4 | 66.3 | Computer Science - Level 1: Algorithm Analysis | Political Science - Level 2: AI Governance Analysis |
+
+#### Component Breakdown
+
+| Model | Overall BQ | Performance (50%) | Evaluation (30%) | Efficiency (20%) | Letter Grade |
 |-------|------------|-------------|------------|------------|--------------|
 | o3-mini-high | 89.8 | 88.5 | 100.0 | 75.3 | B+ |
 | GPT-4o | 89.2 | 84.2 | 100.0 | 82.6 | B+ |
@@ -656,12 +669,12 @@ From our most recent cross-domain analysis:
 
 The Boswell Test also reveals which models excel in specific domains:
 
-| Domain | Top Model | BQ Score |
-|--------|-----------|----------|
-| Political Science Level 1 | o3-mini-high | 88.4 |
-| Political Science Level 2 | DeepSeek-R1-Full | 91.3 |
-| Computer Science Level 1 | DeepSeek-R1-Full | 95.6 |
-| Computer Science Level 2 | GPT-4o | 91.4 |
+| Domain | Top Model | Boswell Quotient | Grade |
+|--------|-----------|------------------|-------|
+| Political Science - Level 1: AI Policy Analysis | o3-mini-high | 88.4 | B+ |
+| Political Science - Level 2: AI Governance Analysis | DeepSeek-R1-Full | 91.3 | A- |
+| Computer Science - Level 1: Algorithm Analysis | DeepSeek-R1-Full | 95.6 | A |
+| Computer Science - Level 2: System Design | GPT-4o | 91.4 | A- |
 
 ### Consistency vs. Specialization
 
