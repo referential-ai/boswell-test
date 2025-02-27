@@ -566,7 +566,7 @@ To create a new test domain:
 
 Edit the `MODELS` list in `boswell_test.py` to add or remove models from OpenRouter. The script is pre-configured with models known to work with OpenRouter. If you want to try additional models:
 
-1. Check the available models on [OpenRouter](https://openrouter.ai/docs/models)
+1. Check the available models on [OpenRouter](https://openrouter.ai/models)
 2. Add them to the `MODELS` list in the format `{"name": "Model-Name", "model_id": "provider/model-id"}`
 3. The model verification step will automatically filter out any models that aren't available
 

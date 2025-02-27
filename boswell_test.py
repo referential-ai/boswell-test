@@ -1306,7 +1306,271 @@ def generate_visualizations(results: Dict[str, Any], run_dir: str) -> None:
         plt.savefig(f"{charts_dir}/time_breakdown.png", dpi=300)
         plt.close()
     
+    # 7. Chart: Boswell Quotient visualization
+    if "boswell_quotient" in results and "model_scores" in results["boswell_quotient"]:
+        plt.figure(figsize=(14, 8))
+        
+        quotient_data = results["boswell_quotient"]["model_scores"]
+        
+        # Sort models by Boswell Quotient score (descending)
+        sorted_models = sorted(
+            quotient_data.keys(),
+            key=lambda m: quotient_data[m]["boswell_quotient"],
+            reverse=True
+        )
+        
+        # Prepare data for visualization
+        scores = [quotient_data[model]["boswell_quotient"] for model in sorted_models]
+        
+        # Create bar chart for overall Boswell Quotient
+        plt.barh(sorted_models, scores, color='#6A5ACD')
+        plt.title('Boswell Quotient by Model', fontsize=16)
+        plt.xlabel('Boswell Quotient (0-100)', fontsize=12)
+        plt.yticks(fontsize=10)
+        plt.xlim(0, 100)  # Scale from 0 to 100
+        plt.grid(axis='x', linestyle='--', alpha=0.7)
+        plt.tight_layout()
+        plt.savefig(f"{charts_dir}/boswell_quotient.png", dpi=300)
+        plt.close()
+        
+        # 8. Chart: Boswell Quotient component breakdown
+        plt.figure(figsize=(14, 10))
+        
+        # Prepare component data
+        components = ["performance", "evaluation", "efficiency"]
+        component_data = {component: [] for component in components}
+        
+        for model in sorted_models:
+            model_components = quotient_data[model].get("components", {})
+            for component in components:
+                component_data[component].append(model_components.get(component, 0))
+        
+        # Set up the bar chart
+        bar_width = 0.25
+        index = np.arange(len(sorted_models))
+        
+        # Plot each component
+        fig, ax = plt.subplots(figsize=(14, 10))
+        
+        # Set colors for components
+        colors = ['#4CAF50', '#2196F3', '#FF9800']  # Green, Blue, Orange
+        
+        # Plot bars for each component
+        for i, component in enumerate(components):
+            ax.barh(index + i*bar_width, component_data[component], 
+                   bar_width, label=component.capitalize(), color=colors[i])
+        
+        # Configure axes and labels
+        ax.set_yticks(index + bar_width)
+        ax.set_yticklabels(sorted_models)
+        ax.set_xlabel('Component Score (0-100)')
+        ax.set_title('Boswell Quotient Component Breakdown by Model')
+        ax.set_xlim(0, 100)
+        ax.legend(loc='upper right')
+        
+        plt.tight_layout()
+        plt.savefig(f"{charts_dir}/boswell_quotient_components.png", dpi=300)
+        plt.close()
+    
     print(f"  Visualizations saved to {charts_dir}")
+
+def calculate_boswell_quotient(results: Dict[str, Any], models: List[str]) -> Dict[str, Any]:
+    """Calculate the Boswell Quotient for each model.
+    
+    The Boswell Quotient is a composite score (0-100) based on:
+    1. Performance Score (50%): Based on grades received from other models
+    2. Evaluation Score (30%): Based on grading accuracy and consistency
+    3. Efficiency Score (20%): Based on timing and resource usage
+    
+    Returns:
+        Dictionary with Boswell Quotient scores and component scores for each model
+    """
+    quotient_results = {
+        "model_scores": {},
+        "component_weights": {
+            "performance": 0.50,  # 50% weight for performance
+            "evaluation": 0.30,   # 30% weight for evaluation capability
+            "efficiency": 0.20    # 20% weight for efficiency
+        }
+    }
+    
+    # Collect all performance scores (grades received)
+    performance_scores = {}
+    max_performance_score = 4.3  # A+ = 4.3
+    
+    for model in models:
+        if model in results["summary"]:
+            # Get median numeric grade received (on 0-4.3 scale)
+            median_grade = results["summary"][model]["median_numeric"]
+            # Convert to 0-100 scale for the performance component
+            performance_score = (median_grade / max_performance_score) * 100
+            performance_scores[model] = performance_score
+    
+    # Collect evaluation scores (based on grading accuracy and bias)
+    evaluation_scores = {}
+    if "bias_analysis" in results and "grader_bias" in results["bias_analysis"]:
+        bias_data = results["bias_analysis"]["grader_bias"]
+        
+        for model in models:
+            if model in bias_data:
+                # Calculate how close the model's grading is to the consensus
+                # A bias of 0 is perfect, higher absolute bias reduces score
+                bias_magnitude = abs(bias_data[model]["median_bias"])
+                
+                # Convert bias to a score (0-100)
+                # Perfect score for no bias, decreasing as bias increases
+                # Bias of 0.7 (very lenient/strict) gives ~40% evaluation score
+                # Bias of 0.3 (slightly lenient/strict) gives ~70% evaluation score
+                evaluation_score = max(0, 100 - (bias_magnitude * 100))
+                evaluation_scores[model] = evaluation_score
+    
+    # Collect efficiency scores (based on timing and tokens)
+    efficiency_scores = {}
+    timing_data = results.get("timing", {}).get("model_timing", {})
+    cost_data = results.get("cost", {})
+    
+    if timing_data and "essay" in timing_data and "grading" in timing_data:
+        # Calculate max response times to normalize
+        essay_times = [timing_data["essay"].get(model, 0) for model in models if model in timing_data["essay"]]
+        max_essay_time = max(essay_times) if essay_times else 1
+        
+        # Calculate average grading times
+        avg_grading_times = {}
+        for model in models:
+            if model in timing_data["grading"]:
+                times = timing_data["grading"][model]
+                if times:
+                    avg_grading_times[model] = sum(times.values()) / len(times)
+        
+        max_grading_time = max(avg_grading_times.values()) if avg_grading_times else 1
+        
+        # Calculate efficiency scores
+        for model in models:
+            essay_time_score = 0
+            grading_time_score = 0
+            
+            # Essay generation efficiency (faster is better)
+            if model in timing_data["essay"]:
+                # Inverse relationship - faster times get higher scores
+                essay_time = timing_data["essay"][model]
+                essay_time_score = max(0, 100 * (1 - (essay_time / max_essay_time)))
+            
+            # Grading efficiency
+            if model in avg_grading_times:
+                # Inverse relationship - faster times get higher scores
+                grading_time = avg_grading_times[model]
+                grading_time_score = max(0, 100 * (1 - (grading_time / max_grading_time)))
+            
+            # Combine essay and grading efficiency (equal weight)
+            if essay_time_score > 0 or grading_time_score > 0:
+                weights = []
+                scores = []
+                
+                if essay_time_score > 0:
+                    weights.append(0.5)
+                    scores.append(essay_time_score)
+                
+                if grading_time_score > 0:
+                    weights.append(0.5)
+                    scores.append(grading_time_score)
+                
+                total_weight = sum(weights)
+                if total_weight > 0:
+                    efficiency_scores[model] = sum(w * s for w, s in zip(weights, scores)) / total_weight
+    
+    # Calculate the final Boswell Quotient for each model
+    for model in models:
+        components = {}
+        weighted_scores = []
+        weights = []
+        
+        # Add performance component if available
+        if model in performance_scores:
+            performance = performance_scores[model]
+            components["performance"] = performance
+            weighted_scores.append(performance * quotient_results["component_weights"]["performance"])
+            weights.append(quotient_results["component_weights"]["performance"])
+        
+        # Add evaluation component if available
+        if model in evaluation_scores:
+            evaluation = evaluation_scores[model]
+            components["evaluation"] = evaluation
+            weighted_scores.append(evaluation * quotient_results["component_weights"]["evaluation"])
+            weights.append(quotient_results["component_weights"]["evaluation"])
+        
+        # Add efficiency component if available
+        if model in efficiency_scores:
+            efficiency = efficiency_scores[model]
+            components["efficiency"] = efficiency
+            weighted_scores.append(efficiency * quotient_results["component_weights"]["efficiency"])
+            weights.append(quotient_results["component_weights"]["efficiency"])
+        
+        # Calculate final score if we have any components
+        if weighted_scores:
+            total_weight = sum(weights)
+            if total_weight > 0:
+                # Normalize by actual weights used
+                final_score = sum(weighted_scores) / total_weight
+                
+                # Store results
+                quotient_results["model_scores"][model] = {
+                    "boswell_quotient": round(final_score, 1),
+                    "components": components,
+                    "rank": 0  # Will be filled in later
+                }
+    
+    # Rank models by Boswell Quotient
+    ranked_models = sorted(
+        quotient_results["model_scores"].keys(),
+        key=lambda m: quotient_results["model_scores"][m]["boswell_quotient"],
+        reverse=True
+    )
+    
+    # Assign ranks (1-based)
+    for i, model in enumerate(ranked_models):
+        quotient_results["model_scores"][model]["rank"] = i + 1
+    
+    return quotient_results
+
+
+def generate_boswell_quotient_table(quotient_results: Dict[str, Any]) -> str:
+    """Generate a Markdown table showing the Boswell Quotient for each model."""
+    # Build header
+    header = "| Rank | Model | Boswell Quotient | Performance | Evaluation | Efficiency |"
+    
+    # Build separator
+    separator = "|------|-------|-----------------|------------|------------|------------|"
+    
+    # Build rows
+    rows = []
+    sorted_models = sorted(
+        quotient_results["model_scores"].keys(),
+        key=lambda m: quotient_results["model_scores"][m]["rank"]
+    )
+    
+    for model in sorted_models:
+        score_data = quotient_results["model_scores"][model]
+        components = score_data["components"]
+        
+        rank = score_data["rank"]
+        quotient = score_data["boswell_quotient"]
+        performance = components.get("performance", "N/A")
+        if performance != "N/A":
+            performance = f"{performance:.1f}"
+        
+        evaluation = components.get("evaluation", "N/A")
+        if evaluation != "N/A":
+            evaluation = f"{evaluation:.1f}"
+            
+        efficiency = components.get("efficiency", "N/A")
+        if efficiency != "N/A":
+            efficiency = f"{efficiency:.1f}"
+        
+        rows.append(f"| {rank} | {model} | {quotient:.1f} | {performance} | {evaluation} | {efficiency} |")
+    
+    # Combine everything
+    return f"{header}\n{separator}\n" + "\n".join(rows)
+
 
 def generate_grade_tables(results: Dict[str, Any], run_dir: str) -> None:
     """Generate formatted tables of grades in ASCII, Markdown, and CSV formats."""
@@ -1317,6 +1581,12 @@ def generate_grade_tables(results: Dict[str, Any], run_dir: str) -> None:
     
     # Add bias results to the main results
     results["bias_analysis"] = bias_results
+    
+    # Calculate Boswell Quotient
+    quotient_results = calculate_boswell_quotient(results, models)
+    
+    # Add Boswell Quotient results to the main results
+    results["boswell_quotient"] = quotient_results
     
     # Generate ASCII table
     ascii_table = generate_ascii_table(results, models)
@@ -1342,6 +1612,11 @@ def generate_grade_tables(results: Dict[str, Any], run_dir: str) -> None:
     with open(f"{run_dir}/grading_bias.md", 'w') as f:
         f.write(bias_markdown)
     
+    # Generate Boswell Quotient table
+    boswell_quotient_table = generate_boswell_quotient_table(quotient_results)
+    with open(f"{run_dir}/boswell_quotient.md", 'w') as f:
+        f.write(boswell_quotient_table)
+    
     # Generate cost report
     cost_report = generate_cost_report(results)
     with open(f"{run_dir}/cost_report.md", 'w') as f:
@@ -1361,6 +1636,7 @@ def generate_grade_tables(results: Dict[str, Any], run_dir: str) -> None:
         "grades": results["grades"],
         "summary": results["summary"],
         "bias_analysis": bias_results,
+        "boswell_quotient": quotient_results,
         "cost": results["cost"],
         "run_timestamp": results["run_timestamp"]
     }
@@ -1538,6 +1814,37 @@ def print_summary(results: Dict[str, Any]) -> None:
                 
         print(f"{author:<20} | {median_letter:<12} | {grades}")
     
+    # Print Boswell Quotient if available
+    if "boswell_quotient" in results and "model_scores" in results["boswell_quotient"]:
+        print("\n=== BOSWELL QUOTIENT ===")
+        print(f"{'Rank':<5} | {'Model':<20} | {'Boswell Quotient':<15} | {'Performance':<11} | {'Evaluation':<11} | {'Efficiency':<11}")
+        print("-" * 90)
+        
+        # Sort models by rank
+        quotient_data = results["boswell_quotient"]["model_scores"]
+        sorted_models = sorted(
+            quotient_data.keys(),
+            key=lambda m: quotient_data[m]["rank"]
+        )
+        
+        for model in sorted_models:
+            score_data = quotient_data[model]
+            components = score_data["components"]
+            
+            rank = score_data["rank"]
+            quotient = score_data["boswell_quotient"]
+            
+            performance = components.get("performance", 0)
+            performance_str = f"{performance:.1f}" if performance else "N/A"
+            
+            evaluation = components.get("evaluation", 0)
+            evaluation_str = f"{evaluation:.1f}" if evaluation else "N/A"
+            
+            efficiency = components.get("efficiency", 0)
+            efficiency_str = f"{efficiency:.1f}" if efficiency else "N/A"
+            
+            print(f"{rank:<5} | {model:<20} | {quotient:<15.1f} | {performance_str:<11} | {evaluation_str:<11} | {efficiency_str:<11}")
+    
     # Print grading bias if available
     if "bias_analysis" in results:
         print("\n=== GRADING BIAS ANALYSIS ===")
@@ -1631,6 +1938,9 @@ def print_summary(results: Dict[str, Any]) -> None:
         print("- Grading time comparison")
         print("- Cost breakdown")
         print("- Process timing breakdown")
+        if "boswell_quotient" in results:
+            print("- Boswell Quotient chart")
+            print("- Boswell Quotient component breakdown")
 
 
 def list_domains() -> None:
