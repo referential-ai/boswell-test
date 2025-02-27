@@ -58,7 +58,7 @@ MODELS = [
     {"name": "Perplexity: Llama 3.1 Sonar 405B Online", "model_id": "perplexity/llama-3.1-sonar-huge-128k-online"},
     {"name": "Perplexity: Llama 3.1 Sonar 70B", "model_id": "perplexity/llama-3.1-sonar-large-128k-chat"},
     {"name": "Perplexity: Llama 3.1 Sonar 8B Online", "model_id": "perplexity/llama-3.1-sonar-small-128k-online"},
-    {"name": "Gemini Flash 1.5", "model_id": "google/gemini-flash-1.5"},
+    {"name": "Gemini Flash 2.0", "model_id": "google/gemini-2.0-flash-001"},
     {"name": "Gemini Pro 1.5", "model_id": "google/gemini-pro-1.5"}
 ]
 
@@ -73,7 +73,10 @@ AVAILABLE_DOMAINS = {
     "pol_sci_1": "Political Science - Level 1: AI Policy Analysis",
     "pol_sci_2": "Political Science - Level 2: AI Governance Analysis",
     "comp_sci_1": "Computer Science - Level 1: Algorithm Analysis",
-    "comp_sci_2": "Computer Science - Level 2: System Design"
+    "comp_sci_2": "Computer Science - Level 2: System Design",
+    "programming_1": "Programming - Level 1: Coding Fundamentals",
+    "programming_2": "Programming - Level 2: Advanced Algorithms",
+    "programming_3": "Programming - Level 3: Competitive Programming Challenges"
 }
 
 
@@ -1446,9 +1449,9 @@ def calculate_boswell_quotient(results: Dict[str, Any], models: List[str]) -> Di
     quotient_results = {
         "model_scores": {},
         "component_weights": {
-            "performance": 0.50,  # 50% weight for performance
-            "evaluation": 0.30,   # 30% weight for evaluation capability
-            "efficiency": 0.20    # 20% weight for efficiency
+            "performance": 0.70,  # 50% weight for performance
+            "evaluation": 0.20,   # 30% weight for evaluation capability
+            "efficiency": 0.10    # 20% weight for efficiency
         }
     }
     
@@ -2373,13 +2376,38 @@ def run_all_domains(args) -> None:
         
         scores = [aggregated_data["model_scores"][m]["average_boswell_quotient"] for m in sorted_models]
         
-        # Create bar chart
-        plt.barh(sorted_models, scores, color='#6A5ACD')
-        plt.title('Aggregate Boswell Quotient by Model (All Domains)', fontsize=16)
-        plt.xlabel('Boswell Quotient (0-100)', fontsize=12)
+        # Create bar chart with a colorful gradient
+        # Create a colormap based on score values
+        cmap = plt.cm.viridis  # Choose a colorful colormap (viridis, plasma, magma, inferno, etc.)
+        colors = cmap(np.linspace(0.2, 0.8, len(scores)))
+        
+        # Create horizontal bar chart with custom colors and styling
+        bars = plt.barh(sorted_models, scores, color=colors)
+        
+        # Add score values at the end of each bar
+        for i, bar in enumerate(bars):
+            plt.text(bar.get_width() + 1, bar.get_y() + bar.get_height()/2, 
+                    f'{scores[i]:.1f}', 
+                    va='center', fontsize=9)
+        
+        # Style the chart
+        plt.title('Aggregate Boswell Quotient by Model (All Domains)', fontsize=16, fontweight='bold')
+        plt.xlabel('Boswell Quotient (0-100)', fontsize=12, fontweight='bold')
         plt.yticks(fontsize=10)
-        plt.xlim(0, 100)
+        plt.xlim(0, 105)  # Extend limit to allow space for score labels
         plt.grid(axis='x', linestyle='--', alpha=0.7)
+        
+        # Add a gradient colorbar for reference
+        sm = plt.cm.ScalarMappable(cmap=cmap)
+        sm.set_array([])
+        cbar = plt.colorbar(sm, orientation='horizontal', pad=0.1, aspect=40)
+        cbar.set_label('Higher Score → Better Performance', fontsize=10)
+        
+        # Background styling
+        ax = plt.gca()
+        ax.set_facecolor('#f8f9fa')  # Light background
+        plt.gcf().set_facecolor('#f8f9fa')
+        
         plt.tight_layout()
         
         # Save chart
@@ -2405,18 +2433,66 @@ def run_all_domains(args) -> None:
             bar_width = 0.15
             positions = np.arange(len(domains))
             
-            # Plot bars for each model
+            # Define a vibrant color palette
+            color_palette = [
+                '#FF6B6B',  # Coral Red
+                '#4ECDC4',  # Turquoise
+                '#FFD166',  # Yellow
+                '#6A0572',  # Purple
+                '#1A535C',  # Dark Teal
+            ]
+            
+            # Plot bars for each model with vibrant colors
             for i, model in enumerate(top_models):
                 domain_scores = [aggregated_data["model_scores"][model]["domain_scores"].get(d, 0) for d in domains]
-                plt.bar(positions + i*bar_width, domain_scores, bar_width, label=model)
+                plt.bar(
+                    positions + i*bar_width, 
+                    domain_scores, 
+                    bar_width, 
+                    label=model,
+                    color=color_palette[i % len(color_palette)],
+                    edgecolor='white',
+                    linewidth=0.7
+                )
+                
+                # Add score values on top of each bar
+                for j, score in enumerate(domain_scores):
+                    plt.text(
+                        positions[j] + i*bar_width, 
+                        score + 2, 
+                        f'{score:.1f}', 
+                        ha='center', 
+                        va='bottom', 
+                        fontsize=8, 
+                        rotation=90,
+                        fontweight='bold'
+                    )
             
-            # Configure chart
-            plt.title('Boswell Quotient Comparison Across Domains (Top Models)', fontsize=16)
-            plt.xlabel('Domain', fontsize=12)
-            plt.ylabel('Boswell Quotient', fontsize=12)
+            # Configure chart with enhanced styling
+            plt.title('Boswell Quotient Comparison Across Domains (Top Models)', fontsize=16, fontweight='bold')
+            plt.xlabel('Domain', fontsize=12, fontweight='bold')
+            plt.ylabel('Boswell Quotient', fontsize=12, fontweight='bold')
             plt.xticks(positions + bar_width * (len(top_models)-1)/2, domain_names, rotation=45, ha='right')
-            plt.ylim(0, 100)
-            plt.legend(title='Model')
+            plt.ylim(0, 110)  # Increased to accommodate score labels
+            
+            # Add a styled legend
+            legend = plt.legend(
+                title='Models', 
+                title_fontsize=12,
+                loc='upper right', 
+                frameon=True, 
+                framealpha=0.95,
+                edgecolor='gray'
+            )
+            
+            # Add background styling
+            ax = plt.gca()
+            ax.set_facecolor('#f8f9fa')  # Light background
+            plt.gcf().set_facecolor('#f8f9fa')
+            
+            # Add a grid for better readability
+            plt.grid(axis='y', linestyle='--', alpha=0.5)
+            
             plt.tight_layout()
             
             # Save chart
