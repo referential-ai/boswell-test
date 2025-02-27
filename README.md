@@ -458,10 +458,12 @@ The Boswell Test framework tracks detailed timing information throughout the tes
 
 This timing information helps identify which models are more efficient and how overall test time is distributed across different phases.
 
-## 🧰 Reliability Features
+## 🧰 Reliability and Performance Features
 
-The Boswell Test framework includes several features to ensure reliable operation:
+The Boswell Test framework includes several features to ensure reliable and efficient operation:
 
+- **Concurrent Processing**: Utilizes parallel processing for model verification, essay generation, and grading to significantly reduce total runtime
+- **Thread Safety**: Implements proper locking mechanisms to prevent race conditions when updating shared data
 - **Model Verification**: Automatically tests models with a small prompt before starting the main test
 - **Retry Logic**: Automatically retries failed API calls up to a configurable number of times
 - **Error Handling**: Gracefully handles API errors and prevents script crashes
@@ -488,6 +490,20 @@ Edit the `MODELS` list in `boswell_test.py` to add or remove models from OpenRou
 1. Check the available models on [OpenRouter](https://openrouter.ai/docs/models)
 2. Add them to the `MODELS` list in the format `{"name": "Model-Name", "model_id": "provider/model-id"}`
 3. The model verification step will automatically filter out any models that aren't available
+
+## 💰 Cost and Performance Considerations
+
+Running a full Boswell Test across multiple models and domains can be resource-intensive:
+
+- **API Costs**: A complete run with 20+ models across all domains can cost approximately $20-30 in OpenRouter credits
+- **Runtime**: With concurrency enabled, a full test run takes approximately 1 hour (vs. several hours without concurrency)
+- **Resource Usage**: The framework is optimized for I/O-bound operations and efficiently manages multiple concurrent API calls
+- **Output Size**: Results are comprehensive, with a full run generating several megabytes of data artifacts
+
+You can customize the test scope to reduce costs:
+- Run tests on a single domain instead of all domains
+- Select a smaller subset of models to test
+- Use the `--skip-verification` flag to bypass the model verification step
 
 ## 📝 License
 

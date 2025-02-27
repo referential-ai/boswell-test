@@ -1178,7 +1178,7 @@ def generate_visualizations(results: Dict[str, Any], run_dir: str) -> None:
     if numeric_grades:
         # Create boxplot of grades received by each model
         plt.boxplot([numeric_grades[model] for model in models], 
-                   labels=models, 
+                   tick_labels=models, 
                    patch_artist=True,
                    boxprops=dict(facecolor='#A8DADC'))
         
