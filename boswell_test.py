@@ -6,6 +6,8 @@ This script automates the process of:
 1. Prompting multiple LLM models with an essay question
 2. Having each model grade every other model's essay
 3. Saving and analyzing the results
+
+This implementation uses concurrent processing to improve performance.
 """
 
 import os
@@ -20,6 +22,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 from typing import List, Dict, Any, Optional, Tuple
 from statistics import median
+import concurrent.futures
+from threading import Lock
 
 # Configuration
 API_KEY = os.environ.get("OPENROUTER_API_KEY")
@@ -182,21 +186,30 @@ def fetch_available_openrouter_models() -> List[Dict[str, Any]]:
             return []
         
         models_data = response.json()
-        # Process and format the models
+        # Process and format the models using a thread pool for faster processing
         formatted_models = []
-        for model_data in models_data.get("data", []):
+        model_data_list = models_data.get("data", [])
+        
+        # Define a function to process each model
+        def process_model(model_data):
             model_id = model_data.get("id")
             if not model_id:
-                continue
+                return None
                 
             model_name = model_data.get("name", model_id.split("/")[-1])
-            formatted_models.append({
+            return {
                 "name": model_name,
                 "model_id": model_id,
                 "context_length": model_data.get("context_length"),
                 "pricing": model_data.get("pricing", {}),
                 "description": model_data.get("description", "")
-            })
+            }
+            
+        # Process models concurrently
+        with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
+            for model in executor.map(process_model, model_data_list):
+                if model:
+                    formatted_models.append(model)
         
         return formatted_models
         
@@ -327,8 +340,33 @@ def save_essay_with_grades(author: str, essay: str, grades: Dict[str, Dict[str, 
     return filename
 
 
+def verify_model(model: Dict[str, str]) -> Tuple[bool, Dict[str, str]]:
+    """Verify a single model is available on OpenRouter.
+    
+    This function is designed to be run concurrently.
+    
+    Returns:
+        Tuple of (success, model) where success is a boolean indicating if model is available
+    """
+    model_name = model["name"]
+    model_id = model["model_id"]
+    
+    print(f"  Testing model: {model_name}...")
+    # Using a minimal prompt just to check if the model is available
+    test_prompt = "Hello, please respond with a single word."
+    response = call_openrouter_api(model_id, test_prompt)
+    
+    if "error" in response:
+        print(f"  ❌ Model {model_name} ({model_id}) is not available: {response.get('error', {}).get('message', 'Unknown error')}")
+        return (False, model)
+        
+    print(f"  ✅ Model {model_name} verified and available")
+    return (True, model)
+
+
 def verify_available_models() -> List[Dict[str, str]]:
     """Verify which models are available on OpenRouter and return only valid ones.
+    Verifies models concurrently to speed up the process.
     
     Returns:
         List of verified model dictionaries
@@ -336,28 +374,185 @@ def verify_available_models() -> List[Dict[str, str]]:
     print("Verifying available models...")
     verified_models = []
     
-    for model in MODELS:
-        model_name = model["name"]
-        model_id = model["model_id"]
+    # Use ThreadPoolExecutor to verify models concurrently
+    with concurrent.futures.ThreadPoolExecutor(max_workers=min(10, len(MODELS))) as executor:
+        # Submit all verification tasks
+        future_to_model = {
+            executor.submit(verify_model, model): model["name"]
+            for model in MODELS
+        }
         
-        print(f"  Testing model: {model_name}...")
-        # Using a minimal prompt just to check if the model is available
-        test_prompt = "Hello, please respond with a single word."
-        response = call_openrouter_api(model_id, test_prompt)
-        
-        if "error" in response:
-            print(f"  ❌ Model {model_name} ({model_id}) is not available: {response.get('error', {}).get('message', 'Unknown error')}")
-            continue
-            
-        print(f"  ✅ Model {model_name} verified and available")
-        verified_models.append(model)
-        time.sleep(1)  # Rate limit friendly pause
+        # Process results as they complete
+        for future in concurrent.futures.as_completed(future_to_model):
+            model_name = future_to_model[future]
+            try:
+                success, model = future.result()
+                if success:
+                    verified_models.append(model)
+            except Exception as e:
+                print(f"  Error verifying model {model_name}: {e}")
     
     if not verified_models:
         print("Error: No valid models available on OpenRouter.")
         sys.exit(1)
         
     return verified_models
+
+
+def grade_essay(grader: Dict[str, str], author: str, essay: str, grading_prompt: str, max_retries: int) -> Dict[str, Any]:
+    """Grade an essay with retry logic.
+    
+    This function is designed to be run concurrently.
+    
+    Returns:
+        Dict containing grading results and metadata
+    """
+    grader_name = grader["name"]
+    grader_id = grader["model_id"]
+    
+    result = {
+        "grader_name": grader_name,
+        "author": author,
+        "feedback": None,
+        "grade": None,
+        "numeric_grade": 0.0,
+        "response": None,
+        "error": None,
+        "duration": 0.0,
+        "start_time": time.time()
+    }
+    
+    print(f"  {grader_name} grading {author}'s essay...")
+    formatted_grading_prompt = grading_prompt.format(essay=essay)
+    
+    for retry in range(max_retries):
+        try:
+            response = call_openrouter_api(grader_id, formatted_grading_prompt)
+            
+            if "error" in response:
+                if retry < max_retries - 1:
+                    print(f"  Error getting feedback from {grader_name}, retrying ({retry+1}/{max_retries})...")
+                    time.sleep(2)
+                    continue
+                else:
+                    result["error"] = f"Error after {max_retries} attempts: {response.get('error')}"
+                    print(f"  Error getting feedback from {grader_name} after {max_retries} attempts, skipping.")
+                    break
+            
+            feedback = response.get("choices", [{}])[0].get("message", {}).get("content", "")
+            if not feedback:
+                if retry < max_retries - 1:
+                    print(f"  Received empty feedback from {grader_name}, retrying...")
+                    continue
+                else:
+                    result["error"] = "Empty feedback after all retries"
+                    break
+            
+            # Extract grade from feedback
+            grade = extract_grade(feedback)
+            
+            # Store results
+            result["feedback"] = feedback
+            result["grade"] = grade
+            result["numeric_grade"] = grade_to_numeric(grade)
+            result["response"] = response
+            result["duration"] = time.time() - result["start_time"]
+            
+            # Format for display
+            cost_display = ""
+            if "cost_info" in response:
+                cost_info = response["cost_info"]
+                cost_display = f"(${cost_info['total_cost']:.4f})"
+                
+            time_display = f"in {result['duration']:.2f}s"
+            print(f"  {grader_name} gave {author} a grade of {grade} {cost_display} {time_display}")
+            
+            return result
+            
+        except Exception as e:
+            if retry < max_retries - 1:
+                print(f"  Exception when getting feedback from {grader_name}: {e}, retrying ({retry+1}/{max_retries})...")
+                time.sleep(2)
+            else:
+                result["error"] = f"Exception after {max_retries} attempts: {str(e)}"
+                print(f"  Failed to get feedback from {grader_name} after {max_retries} attempts: {e}")
+    
+    # If we get here with no feedback, we failed after all retries
+    result["duration"] = time.time() - result["start_time"]
+    return result
+
+
+def get_essay_from_model(model: Dict[str, str], essay_prompt: str, max_retries: int) -> Dict[str, Any]:
+    """Get an essay from a single model with retry logic.
+    
+    This function is designed to be run concurrently.
+    
+    Returns:
+        Dict containing the model name, essay content, response info, and timing data
+    """
+    model_name = model["name"]
+    model_id = model["model_id"]
+    result = {
+        "model_name": model_name,
+        "essay": None,
+        "response": None,
+        "error": None,
+        "duration": 0.0,
+        "start_time": time.time()
+    }
+    
+    print(f"  Requesting essay from {model_name}...")
+    
+    for retry in range(max_retries):
+        try:
+            response = call_openrouter_api(model_id, essay_prompt)
+            
+            if "error" in response:
+                if retry < max_retries - 1:
+                    print(f"  Error getting essay from {model_name}, retrying ({retry+1}/{max_retries})...")
+                    time.sleep(2)  # Wait longer between retries
+                    continue
+                else:
+                    result["error"] = f"Error after {max_retries} attempts: {response.get('error')}"
+                    print(f"  Error getting essay from {model_name} after {max_retries} attempts, skipping.")
+                    break
+            
+            essay = response.get("choices", [{}])[0].get("message", {}).get("content", "")
+            if not essay:
+                if retry < max_retries - 1:
+                    print(f"  Received empty response from {model_name}, retrying...")
+                    continue
+                else:
+                    result["error"] = "Empty response after all retries"
+                    break
+            
+            # Success - store results
+            result["essay"] = essay
+            result["response"] = response
+            result["duration"] = time.time() - result["start_time"]
+            
+            # Format for display
+            cost_display = ""
+            if "cost_info" in response:
+                cost_info = response["cost_info"]
+                cost_display = f"(${cost_info['total_cost']:.4f}, {cost_info['input_tokens'] + cost_info['output_tokens']} tokens)"
+            
+            time_display = f"in {result['duration']:.2f}s"
+            print(f"  Received essay from {model_name} ({len(essay)} characters) {cost_display} {time_display}")
+            
+            return result
+            
+        except Exception as e:
+            if retry < max_retries - 1:
+                print(f"  Exception when getting essay from {model_name}: {e}, retrying ({retry+1}/{max_retries})...")
+                time.sleep(2)
+            else:
+                result["error"] = f"Exception after {max_retries} attempts: {str(e)}"
+                print(f"  Failed to get essay from {model_name} after {max_retries} attempts: {e}")
+    
+    # If we get here with no essay, we failed after all retries
+    result["duration"] = time.time() - result["start_time"]
+    return result
 
 
 def run_boswell_test(domain_name: str, output_file: str, selected_models: List[str] = None, 
@@ -411,6 +606,9 @@ def run_boswell_test(domain_name: str, output_file: str, selected_models: List[s
         }
     }
     
+    # Create a results lock to prevent race conditions when updating shared data
+    results_lock = Lock()
+    
     results = {
         "domain": domain_info,
         "essays": {},
@@ -424,66 +622,46 @@ def run_boswell_test(domain_name: str, output_file: str, selected_models: List[s
         "timing": timing_tracking  # Add timing tracking
     }
     
-    # Step 1: Get essays from each model
+    # Step 1: Get essays from each model concurrently
     print(f"\nStep 1: Collecting essays from each model for domain '{domain_info['name']}'...")
     essay_start_time = time.time()
     
-    for model in models_to_use:
-        model_name = model["name"]
-        model_id = model["model_id"]
+    # Use ThreadPoolExecutor to run API calls concurrently
+    with concurrent.futures.ThreadPoolExecutor(max_workers=min(10, len(models_to_use))) as executor:
+        # Start all essay generation tasks
+        future_to_model = {
+            executor.submit(get_essay_from_model, model, essay_prompt, max_retries): model["name"]
+            for model in models_to_use
+        }
         
-        print(f"  Requesting essay from {model_name}...")
-        model_start_time = time.time()
-        
-        # Add retry logic
-        for retry in range(max_retries):
+        # Process results as they complete
+        for future in concurrent.futures.as_completed(future_to_model):
+            model_name = future_to_model[future]
             try:
-                response = call_openrouter_api(model_id, essay_prompt)
+                essay_result = future.result()
                 
-                if "error" in response:
-                    if retry < max_retries - 1:
-                        print(f"  Error getting essay from {model_name}, retrying ({retry+1}/{max_retries})...")
-                        time.sleep(2)  # Wait longer between retries
-                        continue
-                    else:
-                        print(f"  Error getting essay from {model_name} after {max_retries} attempts, skipping.")
-                        break
-                
-                essay = response.get("choices", [{}])[0].get("message", {}).get("content", "")
-                if not essay:
-                    print(f"  Received empty response from {model_name}, retrying...")
+                # Skip models with errors
+                if essay_result["error"] or not essay_result["essay"]:
                     continue
                 
-                # Track costs
-                if "cost_info" in response:
-                    cost_info = response["cost_info"]
-                    results["cost"]["essay_costs"][model_name] = cost_info
-                    results["cost"]["total_cost"] += cost_info["total_cost"]
-                    results["cost"]["total_tokens"] += cost_info["input_tokens"] + cost_info["output_tokens"]
-                    results["cost"]["total_duration"] += cost_info["duration"]
-                    cost_display = f"(${cost_info['total_cost']:.4f}, {cost_info['input_tokens'] + cost_info['output_tokens']} tokens)"
-                else:
-                    cost_display = ""
-                
-                # Track timing
-                model_duration = time.time() - model_start_time
-                results["timing"]["model_timing"]["essay"][model_name] = model_duration
-                
-                # Format time for display
-                time_display = f"in {model_duration:.2f}s"
+                # Thread-safe update of the results dictionary
+                with results_lock:
+                    # Store the essay
+                    results["essays"][model_name] = essay_result["essay"]
                     
-                results["essays"][model_name] = essay
-                print(f"  Received essay from {model_name} ({len(essay)} characters) {cost_display} {time_display}")
-                break  # Success, exit retry loop
+                    # Track timing
+                    results["timing"]["model_timing"]["essay"][model_name] = essay_result["duration"]
+                    
+                    # Track costs if available
+                    if "response" in essay_result and essay_result["response"] and "cost_info" in essay_result["response"]:
+                        cost_info = essay_result["response"]["cost_info"]
+                        results["cost"]["essay_costs"][model_name] = cost_info
+                        results["cost"]["total_cost"] += cost_info["total_cost"]
+                        results["cost"]["total_tokens"] += cost_info["input_tokens"] + cost_info["output_tokens"]
+                        results["cost"]["total_duration"] += cost_info["duration"]
                 
             except Exception as e:
-                if retry < max_retries - 1:
-                    print(f"  Exception when getting essay from {model_name}: {e}, retrying ({retry+1}/{max_retries})...")
-                    time.sleep(2)
-                else:
-                    print(f"  Failed to get essay from {model_name} after {max_retries} attempts: {e}")
-        
-        time.sleep(1)  # Rate limit friendly pause
+                print(f"  Error processing results from {model_name}: {e}")
     
     # Record total time for essay generation
     results["timing"]["step_durations"]["essay_generation"] = time.time() - essay_start_time
@@ -495,60 +673,68 @@ def run_boswell_test(domain_name: str, output_file: str, selected_models: List[s
         save_results(results, output_file)
         return results
     
-    # Step 2: Grade each essay with each model
+    # Step 2: Grade each essay with each model concurrently
     print("\nStep 2: Grading essays...")
     grading_start_time = time.time()
     
+    # Prepare grading tasks
+    grading_tasks = []
     for grader in models_to_use:
         grader_name = grader["name"]
-        grader_id = grader["model_id"]
         
         # Skip models that didn't generate essays
         if grader_name not in results["essays"]:
             print(f"  Skipping grader {grader_name} as it did not generate an essay.")
             continue
         
-        # Initialize grading timing for this model
-        if grader_name not in results["timing"]["model_timing"]["grading"]:
-            results["timing"]["model_timing"]["grading"][grader_name] = {}
+        # Initialize structures for this grader
+        with results_lock:
+            if grader_name not in results["timing"]["model_timing"]["grading"]:
+                results["timing"]["model_timing"]["grading"][grader_name] = {}
             
-        results["grades"][grader_name] = {}
+            results["grades"][grader_name] = {}
         
+        # Create tasks for each author-grader pair (excluding self-grading)
         for author, essay in results["essays"].items():
-            # Skip self-grading
-            if grader_name == author:
-                continue
+            if grader_name != author:  # Skip self-grading
+                grading_tasks.append((grader, author, essay))
+    
+    # Use ThreadPoolExecutor to run grading concurrently
+    # Limit to 10 concurrent tasks to avoid overwhelming the API
+    max_concurrent_gradings = min(10, len(grading_tasks))
+    with concurrent.futures.ThreadPoolExecutor(max_workers=max_concurrent_gradings) as executor:
+        # Start all grading tasks
+        future_to_task = {
+            executor.submit(grade_essay, grader, author, essay, grading_prompt, max_retries): (grader["name"], author)
+            for grader, author, essay in grading_tasks
+        }
+        
+        # Process results as they complete
+        for future in concurrent.futures.as_completed(future_to_task):
+            grader_name, author = future_to_task[future]
+            try:
+                grading_result = future.result()
                 
-            # Start timing for this specific grading task
-            grading_task_start = time.time()
+                # Skip if there was an error
+                if grading_result["error"] or not grading_result["feedback"]:
+                    continue
                 
-            print(f"  {grader_name} grading {author}'s essay...")
-            formatted_grading_prompt = grading_prompt.format(essay=essay)
-            
-            # Add retry logic for grading
-            for retry in range(max_retries):
-                try:
-                    response = call_openrouter_api(grader_id, formatted_grading_prompt)
+                # Thread-safe update of the results dictionary
+                with results_lock:
+                    # Store grading results
+                    results["grades"][grader_name][author] = {
+                        "feedback": grading_result["feedback"],
+                        "grade": grading_result["grade"],
+                        "numeric_grade": grading_result["numeric_grade"],
+                        "cost_info": grading_result["response"].get("cost_info", {})
+                    }
                     
-                    if "error" in response:
-                        if retry < max_retries - 1:
-                            print(f"  Error getting feedback from {grader_name}, retrying ({retry+1}/{max_retries})...")
-                            time.sleep(2)
-                            continue
-                        else:
-                            print(f"  Error getting feedback from {grader_name} after {max_retries} attempts, skipping.")
-                            break
+                    # Track timing
+                    results["timing"]["model_timing"]["grading"][grader_name][author] = grading_result["duration"]
                     
-                    feedback = response.get("choices", [{}])[0].get("message", {}).get("content", "")
-                    if not feedback:
-                        print(f"  Received empty feedback from {grader_name}, retrying...")
-                        continue
-                        
-                    grade = extract_grade(feedback)
-                    
-                    # Track costs
-                    if "cost_info" in response:
-                        cost_info = response["cost_info"]
+                    # Track costs if available
+                    if "response" in grading_result and grading_result["response"] and "cost_info" in grading_result["response"]:
+                        cost_info = grading_result["response"]["cost_info"]
                         
                         # Initialize grading costs for this grader if not already there
                         if grader_name not in results["cost"]["grading_costs"]:
@@ -561,34 +747,9 @@ def run_boswell_test(domain_name: str, output_file: str, selected_models: List[s
                         results["cost"]["total_cost"] += cost_info["total_cost"]
                         results["cost"]["total_tokens"] += cost_info["input_tokens"] + cost_info["output_tokens"]
                         results["cost"]["total_duration"] += cost_info["duration"]
-                        
-                        cost_display = f"(${cost_info['total_cost']:.4f})"
-                    else:
-                        cost_display = ""
-                    
-                    results["grades"][grader_name][author] = {
-                        "feedback": feedback,
-                        "grade": grade,
-                        "numeric_grade": grade_to_numeric(grade),
-                        "cost_info": response.get("cost_info", {})
-                    }
-                    
-                    # Track timing for this grading task
-                    grading_task_duration = time.time() - grading_task_start
-                    results["timing"]["model_timing"]["grading"][grader_name][author] = grading_task_duration
-                    time_display = f"in {grading_task_duration:.2f}s"
-                    
-                    print(f"  {grader_name} gave {author} a grade of {grade} {cost_display} {time_display}")
-                    break  # Success, exit retry loop
-                    
-                except Exception as e:
-                    if retry < max_retries - 1:
-                        print(f"  Exception when getting feedback from {grader_name}: {e}, retrying ({retry+1}/{max_retries})...")
-                        time.sleep(2)
-                    else:
-                        print(f"  Failed to get feedback from {grader_name} after {max_retries} attempts: {e}")
-            
-            time.sleep(1)  # Rate limit friendly pause
+                
+            except Exception as e:
+                print(f"  Error processing grading results from {grader_name} for {author}: {e}")
     
     # Record total time for grading
     results["timing"]["step_durations"]["grading"] = time.time() - grading_start_time
