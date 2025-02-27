@@ -53,7 +53,7 @@ The framework includes multiple testing domains, each with different difficulty 
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/botwell.git
+   git clone https://github.com/alanwilhelm/botwell.git
    cd botwell
    ```
 
