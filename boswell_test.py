@@ -38,18 +38,18 @@ if not API_KEY:
 # Only models verified to work with OpenRouter are included
 MODELS = [
     {"name": "GPT-4o", "model_id": "openai/gpt-4o"},
-    {"name": "Claude-3-Opus", "model_id": "anthropic/claude-3-opus"},
-    {"name": "Claude-3-Sonnet", "model_id": "anthropic/claude-3-sonnet"},
+    # {"name": "Claude-3-Opus", "model_id": "anthropic/claude-3-opus"},
+    # {"name": "Claude-3-Sonnet", "model_id": "anthropic/claude-3-sonnet"},
     # {"name": "Claude-3.7-Sonnet", "model_id": "anthropic/claude-3.7-sonnet"},
-    # {"name": "Claude-3.7-Sonnet-thinking", "model_id": "anthropic/claude-3.7-sonnet:thinking"},
+    {"name": "Claude-3.7-Sonnet-thinking", "model_id": "anthropic/claude-3.7-sonnet:thinking"},
     # {"name": "GPT-4o-mini", "model_id": "openai/gpt-4o-mini"},
     # {"name": "Llama-3-8B", "model_id": "meta-llama/llama-3-8b-instruct"},
     # {"name": "GPT-3.5-Turbo", "model_id": "openai/gpt-3.5-turbo"},
-    # {"name": "o3-mini-high", "model_id": "openai/o3-mini-high"},
-    # {"name": "o1", "model_id": "openai/o1"},
+    {"name": "o3-mini-high", "model_id": "openai/o3-mini-high"},
+    {"name": "o1", "model_id": "openai/o1"},
     # {"name": "o1-mini", "model_id": "openai/o1-mini"},
-    # {"name": "DeepSeek-R1-Full", "model_id": "deepseek/deepseek-r1"},
-    # {"name": "DeepSeek-Distill-Qwen-32b", "model_id": "deepseek/deepseek-r1-distill-qwen-32b"},
+    {"name": "DeepSeek-R1-Full", "model_id": "deepseek/deepseek-r1"},
+    {"name": "DeepSeek-Distill-Qwen-32b", "model_id": "deepseek/deepseek-r1-distill-qwen-32b"},
     # {"name": "grok2-1212", "model_id": "x-ai/grok-2-1212"},
     # {"name": "grok-beta", "model_id": "x-ai/grok-beta"},
     # {"name": "Qwen-Plus", "model_id": "qwen/qwen-plus"},
@@ -282,9 +282,90 @@ def grade_to_numeric(grade: str) -> float:
         "A+": 4.3, "A": 4.0, "A-": 3.7,
         "B+": 3.3, "B": 3.0, "B-": 2.7,
         "C+": 2.3, "C": 2.0, "C-": 1.7,
+        "D+": 1.3, "D": 1.0, "D-": 0.7,
+        "F": 0.0,
         "N/A": 0.0
     }
     return grade_map.get(grade, 0.0)
+
+
+def grade_to_percentage(numeric_grade: float) -> int:
+    """Convert numeric grade to percentage (0-100 scale).
+    
+    This creates a more granular scale that spreads the grades across
+    a wider range for better visualization and comparison:
+    
+    A+ (4.3) -> 97-100
+    A  (4.0) -> 93-96
+    A- (3.7) -> 90-92
+    B+ (3.3) -> 87-89
+    B  (3.0) -> 83-86
+    B- (2.7) -> 80-82
+    C+ (2.3) -> 77-79
+    C  (2.0) -> 73-76
+    C- (1.7) -> 70-72
+    D+ (1.3) -> 67-69
+    D  (1.0) -> 63-66
+    D- (0.7) -> 60-62
+    F  (0.0) -> 0-59
+    """
+    if numeric_grade >= 4.3:  # A+
+        return 100
+    elif numeric_grade >= 4.0:  # A
+        return 93 + int((numeric_grade - 4.0) / 0.3 * 4)
+    elif numeric_grade >= 3.7:  # A-
+        return 90 + int((numeric_grade - 3.7) / 0.3 * 3)
+    elif numeric_grade >= 3.3:  # B+
+        return 87 + int((numeric_grade - 3.3) / 0.4 * 3)
+    elif numeric_grade >= 3.0:  # B
+        return 83 + int((numeric_grade - 3.0) / 0.3 * 4)
+    elif numeric_grade >= 2.7:  # B-
+        return 80 + int((numeric_grade - 2.7) / 0.3 * 3)
+    elif numeric_grade >= 2.3:  # C+
+        return 77 + int((numeric_grade - 2.3) / 0.4 * 3)
+    elif numeric_grade >= 2.0:  # C
+        return 73 + int((numeric_grade - 2.0) / 0.3 * 4)
+    elif numeric_grade >= 1.7:  # C-
+        return 70 + int((numeric_grade - 1.7) / 0.3 * 3)
+    elif numeric_grade >= 1.3:  # D+
+        return 67 + int((numeric_grade - 1.3) / 0.4 * 3)
+    elif numeric_grade >= 1.0:  # D
+        return 63 + int((numeric_grade - 1.0) / 0.3 * 4)
+    elif numeric_grade >= 0.7:  # D-
+        return 60 + int((numeric_grade - 0.7) / 0.3 * 3)
+    else:  # F
+        # Scale F grade from 0 to 59 based on the numeric value
+        return max(0, int(numeric_grade * 59 / 0.7))
+
+
+def percentage_to_letter_grade(percentage: int) -> str:
+    """Convert percentage (0-100 scale) to letter grade."""
+    if percentage >= 97:
+        return "A+"
+    elif percentage >= 93:
+        return "A"
+    elif percentage >= 90:
+        return "A-"
+    elif percentage >= 87:
+        return "B+"
+    elif percentage >= 83:
+        return "B" 
+    elif percentage >= 80:
+        return "B-"
+    elif percentage >= 77:
+        return "C+"
+    elif percentage >= 73:
+        return "C"
+    elif percentage >= 70:
+        return "C-"
+    elif percentage >= 67:
+        return "D+"
+    elif percentage >= 63:
+        return "D"
+    elif percentage >= 60:
+        return "D-"
+    else:
+        return "F"
 
 
 def load_domain(domain_name: str) -> Tuple[str, str, Dict[str, str]]:
@@ -916,43 +997,32 @@ def generate_bias_ascii_table(bias_results: Dict[str, Any]) -> str:
     # Calculate column widths
     model_width = max(len(grader) for grader in bias_results["grader_bias"].keys()) + 2
     bias_width = 20  # Enough for bias description
-    median_width = 12  # Enough for median value
+    grade_width = 5   # For letter grade
+    score_width = 5   # For percentage score
     
     # Build header
-    header = f"{'Model':{model_width}} | {'Median Given':{median_width}} | {'Grading Bias':{bias_width}} |"
+    header = f"{'Model':{model_width}} | {'Grade':{grade_width}} | {'Score':{score_width}} | {'Grading Bias':{bias_width}} |"
     
     # Build separator
-    separator = "-" * model_width + "+" + "-" * (median_width + 2) + "+" + "-" * (bias_width + 2) + "+"
+    separator = "-" * model_width + "+" + "-" * (grade_width + 2) + "+" + "-" * (score_width + 2) + "+" + "-" * (bias_width + 2) + "+"
     
     # Build rows
     rows = []
     for grader, stats in bias_results["grader_bias"].items():
-        # Convert numeric grade to letter
-        median_letter = "N/A"
-        for grade, value in [
-            ("A+", 4.3), ("A", 4.0), ("A-", 3.7),
-            ("B+", 3.3), ("B", 3.0), ("B-", 2.7),
-            ("C+", 2.3), ("C", 2.0), ("C-", 1.7)
-        ]:
-            if abs(stats["median_given"] - value) < 0.15:  # Close enough to this grade
-                median_letter = grade
-                break
+        # Convert numeric grade to letter and percentage
+        median_grade = stats["median_given"]
+        percentage = grade_to_percentage(median_grade)
+        median_letter = percentage_to_letter_grade(percentage)
                 
-        row = f"{grader:{model_width}} | {median_letter:^{median_width}} | {stats['letter_bias']:{bias_width}} |"
+        row = f"{grader:{model_width}} | {median_letter:^{grade_width}} | {percentage:^{score_width}} | {stats['letter_bias']:{bias_width}} |"
         rows.append(row)
     
     # Add overall median row
-    overall_median_letter = "N/A"
-    for grade, value in [
-        ("A+", 4.3), ("A", 4.0), ("A-", 3.7),
-        ("B+", 3.3), ("B", 3.0), ("B-", 2.7),
-        ("C+", 2.3), ("C", 2.0), ("C-", 1.7)
-    ]:
-        if abs(bias_results["overall_median"] - value) < 0.15:
-            overall_median_letter = grade
-            break
+    overall_median = bias_results["overall_median"]
+    overall_percentage = grade_to_percentage(overall_median)
+    overall_median_letter = percentage_to_letter_grade(overall_percentage)
             
-    overall_row = f"{'OVERALL':{model_width}} | {overall_median_letter:^{median_width}} | {'Baseline':{bias_width}} |"
+    overall_row = f"{'OVERALL':{model_width}} | {overall_median_letter:^{grade_width}} | {overall_percentage:^{score_width}} | {'Baseline':{bias_width}} |"
     
     # Combine everything
     return f"{header}\n{separator}\n" + "\n".join(rows) + f"\n{separator}\n{overall_row}"
@@ -961,40 +1031,28 @@ def generate_bias_ascii_table(bias_results: Dict[str, Any]) -> str:
 def generate_bias_markdown_table(bias_results: Dict[str, Any]) -> str:
     """Generate a Markdown table showing grading bias for each model."""
     # Build header
-    header = "| Model | Median Given | Grading Bias | Numeric Bias |"
+    header = "| Model | Grade | Score | Grading Bias | Numeric Bias |"
     
     # Build separator
-    separator = "|------|-------------|-------------|-------------|"
+    separator = "|------|-------|-------|-------------|-------------|"
     
     # Build rows
     rows = []
     for grader, stats in bias_results["grader_bias"].items():
-        # Convert numeric grade to letter
-        median_letter = "N/A"
-        for grade, value in [
-            ("A+", 4.3), ("A", 4.0), ("A-", 3.7),
-            ("B+", 3.3), ("B", 3.0), ("B-", 2.7),
-            ("C+", 2.3), ("C", 2.0), ("C-", 1.7)
-        ]:
-            if abs(stats["median_given"] - value) < 0.15:  # Close enough to this grade
-                median_letter = grade
-                break
+        # Convert numeric grade to letter and percentage
+        median_grade = stats["median_given"]
+        percentage = grade_to_percentage(median_grade)
+        median_letter = percentage_to_letter_grade(percentage)
                 
-        row = f"| {grader} | {median_letter} | {stats['letter_bias']} | {stats['median_bias']:.2f} |"
+        row = f"| {grader} | {median_letter} | {percentage} | {stats['letter_bias']} | {stats['median_bias']:.2f} |"
         rows.append(row)
     
     # Add overall median row
-    overall_median_letter = "N/A"
-    for grade, value in [
-        ("A+", 4.3), ("A", 4.0), ("A-", 3.7),
-        ("B+", 3.3), ("B", 3.0), ("B-", 2.7),
-        ("C+", 2.3), ("C", 2.0), ("C-", 1.7)
-    ]:
-        if abs(bias_results["overall_median"] - value) < 0.15:
-            overall_median_letter = grade
-            break
+    overall_median = bias_results["overall_median"]
+    overall_percentage = grade_to_percentage(overall_median)
+    overall_median_letter = percentage_to_letter_grade(overall_percentage)
             
-    overall_row = f"| **OVERALL** | {overall_median_letter} | **Baseline** | 0.00 |"
+    overall_row = f"| **OVERALL** | {overall_median_letter} | {overall_percentage} | **Baseline** | 0.00 |"
     
     # Combine everything
     return f"{header}\n{separator}\n" + "\n".join(rows) + f"\n{overall_row}"
@@ -1536,10 +1594,10 @@ def calculate_boswell_quotient(results: Dict[str, Any], models: List[str]) -> Di
 def generate_boswell_quotient_table(quotient_results: Dict[str, Any]) -> str:
     """Generate a Markdown table showing the Boswell Quotient for each model."""
     # Build header
-    header = "| Rank | Model | Boswell Quotient | Performance | Evaluation | Efficiency |"
+    header = "| Rank | Model | Boswell Quotient | Grade | Performance | Evaluation | Efficiency |"
     
     # Build separator
-    separator = "|------|-------|-----------------|------------|------------|------------|"
+    separator = "|------|-------|-----------------|-------|------------|------------|------------|"
     
     # Build rows
     rows = []
@@ -1554,6 +1612,10 @@ def generate_boswell_quotient_table(quotient_results: Dict[str, Any]) -> str:
         
         rank = score_data["rank"]
         quotient = score_data["boswell_quotient"]
+        
+        # Add letter grade equivalent of the Boswell Quotient
+        letter_grade = percentage_to_letter_grade(int(quotient))
+        
         performance = components.get("performance", "N/A")
         if performance != "N/A":
             performance = f"{performance:.1f}"
@@ -1566,10 +1628,219 @@ def generate_boswell_quotient_table(quotient_results: Dict[str, Any]) -> str:
         if efficiency != "N/A":
             efficiency = f"{efficiency:.1f}"
         
-        rows.append(f"| {rank} | {model} | {quotient:.1f} | {performance} | {evaluation} | {efficiency} |")
+        rows.append(f"| {rank} | {model} | {quotient:.1f} | {letter_grade} | {performance} | {evaluation} | {efficiency} |")
     
     # Combine everything
     return f"{header}\n{separator}\n" + "\n".join(rows)
+
+
+def generate_boswell_report(results: Dict[str, Any], quotient_results: Dict[str, Any]) -> str:
+    """Generate a detailed report on the Boswell Quotient results.
+    
+    The report includes:
+    1. Introduction to the Boswell Quotient
+    2. Overall ranking of models
+    3. Component breakdown and analysis
+    4. Insights and observations
+    """
+    domain_info = results["domain"]
+    timestamp = results["run_timestamp"]
+    
+    # Calculate some statistics for the report
+    model_scores = quotient_results["model_scores"]
+    sorted_models = sorted(
+        model_scores.keys(),
+        key=lambda m: model_scores[m]["rank"]
+    )
+    
+    # Get top and bottom 3 models (or fewer if less than 6 models total)
+    top_models = sorted_models[:min(3, len(sorted_models))]
+    bottom_models = sorted_models[max(0, len(sorted_models)-3):]
+    
+    # Find performance leaders in each component
+    component_leaders = {
+        "performance": {"model": "", "score": 0},
+        "evaluation": {"model": "", "score": 0},
+        "efficiency": {"model": "", "score": 0}
+    }
+    
+    for model in sorted_models:
+        components = model_scores[model]["components"]
+        for component in component_leaders:
+            if component in components:
+                score = components[component]
+                if score > component_leaders[component]["score"]:
+                    component_leaders[component]["model"] = model
+                    component_leaders[component]["score"] = score
+    
+    # Generate the report
+    lines = []
+    
+    # Title and introduction
+    lines.append("# Boswell Quotient Analysis Report")
+    lines.append(f"\nRun timestamp: {timestamp}")
+    lines.append(f"Domain: {domain_info['name']}")
+    
+    # Introduction section
+    lines.append("\n## Introduction to the Boswell Quotient")
+    lines.append(
+        "The Boswell Quotient is a comprehensive metric designed to evaluate LLM capabilities across multiple dimensions. "
+        "Named after James Boswell, who was known for his deep understanding and insightful observations of Samuel Johnson, "
+        "this quotient aims to measure how well an AI model can serve as an indispensable companion in academic and analytical tasks."
+    )
+    lines.append("\nThe Boswell Quotient (0-100) is calculated from three key components:")
+    lines.append("1. **Performance (50%)**: How well the model performs in generating content, based on grades received from peers")
+    lines.append("2. **Evaluation (30%)**: How accurately and consistently the model evaluates others' work")
+    lines.append("3. **Efficiency (20%)**: How quickly and resource-efficiently the model completes tasks")
+    
+    # Overall ranking section
+    lines.append("\n## Overall Model Rankings")
+    lines.append("The table below shows all models ranked by their Boswell Quotient:")
+    
+    # Add the full table
+    lines.append("\n" + generate_boswell_quotient_table(quotient_results))
+    
+    # Top performers section
+    lines.append("\n## Top Performing Models")
+    if top_models:
+        top_model = top_models[0]
+        top_score = model_scores[top_model]["boswell_quotient"]
+        lines.append(f"\n**{top_model}** achieved the highest Boswell Quotient of **{top_score:.1f}**, ")
+        
+        # Add description of why the top model performed well
+        components = model_scores[top_model]["components"]
+        strengths = []
+        
+        if "performance" in components and components["performance"] > 85:
+            strengths.append("exceptional content quality")
+        elif "performance" in components and components["performance"] > 75:
+            strengths.append("strong content quality")
+            
+        if "evaluation" in components and components["evaluation"] > 85:
+            strengths.append("excellent evaluation capabilities")
+        elif "evaluation" in components and components["evaluation"] > 75:
+            strengths.append("good evaluation consistency")
+            
+        if "efficiency" in components and components["efficiency"] > 85:
+            strengths.append("outstanding efficiency")
+        elif "efficiency" in components and components["efficiency"] > 75:
+            strengths.append("good response time")
+            
+        if strengths:
+            lines.append(f"demonstrating {', '.join(strengths)}.")
+        else:
+            lines.append("with balanced performance across all components.")
+        
+        # Mention other top performers
+        if len(top_models) > 1:
+            other_tops = [f"**{m}** ({model_scores[m]['boswell_quotient']:.1f})" for m in top_models[1:]]
+            lines.append(f"\nOther top performers include {', '.join(other_tops)}.")
+    
+    # Component analysis section
+    lines.append("\n## Component Analysis")
+    
+    # Performance component
+    lines.append("\n### Performance Component")
+    performance_leader = component_leaders["performance"]["model"]
+    performance_score = component_leaders["performance"]["score"]
+    
+    if performance_leader:
+        lines.append(
+            f"**{performance_leader}** leads in the Performance component with a score of **{performance_score:.1f}**. "
+            f"This reflects the model's ability to generate high-quality content that receives favorable evaluations from peers."
+        )
+    
+    # Evaluation component
+    lines.append("\n### Evaluation Component")
+    evaluation_leader = component_leaders["evaluation"]["model"]
+    evaluation_score = component_leaders["evaluation"]["score"]
+    
+    if evaluation_leader:
+        lines.append(
+            f"**{evaluation_leader}** excels in the Evaluation component with a score of **{evaluation_score:.1f}**. "
+            f"This indicates the model's ability to provide consistent and fair assessments that align with the consensus."
+        )
+    
+    # Efficiency component
+    lines.append("\n### Efficiency Component")
+    efficiency_leader = component_leaders["efficiency"]["model"]
+    efficiency_score = component_leaders["efficiency"]["score"]
+    
+    if efficiency_leader:
+        lines.append(
+            f"**{efficiency_leader}** demonstrates superior Efficiency with a score of **{efficiency_score:.1f}**. "
+            f"This reflects the model's ability to generate responses and evaluations quickly while using resources effectively."
+        )
+    
+    # Observations and insights
+    lines.append("\n## Observations and Insights")
+    
+    # Look for models with balanced performance
+    balanced_models = []
+    for model in sorted_models:
+        components = model_scores[model]["components"]
+        if len(components) >= 3:  # Has all three components
+            scores = [components.get(c, 0) for c in ["performance", "evaluation", "efficiency"]]
+            if scores[0] > 0 and scores[1] > 0 and scores[2] > 0:
+                # Check if all scores are within 15 points of each other
+                if max(scores) - min(scores) <= 15:
+                    balanced_models.append((model, model_scores[model]["boswell_quotient"]))
+    
+    if balanced_models:
+        balanced_models.sort(key=lambda x: x[1], reverse=True)
+        balanced_list = [f"**{m}** ({s:.1f})" for m, s in balanced_models[:3]]
+        lines.append(
+            f"The most balanced models across all components were {', '.join(balanced_list)}. "
+            f"These models demonstrate well-rounded capabilities essential for being a reliable AI assistant."
+        )
+    
+    # Look for interesting patterns or outliers
+    performance_vs_evaluation = []
+    for model in sorted_models:
+        components = model_scores[model]["components"]
+        if "performance" in components and "evaluation" in components:
+            perf = components["performance"]
+            eval_score = components["evaluation"]
+            if abs(perf - eval_score) > 20:  # Significant difference
+                performance_vs_evaluation.append((model, perf, eval_score))
+    
+    if performance_vs_evaluation:
+        # Models that are better at performance than evaluation
+        better_performers = [(m, p, e) for m, p, e in performance_vs_evaluation if p > e]
+        if better_performers:
+            example = better_performers[0]
+            lines.append(
+                f"\n**{example[0]}** and similar models demonstrate significantly higher content quality "
+                f"({example[1]:.1f}) than evaluation consistency ({example[2]:.1f}). "
+                f"This suggests these models excel at generating content but may need improvement in "
+                f"their critical assessment capabilities."
+            )
+        
+        # Models that are better at evaluation than performance
+        better_evaluators = [(m, p, e) for m, p, e in performance_vs_evaluation if e > p]
+        if better_evaluators:
+            example = better_evaluators[0]
+            lines.append(
+                f"\n**{example[0]}** and similar models show stronger evaluation capabilities "
+                f"({example[2]:.1f}) compared to content generation ({example[1]:.1f}). "
+                f"These models may excel as critics or reviewers rather than primary content generators."
+            )
+    
+    # Conclusion
+    lines.append("\n## Conclusion")
+    lines.append(
+        "The Boswell Quotient provides a multi-dimensional assessment of AI models' capabilities, "
+        "helping identify which models are best suited for different use cases. A high Boswell Quotient "
+        "indicates a model that can effectively serve as a comprehensive AI assistant - generating high-quality "
+        "content, providing accurate evaluations, and doing so efficiently."
+    )
+    
+    if top_models:
+        top_three = [f"**{m}**" for m in top_models[:min(3, len(top_models))]]
+        lines.append(f"\nBased on this analysis, {', '.join(top_three)} stand out as the most capable AI assistants in this domain.")
+    
+    # Return the full report
+    return "\n".join(lines)
 
 
 def generate_grade_tables(results: Dict[str, Any], run_dir: str) -> None:
@@ -1612,10 +1883,15 @@ def generate_grade_tables(results: Dict[str, Any], run_dir: str) -> None:
     with open(f"{run_dir}/grading_bias.md", 'w') as f:
         f.write(bias_markdown)
     
-    # Generate Boswell Quotient table
+    # Generate Boswell Quotient table and report
     boswell_quotient_table = generate_boswell_quotient_table(quotient_results)
+    boswell_report = generate_boswell_report(results, quotient_results)
+    
     with open(f"{run_dir}/boswell_quotient.md", 'w') as f:
         f.write(boswell_quotient_table)
+    
+    with open(f"{run_dir}/boswell_report.md", 'w') as f:
+        f.write(boswell_report)
     
     # Generate cost report
     cost_report = generate_cost_report(results)
@@ -1645,22 +1921,24 @@ def generate_grade_tables(results: Dict[str, Any], run_dir: str) -> None:
 
 
 def generate_ascii_table(results: Dict[str, Any], models: List[str]) -> str:
-    """Generate an ASCII table of grades."""
+    """Generate an ASCII table of grades with percentage scores."""
     # Calculate column widths
     model_width = max(len(model) for model in models) + 2
-    grade_width = 7  # Enough for "A+/A-" format
+    grade_width = 10  # Enough for "A+ (97)" format
+    median_width = 7  # Just for the letter grade
+    pct_width = 5     # For percentage
     
     # Build header
     header = f"{'Model':{model_width}} |"
     for grader in models:
         header += f" {grader[:grade_width-1]:{grade_width-1}} |"
-    header += f" {'Median':{grade_width}} |"
+    header += f" {'Median':{median_width}} | {'Pct':{pct_width}} |"
     
     # Build separator
     separator = "-" * model_width + "+"
     for _ in models:
         separator += "-" * (grade_width + 1) + "+"
-    separator += "-" * (grade_width + 2) + "+"
+    separator += "-" * (median_width + 2) + "+" + "-" * (pct_width + 2) + "+"
     
     # Build rows
     rows = []
@@ -1670,32 +1948,36 @@ def generate_ascii_table(results: Dict[str, Any], models: List[str]) -> str:
         for grader in models:
             if grader == author:
                 # Self-grade
-                grade = "---"
+                grade_display = "---"
             elif grader in results["grades"] and author in results["grades"][grader]:
-                grade = results["grades"][grader][author]["grade"]
+                grade_data = results["grades"][grader][author]
+                letter_grade = grade_data["grade"]
+                numeric_grade = grade_data["numeric_grade"]
+                percentage = grade_to_percentage(numeric_grade)
+                grade_display = f"{letter_grade} ({percentage})"
             else:
-                grade = "N/A"
+                grade_display = "N/A"
             
-            row += f" {grade:^{grade_width-1}} |"
+            # Truncate if too long
+            if len(grade_display) > grade_width - 1:
+                grade_display = grade_display[:grade_width-2] + "…"
+                
+            row += f" {grade_display:{grade_width-1}} |"
         
-        # Add median
+        # Add median and percentage
         if author in results["summary"]:
-            median_letter = "N/A"
             median_num = results["summary"][author]["median_numeric"]
             
+            # Calculate percentage
+            percentage = grade_to_percentage(median_num)
+            
             # Convert numeric back to letter grade for display
-            for grade, value in [
-                ("A+", 4.3), ("A", 4.0), ("A-", 3.7),
-                ("B+", 3.3), ("B", 3.0), ("B-", 2.7),
-                ("C+", 2.3), ("C", 2.0), ("C-", 1.7)
-            ]:
-                if abs(median_num - value) < 0.15:  # Close enough to this grade
-                    median_letter = grade
-                    break
+            median_letter = percentage_to_letter_grade(percentage)
         else:
             median_letter = "N/A"
+            percentage = "N/A"
             
-        row += f" {median_letter:^{grade_width}} |"
+        row += f" {median_letter:^{median_width}} | {percentage:^{pct_width}} |"
         rows.append(row)
     
     # Combine everything
@@ -1703,12 +1985,12 @@ def generate_ascii_table(results: Dict[str, Any], models: List[str]) -> str:
 
 
 def generate_markdown_table(results: Dict[str, Any], models: List[str]) -> str:
-    """Generate a Markdown table of grades."""
+    """Generate a Markdown table of grades with percentage scores."""
     # Build header
-    header = "| Model | " + " | ".join(models) + " | Median Grade |"
+    header = "| Model | " + " | ".join(models) + " | Median Grade | Percentage |"
     
     # Build separator
-    separator = "|------|" + "|".join(["---" for _ in models]) + "|-------------|"
+    separator = "|------|" + "|".join(["---" for _ in models]) + "|-------------|-----------|"
     
     # Build rows
     rows = []
@@ -1720,28 +2002,30 @@ def generate_markdown_table(results: Dict[str, Any], models: List[str]) -> str:
                 # Self-grade
                 grades.append("---")
             elif grader in results["grades"] and author in results["grades"][grader]:
-                grades.append(results["grades"][grader][author]["grade"])
+                grade_data = results["grades"][grader][author]
+                letter_grade = grade_data["grade"]
+                numeric_grade = grade_data["numeric_grade"]
+                percentage = grade_to_percentage(numeric_grade)
+                # Add percentage in parentheses
+                grades.append(f"{letter_grade} ({percentage})")
             else:
                 grades.append("N/A")
         
         # Add median
         if author in results["summary"]:
-            median_letter = "N/A"
             median_num = results["summary"][author]["median_numeric"]
             
-            # Convert numeric back to letter grade for display
-            for grade, value in [
-                ("A+", 4.3), ("A", 4.0), ("A-", 3.7),
-                ("B+", 3.3), ("B", 3.0), ("B-", 2.7),
-                ("C+", 2.3), ("C", 2.0), ("C-", 1.7)
-            ]:
-                if abs(median_num - value) < 0.15:  # Close enough to this grade
-                    median_letter = grade
-                    break
-        else:
-            median_letter = "N/A"
+            # Calculate percentage
+            percentage = grade_to_percentage(median_num)
             
-        row = f"| {author} | " + " | ".join(grades) + f" | {median_letter} |"
+            # Convert numeric back to letter grade for display
+            median_letter = percentage_to_letter_grade(percentage)
+            
+            median_display = f"{median_letter} | {percentage}"
+        else:
+            median_display = "N/A | N/A"
+            
+        row = f"| {author} | " + " | ".join(grades) + f" | {median_display} |"
         rows.append(row)
     
     # Combine everything
@@ -1749,9 +2033,9 @@ def generate_markdown_table(results: Dict[str, Any], models: List[str]) -> str:
 
 
 def generate_csv_table(results: Dict[str, Any], models: List[str]) -> str:
-    """Generate a CSV table of grades."""
+    """Generate a CSV table of grades with percentage scores."""
     # Build header
-    header = "Model," + ",".join(models) + ",Median Grade"
+    header = "Model," + ",".join(models) + ",Median Grade,Percentage"
     
     # Build rows
     rows = []
@@ -1763,28 +2047,29 @@ def generate_csv_table(results: Dict[str, Any], models: List[str]) -> str:
                 # Self-grade
                 grades.append("---")
             elif grader in results["grades"] and author in results["grades"][grader]:
-                grades.append(results["grades"][grader][author]["grade"])
+                grade_data = results["grades"][grader][author]
+                letter_grade = grade_data["grade"]
+                numeric_grade = grade_data["numeric_grade"]
+                percentage = grade_to_percentage(numeric_grade)
+                # Add percentage in parentheses for CSV
+                grades.append(f"{letter_grade} ({percentage})")
             else:
                 grades.append("N/A")
         
         # Add median
         if author in results["summary"]:
-            median_letter = "N/A"
             median_num = results["summary"][author]["median_numeric"]
             
+            # Calculate percentage
+            percentage = grade_to_percentage(median_num)
+            
             # Convert numeric back to letter grade for display
-            for grade, value in [
-                ("A+", 4.3), ("A", 4.0), ("A-", 3.7),
-                ("B+", 3.3), ("B", 3.0), ("B-", 2.7),
-                ("C+", 2.3), ("C", 2.0), ("C-", 1.7)
-            ]:
-                if abs(median_num - value) < 0.15:  # Close enough to this grade
-                    median_letter = grade
-                    break
+            median_letter = percentage_to_letter_grade(percentage)
         else:
             median_letter = "N/A"
+            percentage = "N/A"
             
-        row = f"{author}," + ",".join(grades) + f",{median_letter}"
+        row = f"{author}," + ",".join(grades) + f",{median_letter},{percentage}"
         rows.append(row)
     
     # Combine everything
@@ -1794,31 +2079,26 @@ def generate_csv_table(results: Dict[str, Any], models: List[str]) -> str:
 def print_summary(results: Dict[str, Any]) -> None:
     """Print a summary table of results."""
     print("\n=== SUMMARY OF RESULTS ===")
-    print(f"{'Model':<20} | {'Median Grade':<12} | {'Grades Received'}")
-    print("-" * 70)
+    print(f"{'Model':<20} | {'Grade':<5} | {'Score':<5} | {'Grades Received'}")
+    print("-" * 80)
     
     for author, stats in results["summary"].items():
         median_num = stats["median_numeric"]
         grades = ", ".join(stats["grades_received"])
         
+        # Calculate percentage score
+        percentage = grade_to_percentage(median_num)
+        
         # Convert numeric back to letter grade for display
-        median_letter = "N/A"
-        for grade, value in [
-            ("A+", 4.3), ("A", 4.0), ("A-", 3.7),
-            ("B+", 3.3), ("B", 3.0), ("B-", 2.7),
-            ("C+", 2.3), ("C", 2.0), ("C-", 1.7)
-        ]:
-            if abs(median_num - value) < 0.15:  # Close enough to this grade
-                median_letter = grade
-                break
+        median_letter = percentage_to_letter_grade(percentage)
                 
-        print(f"{author:<20} | {median_letter:<12} | {grades}")
+        print(f"{author:<20} | {median_letter:<5} | {percentage:<5} | {grades}")
     
     # Print Boswell Quotient if available
     if "boswell_quotient" in results and "model_scores" in results["boswell_quotient"]:
         print("\n=== BOSWELL QUOTIENT ===")
-        print(f"{'Rank':<5} | {'Model':<20} | {'Boswell Quotient':<15} | {'Performance':<11} | {'Evaluation':<11} | {'Efficiency':<11}")
-        print("-" * 90)
+        print(f"{'Rank':<5} | {'Model':<20} | {'Quotient':<8} | {'Grade':<5} | {'Performance':<11} | {'Evaluation':<11} | {'Efficiency':<11}")
+        print("-" * 100)
         
         # Sort models by rank
         quotient_data = results["boswell_quotient"]["model_scores"]
@@ -1834,6 +2114,9 @@ def print_summary(results: Dict[str, Any]) -> None:
             rank = score_data["rank"]
             quotient = score_data["boswell_quotient"]
             
+            # Convert to letter grade
+            letter_grade = percentage_to_letter_grade(int(quotient))
+            
             performance = components.get("performance", 0)
             performance_str = f"{performance:.1f}" if performance else "N/A"
             
@@ -1843,7 +2126,7 @@ def print_summary(results: Dict[str, Any]) -> None:
             efficiency = components.get("efficiency", 0)
             efficiency_str = f"{efficiency:.1f}" if efficiency else "N/A"
             
-            print(f"{rank:<5} | {model:<20} | {quotient:<15.1f} | {performance_str:<11} | {evaluation_str:<11} | {efficiency_str:<11}")
+            print(f"{rank:<5} | {model:<20} | {quotient:<8.1f} | {letter_grade:<5} | {performance_str:<11} | {evaluation_str:<11} | {efficiency_str:<11}")
     
     # Print grading bias if available
     if "bias_analysis" in results:
@@ -1851,33 +2134,20 @@ def print_summary(results: Dict[str, Any]) -> None:
         
         # Get overall median
         overall_median = results["bias_analysis"]["overall_median"]
-        overall_median_letter = "N/A"
-        for grade, value in [
-            ("A+", 4.3), ("A", 4.0), ("A-", 3.7),
-            ("B+", 3.3), ("B", 3.0), ("B-", 2.7),
-            ("C+", 2.3), ("C", 2.0), ("C-", 1.7)
-        ]:
-            if abs(overall_median - value) < 0.15:
-                overall_median_letter = grade
-                break
-                
-        print(f"Overall Median Grade: {overall_median_letter}")
-        print(f"{'Model':<20} | {'Median Given':<12} | {'Grading Bias':<25} | {'Bias Value'}")
-        print("-" * 70)
+        overall_percentage = grade_to_percentage(overall_median)
+        overall_median_letter = percentage_to_letter_grade(overall_percentage)
+        
+        print(f"Overall Median Grade: {overall_median_letter} ({overall_percentage})")
+        print(f"{'Model':<20} | {'Grade':<5} | {'Score':<5} | {'Grading Bias':<25} | {'Bias Value'}")
+        print("-" * 85)
         
         for grader, stats in results["bias_analysis"]["grader_bias"].items():
-            # Convert numeric grade to letter
-            median_letter = "N/A"
-            for grade, value in [
-                ("A+", 4.3), ("A", 4.0), ("A-", 3.7),
-                ("B+", 3.3), ("B", 3.0), ("B-", 2.7),
-                ("C+", 2.3), ("C", 2.0), ("C-", 1.7)
-            ]:
-                if abs(stats["median_given"] - value) < 0.15:  # Close enough to this grade
-                    median_letter = grade
-                    break
+            # Convert numeric grade to percentage and letter
+            median_grade = stats["median_given"]
+            percentage = grade_to_percentage(median_grade)
+            median_letter = percentage_to_letter_grade(percentage)
                     
-            print(f"{grader:<20} | {median_letter:<12} | {stats['letter_bias']:<25} | {stats['median_bias']:.2f}")
+            print(f"{grader:<20} | {median_letter:<5} | {percentage:<5} | {stats['letter_bias']:<25} | {stats['median_bias']:.2f}")
     
     # Print cost summary if available
     if "cost" in results:
@@ -2036,7 +2306,9 @@ def run_all_domains(args) -> None:
             # Store results
             all_results[domain_name] = {
                 "directory": results.get("results_dir", ""),
-                "domain": domain_description
+                "domain": domain_description,
+                "boswell_quotient": results.get("boswell_quotient", {}),
+                "run_timestamp": results.get("run_timestamp", "")
             }
             
             # Print summary
@@ -2061,7 +2333,397 @@ def run_all_domains(args) -> None:
     for domain_name, info in all_results.items():
         print(f"  - {info['domain']}: {info['directory']}")
     
+    # Generate aggregate Boswell Quotient if we have multiple domains
+    if len(all_results) > 1:
+        print("\nGenerating aggregate Boswell Quotient report across all domains...")
+        
+        # Create timestamp for aggregate results
+        timestamp = time.strftime("%Y%m%d-%H%M%S")
+        
+        # Create aggregate results directory
+        aggregate_dir = f"results/{timestamp}-aggregate"
+        os.makedirs(aggregate_dir, exist_ok=True)
+        
+        # Generate aggregate data
+        aggregated_data = aggregate_boswell_quotient(all_results)
+        
+        # Create mapping of domain IDs to descriptions
+        domain_descriptions = {name: desc for name, desc in AVAILABLE_DOMAINS.items()}
+        
+        # Generate aggregate report
+        aggregate_report = generate_aggregate_boswell_report(aggregated_data, domain_descriptions)
+        
+        # Save aggregate report
+        with open(f"{aggregate_dir}/aggregate_boswell_report.md", 'w') as f:
+            f.write(aggregate_report)
+        
+        # Generate aggregate visualizations
+        charts_dir = f"{aggregate_dir}/charts"
+        os.makedirs(charts_dir, exist_ok=True)
+        
+        # Create aggregate Boswell Quotient chart
+        plt.figure(figsize=(14, 8))
+        
+        # Prepare data
+        sorted_models = sorted(
+            aggregated_data["model_scores"].keys(),
+            key=lambda m: aggregated_data["model_scores"][m]["average_boswell_quotient"],
+            reverse=True
+        )
+        
+        scores = [aggregated_data["model_scores"][m]["average_boswell_quotient"] for m in sorted_models]
+        
+        # Create bar chart
+        plt.barh(sorted_models, scores, color='#6A5ACD')
+        plt.title('Aggregate Boswell Quotient by Model (All Domains)', fontsize=16)
+        plt.xlabel('Boswell Quotient (0-100)', fontsize=12)
+        plt.yticks(fontsize=10)
+        plt.xlim(0, 100)
+        plt.grid(axis='x', linestyle='--', alpha=0.7)
+        plt.tight_layout()
+        
+        # Save chart
+        plt.savefig(f"{charts_dir}/aggregate_boswell_quotient.png", dpi=300)
+        plt.close()
+        
+        # Create domain comparison chart for top models
+        # Only include models that appear in all domains
+        all_domain_models = [m for m in sorted_models 
+                           if len(aggregated_data["model_scores"][m]["domain_scores"]) == len(all_results)]
+        
+        # Take top 5 models or fewer if less available
+        top_models = all_domain_models[:min(5, len(all_domain_models))]
+        
+        if top_models:
+            plt.figure(figsize=(14, 8))
+            
+            # Set up domain names and positions
+            domains = list(aggregated_data["domains_analyzed"])
+            domain_names = [domain_descriptions.get(d, d) for d in domains]
+            
+            # Set up bar positions
+            bar_width = 0.15
+            positions = np.arange(len(domains))
+            
+            # Plot bars for each model
+            for i, model in enumerate(top_models):
+                domain_scores = [aggregated_data["model_scores"][model]["domain_scores"].get(d, 0) for d in domains]
+                plt.bar(positions + i*bar_width, domain_scores, bar_width, label=model)
+            
+            # Configure chart
+            plt.title('Boswell Quotient Comparison Across Domains (Top Models)', fontsize=16)
+            plt.xlabel('Domain', fontsize=12)
+            plt.ylabel('Boswell Quotient', fontsize=12)
+            plt.xticks(positions + bar_width * (len(top_models)-1)/2, domain_names, rotation=45, ha='right')
+            plt.ylim(0, 100)
+            plt.legend(title='Model')
+            plt.tight_layout()
+            
+            # Save chart
+            plt.savefig(f"{charts_dir}/domain_comparison.png", dpi=300)
+            plt.close()
+        
+        # Save aggregate data as JSON
+        with open(f"{aggregate_dir}/aggregate_boswell_quotient.json", 'w') as f:
+            json.dump({
+                "timestamp": timestamp,
+                "aggregated_data": aggregated_data,
+                "source_domains": [d for d in aggregated_data["domains_analyzed"]],
+                "domain_descriptions": domain_descriptions
+            }, f, indent=2)
+        
+        print(f"Aggregate results saved to: {aggregate_dir}")
+        print(f"  - Aggregate report: {aggregate_dir}/aggregate_boswell_report.md")
+        print(f"  - Visualizations: {aggregate_dir}/charts/")
+    
     print("\nBoswell Test for all domains has been completed!")
+
+def aggregate_boswell_quotient(domain_results: Dict[str, Dict[str, Any]]) -> Dict[str, Any]:
+    """Aggregate Boswell Quotient scores across multiple domains.
+    
+    Args:
+        domain_results: Dictionary of domain names to result dictionaries
+        
+    Returns:
+        Dictionary containing aggregated Boswell Quotient data
+    """
+    # Initialize data structure for aggregated results
+    aggregated = {
+        "model_scores": {},
+        "domains_analyzed": list(domain_results.keys()),
+        "component_weights": {
+            "performance": 0.50,
+            "evaluation": 0.30,
+            "efficiency": 0.20
+        }
+    }
+    
+    # Track which models appear in which domains
+    model_domains = {}
+    
+    # Collect all Boswell Quotient data by model across domains
+    for domain_name, results in domain_results.items():
+        if "boswell_quotient" in results and "model_scores" in results["boswell_quotient"]:
+            model_scores = results["boswell_quotient"]["model_scores"]
+            
+            for model, score_data in model_scores.items():
+                # Initialize model entry if not exists
+                if model not in aggregated["model_scores"]:
+                    aggregated["model_scores"][model] = {
+                        "domain_scores": {},
+                        "domain_components": {},
+                        "average_boswell_quotient": 0.0,
+                        "rank": 0
+                    }
+                
+                # Add domain-specific data
+                aggregated["model_scores"][model]["domain_scores"][domain_name] = score_data["boswell_quotient"]
+                aggregated["model_scores"][model]["domain_components"][domain_name] = score_data.get("components", {})
+                
+                # Track which domains this model appears in
+                if model not in model_domains:
+                    model_domains[model] = []
+                model_domains[model].append(domain_name)
+    
+    # Calculate aggregate scores
+    for model, data in aggregated["model_scores"].items():
+        # Calculate average Boswell Quotient across all domains where the model appears
+        if data["domain_scores"]:
+            data["average_boswell_quotient"] = sum(data["domain_scores"].values()) / len(data["domain_scores"])
+            
+            # Calculate aggregated component scores
+            all_components = {
+                "performance": [],
+                "evaluation": [],
+                "efficiency": []
+            }
+            
+            # Collect component scores from all domains
+            for domain, components in data["domain_components"].items():
+                for component in all_components:
+                    if component in components:
+                        all_components[component].append(components[component])
+            
+            # Calculate average for each component
+            data["aggregated_components"] = {}
+            for component, scores in all_components.items():
+                if scores:
+                    data["aggregated_components"][component] = sum(scores) / len(scores)
+    
+    # Rank models by average Boswell Quotient
+    sorted_models = sorted(
+        aggregated["model_scores"].keys(),
+        key=lambda m: aggregated["model_scores"][m]["average_boswell_quotient"],
+        reverse=True
+    )
+    
+    # Assign ranks
+    for i, model in enumerate(sorted_models):
+        aggregated["model_scores"][model]["rank"] = i + 1
+    
+    # Add consistency metrics - how consistent are models across domains?
+    for model, data in aggregated["model_scores"].items():
+        if len(data["domain_scores"]) > 1:
+            scores = list(data["domain_scores"].values())
+            max_score = max(scores)
+            min_score = min(scores)
+            
+            # Calculate consistency as 100 - (max-min)
+            # Higher values mean more consistent performance across domains
+            data["consistency"] = 100 - (max_score - min_score)
+            
+            # Add domain count
+            data["domain_count"] = len(data["domain_scores"])
+            
+            # Identify best and worst domains
+            best_domain = max(data["domain_scores"].items(), key=lambda x: x[1])[0]
+            worst_domain = min(data["domain_scores"].items(), key=lambda x: x[1])[0]
+            
+            data["best_domain"] = best_domain
+            data["worst_domain"] = worst_domain
+    
+    return aggregated
+
+
+def generate_aggregate_boswell_report(aggregated_data: Dict[str, Any], domain_descriptions: Dict[str, str]) -> str:
+    """Generate a comprehensive report of aggregate Boswell Quotient results.
+    
+    Args:
+        aggregated_data: Aggregated Boswell Quotient data
+        domain_descriptions: Dictionary mapping domain IDs to descriptions
+        
+    Returns:
+        Markdown report as a string
+    """
+    lines = []
+    
+    # Title and introduction
+    lines.append("# Aggregate Boswell Quotient Analysis Across Domains")
+    lines.append(f"\nThis report aggregates model performance across {len(aggregated_data['domains_analyzed'])} domains:")
+    
+    # List the domains included
+    for domain_id in aggregated_data['domains_analyzed']:
+        domain_desc = domain_descriptions.get(domain_id, domain_id)
+        lines.append(f"- **{domain_desc}**")
+    
+    # Overall model rankings table
+    lines.append("\n## Overall Model Rankings")
+    lines.append("\nThe table below shows models ranked by their average Boswell Quotient across all domains:")
+    lines.append("\n| Rank | Model | Boswell Quotient | Grade | Domain Count | Consistency | Best Domain | Worst Domain |")
+    lines.append("|------|-------|-----------------|-------|--------------|-------------|------------|-------------|")
+    
+    # Sort models by rank
+    sorted_models = sorted(
+        aggregated_data["model_scores"].keys(),
+        key=lambda m: aggregated_data["model_scores"][m]["rank"]
+    )
+    
+    # Add each model's data
+    for model in sorted_models:
+        data = aggregated_data["model_scores"][model]
+        
+        rank = data["rank"]
+        avg_score = data["average_boswell_quotient"]
+        
+        # Convert to letter grade
+        letter_grade = percentage_to_letter_grade(int(avg_score))
+        
+        domain_count = data.get("domain_count", len(data["domain_scores"]))
+        
+        # Format consistency if available
+        consistency = data.get("consistency", "N/A")
+        if consistency != "N/A":
+            consistency = f"{consistency:.1f}"
+            
+        # Get best and worst domains with descriptions
+        best_domain = data.get("best_domain", list(data["domain_scores"].keys())[0] if data["domain_scores"] else "N/A")
+        worst_domain = data.get("worst_domain", best_domain)
+        
+        best_domain_desc = domain_descriptions.get(best_domain, best_domain)
+        worst_domain_desc = domain_descriptions.get(worst_domain, worst_domain)
+        
+        # Format row
+        lines.append(f"| {rank} | {model} | {avg_score:.1f} | {letter_grade} | {domain_count} | {consistency} | {best_domain_desc} | {worst_domain_desc} |")
+    
+    # Top performers section
+    if sorted_models:
+        lines.append("\n## Top Performing Models")
+        top_model = sorted_models[0]
+        top_data = aggregated_data["model_scores"][top_model]
+        
+        lines.append(f"\n**{top_model}** achieved the highest average Boswell Quotient of **{top_data['average_boswell_quotient']:.1f}** " +
+                    f"across {len(top_data['domain_scores'])} domains.")
+        
+        # Add information about consistency for top model
+        if "consistency" in top_data:
+            if top_data["consistency"] > 90:
+                lines.append(f"With a consistency score of {top_data['consistency']:.1f}, it demonstrated remarkably stable performance across all domains.")
+            elif top_data["consistency"] > 75:
+                lines.append(f"With a consistency score of {top_data['consistency']:.1f}, it performed well across most domains with some variation.")
+            else:
+                lines.append(f"With a consistency score of {top_data['consistency']:.1f}, it showed significant performance variation across domains.")
+                
+                # Mention best and worst domains
+                best = domain_descriptions.get(top_data["best_domain"], top_data["best_domain"])
+                worst = domain_descriptions.get(top_data["worst_domain"], top_data["worst_domain"])
+                lines.append(f"It performed best in **{best}** and had more difficulty with **{worst}**.")
+        
+        # Mention other top performers
+        if len(sorted_models) > 1:
+            runner_ups = []
+            for model in sorted_models[1:4]:  # Get up to next 3 models
+                if model in aggregated_data["model_scores"]:
+                    score = aggregated_data["model_scores"][model]["average_boswell_quotient"]
+                    runner_ups.append(f"**{model}** ({score:.1f})")
+            
+            if runner_ups:
+                lines.append(f"\nOther strong performers include {', '.join(runner_ups)}.")
+    
+    # Domain-specific leaders
+    lines.append("\n## Domain-Specific Leaders")
+    lines.append("\nThe table below shows which models performed best in each domain:")
+    lines.append("\n| Domain | Top Model | Boswell Quotient | Grade |")
+    lines.append("|--------|-----------|------------------|-------|")
+    
+    # Find top model for each domain
+    for domain_id in aggregated_data["domains_analyzed"]:
+        domain_desc = domain_descriptions.get(domain_id, domain_id)
+        
+        # Find the best model for this domain
+        best_model = ""
+        best_score = 0
+        
+        for model, data in aggregated_data["model_scores"].items():
+            if domain_id in data["domain_scores"] and data["domain_scores"][domain_id] > best_score:
+                best_model = model
+                best_score = data["domain_scores"][domain_id]
+        
+        if best_model:
+            # Convert to letter grade
+            letter_grade = percentage_to_letter_grade(int(best_score))
+            lines.append(f"| {domain_desc} | {best_model} | {best_score:.1f} | {letter_grade} |")
+    
+    # Overall insights
+    lines.append("\n## Key Insights")
+    
+    # Find models that perform consistently across domains
+    consistent_models = []
+    for model, data in aggregated_data["model_scores"].items():
+        if "consistency" in data and data["consistency"] > 85 and len(data["domain_scores"]) > 1:
+            consistent_models.append((model, data["consistency"], data["average_boswell_quotient"]))
+    
+    if consistent_models:
+        # Sort by consistency
+        consistent_models.sort(key=lambda x: x[1], reverse=True)
+        
+        # Take up to top 3
+        top_consistent = consistent_models[:min(3, len(consistent_models))]
+        model_list = [f"**{m}** (consistency: {c:.1f})" for m, c, _ in top_consistent]
+        
+        lines.append("\n### Most Consistent Performers")
+        lines.append(f"These models maintained the most consistent performance across different domains: {', '.join(model_list)}.")
+        lines.append("High consistency suggests these models have broad capabilities that transfer well between different subject areas.")
+    
+    # Find specialists (high performance in specific domains)
+    specialists = []
+    for model, data in aggregated_data["model_scores"].items():
+        if len(data["domain_scores"]) > 1:
+            scores = list(data["domain_scores"].values())
+            max_score = max(scores)
+            avg_other = sum(s for s in scores if s != max_score) / (len(scores) - 1)
+            
+            # If top domain is significantly better than average of others
+            if max_score > avg_other + 10:
+                best_domain = max(data["domain_scores"].items(), key=lambda x: x[1])[0]
+                specialists.append((model, best_domain, max_score, max_score - avg_other))
+    
+    if specialists:
+        # Sort by specialization gap
+        specialists.sort(key=lambda x: x[3], reverse=True)
+        
+        lines.append("\n### Domain Specialists")
+        lines.append("These models showed significantly stronger performance in specific domains:")
+        
+        for model, domain, score, gap in specialists[:min(3, len(specialists))]:
+            domain_desc = domain_descriptions.get(domain, domain)
+            lines.append(f"- **{model}** excels in **{domain_desc}** (score: {score:.1f}, {gap:.1f} points above its average in other domains)")
+    
+    # Conclusion
+    lines.append("\n## Conclusion")
+    lines.append(
+        "The aggregated Boswell Quotient provides a comprehensive view of model capabilities across multiple domains, "
+        "helping identify both generalist models that perform consistently well across diverse tasks and specialist models "
+        "that excel in particular areas."
+    )
+    
+    if sorted_models:
+        lines.append(
+            f"\nBased on this cross-domain analysis, **{sorted_models[0]}** emerges as the most capable overall AI assistant, "
+            f"with strong performance across the tested domains."
+        )
+    
+    return "\n".join(lines)
+
 
 def main() -> None:
     """Main entry point for the script."""

@@ -9,14 +9,16 @@ This tool automates the process of running a Boswell Test across multiple LLMs. 
 1. **Essay Generation**: The system prompts multiple LLMs with the same complex question in a specific domain (like political science or computer science)
 2. **Peer Evaluation**: Each LLM grades the essays written by all other models, providing detailed feedback and assigning letter grades (A+, A, A-, etc.)
 3. **Bias Analysis**: The system analyzes grading patterns to identify which models grade more strictly or leniently compared to the median
-4. **Visualization**: The framework generates charts and graphs showing performance metrics, grading distributions, timing data, and cost analysis
-5. **Comprehensive Reporting**: Results are organized in timestamped directories with easy-to-read tables in multiple formats (Markdown, ASCII, CSV, JSON)
+4. **Boswell Quotient**: A comprehensive score (0-100) is calculated for each model based on performance (grades received), evaluation ability (grading consistency), and efficiency (response time)
+5. **Visualization**: The framework generates charts and graphs showing performance metrics, grading distributions, timing data, and Boswell Quotient rankings
+6. **Comprehensive Reporting**: Results are organized in timestamped directories with easy-to-read tables in multiple formats (Markdown, ASCII, CSV, JSON)
 
 The Boswell Test methodology offers several advantages over traditional benchmarks:
 - It captures nuanced evaluation capabilities, not just raw performance
 - It leverages LLMs' own analytical skills to provide detailed feedback
 - It reveals biases in how different models evaluate the same work
 - It creates a multidimensional view of model capabilities across different domains
+- It calculates a comprehensive "Boswell Quotient" that measures a model's ability to serve as an indispensable AI companion
 
 All of this is automated through a simple command-line interface that handles the entire testing process from essay generation to final report creation.
 
@@ -108,7 +110,11 @@ python boswell_test.py --domain pol_sci_2
 python boswell_test.py --all-domains
 ```
 
-This will sequentially run tests on all domains with the same set of models, creating separate results directories for each domain.
+This will sequentially run tests on all domains with the same set of models, creating separate results directories for each domain. When multiple domains are tested, it will also generate:
+
+1. An **aggregate Boswell Quotient** analysis across all domains
+2. Visualizations comparing model performance across domains
+3. Detailed reports identifying which models are consistent across domains vs. specialized in specific areas
 
 #### Use specific models:
 
@@ -187,16 +193,26 @@ results/
 │   │   ├── essay_generation_time.png  # Time comparison for essay generation
 │   │   ├── average_grading_time.png   # Time comparison for grading
 │   │   ├── cost_breakdown.png     # Cost analysis per model
-│   │   └── time_breakdown.png     # Pie chart of process timing
+│   │   ├── time_breakdown.png     # Pie chart of process timing
+│   │   ├── boswell_quotient.png   # Bar chart of Boswell Quotient rankings
+│   │   └── boswell_quotient_components.png # Component breakdown analysis
 │   ├── grades_table.txt           # ASCII table of all grades
 │   ├── grades_table.md            # Markdown table of all grades
 │   ├── grades_table.csv           # CSV format for spreadsheet import
 │   ├── grading_bias.txt           # ASCII table of grading bias analysis
 │   ├── grading_bias.md            # Markdown table of grading bias analysis
+│   ├── boswell_quotient.md        # Table ranking models by Boswell Quotient
+│   ├── boswell_report.md          # Comprehensive Boswell Quotient analysis report
 │   ├── cost_report.md             # Detailed cost analysis report
 │   ├── timing_report.md           # Detailed timing analysis report  
 │   ├── grades.json                # Structured grade data in JSON
 │   └── full_results.json          # Complete results with all data
+├── 20240626-234567-aggregate/     # Aggregate analysis across all domains (when using --all-domains)
+│   ├── charts/                    # Cross-domain visualizations
+│   │   ├── aggregate_boswell_quotient.png  # Overall ranking across domains
+│   │   └── domain_comparison.png  # How top models perform in each domain
+│   ├── aggregate_boswell_report.md # Comprehensive cross-domain analysis
+│   └── aggregate_boswell_quotient.json # Structured aggregate data
 └── ...
 ```
 
@@ -383,7 +399,49 @@ A stacked bar chart showing the cost breakdown for each model, split between ess
 **Process Timing** (`time_breakdown.png`):
 A pie chart showing the proportion of time spent on each phase of the test: essay generation, grading, analysis, and file generation.
 
+**Boswell Quotient** (`boswell_quotient.png`):
+A horizontal bar chart showing each model's Boswell Quotient score (0-100), ranked from highest to lowest. This visualization provides a quick overview of which models perform best overall when considering performance, evaluation capabilities, and efficiency.
+
+**Boswell Quotient Components** (`boswell_quotient_components.png`):
+A breakdown of each component that contributes to the Boswell Quotient (performance, evaluation, efficiency), showing the relative strengths and weaknesses of each model.
+
 These visualizations provide at-a-glance insights into model performance, efficiency, and cost-effectiveness across the different test aspects.
+
+#### 5. Boswell Quotient Report (`boswell_report.md`)
+
+The Boswell Quotient is a comprehensive metric (0-100) designed to measure how well a model can serve as an indispensable AI companion, inspired by James Boswell's role as Samuel Johnson's biographer:
+
+**Comprehensive Report Structure**:
+- **Introduction**: Explanation of the Boswell Quotient methodology
+- **Overall Rankings**: Complete rankings of all models by their Boswell Quotient  
+- **Top Performers**: Analysis of the highest-scoring models
+- **Component Analysis**: Breakdown of which models excel in each component
+- **Observations & Insights**: Patterns, balanced models, and notable outliers
+- **Conclusion**: Summary of most capable AI assistants for the tested domain
+
+**Calculation Components**:
+1. **Performance (50%)**: Based on grades received from peer models
+2. **Evaluation (30%)**: Based on grading accuracy and consistency 
+3. **Efficiency (20%)**: Based on response time and resource usage
+
+The Boswell Quotient helps identify which models are most likely to serve as highly capable, balanced AI assistants that would be difficult to replace - models you might feel "lost without," similar to Samuel Johnson's famous quote about Boswell.
+
+#### 6. Aggregate Boswell Analysis (Cross-Domain)
+
+When running tests across multiple domains (`--all-domains`), the framework also generates a cross-domain analysis that identifies models' strengths and weaknesses across different subject areas:
+
+**Aggregate Report Structure**:
+- **Overall Model Rankings**: Models ranked by their average Boswell Quotient across all tested domains
+- **Top Performing Models**: Analysis of models that excel across all domains
+- **Domain-Specific Leaders**: Table showing which models performed best in each domain
+- **Key Insights**: Analysis of consistent performers vs. domain specialists
+- **Consistency Metrics**: Scores showing how uniformly models perform across domains
+- **Conclusion**: Identification of the most adaptable, versatile AI assistants
+
+This cross-domain analysis is particularly useful for identifying:
+1. **Generalist models** that perform well across all types of tasks
+2. **Specialist models** that excel in specific domains
+3. **Consistency patterns** that show whether a model's capabilities transfer well between subjects
 
 **JSON Grades** (`grades.json`):
 ```json
@@ -405,6 +463,40 @@ These visualizations provide at-a-glance insights into model performance, effici
   "summary": {
     "GPT-4o": {"median_numeric": 3.3, "grades_received": ["A-", "B+"]},
     "Claude": {"median_numeric": 3.7, "grades_received": ["A", "A-"]}
+  },
+  "bias_analysis": {
+    "overall_median": 3.5,
+    "grader_bias": {
+      "GPT-4o": {"median_given": 4.0, "median_bias": 0.5, "letter_bias": "Lenient (+1 grade)"},
+      "Claude": {"median_given": 3.5, "median_bias": 0.0, "letter_bias": "Neutral"}
+    }
+  },
+  "boswell_quotient": {
+    "component_weights": {
+      "performance": 0.5,
+      "evaluation": 0.3,
+      "efficiency": 0.2
+    },
+    "model_scores": {
+      "GPT-4o": {
+        "boswell_quotient": 84.5,
+        "components": {
+          "performance": 82.0,
+          "evaluation": 95.0,
+          "efficiency": 76.0
+        },
+        "rank": 2
+      },
+      "Claude": {
+        "boswell_quotient": 88.2,
+        "components": {
+          "performance": 90.0,
+          "evaluation": 100.0,
+          "efficiency": 68.0
+        },
+        "rank": 1
+      }
+    }
   },
   "run_timestamp": "2024-06-26 12:34:56"
 }

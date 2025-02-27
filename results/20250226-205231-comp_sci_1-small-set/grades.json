@@ -1,0 +1,892 @@
+{
+  "domain": {
+    "name": "Computer Science - Level 1: Algorithm Analysis",
+    "description": "Level 1 evaluation of understanding and analysis of sorting algorithms and complexity."
+  },
+  "grades": {
+    "GPT-4o": {
+      "o3-mini-high": {
+        "feedback": "1) **Technical Accuracy of the Complexity Analysis**: The essay provides accurate time complexity analysis for quicksort, mergesort, and heapsort. The specified best, average, and worst-case complexities are correct. The space complexity discussions are also generally accurate, with appropriate mentions of recursion stack space for quicksort and array space for mergesort.\n\n2) **Depth of Understanding of Algorithm Characteristics**: The essay reflects a strong understanding of the distinctive characteristics of each sorting algorithm. For example, it correctly identifies how quicksort excels with good pivot choices, the stable nature of mergesort, and the memory efficiency of heapsort.\n\n3) **Correctness of the Comparative Analysis**: The author correctly compares the algorithms in terms of cache efficiency, stability, and space use. It highlights the areas where one algorithm may outperform others, incorporating practical scenarios like cache performance and memory constraints.\n\n4) **Balance Between Theoretical Foundations and Practical Applications**: The essay successfully balances theoretical complexity with practical considerations, like cache performance and implementation details, providing a comprehensive view of when each algorithm is most useful in practice.\n\n5) **Clarity of Explanations for Technical Concepts**: The explanations are clear and well-articulated, making complex concepts easily understandable. The essay effectively uses terminology like \"recursion stack,\" \"cache performance,\" and \"stability\" while ensuring clarity for complex ideas.\n\nOverall, the essay demonstrates a thorough understanding of sorting algorithms, maintains technical accuracy, provides detailed comparisons, and offers a practical perspective, all while explaining technical concepts clearly.\n\n```\nGrade: A+\n```",
+        "grade": "A+",
+        "numeric_grade": 4.3,
+        "cost_info": {
+          "input_tokens": 1292,
+          "output_tokens": 316,
+          "input_cost": 0.000646,
+          "output_cost": 0.00047400000000000003,
+          "total_cost": 0.00112,
+          "duration": 7.892960071563721
+        }
+      },
+      "o1": {
+        "feedback": "The essay provides a well-rounded discussion of sorting algorithms, correctly outlining their complexities, characteristics, and practical implications. Here is a detailed evaluation based on your criteria:\n\n1) **Technical Accuracy of the Complexity Analysis**:\n   - The complexities for QuickSort, MergeSort, HeapSort, and the optional mentions are accurate. The explanation provides insight into why these algorithms have these complexities based on their operations (e.g., pivot partitions and divide-and-conquer approaches).\n\n2) **Depth of Understanding of Algorithm Characteristics**:\n   - There is a profound understanding of the inherent qualities of each algorithm, like QuickSort's divide-and-conquer mechanics and issues with worst-case scenarios, MergeSort's stability, and HeapSort's space efficiency.\n\n3) **Correctness of the Comparative Analysis**:\n   - The essay exhibits an effective comparative analysis, addressing multiple perspectives such as stability, cache friendliness, and ease of implementation, as well as language/library implementations.\n\n4) **Balance Between Theoretical Foundations and Practical Applications**:\n   - The essay balances theoretical aspects like time complexities with practical considerations, such as cache performance and memory usage in constrained settings. It recognizes the importance of implementation details and application needs.\n\n5) **Clarity of Explanations for Technical Concepts**:\n   - Explanations are generally clear and concise. Technical concepts are presented in a way that is accessible yet comprehensive\u2014such as the implications of pivot choice or the need for auxiliary space in MergeSort.\n\nOverall, the essay shows an impressive depth of knowledge and ability to communicate complex concepts in a clear manner. It effectively prioritizes both theoretical underpinnings and real-world applicability in its analysis.\n\n```\nGrade: A\n```",
+        "grade": "A",
+        "numeric_grade": 4.0,
+        "cost_info": {
+          "input_tokens": 1359,
+          "output_tokens": 339,
+          "input_cost": 0.0006795,
+          "output_cost": 0.0005085000000000001,
+          "total_cost": 0.001188,
+          "duration": 8.279813051223755
+        }
+      },
+      "DeepSeek-Distill-Qwen-32b": {
+        "feedback": "The essay presents a well-rounded analysis of various sorting algorithms, touching upon their time and space complexities, practical applications, and optimal scenarios. Here's a detailed evaluation based on the criteria provided:\n\n1) **Technical accuracy of the complexity analysis**:\n   - The essay accurately covers the time complexities of the algorithms mentioned. The space complexities are generally correct, though for quicksort, unless specific versions like the introspective sort are used, worst-case behavior needs randomized pivots more explicitly stated to prevent O(n\u00b2) behavior due to sorted input.\n\n2) **Depth of understanding of algorithm characteristics**:\n   - The author demonstrates a strong understanding of the algorithms and their varying characteristics. Important factors like stability and in-place operations are well-covered, indicating depth in understanding.\n\n3) **Correctness of the comparative analysis**:\n   - The comparative analysis is accurately presented, noting the pros and cons of each algorithm in varying contexts, with specific examples of when each is best used. However, the description of quicksort's average case being \"due to probabilistic analysis\" could be elaborated for clarity, as it might mislead those unfamiliar with expected time analysis versus probabilistic behavior.\n\n4) **Balance between theoretical foundations and practical applications**:\n   - The essay strikes a good balance between discussing theoretical complexities (time and space) and real-world considerations like cache performance, stability, and use in specific systems like databases or embedded systems.\n\n5) **Clarity of explanations for technical concepts**:\n   - The essay is generally clear and concise in its explanations, making it accessible while still addressing complex topics. The section on cache locality adds helpful depth but could be expanded slightly to explain why this affects performance.\n\nOverall, the essay is solid, with minor room for improvement in expanding on certain technical concepts for absolute clarity.\n\n```\nGrade: A\n```",
+        "grade": "A",
+        "numeric_grade": 4.0,
+        "cost_info": {
+          "input_tokens": 933,
+          "output_tokens": 368,
+          "input_cost": 0.0004665,
+          "output_cost": 0.000552,
+          "total_cost": 0.0010184999999999999,
+          "duration": 9.273816108703613
+        }
+      },
+      "Claude-3.7-Sonnet-thinking": {
+        "feedback": "1) **Technical Accuracy of the Complexity Analysis**: The essay's complexity analysis is largely accurate. It correctly identifies the time complexity for each sorting algorithm across best, average, and worst-case scenarios, as well as their space complexities. The analysis using the Master Theorem for Quicksort and Mergesort is correctly applied, although the explanation could be more detailed to address why the pivot selection is crucial for Quicksort. The space complexity discussions are precise, covering both theoretical and practical considerations.\n\n2) **Depth of Understanding of Algorithm Characteristics**: The essay demonstrates a sound understanding of each algorithm's characteristics, such as stability and in-place operations. It highlights critical nuances like the pivot selection in Quicksort and the in-place advantage and stability constraints of Mergesort. The distinctions among algorithms in terms of performance under different conditions (e.g., cache locality, nearly-sorted data) are well-articulated.\n\n3) **Correctness of the Comparative Analysis**: The comparative analysis is thorough and highlights key differences and use cases for each algorithm. The essay explains when and why specific algorithms might be preferred in scenarios like large data sets, when stability is essential, or when memory usage is a constraint. These assessments are correctly matched with the theoretical underpinnings discussed earlier in the essay.\n\n4) **Balance Between Theoretical Foundations and Practical Applications**: The essay achieves a strong balance between theory and practice. It effectively links theoretical time and space complexities with real-world implications like cache efficiency, constant factors, and adaptability to input data. The illustrative benchmarks and discussions on library implementations and real-world considerations significantly bolster its practical relevance.\n\n5) **Clarity of Explanations for Technical Concepts**: Explanations are clear and detailed, using specific examples and straightforward language. However, the mathematical recurrence relations and some technical terms could be further clarified for readers who may not be experts. A brief introduction to concepts like the Master Theorem or cache locality might enhance accessibility.\n\nOverall, the essay is comprehensive, demonstrating strong theoretical knowledge and practical insights without going too deep into mathematical rigor, which allows it to remain accessible.\n\n```\nGrade: A\n```",
+        "grade": "A",
+        "numeric_grade": 4.0,
+        "cost_info": {
+          "input_tokens": 1097,
+          "output_tokens": 432,
+          "input_cost": 0.0005485,
+          "output_cost": 0.000648,
+          "total_cost": 0.0011965,
+          "duration": 10.2426118850708
+        }
+      },
+      "DeepSeek-R1-Full": {
+        "feedback": "The essay on sorting algorithm complexity trade-offs is well-structured, addressing key aspects of different sorting algorithms with solid technical analysis and a comprehensive overview of their characteristics and use cases. Here's an evaluation based on the specified criteria:\n\n1) **Technical Accuracy of the Complexity Analysis**: \n   - The analysis correctly identifies the time complexity for each algorithm. Quicksort's complexity is accurately described, noting the potential for \\(O(n^2)\\) in the worst case and typical \\(O(n \\log n)\\) performance.\n   - Mergesort and heapsort complexities are correctly stated, and the reasoning aligns with these descriptions.\n   - Insertion sort's complexities are well-detailed, particularly its adaptive nature.\n   - Space complexities are accurately discussed for each algorithm.\n\n2) **Depth of Understanding of Algorithm Characteristics**: \n   - The essay demonstrates a strong understanding of both theoretical and practical aspects, discussing cache locality, branch prediction, and real-world constraints.\n   - The comparisons are insightful, highlighting not just performance but also operational characteristics like stability and memory usage.\n\n3) **Correctness of the Comparative Analysis**: \n   - The comparative sections are accurate and cover a range of real-world scenarios, exhibiting a nuanced understanding of operational environments.\n   - It mentions parallelization, stability, and adaptivity, which are crucial for real-world applicability, thereby enhancing the comparative analysis.\n\n4) **Balance Between Theoretical Foundations and Practical Applications**: \n   - The essay excellently balances theoretical analysis with practical application, demonstrating how each algorithm's theoretical properties translate into real-world advantages and disadvantages.\n   - It succinctly ties theoretical complexities to practical use cases, offering a thorough examination of why certain algorithms are chosen in specific scenarios.\n\n5) **Clarity of Explanations for Technical Concepts**: \n   - The explanations are clear, jargon-free, and well-suited for readers with a foundational understanding of computational complexity.\n   - Each section logically follows from the last, and technical concepts are broken down effectively for clarity and comprehension.\n\nOverall, the essay achieves a strong synthesis of theoretical analysis and practical insight, offering a precise, clear, and thorough understanding of sorting algorithms and their complexities. The clarity, depth, and accuracy are well above average.\n\n```\nGrade: A+\n```",
+        "grade": "A+",
+        "numeric_grade": 4.3,
+        "cost_info": {
+          "input_tokens": 1272,
+          "output_tokens": 458,
+          "input_cost": 0.0006360000000000001,
+          "output_cost": 0.000687,
+          "total_cost": 0.001323,
+          "duration": 10.84129786491394
+        }
+      }
+    },
+    "DeepSeek-Distill-Qwen-32b": {
+      "DeepSeek-R1-Full": {
+        "feedback": "Grade: A",
+        "grade": "A",
+        "numeric_grade": 4.0,
+        "cost_info": {
+          "input_tokens": 1247,
+          "output_tokens": 5,
+          "input_cost": 0.0006235,
+          "output_cost": 7.5e-06,
+          "total_cost": 0.000631,
+          "duration": 0.8845062255859375
+        }
+      },
+      "o3-mini-high": {
+        "feedback": "Grade: A",
+        "grade": "A",
+        "numeric_grade": 4.0,
+        "cost_info": {
+          "input_tokens": 1314,
+          "output_tokens": 5,
+          "input_cost": 0.000657,
+          "output_cost": 7.5e-06,
+          "total_cost": 0.0006645,
+          "duration": 0.9299099445343018
+        }
+      },
+      "GPT-4o": {
+        "feedback": "The essay on sorting algorithm complexity is comprehensive and demonstrates a strong understanding of the subject. It accurately presents the time and space complexities of QuickSort, MergeSort, and HeapSort, and provides relevant real-world considerations and use cases. The analysis is well-structured and clear, balancing theoretical knowledge with practical insights effectively. \n\nGrade: A\n\n```\nGrade: A\n```",
+        "grade": "A",
+        "numeric_grade": 4.0,
+        "cost_info": {
+          "input_tokens": 984,
+          "output_tokens": 389,
+          "input_cost": 0.000492,
+          "output_cost": 0.0005835,
+          "total_cost": 0.0010755,
+          "duration": 12.129658222198486
+        }
+      },
+      "o1": {
+        "feedback": "The essay provides a comprehensive analysis of three major sorting algorithms, covering time and space complexities, real-world considerations, and optimal scenarios for each. It is clear, accurate, and well-organized, making it accessible to readers with varying levels of knowledge. Subtle areas for improvement include a more detailed discussion of pivot selection strategies in QuickSort and adaptive algorithms. However, the essay is thorough and demonstrates a deep understanding of the subject.\n\nGrade: A",
+        "grade": "A",
+        "numeric_grade": 4.0,
+        "cost_info": {
+          "input_tokens": 1357,
+          "output_tokens": 539,
+          "input_cost": 0.0006785,
+          "output_cost": 0.0008085000000000001,
+          "total_cost": 0.001487,
+          "duration": 19.02953028678894
+        }
+      },
+      "Claude-3.7-Sonnet-thinking": {
+        "feedback": "The essay demonstrates a strong understanding of sorting algorithm complexity and provides a balanced, insightful analysis. Here's the evaluation based on the specified criteria:\n\n1. **Technical Accuracy of Complexity Analysis**:  \n   The essay provides correct and precise information about time and space complexity for each algorithm. The mathematical analysis, such as the recurrence relations for Quicksort and Mergesort, is accurate and well-explained. The use of the Master Theorem to resolve Quicksort's average-case complexity is particularly strong.\n\n2. **Depth of Understanding of Algorithm Characteristics**:  \n   The essay delves into both theoretical and practical aspects of each algorithm. For example, it explains how cache locality affects Quicksort's performance despite identical asymptotic complexity to Mergesort. The discussion of practical factors like constant factors, branch prediction, and stability requirements showcases a deep understanding of real-world considerations.\n\n3. **Correctness of the Comparative Analysis**:  \n   The comparison of algorithms is thorough and balanced. It avoids oversimplification, such as noting that Quicksort's worst-case performance can degrade significantly depending on pivot selection. The essay also correctly identifies optimal use cases for each algorithm, such as Heapsort for real-time systems and Counting Sort for integer ranges.\n\n4. **Balance Between Theoretical Foundations and Practical Applications**:  \n   The essay strikes an excellent balance. It provides mathematical analyses of time and space complexity while also addressing practical factors like cache efficiency, branch prediction, and stability. The inclusion of real-world examples, such as library implementations using insertion sort for small arrays, enhances the practical relevance of the discussion.\n\n5. **Clarity of Explanations for Technical Concepts**:  \n   The explanations are clear and accessible. Complex concepts like recurrence relations and cache locality are presented in a way that is understandable to readers with a basic background in algorithms. The structure of the essay, with well-organized sections and bullet points, aids readability.\n\n**Grade: A+**",
+        "grade": "A+",
+        "numeric_grade": 4.3,
+        "cost_info": {
+          "input_tokens": 1109,
+          "output_tokens": 786,
+          "input_cost": 0.0005545,
+          "output_cost": 0.0011790000000000001,
+          "total_cost": 0.0017335000000000002,
+          "duration": 26.31323504447937
+        }
+      }
+    },
+    "Claude-3.7-Sonnet-thinking": {
+      "GPT-4o": {
+        "feedback": "# Evaluation of Sorting Algorithm Complexity Essay\n\n## 1) Technical Accuracy of the Complexity Analysis\nThe essay demonstrates excellent technical accuracy in the complexity analysis of all three algorithms. The time complexities for QuickSort, MergeSort, and HeapSort are correctly identified, including the important distinction between QuickSort's average case O(n log n) and worst case O(n\u00b2). The space complexity analysis is also accurate, correctly noting QuickSort's O(log n) average case with possible O(n) worst case, MergeSort's O(n) auxiliary space requirement, and HeapSort's O(1) in-place advantage.\n\n## 2) Depth of Understanding of Algorithm Characteristics\nThe author shows strong understanding of the underlying characteristics of each algorithm. They correctly explain the conditions that lead to best and worst-case scenarios for QuickSort, demonstrate understanding of MergeSort's consistent divide-and-conquer approach, and accurately describe HeapSort's heap property maintenance. The discussion of cache performance, stability, and adaptability shows depth beyond basic complexity analysis.\n\n## 3) Correctness of the Comparative Analysis\nThe comparative analysis is accurate and insightful. The essay effectively contrasts the algorithms' strengths and weaknesses, such as highlighting QuickSort's cache efficiency versus MergeSort's stability. The comparisons are factually sound and demonstrate a nuanced understanding of when one algorithm might be preferred over another.\n\n## 4) Balance Between Theoretical Foundations and Practical Applications\nThis is a particular strength of the essay. The author successfully bridges theoretical complexity analysis with real-world considerations like cache performance, stability requirements, and memory constraints. Each algorithm is connected to specific practical scenarios where its characteristics would be advantageous, showing excellent integration of theory and application.\n\n## 5) Clarity of Explanations for Technical Concepts\nThe technical concepts are explained clearly and precisely. The mathematical notation is used appropriately, and complex ideas like recursion stack implications and stability are articulated in an accessible manner. The organization of the essay contributes to this clarity, with a logical progression from theoretical analysis to practical considerations.\n\n```\nGrade: A\n```\n\nThe essay demonstrates comprehensive understanding of sorting algorithm complexity, with accurate technical details, insightful comparative analysis, and excellent connections between theory and practice. The few areas that could be enhanced (such as discussing parallelizability or sorting lower bounds) are beyond the scope of what would typically be expected in this type of analysis.",
+        "grade": "A",
+        "numeric_grade": 4.0,
+        "cost_info": {
+          "input_tokens": 1166,
+          "output_tokens": 1567,
+          "input_cost": 0.000583,
+          "output_cost": 0.0023505,
+          "total_cost": 0.0029335000000000003,
+          "duration": 29.445502042770386
+        }
+      },
+      "o1": {
+        "feedback": "# Assessment of Sorting Algorithm Complexity Essay\n\n## 1) Technical Accuracy of the Complexity Analysis\nThe essay demonstrates strong technical accuracy in its complexity analysis. The time complexity bounds for QuickSort (best/average O(n log n), worst O(n\u00b2)), MergeSort (consistent O(n log n)), and HeapSort (consistent O(n log n)) are all correctly stated. The space complexity analysis is also accurate: QuickSort (O(log n) for recursion stack), MergeSort (O(n) auxiliary space), and HeapSort (O(1) auxiliary space). The explanations for why these complexities occur are technically sound and well-reasoned.\n\n## 2) Depth of Understanding of Algorithm Characteristics\nThe essay reveals a thorough understanding of the underlying mechanics of each algorithm. The explanations of partitioning in QuickSort, the divide-and-conquer approach of MergeSort, and the heap construction and extraction process in HeapSort all demonstrate solid comprehension. The author clearly understands not just the theoretical bounds but also the operational characteristics that produce these bounds.\n\n## 3) Correctness of the Comparative Analysis\nThe comparative analysis is accurate and nuanced. The essay correctly identifies the tradeoffs between algorithms: QuickSort's excellent average-case but problematic worst-case, MergeSort's consistency and stability at the cost of space, and HeapSort's compromise position. The comparisons are well-reasoned and avoid oversimplifications.\n\n## 4) Balance Between Theoretical Foundations and Practical Applications\nThis is a particular strength of the essay. The author moves smoothly from theoretical complexity analysis to practical considerations like cache friendliness, stability requirements, and memory constraints. The \"Optimal Scenarios\" section effectively bridges theory with application by providing concrete use cases. The recognition that library implementations often use hybrid approaches shows awareness of how theory translates to practice.\n\n## 5) Clarity of Explanations for Technical Concepts\nThe explanations are clear and accessible without sacrificing technical precision. Complex concepts like stability, pivot selection issues, and heap operations are explained in straightforward terms. The organization into clear sections enhances readability and comprehension.\n\nThe essay could have further expanded on some advanced topics (like specific partitioning strategies for QuickSort or discussions of modern hybrid algorithms like Timsort), but the coverage of core concepts is comprehensive and well-executed.\n\n```\nGrade: A\n```",
+        "grade": "A",
+        "numeric_grade": 4.0,
+        "cost_info": {
+          "input_tokens": 1613,
+          "output_tokens": 1808,
+          "input_cost": 0.0008065,
+          "output_cost": 0.002712,
+          "total_cost": 0.0035185,
+          "duration": 31.827685117721558
+        }
+      },
+      "DeepSeek-Distill-Qwen-32b": {
+        "feedback": "# Evaluation of Sorting Algorithm Complexity Essay\n\n## Technical Accuracy\nThe technical accuracy of the complexity analysis is excellent. The time and space complexities for all algorithms are correctly stated, including the distinction between best, average, and worst cases. The essay accurately describes quicksort's O(n log n) average case and O(n\u00b2) worst case, mergesort's consistent O(n log n) performance, heapsort's O(n log n) with O(1) space usage, and the O(n\u00b2)/O(n) complexities of insertion and bubble sorts.\n\n## Depth of Understanding\nThe essay demonstrates strong understanding of algorithm characteristics beyond mere complexities. The author correctly identifies factors affecting performance such as:\n- The probabilistic nature of quicksort's average case\n- The space-time tradeoffs between algorithms\n- The importance of stability in sorting\n- The impact of cache locality on real-world performance\n\n## Correctness of Comparative Analysis\nThe comparative analysis is sound and well-reasoned. The strengths and weaknesses of each algorithm are accurately compared, with appropriate guidance on which algorithms suit different scenarios.\n\n## Theory-Practice Balance\nThe essay excellently balances theoretical foundations with practical applications. It begins with formal complexity analysis but extends to real-world considerations like cache behavior, implementation details, and specific use cases that affect algorithm selection in practice.\n\n## Clarity of Explanations\nTechnical concepts are explained clearly and concisely. The organization progresses logically from theoretical foundations to practical applications, making the material accessible while maintaining technical precision.\n\n### Minor Improvements Possible\n- Could have mentioned quicksort optimization techniques beyond randomized pivots\n- Might have included hybrid sorting algorithms (like Timsort)\n- Could have elaborated more on the instability of certain algorithms\n\nThese are minor points that do not significantly detract from the overall quality of the analysis.\n\n```\nGrade: A\n```",
+        "grade": "A",
+        "numeric_grade": 4.0,
+        "cost_info": {
+          "input_tokens": 1078,
+          "output_tokens": 1455,
+          "input_cost": 0.0005390000000000001,
+          "output_cost": 0.0021825,
+          "total_cost": 0.0027215,
+          "duration": 24.456624746322632
+        }
+      },
+      "o3-mini-high": {
+        "feedback": "# Assessment of Sorting Algorithm Complexity Essay\n\n## Technical Accuracy\nThe essay demonstrates excellent technical accuracy in the complexity analysis. The time complexity analysis for quicksort (O(n log n) best/average, O(n\u00b2) worst), mergesort (O(n log n) for all cases), and heapsort (O(n log n) for all cases) is correct. The space complexity analysis is also precise, correctly identifying quicksort's O(log n) average stack space requirement, mergesort's O(n) auxiliary space needs, and heapsort's O(1) space efficiency.\n\n## Depth of Understanding\nThe author shows strong understanding of the underlying principles of each algorithm. The explanations of pivot selection in quicksort, the consistent division strategy in mergesort, and the heap construction and extraction operations in heapsort reveal sophisticated comprehension of how these algorithms function. The discussion on tail-recursive optimizations for quicksort also demonstrates advanced knowledge.\n\n## Correctness of Comparative Analysis\nThe comparative analysis is thorough and accurate. The essay effectively contrasts the algorithms based on their theoretical guarantees and provides nuanced distinctions between them. The comparisons regarding cache performance, stability characteristics, and practical use cases are well-founded and represent the consensus in computer science.\n\n## Theory-Practice Balance\nThe essay excels in balancing theoretical foundations with practical considerations. It moves beyond asymptotic analysis to discuss important real-world factors like cache performance, memory access patterns, and constant factors that affect actual runtime. The section on practical scenarios demonstrates mature understanding of how theoretical properties translate to application contexts.\n\n## Clarity of Explanations\nTechnical concepts are explained with excellent clarity and precision. Complex ideas like locality of reference, stability in sorting, and the performance characteristics of different algorithms are articulated in an accessible yet technically accurate manner. The structure of the essay facilitates comprehension of these concepts.\n\n## Areas for Minor Improvement\n- Could have elaborated slightly more on the O(n) heapify operation's subtleties\n- Some modern sorting algorithm variants like introsort are mentioned but could be explored in slightly more depth\n- A brief discussion of empirical performance benchmarks would have strengthened the practical analysis\n\n```\nGrade: A\n```",
+        "grade": "A",
+        "numeric_grade": 4.0,
+        "cost_info": {
+          "input_tokens": 1495,
+          "output_tokens": 1449,
+          "input_cost": 0.0007475000000000001,
+          "output_cost": 0.0021735,
+          "total_cost": 0.002921,
+          "duration": 26.617682933807373
+        }
+      },
+      "DeepSeek-R1-Full": {
+        "feedback": "# Evaluation of Sorting Algorithm Complexity Essay\n\n## Technical Accuracy\nThe essay demonstrates excellent technical accuracy in algorithm complexity analysis. All time and space complexity classifications are correct for Quicksort, Mergesort, Heapsort, and Insertion Sort. The author correctly identifies nuances like Quicksort's O(log n) average-case space complexity with potential O(n) worst case, and accurately describes the complexity trade-offs across different scenarios.\n\n## Depth of Understanding\nThe analysis shows sophisticated understanding beyond basic complexity theory. The author demonstrates excellent comprehension of:\n- How randomized pivot selection affects Quicksort performance\n- Why Mergesort maintains consistent performance regardless of input\n- The relationship between heap construction (O(n)) and extraction operations (O(log n))\n- The adaptive properties of Insertion Sort\n\n## Comparative Analysis\nThe comparative analysis is thorough and nuanced. The essay excels at identifying the practical implications of theoretical differences between algorithms. The discussion of cache locality, branch prediction, and memory access patterns demonstrates a systems-level understanding of algorithm performance. The stability comparison is particularly well-articulated, with clear explanation of its practical importance.\n\n## Theory-Practice Balance\nThe essay achieves an excellent balance between theoretical foundations and practical applications. The author connects abstract complexity analysis to concrete implementation contexts like database indexing, embedded systems, and mobile applications. The discussion of Timsort as a hybrid algorithm demonstrates understanding of how theoretical principles adapt to real-world needs.\n\n## Clarity of Explanations\nTechnical concepts are explained with precision and clarity. Complex ideas like cache locality and branch prediction are presented in an accessible way without sacrificing accuracy. The organization by complexity type, then by practical considerations, creates a logical flow that enhances understanding.\n\n## Strengths\n- Comprehensive coverage of both theoretical and practical aspects\n- Excellent examples that illustrate abstract concepts\n- Nuanced discussion of performance factors beyond basic Big O notation\n- Strong connections between algorithm characteristics and optimal use cases\n\n## Minor Improvements Possible\n- Could have briefly discussed other important sorting algorithms (e.g., Radix Sort)\n- More details on specific Quicksort optimizations (median-of-three, etc.)\n- Brief discussion of parallel sorting algorithms could enhance completeness\n\n```\nGrade: A\n```",
+        "grade": "A",
+        "numeric_grade": 4.0,
+        "cost_info": {
+          "input_tokens": 1502,
+          "output_tokens": 1778,
+          "input_cost": 0.000751,
+          "output_cost": 0.002667,
+          "total_cost": 0.003418,
+          "duration": 30.71597170829773
+        }
+      }
+    },
+    "o1": {
+      "GPT-4o": {
+        "feedback": "The essay demonstrates a solid understanding of the complexities for QuickSort, MergeSort, and HeapSort. The time complexity analysis is accurate and aligns with standard algorithmic theory. Space complexity requirements are correctly noted, including the nuances of QuickSort\u2019s recursion stack usage. The discussion of real-world considerations such as cache performance, stability, and external sorting shows depth and practical insight, illustrating awareness that Big-O is not the sole factor for algorithm selection. Comparative analysis is coherent and highlights both theoretical and practical distinctions. The explanations are clear and well-structured, making complex concepts accessible. Overall, the balance between theoretical underpinnings and real-world application is commendable.\n\nGrade: A",
+        "grade": "A",
+        "numeric_grade": 4.0,
+        "cost_info": {
+          "input_tokens": 995,
+          "output_tokens": 851,
+          "input_cost": 0.0004975,
+          "output_cost": 0.0012765,
+          "total_cost": 0.001774,
+          "duration": 9.933557987213135
+        }
+      },
+      "o3-mini-high": {
+        "feedback": "This essay demonstrates strong technical accuracy and a solid understanding of sorting algorithm complexity. Its discussion of Quicksort, Mergesort, and Heapsort accurately covers best, average, and worst-case time complexities and the relevant space requirements, showing an in-depth knowledge of how each algorithm\u2019s partitioning, merging, or heap-building steps contribute to their overall performance profiles. The comparative analysis is correct, effectively contrasting the stability and worst-case guarantees of Mergesort and Heapsort with Quicksort\u2019s typical speed advantages and the importance of pivot selection.\n\nBeyond the theory, the essay effectively addresses real-world considerations such as cache performance, stability, and practical scenarios for each algorithm. Including details on parallelization for Mergesort, adversarial inputs for Quicksort, and memory constraints for Heapsort underscores good balance between theoretical foundations and practical applications. The explanations are clear and accessible, highlighting key factors like recursion depth, external sorting cases, and worst-case behavior without overwhelming the reader. Overall, it is a thorough and well-presented analysis of sorting algorithm choices.\n\nGrade: A+",
+        "grade": "A+",
+        "numeric_grade": 4.3,
+        "cost_info": {
+          "input_tokens": 1291,
+          "output_tokens": 1060,
+          "input_cost": 0.0006455,
+          "output_cost": 0.00159,
+          "total_cost": 0.0022355,
+          "duration": 11.59228229522705
+        }
+      },
+      "Claude-3.7-Sonnet-thinking": {
+        "feedback": "Overall Evaluation:\n\n1) Technical Accuracy:  \nThe essay's complexity analyses are precise and align well with established theoretical results for each algorithm. The use of the Master Theorem for Quicksort and Mergesort is correctly applied, and the summaries of each algorithm\u2019s best, average, and worst-case complexity are accurate.  \n\n2) Depth of Understanding:  \nIt demonstrates a strong grasp of each sorting algorithm\u2019s characteristics, including pivot selection pitfalls in Quicksort, stability considerations in Mergesort, and the build-extract cycle in Heapsort. The discussion of how Insertion Sort behaves with partially sorted data highlights a nuanced understanding of practical performance.  \n\n3) Correctness of Comparative Analysis:  \nThe table and subsequent text correctly compare both time and space complexities. The essay also highlights important trade-offs\u2014such as the stable nature of Mergesort, the in-place advantage of Heapsort, and how Quicksort frequently outperforms Mergesort in practice despite identical asymptotic bounds\u2014reflecting a well-researched assessment.  \n\n4) Theoretical vs. Practical Balance:  \nIt strikes an excellent balance: theoretical complexities are clearly stated, and practical considerations like cache locality, branch prediction effects, and real-world benchmark outcomes are addressed in sufficient depth. These factors are often overlooked in purely academic discussions, so integrating them strengthens the analysis.  \n\n5) Clarity of Explanations:  \nTechnical concepts are articulated in a straightforward manner, using specific examples to illustrate real-world performance. The essay\u2019s structure\u2014starting with a concise complexity table, followed by detailed insights\u2014makes it easy to follow.  \n\nIn sum, the essay offers a thorough, accurate, and balanced examination of sorting algorithm complexities, both from a theoretical and practical standpoint.\n\nGrade: A",
+        "grade": "A",
+        "numeric_grade": 4.0,
+        "cost_info": {
+          "input_tokens": 1096,
+          "output_tokens": 1520,
+          "input_cost": 0.0005480000000000001,
+          "output_cost": 0.00228,
+          "total_cost": 0.002828,
+          "duration": 15.159723997116089
+        }
+      },
+      "DeepSeek-R1-Full": {
+        "feedback": "This essay demonstrates strong technical accuracy across all presented sorting algorithms, correctly outlining their average and worst-case complexities, as well as space requirements. The explanations for each algorithm\u2019s strengths and weaknesses are clear and match well-established theoretical results, showing a solid grasp of partitioning strategies (Quicksort), balanced merging (Mergesort), in-place priority queues (Heapsort), and adaptive performance (Insertion Sort and Timsort).\n\nRegarding depth, the essay goes beyond mere Big O notation by highlighting real-world constraints such as cache locality, branch prediction, stability, and external-memory considerations. This analytical depth indicates a proper understanding of when each sort algorithm is most appropriate, including memory usage and data patterns that can affect performance.\n\nThe comparative analysis is well-structured. The essay gives a fair overview of trade-offs and includes practical examples where each algorithm excels (e.g., Timsort in dynamic contexts, Mergesort for stable sorting on disk-based datasets, Quicksort for general in-memory sorting). This discussion balances theoretical underpinnings with practical applications, reflecting a nuanced perspective on algorithm choice in real software systems.\n\nExplanations of technical concepts (like pivot selection, stability, and adaptivity) are clearly articulated. The reader gets a concise but thorough overview of why constants matter in practice and how certain design choices impact performance on modern hardware. Overall, the essay succeeds in combining theoretical rigor with concrete real-world scenarios, aiding comprehension for both academic and applied audiences.\n\nGrade: A+",
+        "grade": "A+",
+        "numeric_grade": 4.3,
+        "cost_info": {
+          "input_tokens": 1271,
+          "output_tokens": 756,
+          "input_cost": 0.0006355,
+          "output_cost": 0.001134,
+          "total_cost": 0.0017695,
+          "duration": 8.555831909179688
+        }
+      },
+      "DeepSeek-Distill-Qwen-32b": {
+        "feedback": "The essay demonstrates a strong command of sorting algorithm complexities and their practical trade-offs. Below is an evaluation based on the requested criteria:\n\n1) Technical accuracy of the complexity analysis:\n   \u2022 Each algorithm\u2019s time and space complexity is correctly stated, including Quicksort\u2019s average and worst-case times, Mergesort\u2019s consistent O(n log n), Heapsort\u2019s in-place property, and the O(n\u00b2) behavior for Insertion Sort and Bubble Sort.\n   \u2022 The explanation of why Quicksort degrades to O(n\u00b2) (particularly on sorted or duplicate-heavy data with a na\u00efve pivot strategy) is accurate, as is the mention of using techniques such as randomized pivots to mitigate that scenario.\n\n2) Depth of understanding of algorithm characteristics:\n   \u2022 The discussion of stability (particularly pointing out Mergesort\u2019s stability and the general lack of stability in Quicksort and Heapsort) shows good depth.\n   \u2022 Recognizing cache locality (favoring Quicksort) and the difference between average/worst-case analysis adds further insight beyond mere Big O.\n\n3) Correctness of the comparative analysis:\n   \u2022 The comparisons between Quicksort, Mergesort, Heapsort, Insertion Sort, and Bubble Sort are on target, highlighting each algorithm\u2019s strengths, weaknesses, and typical usage scenarios.\n   \u2022 The essay accurately characterizes Insertion and Bubble Sort as practical only for small or nearly sorted datasets.\n\n4) Balance between theoretical foundations and practical applications:\n   \u2022 The essay does well to connect theory (time and space complexities) with real-world concerns (e.g., memory constraints, stability, and cache efficiency).\n   \u2022 Practical examples reinforcing why one would choose, for example, Quicksort for in-memory operations vs. Mergesort when stability is crucial, are apt and balanced.\n\n5) Clarity of explanations for technical concepts:\n   \u2022 Concepts like worst-case scenarios, stability, in-place operation, and auxiliary space are explained concisely and accurately, making the essay accessible while remaining technically sound.\n   \u2022 The overall structure and organization (sections for complexities, real-world considerations, optimal scenarios) enhance clarity.\n\nOverall, the essay is thorough, accurate, and clearly presented.\n\nGrade: A+",
+        "grade": "A+",
+        "numeric_grade": 4.3,
+        "cost_info": {
+          "input_tokens": 932,
+          "output_tokens": 1485,
+          "input_cost": 0.00046600000000000005,
+          "output_cost": 0.0022275000000000003,
+          "total_cost": 0.0026935000000000006,
+          "duration": 14.200196027755737
+        }
+      }
+    },
+    "o3-mini-high": {
+      "GPT-4o": {
+        "feedback": "The essay provides an accurate and insightful discussion of the complexity characteristics of QuickSort, MergeSort, and HeapSort. The time complexities are correctly presented for best, average, and worst cases, and the explanation of how the choice of pivot in QuickSort can lead to different performance scenarios is spot on. The space complexity analysis is similarly correct, noting QuickSort\u2019s potential for a larger recursion stack and explaining the auxiliary space required by MergeSort as well as the in-place nature of HeapSort.\n\nThe essay goes beyond simply listing Big O notation by addressing real-world issues such as cache performance, stability, and adaptability. The discussion of practical applications (like using QuickSort in cache-sensitive environments or MergeSort when stability is needed) shows a deep understanding of how theoretical concepts translate into practice. The comparative analysis is balanced and presents each algorithm\u2019s trade-offs clearly, enabling informed decision-making based on different constraints and use cases.\n\nOverall, the essay strikes an excellent balance between theoretical foundation and practical implementation details while maintaining clarity and logical organization throughout the discussion.\n\nGrade: A",
+        "grade": "A",
+        "numeric_grade": 4.0,
+        "cost_info": {
+          "input_tokens": 995,
+          "output_tokens": 2205,
+          "input_cost": 0.0004975,
+          "output_cost": 0.0033075,
+          "total_cost": 0.0038050000000000002,
+          "duration": 16.098113775253296
+        }
+      },
+      "DeepSeek-Distill-Qwen-32b": {
+        "feedback": "The essay demonstrates a strong grasp of the key issues in sorting algorithm complexity. Here\u2019s a breakdown based on the specified points:\n\n1) Technical Accuracy of the Complexity Analysis\n\u2003\u2022 The stated time and space complexities for quicksort, mergesort, heapsort, insertion sort, and bubble sort are accurate.  \n\u2003\u2022 The explanation of quicksort\u2019s average O(n log n) performance and its worst-case behavior, while attributed to sorted data or duplicate-heavy inputs, correctly touches on issues with pivot selection (even if a brief note on randomized pivots would refine it further).  \n\u2003\u2022 All complexity bounds for the other algorithms are appropriately identified.\n\n2) Depth of Understanding of Algorithm Characteristics\n\u2003\u2022 The essay goes beyond stating Big-O bounds by discussing implementation subtleties like recursion depth for quicksort and additional memory usage in mergesort.  \n\u2003\u2022 It explains the concept of stability (mergesort\u2019s advantage) and how cache locality benefits quicksort, showing a nuanced understanding.\n\n3) Correctness of the Comparative Analysis\n\u2003\u2022 The comparisons between algorithms are well-founded: recommending quicksort for general-purpose sorting, mergesort when stability is required, and heapsort for in-place sorting in environments with limited stack space.  \n\u2003\u2022 It correctly notes the practical scenarios where simpler algorithms (insertion sort and bubble sort) may be preferred due to their efficiency with nearly sorted data.\n\n4) Balance between Theoretical Foundations and Practical Applications\n\u2003\u2022 The discussion effectively ties theoretical complexity results to practical considerations, including real-world concerns like memory constraints and cache locality.  \n\u2003\u2022 Concrete examples provided (web servers, databases, embedded systems) make the analysis relevant to practical situations.\n\n5) Clarity of Explanations for Technical Concepts\n\u2003\u2022 The essay is well-organized and structured with clear headings and bullet points that help in distinguishing between theoretical analysis and practical implications.  \n\u2003\u2022 Concepts such as \u201cin-place\u201d operations, \u201ccache locality,\u201d and the trade-offs between time and space complexity are explained in a clear and accessible manner.\n\nOverall, the essay is comprehensive, factually correct, and clearly written. It effectively balances theoretical rigor with practical considerations and demonstrates a clear comparative analysis of the sorting algorithms discussed.\n\nGrade: A+",
+        "grade": "A+",
+        "numeric_grade": 4.3,
+        "cost_info": {
+          "input_tokens": 932,
+          "output_tokens": 2058,
+          "input_cost": 0.00046600000000000005,
+          "output_cost": 0.003087,
+          "total_cost": 0.0035529999999999997,
+          "duration": 14.88360595703125
+        }
+      },
+      "o1": {
+        "feedback": "The essay provides a technically accurate and well-rounded overview of the complexities of common sorting algorithms. Here\u2019s a quick breakdown based on the requested criteria:\n\n1) Technical Accuracy of the Complexity Analysis  \n\u2003\u2022 The time complexities for QuickSort, MergeSort, and HeapSort are correctly described\u2014QuickSort as O(n log n) on average (with a worst-case of O(n\u00b2)), and both MergeSort and HeapSort as O(n log n) in all cases.  \n\u2003\u2022 The explanation of auxiliary space (with MergeSort requiring O(n) extra space versus QuickSort\u2019s typically O(log n) space overhead, and HeapSort\u2019s in-place approach) is accurate.\n\n2) Depth of Understanding of Algorithm Characteristics  \n\u2003\u2022 The essay explains key algorithmic concepts such as the divide-and-conquer strategy, pivot selection in QuickSort, the merging process in MergeSort, and the heap-building process in HeapSort.  \n\u2003\u2022 It also touches on additional algorithms (InsertionSort, SelectionSort, BubbleSort) to provide a context for when simpler methods might be applicable.\n\n3) Correctness of the Comparative Analysis  \n\u2003\u2022 The comparative discussion is well balanced, addressing not just asymptotic time and space complexities, but also factors like cache locality, stability, and real-world implementation trade-offs.  \n\u2003\u2022 Scenarios for when each algorithm is optimal are well articulated, giving the reader clear practical insights.\n\n4) Balance Between Theoretical Foundations and Practical Applications  \n\u2003\u2022 The essay manages to effectively integrate rigorous complexity analysis with real-world considerations.  \n\u2003\u2022 Discussions on cache friendliness, stability, and use cases in different environments (memory-constrained, real-time systems, etc.) strengthen the practical perspective.\n\n5) Clarity of Explanations for Technical Concepts  \n\u2003\u2022 The explanations are clear and concise, with a logical structure that uses bullet points for easier readability.  \n\u2003\u2022 Technical terms are well-defined, ensuring that both theoretical and practical points are communicated effectively.\n\nOverall, the essay demonstrates a strong command of both the theoretical and practical aspects of sorting algorithms, with clear and accurate descriptions that effectively compare and contrast the different methods.\n\nGrade: A",
+        "grade": "A",
+        "numeric_grade": 4.0,
+        "cost_info": {
+          "input_tokens": 1358,
+          "output_tokens": 2553,
+          "input_cost": 0.000679,
+          "output_cost": 0.0038295,
+          "total_cost": 0.0045085,
+          "duration": 22.600754976272583
+        }
+      },
+      "Claude-3.7-Sonnet-thinking": {
+        "feedback": "The essay demonstrates a strong understanding of sorting algorithms and their analytical and practical trade-offs. Here\u2019s a breakdown by the requested evaluation points:\n\n1. Technical Accuracy of the Complexity Analysis:  \n\u2003\u2022 The essay correctly lists the worst-case, average-case, and best-case complexities for each algorithm in the table.  \n\u2003\u2022 The recurrence relation provided for quicksort (T(n) = 2T(n/2) + \u0398(n) for the average case) closely mirrors the balanced partition scenario\u2014it serves its purpose in leading to O(n log n) performance, even if in many texts the quicksort recurrence is typically expressed as T(n) = T(i) + T(n-i-1) + \u0398(n) due to randomness in partitioning.  \n\u2003\u2022 The descriptions for mergesort and heapsort are accurate, and the treatment of counting sort\u2019s complexity (O(n + k)) is appropriate.\n\n2. Depth of Understanding of Algorithm Characteristics:  \n\u2003\u2022 The essay goes beyond asymptotic analysis by discussing differences in space usage, stability, and the impact of recursion in quicksort.  \n\u2003\u2022 It demonstrates awareness of implementation nuances (like in-place strategies and the need for additional memory in mergesort) and adaptive behavior (as in insertion sort with nearly-sorted data).\n\n3. Correctness of the Comparative Analysis:  \n\u2003\u2022 The discussion correctly contrasts the theoretical worst-case guarantees (heapsort\u2019s O(n log n) irrespective of input) with average-case performance (quicksort\u2019s generally superior practical performance).  \n\u2003\u2022 It fairly outlines circumstances where stability is essential and compares the algorithms\u2019 suitability in various contexts (e.g., in-memory sorting vs. external sorting).\n\n4. Balance Between Theoretical Foundations and Practical Applications:  \n\u2003\u2022 The essay strikes a good balance by combining mathematical recurrence analyses with discussions of real-world factors such as cache locality, constant factors, branch prediction, and the impact of practical input size.  \n\u2003\u2022 It gives concrete examples where each algorithm might be most effective.\n\n5. Clarity of Explanations for Technical Concepts:  \n\u2003\u2022 The use of a table alongside detailed textual explanations makes the essay accessible and clear.  \n\u2003\u2022 The breakdown of the mathematical and practical reasoning is well-organized, allowing readers to follow the trade-offs involved in algorithm selection.\n\nOverall, the essay is well-written and informed, with only minor oversimplifications (such as the quicksort average-case recurrence) that do not detract significantly from its overall quality.\n\nGrade: A",
+        "grade": "A",
+        "numeric_grade": 4.0,
+        "cost_info": {
+          "input_tokens": 1096,
+          "output_tokens": 2753,
+          "input_cost": 0.0005480000000000001,
+          "output_cost": 0.0041295,
+          "total_cost": 0.0046775,
+          "duration": 42.57104420661926
+        }
+      },
+      "DeepSeek-R1-Full": {
+        "feedback": "The essay provides a clear and well-organized analysis of sorting algorithms, covering both the theoretical complexity and practical considerations. Here\u2019s a breakdown of the evaluation:\n\n1. Technical Accuracy:  \n\u2003\u2022 The time complexities for Quicksort, Mergesort, Heapsort, and Insertion Sort are correctly stated (with Quicksort\u2019s worst-case behavior duly noted).  \n\u2003\u2022 The space complexities are also accurately described, including nuances like the recursion stack depth in Quicksort and the auxiliary array in Mergesort.\n\n2. Depth of Understanding:  \n\u2003\u2022 The essay shows a solid grasp of each algorithm\u2019s inner workings\u2014for instance, how random pivot selection in Quicksort influences its average behavior, and why MergeSort maintains consistent performance.  \n\u2003\u2022 Practical concerns, like cache locality and branch prediction for Quicksort and Heapsort respectively, indicate a deeper understanding beyond textbook Big-O analysis.\n\n3. Comparative Analysis:  \n\u2003\u2022 The discussion clearly contrasts the algorithms on factors such as stability, adaptivity (e.g., Insertion Sort\u2019s linear time in nearly sorted cases), and suitability for different environments (in-memory vs. external sorting).  \n\u2003\u2022 The use-case examples (databases, gaming leaderboards, mobile apps) effectively illustrate why one might choose one algorithm over another.\n\n4. Theoretical vs. Practical Balance:  \n\u2003\u2022 The essay balances the underpinning theoretical complexities with the real-world implications of hidden constants, memory overhead, and hardware considerations such as cache and parallelization.\n\u2003\u2022 It appropriately highlights hybrid algorithms such as Timsort, showing how theoretical ideas adapt to practical needs.\n\n5. Clarity of Explanations:  \n\u2003\u2022 The technical concepts are explained in a clear and systematic manner, with good structure by dividing the analysis into subsections.\n\u2003\u2022 The step-by-step breakdown of each algorithm\u2019s behavior makes the discussion accessible even when addressing complex comparative points.\n\nMinor areas for potential enhancement might include a deeper exploration of some nuances (such as alternative stable versions of QuickSort or further discussion of in-place merge optimizations), but these do not detract from the overall quality and depth of the analysis.\n\nGrade: A",
+        "grade": "A",
+        "numeric_grade": 4.0,
+        "cost_info": {
+          "input_tokens": 1271,
+          "output_tokens": 3069,
+          "input_cost": 0.0006355,
+          "output_cost": 0.0046035,
+          "total_cost": 0.005239,
+          "duration": 52.72314381599426
+        }
+      }
+    },
+    "DeepSeek-R1-Full": {
+      "o1": {
+        "feedback": "```\nGrade: A\n```\n\n**Breakdown**  \n1. **Technical Accuracy**: No errors in time/space complexities or algorithm mechanics. Correct explanations of pivot impact (QuickSort), merge operations (MergeSort), and heap structure (HeapSort).  \n2. **Depth of Understanding**: Demonstrates grasp of algorithm trade-offs (e.g., pivot selection, stability, recursion depth) and practical factors (cache locality, memory constraints).  \n3. **Comparative Analysis Correctness**: Valid distinctions between algorithms\u2019 use cases (QuickSort\u2019s average-case vs. MergeSort\u2019s stability vs. HeapSort\u2019s memory efficiency). Real-world examples (e-commerce, linked lists) reinforce analysis.  \n4. **Theory-Practice Balance**: Bridges theoretical bounds (e.g., Big-O) with implementation nuances (e.g., intro sort adaptations, in-place merging trade-offs). Could extend discussion of hybrid algorithms like Timsort.  \n5. **Clarity**: Concepts explained logically with accessible analogies (stability in student records). Minor room for refinement in HeapSort\u2019s heapify process details.  \n\nOverall, a strong, accurate, and insightful analysis meriting an **A**.",
+        "grade": "A",
+        "numeric_grade": 4.0,
+        "cost_info": {
+          "input_tokens": 1356,
+          "output_tokens": 852,
+          "input_cost": 0.0006780000000000001,
+          "output_cost": 0.001278,
+          "total_cost": 0.0019560000000000003,
+          "duration": 79.80793190002441
+        }
+      },
+      "DeepSeek-Distill-Qwen-32b": {
+        "feedback": "Grade: A+",
+        "grade": "A+",
+        "numeric_grade": 4.3,
+        "cost_info": {
+          "input_tokens": 913,
+          "output_tokens": 843,
+          "input_cost": 0.00045650000000000004,
+          "output_cost": 0.0012645,
+          "total_cost": 0.001721,
+          "duration": 79.43694114685059
+        }
+      },
+      "GPT-4o": {
+        "feedback": "Grade: A",
+        "grade": "A",
+        "numeric_grade": 4.0,
+        "cost_info": {
+          "input_tokens": 962,
+          "output_tokens": 1057,
+          "input_cost": 0.000481,
+          "output_cost": 0.0015854999999999999,
+          "total_cost": 0.0020664999999999998,
+          "duration": 98.60433268547058
+        }
+      },
+      "o3-mini-high": {
+        "feedback": "The essay demonstrates a strong command of sorting algorithm complexity analysis and practical considerations. Here's the evaluation across the specified criteria:\n\n1. **Technical Accuracy**:  \n   Time and space complexities for all three algorithms are correctly stated. Key distinctions (e.g., quicksort\u2019s worst-case, mergesort\u2019s space, heapsort\u2019s worst-case guarantee) align with textbook definitions. Minor omissions (e.g., quicksort pivot selection strategies for mitigating worst-case behavior) are nuanced but non-critical.  \n   \n2. **Depth of Understanding**:  \n   The analysis extends beyond asymptotics to include cache behavior, stability, and memory constraints. Practical trade-offs (e.g., heapsort\u2019s unsuitability for cache-heavy systems, mergesort\u2019s parallelization) reflect a mature grasp of real-world algorithm behavior.  \n\n3. **Comparative Analysis**:  \n   Comparisons are well-reasoned, with appropriate use cases (e.g., quicksort for average efficiency, mergesort for stability/external sorts, heapsort for memory constraints). The contrast between theoretical guarantees (heapsort\u2019s O(n log n) worst-case) and practical efficiency (quicksort\u2019s cache locality) is exemplary.  \n\n4. **Theory-Practice Balance**:  \n   The essay excels here, integrating Big O analysis with empirical factors like constant factors, parallelization, and hybrid algorithms (e.g., Timsort, introsort). Applications in embedded systems, external sorting, and library implementations ground the discussion effectively.  \n\n5. **Clarity**:  \n   Technical concepts (e.g., recursion stack, stability, cache locality) are explained precisely without verbosity. The structure flows logically from theory to practice, and examples (e.g., student record sorting) aid comprehension.  \n\n**Minor Critique**: A brief mention of insertion sort or hybrid methods (beyond Timsort) for small datasets could enhance completeness but is not essential.  \n\nGrade:",
+        "grade": "N/A",
+        "numeric_grade": 0.0,
+        "cost_info": {
+          "input_tokens": 1307,
+          "output_tokens": 1307,
+          "input_cost": 0.0006535,
+          "output_cost": 0.0019605,
+          "total_cost": 0.002614,
+          "duration": 218.96071982383728
+        }
+      },
+      "Claude-3.7-Sonnet-thinking": {
+        "feedback": "```\nGrade: A\n```\n\n**Rationale**:\n\n1. **Technical Accuracy**: The complexity analysis is mostly correct, though Quicksort's space complexity in the table (O(log n)) doesn't explicitly note the worst-case O(n) scenario, which is only mentioned in the text. Heapsort\u2019s O(1) space assumes an in-place implementation, which is accurate. Minor deduction for incomplete table annotations.\n\n2. **Depth of Understanding**: Demonstrates strong grasp of recurrence relations, implementation trade-offs (e.g., stability vs. memory), and practical factors like cache locality. The analysis of branch prediction\u2019s impact on Quicksort, while valid, could benefit from deeper nuance.\n\n3. **Comparative Analysis**: Correctly distinguishes use cases (e.g., Mergesort for external sorting vs. Quicksort for in-memory). The Counting Sort example effectively highlights non-comparative sorting advantages.\n\n4. **Theory-Practice Balance**: Successfully integrates asymptotic analysis with real-world considerations (e.g., constant factors, stability requirements). Benchmarks and library implementation details strengthen practical relevance.\n\n5. **Clarity**: Well-structured explanations with concrete examples. The table format aids readability, though the space complexity column could be more precisely annotated to avoid ambiguity.\n\nOverall, the essay is exemplary but has minor room for improvement in explicitness and depth on a few points, warranting an **A** rather than A+.",
+        "grade": "A",
+        "numeric_grade": 4.0,
+        "cost_info": {
+          "input_tokens": 1093,
+          "output_tokens": 1338,
+          "input_cost": 0.0005465,
+          "output_cost": 0.002007,
+          "total_cost": 0.0025535,
+          "duration": 26.97554898262024
+        }
+      }
+    }
+  },
+  "summary": {
+    "o1": {
+      "median_numeric": 4.0,
+      "grades_received": [
+        "A",
+        "A",
+        "A",
+        "A",
+        "A"
+      ]
+    },
+    "GPT-4o": {
+      "median_numeric": 4.0,
+      "grades_received": [
+        "A",
+        "A",
+        "A",
+        "A",
+        "A"
+      ]
+    },
+    "o3-mini-high": {
+      "median_numeric": 4.0,
+      "grades_received": [
+        "A+",
+        "A",
+        "A",
+        "A+",
+        "N/A"
+      ]
+    },
+    "Claude-3.7-Sonnet-thinking": {
+      "median_numeric": 4.0,
+      "grades_received": [
+        "A",
+        "A+",
+        "A",
+        "A",
+        "A"
+      ]
+    },
+    "DeepSeek-Distill-Qwen-32b": {
+      "median_numeric": 4.3,
+      "grades_received": [
+        "A",
+        "A",
+        "A+",
+        "A+",
+        "A+"
+      ]
+    },
+    "DeepSeek-R1-Full": {
+      "median_numeric": 4.0,
+      "grades_received": [
+        "A+",
+        "A",
+        "A",
+        "A+",
+        "A"
+      ]
+    }
+  },
+  "bias_analysis": {
+    "overall_median": 4.0,
+    "overall_mean": 3.9466666666666668,
+    "grader_bias": {
+      "o1": {
+        "median_given": 4.3,
+        "median_bias": 0.2999999999999998,
+        "mean_bias": 0.23333333333333295,
+        "letter_bias": "Slightly Lenient (+1/3 grade)",
+        "count": 5
+      },
+      "GPT-4o": {
+        "median_given": 4.0,
+        "median_bias": 0.0,
+        "mean_bias": 0.17333333333333334,
+        "letter_bias": "Neutral",
+        "count": 5
+      },
+      "o3-mini-high": {
+        "median_given": 4.0,
+        "median_bias": 0.0,
+        "mean_bias": 0.11333333333333373,
+        "letter_bias": "Neutral",
+        "count": 5
+      },
+      "Claude-3.7-Sonnet-thinking": {
+        "median_given": 4.0,
+        "median_bias": 0.0,
+        "mean_bias": 0.05333333333333323,
+        "letter_bias": "Neutral",
+        "count": 5
+      },
+      "DeepSeek-Distill-Qwen-32b": {
+        "median_given": 4.0,
+        "median_bias": 0.0,
+        "mean_bias": 0.11333333333333373,
+        "letter_bias": "Neutral",
+        "count": 5
+      },
+      "DeepSeek-R1-Full": {
+        "median_given": 4.0,
+        "median_bias": 0.0,
+        "mean_bias": -0.6866666666666665,
+        "letter_bias": "Neutral",
+        "count": 5
+      }
+    }
+  },
+  "boswell_quotient": {
+    "model_scores": {
+      "o1": {
+        "boswell_quotient": 85.2,
+        "components": {
+          "performance": 93.02325581395348,
+          "evaluation": 70.00000000000001,
+          "efficiency": 88.58984551495143
+        },
+        "rank": 6
+      },
+      "GPT-4o": {
+        "boswell_quotient": 94.0,
+        "components": {
+          "performance": 93.02325581395348,
+          "evaluation": 100.0,
+          "efficiency": 87.46079973842916
+        },
+        "rank": 2
+      },
+      "o3-mini-high": {
+        "boswell_quotient": 92.5,
+        "components": {
+          "performance": 93.02325581395348,
+          "evaluation": 100.0,
+          "efficiency": 79.69758331923566
+        },
+        "rank": 3
+      },
+      "Claude-3.7-Sonnet-thinking": {
+        "boswell_quotient": 91.3,
+        "components": {
+          "performance": 93.02325581395348,
+          "evaluation": 100.0,
+          "efficiency": 74.0029633307915
+        },
+        "rank": 5
+      },
+      "DeepSeek-Distill-Qwen-32b": {
+        "boswell_quotient": 92.5,
+        "components": {
+          "performance": 100.0,
+          "evaluation": 100.0,
+          "efficiency": 62.45867241833879
+        },
+        "rank": 4
+      },
+      "DeepSeek-R1-Full": {
+        "boswell_quotient": 95.6,
+        "components": {
+          "performance": 93.02325581395348,
+          "evaluation": 100.0
+        },
+        "rank": 1
+      }
+    },
+    "component_weights": {
+      "performance": 0.5,
+      "evaluation": 0.3,
+      "efficiency": 0.2
+    }
+  },
+  "cost": {
+    "total_cost": 0.089515,
+    "total_tokens": 84206,
+    "total_duration": 1216.0676414966583,
+    "essay_costs": {
+      "o1": {
+        "input_tokens": 176,
+        "output_tokens": 1637,
+        "input_cost": 8.8e-05,
+        "output_cost": 0.0024555000000000002,
+        "total_cost": 0.0025435,
+        "duration": 14.746683835983276
+      },
+      "GPT-4o": {
+        "input_tokens": 177,
+        "output_tokens": 816,
+        "input_cost": 8.85e-05,
+        "output_cost": 0.001224,
+        "total_cost": 0.0013125,
+        "duration": 18.841097116470337
+      },
+      "o3-mini-high": {
+        "input_tokens": 176,
+        "output_tokens": 2594,
+        "input_cost": 8.8e-05,
+        "output_cost": 0.003891,
+        "total_cost": 0.003979,
+        "duration": 20.196856021881104
+      },
+      "Claude-3.7-Sonnet-thinking": {
+        "input_tokens": 223,
+        "output_tokens": 1967,
+        "input_cost": 0.0001115,
+        "output_cost": 0.0029505,
+        "total_cost": 0.003062,
+        "duration": 32.531193017959595
+      },
+      "DeepSeek-Distill-Qwen-32b": {
+        "input_tokens": 179,
+        "output_tokens": 1721,
+        "input_cost": 8.95e-05,
+        "output_cost": 0.0025815,
+        "total_cost": 0.002671,
+        "duration": 67.62710309028625
+      },
+      "DeepSeek-R1-Full": {
+        "input_tokens": 177,
+        "output_tokens": 3276,
+        "input_cost": 8.85e-05,
+        "output_cost": 0.004914,
+        "total_cost": 0.0050025,
+        "duration": 101.14017367362976
+      }
+    },
+    "grading_costs": {
+      "DeepSeek-Distill-Qwen-32b": {
+        "DeepSeek-R1-Full": {
+          "input_tokens": 1247,
+          "output_tokens": 5,
+          "input_cost": 0.0006235,
+          "output_cost": 7.5e-06,
+          "total_cost": 0.000631,
+          "duration": 0.8845062255859375
+        },
+        "o3-mini-high": {
+          "input_tokens": 1314,
+          "output_tokens": 5,
+          "input_cost": 0.000657,
+          "output_cost": 7.5e-06,
+          "total_cost": 0.0006645,
+          "duration": 0.9299099445343018
+        },
+        "GPT-4o": {
+          "input_tokens": 984,
+          "output_tokens": 389,
+          "input_cost": 0.000492,
+          "output_cost": 0.0005835,
+          "total_cost": 0.0010755,
+          "duration": 12.129658222198486
+        },
+        "o1": {
+          "input_tokens": 1357,
+          "output_tokens": 539,
+          "input_cost": 0.0006785,
+          "output_cost": 0.0008085000000000001,
+          "total_cost": 0.001487,
+          "duration": 19.02953028678894
+        },
+        "Claude-3.7-Sonnet-thinking": {
+          "input_tokens": 1109,
+          "output_tokens": 786,
+          "input_cost": 0.0005545,
+          "output_cost": 0.0011790000000000001,
+          "total_cost": 0.0017335000000000002,
+          "duration": 26.31323504447937
+        }
+      },
+      "GPT-4o": {
+        "o3-mini-high": {
+          "input_tokens": 1292,
+          "output_tokens": 316,
+          "input_cost": 0.000646,
+          "output_cost": 0.00047400000000000003,
+          "total_cost": 0.00112,
+          "duration": 7.892960071563721
+        },
+        "o1": {
+          "input_tokens": 1359,
+          "output_tokens": 339,
+          "input_cost": 0.0006795,
+          "output_cost": 0.0005085000000000001,
+          "total_cost": 0.001188,
+          "duration": 8.279813051223755
+        },
+        "DeepSeek-Distill-Qwen-32b": {
+          "input_tokens": 933,
+          "output_tokens": 368,
+          "input_cost": 0.0004665,
+          "output_cost": 0.000552,
+          "total_cost": 0.0010184999999999999,
+          "duration": 9.273816108703613
+        },
+        "Claude-3.7-Sonnet-thinking": {
+          "input_tokens": 1097,
+          "output_tokens": 432,
+          "input_cost": 0.0005485,
+          "output_cost": 0.000648,
+          "total_cost": 0.0011965,
+          "duration": 10.2426118850708
+        },
+        "DeepSeek-R1-Full": {
+          "input_tokens": 1272,
+          "output_tokens": 458,
+          "input_cost": 0.0006360000000000001,
+          "output_cost": 0.000687,
+          "total_cost": 0.001323,
+          "duration": 10.84129786491394
+        }
+      },
+      "o1": {
+        "GPT-4o": {
+          "input_tokens": 995,
+          "output_tokens": 851,
+          "input_cost": 0.0004975,
+          "output_cost": 0.0012765,
+          "total_cost": 0.001774,
+          "duration": 9.933557987213135
+        },
+        "o3-mini-high": {
+          "input_tokens": 1291,
+          "output_tokens": 1060,
+          "input_cost": 0.0006455,
+          "output_cost": 0.00159,
+          "total_cost": 0.0022355,
+          "duration": 11.59228229522705
+        },
+        "Claude-3.7-Sonnet-thinking": {
+          "input_tokens": 1096,
+          "output_tokens": 1520,
+          "input_cost": 0.0005480000000000001,
+          "output_cost": 0.00228,
+          "total_cost": 0.002828,
+          "duration": 15.159723997116089
+        },
+        "DeepSeek-R1-Full": {
+          "input_tokens": 1271,
+          "output_tokens": 756,
+          "input_cost": 0.0006355,
+          "output_cost": 0.001134,
+          "total_cost": 0.0017695,
+          "duration": 8.555831909179688
+        },
+        "DeepSeek-Distill-Qwen-32b": {
+          "input_tokens": 932,
+          "output_tokens": 1485,
+          "input_cost": 0.00046600000000000005,
+          "output_cost": 0.0022275000000000003,
+          "total_cost": 0.0026935000000000006,
+          "duration": 14.200196027755737
+        }
+      },
+      "Claude-3.7-Sonnet-thinking": {
+        "GPT-4o": {
+          "input_tokens": 1166,
+          "output_tokens": 1567,
+          "input_cost": 0.000583,
+          "output_cost": 0.0023505,
+          "total_cost": 0.0029335000000000003,
+          "duration": 29.445502042770386
+        },
+        "o1": {
+          "input_tokens": 1613,
+          "output_tokens": 1808,
+          "input_cost": 0.0008065,
+          "output_cost": 0.002712,
+          "total_cost": 0.0035185,
+          "duration": 31.827685117721558
+        },
+        "DeepSeek-Distill-Qwen-32b": {
+          "input_tokens": 1078,
+          "output_tokens": 1455,
+          "input_cost": 0.0005390000000000001,
+          "output_cost": 0.0021825,
+          "total_cost": 0.0027215,
+          "duration": 24.456624746322632
+        },
+        "o3-mini-high": {
+          "input_tokens": 1495,
+          "output_tokens": 1449,
+          "input_cost": 0.0007475000000000001,
+          "output_cost": 0.0021735,
+          "total_cost": 0.002921,
+          "duration": 26.617682933807373
+        },
+        "DeepSeek-R1-Full": {
+          "input_tokens": 1502,
+          "output_tokens": 1778,
+          "input_cost": 0.000751,
+          "output_cost": 0.002667,
+          "total_cost": 0.003418,
+          "duration": 30.71597170829773
+        }
+      },
+      "o3-mini-high": {
+        "GPT-4o": {
+          "input_tokens": 995,
+          "output_tokens": 2205,
+          "input_cost": 0.0004975,
+          "output_cost": 0.0033075,
+          "total_cost": 0.0038050000000000002,
+          "duration": 16.098113775253296
+        },
+        "DeepSeek-Distill-Qwen-32b": {
+          "input_tokens": 932,
+          "output_tokens": 2058,
+          "input_cost": 0.00046600000000000005,
+          "output_cost": 0.003087,
+          "total_cost": 0.0035529999999999997,
+          "duration": 14.88360595703125
+        },
+        "o1": {
+          "input_tokens": 1358,
+          "output_tokens": 2553,
+          "input_cost": 0.000679,
+          "output_cost": 0.0038295,
+          "total_cost": 0.0045085,
+          "duration": 22.600754976272583
+        },
+        "Claude-3.7-Sonnet-thinking": {
+          "input_tokens": 1096,
+          "output_tokens": 2753,
+          "input_cost": 0.0005480000000000001,
+          "output_cost": 0.0041295,
+          "total_cost": 0.0046775,
+          "duration": 42.57104420661926
+        },
+        "DeepSeek-R1-Full": {
+          "input_tokens": 1271,
+          "output_tokens": 3069,
+          "input_cost": 0.0006355,
+          "output_cost": 0.0046035,
+          "total_cost": 0.005239,
+          "duration": 52.72314381599426
+        }
+      },
+      "DeepSeek-R1-Full": {
+        "o1": {
+          "input_tokens": 1356,
+          "output_tokens": 852,
+          "input_cost": 0.0006780000000000001,
+          "output_cost": 0.001278,
+          "total_cost": 0.0019560000000000003,
+          "duration": 79.80793190002441
+        },
+        "DeepSeek-Distill-Qwen-32b": {
+          "input_tokens": 913,
+          "output_tokens": 843,
+          "input_cost": 0.00045650000000000004,
+          "output_cost": 0.0012645,
+          "total_cost": 0.001721,
+          "duration": 79.43694114685059
+        },
+        "GPT-4o": {
+          "input_tokens": 962,
+          "output_tokens": 1057,
+          "input_cost": 0.000481,
+          "output_cost": 0.0015854999999999999,
+          "total_cost": 0.0020664999999999998,
+          "duration": 98.60433268547058
+        },
+        "o3-mini-high": {
+          "input_tokens": 1307,
+          "output_tokens": 1307,
+          "input_cost": 0.0006535,
+          "output_cost": 0.0019605,
+          "total_cost": 0.002614,
+          "duration": 218.96071982383728
+        },
+        "Claude-3.7-Sonnet-thinking": {
+          "input_tokens": 1093,
+          "output_tokens": 1338,
+          "input_cost": 0.0005465,
+          "output_cost": 0.002007,
+          "total_cost": 0.0025535,
+          "duration": 26.97554898262024
+        }
+      }
+    }
+  },
+  "run_timestamp": "2025-02-26 20:52:31"
+}

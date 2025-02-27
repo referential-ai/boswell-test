@@ -1,0 +1,10 @@
+Model                        | Grade | Score | Grading Bias         |
+----------------------------+-------+-------+----------------------+
+o1                           |  A-   |  90   | Neutral              |
+DeepSeek-Distill-Qwen-32b    |  B+   |  87   | Strict (-1 grade)    |
+o3-mini-high                 |  A-   |  90   | Neutral              |
+GPT-4o                       |  A-   |  90   | Neutral              |
+Claude-3.7-Sonnet-thinking   |  B+   |  87   | Strict (-1 grade)    |
+DeepSeek-R1-Full             |  A-   |  90   | Neutral              |
+----------------------------+-------+-------+----------------------+
+OVERALL                      |  A-   |  90   | Baseline             |

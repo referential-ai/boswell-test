@@ -1,0 +1,8 @@
+| Model | o1 | GPT-4o | o3-mini-high | Claude-3.7-Sonnet-thinking | DeepSeek-Distill-Qwen-32b | DeepSeek-R1-Full | Median Grade | Percentage |
+|------|---|---|---|---|---|---|-------------|-----------|
+| o1 | --- | A (93) | A (93) | A (93) | A (93) | A (93) | A | 93 |
+| GPT-4o | A (93) | --- | A (93) | A (93) | A (93) | A (93) | A | 93 |
+| o3-mini-high | A+ (100) | A+ (100) | --- | A (93) | A (93) | N/A (0) | A | 93 |
+| Claude-3.7-Sonnet-thinking | A (93) | A (93) | A (93) | --- | A+ (100) | A (93) | A | 93 |
+| DeepSeek-Distill-Qwen-32b | A+ (100) | A (93) | A+ (100) | A (93) | --- | A+ (100) | A+ | 100 |
+| DeepSeek-R1-Full | A+ (100) | A+ (100) | A (93) | A (93) | A (93) | --- | A | 93 |

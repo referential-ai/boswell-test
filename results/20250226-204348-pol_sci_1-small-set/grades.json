@@ -1,0 +1,893 @@
+{
+  "domain": {
+    "name": "Political Science - Level 1 AI Policy Analysis",
+    "description": "Level 1 evaluation of AI policy analysis capabilities."
+  },
+  "grades": {
+    "GPT-4o": {
+      "Claude-3.7-Sonnet-thinking": {
+        "feedback": "**Feedback:**\n\n1) **Depth of Analysis:**\n\nThe essay offers a detailed overview of AI governance across various regions. It highlights the distinctive approaches taken by the United States, European Union, China, and the United Kingdom, with a nod to other countries like Canada, Japan, and Singapore. There is a solid balance in examining both strengths and weaknesses for each region. However, the analysis could delve deeper into why certain weaknesses persist and provide more examples of how countries are addressing them. Furthermore, the essay could explore potential cross-border collaborations or conflicts in AI governance.\n\n2) **Clarity and Structure:**\n\nThe essay is well-organized, with clear sections and headings that guide the reader through the different regions and themes being discussed. Each section follows a logical progression from strengths to weaknesses. The \"Common Challenges\" and \"Emerging Trends\" sections effectively broaden the scope and place individual approaches within a global context. However, some sections could benefit from more transitional sentences to ensure flow between distinct ideas, especially when moving from specific country analyses to broader thematic discussions.\n\n3) **Accuracy of Facts or References:**\n\nThe essay references factual developments with accuracy, such as the EU's AI Act and the U.S. Executive Order on AI. These references contribute credibility and depth. However, the essay could improve by providing more specific dates or examples of recent actions or case studies where possible. This would strengthen the discussion of emerging trends and challenges. Additionally, ensuring that the claims about the \"Brussels effect\" and public-private partnerships are backed with examples or studies would add further depth.\n\n4) **Overall Coherence:**\n\nThe essay maintains a coherent narrative, consistently comparing and contrasting different governance approaches and their implications. The conclusion offers a strong synthesis of the insights gained throughout the essay, advocating for a hybrid approach to AI governance. This conclusion ties back effectively to the introductory premise, providing a comprehensive view of global AI strategies.\n\nGrade: A-",
+        "grade": "A-",
+        "numeric_grade": 3.7,
+        "cost_info": {
+          "input_tokens": 812,
+          "output_tokens": 389,
+          "input_cost": 0.00040600000000000006,
+          "output_cost": 0.0005835,
+          "total_cost": 0.0009895000000000001,
+          "duration": 10.0936119556427
+        }
+      },
+      "o3-mini-high": {
+        "feedback": "1) **Depth of Analysis**:\nThe essay provides a well-rounded comparative analysis of different global approaches to AI regulation. It effectively highlights the strengths and weaknesses of each approach in Europe, the United States, China, and other regions like Singapore and Japan. However, the analysis could be deepened by providing more specific examples or case studies illustrating the outcomes of these policies, such as specific instances where policies have succeeded or failed. Additionally, mentioning potential future implications of these approaches on global AI development would further enrich the discussion.\n\n2) **Clarity and Structure**:\nThe structure of the essay is logical and coherent, with clear distinctions made between different regional approaches. Each paragraph focuses on one main point, which helps the reader follow the argument. Transitions between sections are smooth and keep the essay cohesive. Nonetheless, it might benefit from a stronger concluding paragraph that not only reiterates the main points but also suggests potential policy recommendations or insights derived from this comparative analysis.\n\n3) **Accuracy of Facts or References**:\nThe essay demonstrates a sound factual basis, discussing known AI policies such as the EU Artificial Intelligence Act and the U.S. regulatory landscape. It appropriately captures the essence of China's strategy and the hybrid models in Asia. However, referencing specific regulatory initiatives or providing citations from recent AI policy discussions would enhance the credibility and thoroughness of the factual references.\n\n4) **Overall Coherence**:\nOverall, the essay is coherent, with a clear thesis that different regions prioritize different aspects of AI regulation, balancing innovation and safety. The comparisons made are insightful, and the conclusions drawn are logically sound. However, an exploration of how these diverse approaches might impact global cooperation in AI policy and technology sharing might further solidify the coherence of the essay\u2019s argument.\n\n```\nGrade: A-\n```",
+        "grade": "A-",
+        "numeric_grade": 3.7,
+        "cost_info": {
+          "input_tokens": 1031,
+          "output_tokens": 357,
+          "input_cost": 0.0005155,
+          "output_cost": 0.0005355,
+          "total_cost": 0.0010509999999999999,
+          "duration": 10.169093132019043
+        }
+      },
+      "DeepSeek-Distill-Qwen-32b": {
+        "feedback": "1) **Depth of Analysis**: The essay provides a well-rounded examination of AI policies in the United States, European Union, China, and Japan, highlighting their strengths, weaknesses, and innovations. The analysis is adept at drawing out the key contrasts between nations (e.g., U.S. innovation vs. EU regulation). However, while the essay captures essential elements, the analysis could benefit from incorporating more specific examples or case studies to deepen the exploration of each country's approach and its impact.\n\n2) **Clarity and Structure**: The essay is clearly and logically structured, with sections divided by country and sub-sections for strengths, weaknesses, and innovations. This organization aids readability and comprehension. However, some sections could use more transitional phrases or sentences to smoothly connect ideas, particularly when moving between strengths, weaknesses, and innovations.\n\n3) **Accuracy of Facts or References**: The essay accurately references the major aspects of each region's AI policies, such as the U.S. National AI Initiative Act and the EU's Artificial Intelligence Act. The information appears correct concerning general policy directions and recent advancements in AI. However, the claim about China's \"\u5de8\u5927\" strides could be trimmed or translated to ensure consistency, as using the Chinese character might be distracting for English readers.\n\n4) **Overall Coherence**: Overall, the essay maintains a coherent narrative about balancing innovation with ethical governance of AI across major countries. It presents a clear argument about the necessity of balancing these concerns with collaboration for global AI challenges. The conclusion effectively synthesizes the preceding analysis, providing a concise summary and outlook.\n\n```\nGrade: A-\n```",
+        "grade": "A-",
+        "numeric_grade": 3.7,
+        "cost_info": {
+          "input_tokens": 1150,
+          "output_tokens": 324,
+          "input_cost": 0.000575,
+          "output_cost": 0.00048600000000000005,
+          "total_cost": 0.001061,
+          "duration": 10.27728796005249
+        }
+      },
+      "DeepSeek-R1-Full": {
+        "feedback": "**Feedback on the Essay:**\n\n1) **Depth of Analysis**: The essay provides a comprehensive overview of AI policies across multiple regions, highlighting the strengths and weaknesses of each approach. There is a good balance between discussing regulatory frameworks, innovation strategies, and ethical implications. The analysis of the EU, U.S., China, and smaller economies like Singapore and the UAE is well-developed, though it could benefit from deeper exploration of long-term impacts and potential future scenarios of these policies.\n\n2) **Clarity and Structure**: The essay is well-organized, clearly dividing its discussion into sections that focus on specific geographic areas. Each section flows logically into the next, maintaining coherence throughout. However, there are minor areas where transitions between points could be smoother, particularly when moving from one country to another.\n\n3) **Accuracy of Facts or References**: The essay provides relevant and up-to-date information, with specific references to pertinent legislation and initiatives, like the EU's AI Act, the U.S. Executive Order on AI, and China's Next-Generation AI Development Plan. There is a factual error in referring to the U.S. as \"EU\" at one point, which is likely a typo. Furthermore, the United Nations\u2019 involvement and the G7 Hiroshima Process are correctly mentioned as avenues for potential international collaboration.\n\n4) **Overall Coherence**: The overall argument of the essay is coherent, linking the need to balance innovation with ethical considerations across different geopolitical contexts. There is a clear conclusion that highlights the importance of international coordination and the adaptability of policies. This reinforces the central thesis effectively and leaves the reader with a cogent summary of the diverse approaches to AI policy.\n\n**Suggestions for Improvement**: To enhance the depth of analysis, a more critical examination of how these policies impact citizens in the respective regions could be included. Additionally, exploring the potential for international conflicts due to differing AI policies and practices could add another layer to the discussion. Improving transition statements between sections would boost the essay\u2019s clarity.\n\n```\nGrade: A-\n```",
+        "grade": "A-",
+        "numeric_grade": 3.7,
+        "cost_info": {
+          "input_tokens": 1256,
+          "output_tokens": 409,
+          "input_cost": 0.000628,
+          "output_cost": 0.0006135,
+          "total_cost": 0.0012415,
+          "duration": 11.88280701637268
+        }
+      },
+      "o1": {
+        "feedback": "1) **Depth of Analysis:** The essay provides a nuanced overview of different countries' approaches to AI policy. It effectively illustrates the strengths and weaknesses of EU, U.S., China, Japan, Canada, and Singapore, tying these to broader cultural and strategic contexts. However, while mentioning public safety concerns in the conclusion, integrating these discussions more deeply within the individual sections on each region could offer a more balanced analysis and align the discussion with the essay's central theme of governance approaches.\n\n2) **Clarity and Structure:** The essay is well-structured with a clear introduction, well-defined sections discussing each region's policy, and a conclusion that summarizes the key points. Each paragraph transitions smoothly into the next, maintaining a coherent flow through the piece. Clear headings or subheadings could have further improved structure and readability, especially for an analytical essay covering multiple case studies.\n\n3) **Accuracy of Facts or References:** The essay accurately references recent policymaking efforts, notably the European Union's Artificial Intelligence Act, the U.S. decentralized approach, China's strategic top-down policies, Japan's Society 5.0 initiative, and efforts in Canada and Singapore. However, it could be improved by citing specific sources or reports that back up claims, especially in academic works where evidencing points is essential.\n\n4) **Overall Coherence:** The essay coherently interweaves different countries' perspectives, fostering a holistic understanding of global AI policies. However, the narrative could benefit from a more detailed exploration of how these diverse governance styles might interact on the international stage, considering transnational issues and collaborative efforts or conflicts that could arise.\n\nThe essay demonstrates an understanding of global AI strategies, balances the analysis of risks and opportunities, and achieves clarity and coherence in presenting its arguments. To push this paper from a B to an A grade, a deeper, source-backed exploration of public safety concerns in each region and a more extensive discussion on international collaboration in AI governance would be beneficial.\n\n```\nGrade: B\n```",
+        "grade": "B",
+        "numeric_grade": 3.0,
+        "cost_info": {
+          "input_tokens": 1173,
+          "output_tokens": 398,
+          "input_cost": 0.0005865,
+          "output_cost": 0.0005970000000000001,
+          "total_cost": 0.0011835,
+          "duration": 12.177358865737915
+        }
+      }
+    },
+    "Claude-3.7-Sonnet-thinking": {
+      "DeepSeek-Distill-Qwen-32b": {
+        "feedback": "# Feedback on AI Policy Essay\n\n## 1) Depth of Analysis\nThe essay provides a solid comparative framework for analyzing AI policies across the US, EU, China, and Japan. You effectively identify the key differences in approaches, such as the US's private-sector emphasis versus the EU's regulatory focus. However, the analysis remains somewhat surface-level. The essay would benefit from more specific examples of policy implementation, quantitative data on investments, or discussion of particular AI applications or incidents that have shaped policy decisions. For instance, when discussing US innovations, mentioning specific companies, research initiatives, or technological breakthroughs would strengthen your arguments.\n\n## 2) Clarity and Structure\nThe structure is a significant strength of this essay. Your consistent use of subheadings and parallel organization across countries creates a clear framework that makes comparisons easy to follow. The introduction and conclusion appropriately frame the discussion, though both could be stronger with more specific insights. The systematic approach to strengths, weaknesses, and innovations for each country works well, though transition statements between country sections would improve flow.\n\n## 3) Accuracy of Facts or References\nWhile the essay correctly identifies major policy initiatives like the US National AI Initiative Act and the EU's proposed AI Act, it lacks specific citations and references to support claims. I noticed a Chinese character (\u5de8\u5927) that appears accidentally inserted in the China section. The essay would be stronger with dates for when policies were implemented, specific funding amounts, and references to particular regulatory provisions. Some claims, like \"China's massive dataset,\" would benefit from more precise evidence.\n\n## 4) Overall Coherence\nThe essay maintains a consistent focus on AI policy approaches and successfully links back to the central theme of balancing innovation with regulation. The parallel structure helps maintain coherence across different country analyses. However, the \"innovations and public safety concerns\" sections sometimes blend together without clear distinction, and there's some inconsistency in depth between different country analyses.\n\nThe essay presents a good overview of different national approaches to AI policy with a logical structure, but would benefit from deeper analysis, more specific examples, and stronger evidence to support its claims.\n\n```\nGrade: B+\n```",
+        "grade": "B+",
+        "numeric_grade": 3.3,
+        "cost_info": {
+          "input_tokens": 1328,
+          "output_tokens": 1506,
+          "input_cost": 0.0006640000000000001,
+          "output_cost": 0.002259,
+          "total_cost": 0.0029230000000000003,
+          "duration": 29.892019033432007
+        }
+      },
+      "GPT-4o": {
+        "feedback": "# Feedback on \"Global AI Policies: Strengths and Weaknesses in Governance\"\n\n## 1) Depth of Analysis\nThe essay provides a competent comparative overview of different national approaches to AI governance. The strength/weakness framework effectively highlights key distinctions between regulatory philosophies. However, the analysis would benefit from more concrete examples of how these policies affect specific AI applications or industries. For instance, when discussing EU's \"bureaucratic complexity,\" specific cases of innovation hindrance would strengthen the argument. Similarly, the discussion of China's surveillance applications lacks specific examples that would illustrate the real-world implications of these policies.\n\n## 2) Clarity and Structure\nThe essay has excellent organization with a logical flow from introduction through country-specific analyses to conclusion. The consistent structure using strengths/weaknesses for each country facilitates comparison. The writing is clear, precise, and accessible for readers without specialized knowledge. The introduction effectively frames the topic, though a more specific thesis statement articulating what these comparisons reveal would strengthen it.\n\n## 3) Accuracy of Facts or References\nThe factual basis is generally sound with accurate identification of key policies like the EU's AI Act, US National AI Initiative Act, China's Next Generation AI Plan, and Japan's Society 5.0. However, the reference list is minimal, consisting only of policy documents without academic sources. More specific citations (including years and specific provisions) would strengthen credibility. The essay would benefit from incorporating scholarly analyses of these governance approaches.\n\n## 4) Overall Coherence\nThe essay maintains consistent focus on comparing governance approaches throughout. The parallel structure helps readers draw meaningful comparisons between different national strategies. The conclusion effectively synthesizes the main findings and suggests potential paths forward. The logical progression from describing policies to analyzing their implications creates a coherent narrative about the global AI governance landscape.\n\nGrade: B+",
+        "grade": "B+",
+        "numeric_grade": 3.3,
+        "cost_info": {
+          "input_tokens": 1305,
+          "output_tokens": 1484,
+          "input_cost": 0.0006525,
+          "output_cost": 0.002226,
+          "total_cost": 0.0028785,
+          "duration": 29.901371002197266
+        }
+      },
+      "o3-mini-high": {
+        "feedback": "# Feedback on AI Governance Essay\n\n## 1) Depth of analysis\nThe essay provides a thoughtful comparative analysis of AI governance approaches across different regions. You effectively identify the key differences between the European regulatory model, the American market-led approach, China's state-driven strategy, and hybrid models from countries like Singapore. Your analysis of the strengths and weaknesses of each approach shows good critical thinking.\n\nHowever, the analysis could be strengthened with more specific examples of how these policies are implemented in practice. For instance, when discussing the US approach, you mention the FTC and Department of Transportation, but concrete examples of their regulatory actions would add depth. Similarly, more detailed discussion of how China's approach has manifested in specific AI applications would strengthen your argument.\n\n## 2) Clarity and structure\nThe essay is well-structured with a clear introduction, systematic analysis of different regional approaches, and a thoughtful conclusion. Each paragraph has a clear focus and builds logically on previous points. The comparative framework is consistently applied throughout, making it easy to track the distinctions between different governance models.\n\nThe writing is precise and academic in tone, with effective transitions between sections. Your conclusion effectively synthesizes the key points without simply repeating earlier statements.\n\n## 3) Accuracy of facts or references\nThe factual information presented appears generally accurate, including references to the EU Artificial Intelligence Act, China's New Generation AI Development Plan, and Singapore's Model AI Governance Framework. The characterizations of different regional approaches align with current understanding of global AI governance.\n\nHowever, the essay would be strengthened by specific citations and references. While you mention key policies, there are no dates indicated for when these were implemented or proposed, and no citations to support claims about their effects. This limits the scholarly rigor of the analysis.\n\n## 4) Overall coherence\nThe essay maintains strong coherence throughout, with a consistent analytical framework examining the tension between innovation and regulation across different governance models. Your introduction effectively frames the comparative approach, and the conclusion successfully synthesizes the findings.\n\nYour analysis recognizes the complexity of AI governance, acknowledging that there is \"no one-size-fits-all solution\" while still providing clear distinctions between approaches. This demonstrates sophisticated understanding of the subject matter.\n\n```\nGrade: A-\n```\n\nThe essay demonstrates strong analytical thinking and a clear understanding of comparative AI governance approaches. With more specific examples and proper citations, it could easily achieve a higher grade.",
+        "grade": "A-",
+        "numeric_grade": 3.7,
+        "cost_info": {
+          "input_tokens": 1175,
+          "output_tokens": 1571,
+          "input_cost": 0.0005875,
+          "output_cost": 0.0023565,
+          "total_cost": 0.002944,
+          "duration": 30.80706477165222
+        }
+      },
+      "DeepSeek-R1-Full": {
+        "feedback": "# Feedback on \"AI Policy Across the Globe\" Essay\n\n## 1) Depth of Analysis\nThe essay provides a commendable comparative analysis of AI regulatory approaches across different regions. It effectively identifies key distinctions in policy philosophies (EU's regulatory emphasis, US's innovation-first stance, China's state-directed approach). The inclusion of smaller economies adds valuable perspective beyond the major powers.\n\nStrengths include the identification of specific policy mechanisms (risk-based categorization in the EU, voluntary standards in the US) and the analysis of cultural and political factors shaping these approaches. The essay also acknowledges tensions between innovation and regulation.\n\nAreas for improvement: The analysis could go deeper into how these policies affect AI development in practice rather than in theory. The economic implications receive limited treatment beyond general statements about innovation costs. Additionally, the discussion of smaller economies feels somewhat rushed compared to the major powers.\n\n## 2) Clarity and Structure\nThe essay is well-structured with a logical organization by region followed by thematic analysis. The use of bold text effectively highlights key concepts, and the consistent format (overview, strengths, limitations) for each regional section creates coherence.\n\nThe introduction clearly establishes the comparative framework, while the conclusion synthesizes findings effectively. However, some paragraphs attempt to cover too many points at once, and the transitions between sections could be smoother\u2014particularly between the regional analyses and the public safety section.\n\n## 3) Accuracy of Facts or References\nThe factual information is generally accurate and up-to-date, including references to:\n- The EU AI Act (correctly noting its March 2024 ratification)\n- The US Executive Order on AI (2023)\n- China's Next-Generation AI Development Plan\n- Singapore's updated AI Governance Framework\n\nI noted one error: \"European Union (EU), United States (EU)\" in the introduction paragraph\u2014the US is incorrectly labeled as EU. Additionally, some numerical claims (like the \u20ac1 billion for EU AI research) would benefit from citation.\n\n## 4) Overall Coherence\nThe essay maintains consistent focus on the central tension between fostering innovation and ensuring ethical AI use. It effectively connects policy approaches to underlying values and governance models.\n\nThe analysis of public safety concerns could be better integrated with the preceding sections, and there could be more explicit comparison between regions rather than primarily parallel analysis. Nevertheless, the essay builds toward a thoughtful conclusion that identifies emerging convergence while acknowledging persistent differences.\n\n```\nGrade: A-\n```\n\nThe essay demonstrates strong knowledge of global AI policy landscapes with good analytical depth and organization. The minor factual error, some surface-level analysis in places, and opportunities for smoother transitions prevent it from reaching A or A+ level.",
+        "grade": "A-",
+        "numeric_grade": 3.7,
+        "cost_info": {
+          "input_tokens": 1475,
+          "output_tokens": 1657,
+          "input_cost": 0.0007375000000000001,
+          "output_cost": 0.0024855000000000003,
+          "total_cost": 0.003223,
+          "duration": 32.442002058029175
+        }
+      },
+      "o1": {
+        "feedback": "# Feedback on AI Policy Essay\n\n## 1) Depth of Analysis\nThe essay provides a well-structured comparative analysis of AI governance approaches across several major jurisdictions. It successfully identifies key strengths and weaknesses for each region's approach. However, the analysis remains somewhat surface-level in places. While the essay correctly identifies frameworks like the EU's AI Act and China's Next Generation AI Development Plan, it would benefit from more specific examples of how these policies have affected actual AI development or deployment. The discussion could be enriched with concrete case studies demonstrating the real-world impacts of different regulatory philosophies.\n\n## 2) Clarity and Structure\nThe organizational structure is excellent. The essay follows a logical progression, with dedicated paragraphs for each jurisdiction followed by cross-cutting concerns and a synthesizing conclusion. The parallel treatment of different regions (introducing the approach, then discussing strengths and weaknesses) creates a consistent analytical framework that enhances readability. Transitions between sections are smooth, and the language is generally precise and appropriate for an academic analysis of policy differences.\n\n## 3) Accuracy of Facts or References\nThe factual content regarding major policy frameworks appears accurate - the EU's risk-based categorization approach, China's 2017 development plan, Japan's Society 5.0 concept, and Canada's research institutes (Vector, MILA, AMII) are all correctly identified. However, the essay would be significantly strengthened by including specific citations and more precise references. Some claims about regulatory effects or innovation outcomes are presented without supporting evidence, which weakens the scholarly rigor of the analysis.\n\n## 4) Overall Coherence\nThe essay maintains strong coherence throughout, effectively developing the central theme of balancing innovation with regulation and public safety. The conclusion successfully synthesizes the different approaches while reinforcing the main comparative insights. The essay skillfully avoids presenting any single approach as universally superior, instead highlighting how different governance models reflect varied cultural, economic, and political priorities.\n\nGrade: B+",
+        "grade": "B+",
+        "numeric_grade": 3.3,
+        "cost_info": {
+          "input_tokens": 1331,
+          "output_tokens": 1661,
+          "input_cost": 0.0006655,
+          "output_cost": 0.0024915000000000002,
+          "total_cost": 0.003157,
+          "duration": 32.62770700454712
+        }
+      }
+    },
+    "o1": {
+      "DeepSeek-Distill-Qwen-32b": {
+        "feedback": "1) Depth of Analysis:  \nThe essay provides a clear overview of key AI policy elements in the United States, European Union, China, and Japan. It does a good job highlighting the distinct features of each policy approach\u2014such as the U.S. focus on private-sector innovation, the EU\u2019s strong regulatory framework, China\u2019s state-led model, and Japan\u2019s societal emphasis. However, it could benefit from deeper exploration of the geopolitical implications of AI development, as well as a more nuanced discussion of how different cultures shape ethical standards. Including concrete examples of successful (or failed) policy implementations in each region could further strengthen the analysis.\n\n2) Clarity and Structure:  \nOverall, the essay is well-organized with clear headings and sub-headings. It logically progresses from strengths to weaknesses, followed by discussions of innovations and public safety concerns. The conclusion effectively summarizes the key points, though it could be strengthened by more explicit takeaways or policy recommendations. Expanding the argument around why certain strengths and weaknesses arise in specific nations would also enhance clarity.\n\n3) Accuracy of Facts or References:  \nThe discussion accurately references the 2020 National AI Initiative Act in the U.S. and the proposed EU Artificial Intelligence Act, and it correctly identifies China\u2019s rapid AI advancements and Japan\u2019s focus on robotics for an aging population. While these references are sound, the essay would be improved by mentioning the official names of relevant government agencies or policy documents, as well as providing brief statistics or studies to back up claims about AI advancements and public sentiment where possible.\n\n4) Overall Coherence:  \nThe essay maintains a consistent focus on the balance between innovation and regulation. Each country\u2019s section connects well to the central theme of governance, ethics, and the interplay of public and private interests in AI development. The concluding remarks successfully bring the four cases together to emphasize the necessity of collaboration and balanced regulation. The transitions could be slightly refined to show more direct comparisons (for example, how U.S. policy contrasts with EU policy in practical terms), but overall coherence is strong.\n\nGrade: A-",
+        "grade": "A-",
+        "numeric_grade": 3.7,
+        "cost_info": {
+          "input_tokens": 1149,
+          "output_tokens": 937,
+          "input_cost": 0.0005745,
+          "output_cost": 0.0014055,
+          "total_cost": 0.00198,
+          "duration": 9.865159273147583
+        }
+      },
+      "o3-mini-high": {
+        "feedback": "Depth of analysis:  \nThe essay demonstrates solid comparative insight, examining each region\u2019s regulatory strategy by highlighting both strengths and weaknesses. It effectively addresses multiple factors\u2014public safety, innovation, ethical considerations\u2014and shows an understanding of how different political environments shape AI policy. To add more depth, the essay could further elaborate on how specific legal frameworks or historical precedents influence lawmakers, and it might incorporate academic or industry sources to bolster its arguments.\n\nClarity and structure:  \nThe organization is concise and logical, guiding the reader from Europe to the United States, China, and finally other Asian models before offering an integrative conclusion. Each regional approach is introduced with clear topic sentences, and transitions between paragraphs are smooth. Adding subheadings or brief summaries after each section could further enhance clarity, helping readers strengthen their grasp of the comparative points.\n\nAccuracy of facts or references:  \nReferences to the EU Artificial Intelligence Act, China\u2019s New Generation AI Development Plan, and the decentralized nature of U.S. regulation are broadly accurate. The essay correctly notes the potential benefits and drawbacks inherent in these approaches. While the level of factual grounding is sufficient for an overview, providing additional details\u2014such as key provisions of these policies and official sources\u2014would reinforce the essay\u2019s credibility and depth.\n\nOverall coherence:  \nThe essay maintains a coherent argument throughout, emphasizing the interplay between innovation, public safety, ethical oversight, and regulatory flexibility. The concluding remarks tie each section together, underscoring the wider theme that there is no perfect regulatory model. This cohesive approach strengthens the overall impact, although referencing a few concrete examples or case studies would make the discussion even more persuasive.\n\nGrade: A-",
+        "grade": "A-",
+        "numeric_grade": 3.7,
+        "cost_info": {
+          "input_tokens": 1030,
+          "output_tokens": 982,
+          "input_cost": 0.000515,
+          "output_cost": 0.001473,
+          "total_cost": 0.001988,
+          "duration": 10.458314895629883
+        }
+      },
+      "Claude-3.7-Sonnet-thinking": {
+        "feedback": "Depth of Analysis:  \nYour essay presents a broadly informed comparative overview of AI governance across major jurisdictions. It effectively highlights the thematic distinctions\u2014market-led, rights-based, and state-led strategies\u2014and identifies key policy documents (e.g., the 2023 Executive Order in the U.S., the EU\u2019s AI Act, China\u2019s New Generation AI Development Plan). While the coverage is thorough at a broad level, you could enhance depth by discussing more specific mechanisms (e.g., how each regulatory framework tackles algorithmic bias) or by analyzing tangible outcomes in these regions.\n\nClarity and Structure:  \nThe essay is well-organized into clear sections, each addressing a key jurisdiction or set of approaches. Your use of headings and subheadings makes it easy to follow. The succinct bullet points under \u201cStrengths\u201d and \u201cWeaknesses\u201d provide a clear, at-a-glance perspective. In a longer piece, you might consider integrating these bullet points into more elaborate paragraphs, connecting strengths and weaknesses to real-world examples and policy outcomes for added clarity and depth.\n\nAccuracy of Facts or References:  \nThe references to specific policies and frameworks (e.g., GDPR, NIST\u2019s AI Risk Management Framework, the AI White Paper in the UK) are accurate and timely. You also mention relevant international examples like Canada\u2019s Montreal Declaration and Japan\u2019s Society 5.0. Overall, the factual references appear sound, though adding a few citation details (where applicable) would underscore the rigor of your analysis.\n\nOverall Coherence:  \nThe essay maintains a coherent thematic thread: a comparative analysis of different AI governance models. Your final section nicely summarizes the trade-offs of each approach\u2014balancing innovation versus protection of rights and safety\u2014and provides a forward-looking perspective on hybridizing these strategies. The concluding remarks logically flow from your findings and suggest a reasonable path forward.\n\nGrade: A",
+        "grade": "A",
+        "numeric_grade": 4.0,
+        "cost_info": {
+          "input_tokens": 811,
+          "output_tokens": 894,
+          "input_cost": 0.00040550000000000004,
+          "output_cost": 0.001341,
+          "total_cost": 0.0017465,
+          "duration": 9.437672853469849
+        }
+      },
+      "GPT-4o": {
+        "feedback": "Depth of Analysis:  \nThe essay demonstrates a well-rounded understanding of AI governance across multiple global regions. Each section clearly identifies core regulatory or strategic initiatives (e.g., EU\u2019s GDPR and proposed AI Act, US\u2019s National AI Initiative Act, China\u2019s Next Generation AI Development Plan, and Japan\u2019s Society 5.0). It effectively highlights the main motivations, strengths, and limitations behind these policies. However, further exploration of how these frameworks compare or intersect\u2014particularly in areas such as international competition or collaboration\u2014could deepen the analysis.\n\nClarity and Structure:  \nThe organizational structure is clear, with each region receiving its own dedicated section. Headings and subheadings guide the reader, and bullet points for strengths and weaknesses improve readability. The introduction and conclusion neatly frame the discussion, though a transitional summary between each regional section would help reinforce contrasts and themes. Overall, the writing is coherent and easy to follow.\n\nAccuracy of Facts or References:  \nReferences appear consistent with commonly known legislation and initiatives, such as the EU\u2019s GDPR and proposed AI Act, the US\u2019s National AI Initiative Act, China\u2019s AI Development Plan, and Japan\u2019s Society 5.0. The factual descriptions of these policies are generally accurate, reflecting their primary goals and regulatory approaches. If expanding the essay, adding brief citations or links to the original legislative texts within the body could strengthen factual grounding further.\n\nOverall Coherence:  \nThe essay maintains a coherent discussion around AI governance. Each section aligns with the main theme: outlining how various governments approach AI policy, what they prioritize, and where shortcomings might exist. The conclusion effectively ties these perspectives together, emphasizing the need for a balance between innovation, ethics, and public safety. The piece flows logically, and its consistent focus on strengths and weaknesses aids in comparative understanding.\n\nGrade: A-",
+        "grade": "A-",
+        "numeric_grade": 3.7,
+        "cost_info": {
+          "input_tokens": 1109,
+          "output_tokens": 1079,
+          "input_cost": 0.0005545,
+          "output_cost": 0.0016185,
+          "total_cost": 0.002173,
+          "duration": 11.30421495437622
+        }
+      },
+      "DeepSeek-R1-Full": {
+        "feedback": "1) Depth of Analysis:  \nYour essay offers a solid comparative overview of AI policies in major global regions and smaller economies. The discussion on regulatory philosophies\u2014ranging from the EU\u2019s rights-based approach to China\u2019s state-led model\u2014is generally well-developed. You highlight specific policy instruments (e.g., the EU AI Act, U.S. state-level regulations) and ethical concerns (bias, surveillance) to good effect. However, you might deepen the analysis by exploring more about how economic drivers (e.g., tech sector employment, venture capital flows) influence policy decisions. In addition, examining historical precedents or additional international bodies shaping AI norms (beyond the UN and G7) could bolster the essay\u2019s analytical depth.\n\n2) Clarity and Structure:  \nStructurally, the essay is well-organized, with clear subheadings that distinguish the policies of each region. The introductions to each section provide good signposts, and the conclusion nicely ties together the notion of a global convergence in AI regulation. One minor point is the repeated abbreviation \u201cEU\u201d instead of \u201cUS\u201d in the first paragraph (\u201cUnited States (EU)\u201d)\u2014a small typographical slip. Otherwise, the paper flows logically from one subsection to the next.\n\n3) Accuracy of Facts or References:  \nMost references align with known policy initiatives. The EU AI Act is indeed under development, although noting it as \u201cratified in March 2024\u201d treats a future projection as certainty\u2014clarifying the timeline or sourcing would help. References to Chinese regulations on generative AI and U.S. executive orders on AI are broadly correct, though specific budget figures (e.g., \u20ac1 billion from the EU, $1.7 billion from the U.S.) would benefit from precise citations. The mention of \u201cThe New York Times v. OpenAI\u201d captures existing legal tensions around copyright and AI, though the actual details of ongoing or concluded cases could be more specifically cited.\n\n4) Overall Coherence:  \nThe essay stays on-topic and maintains coherence by linking each region\u2019s regulatory approach to overarching themes of innovation, ethics, and safety. The comparisons underscore how various political cultures define \u201cpublic safety\u201d and \u201cethical AI\u201d differently, giving readers a sense of the global landscape. The conclusion persuasively reiterates that international collaboration remains key despite divergent approaches.\n\nGrade: A-",
+        "grade": "A-",
+        "numeric_grade": 3.7,
+        "cost_info": {
+          "input_tokens": 1255,
+          "output_tokens": 1573,
+          "input_cost": 0.0006274999999999999,
+          "output_cost": 0.0023595,
+          "total_cost": 0.002987,
+          "duration": 16.12042236328125
+        }
+      }
+    },
+    "DeepSeek-Distill-Qwen-32b": {
+      "GPT-4o": {
+        "feedback": "Grade: B+\nGrade: B+",
+        "grade": "B+",
+        "numeric_grade": 3.3,
+        "cost_info": {
+          "input_tokens": 1124,
+          "output_tokens": 12,
+          "input_cost": 0.0005620000000000001,
+          "output_cost": 1.8e-05,
+          "total_cost": 0.0005800000000000001,
+          "duration": 0.993628978729248
+        }
+      },
+      "Claude-3.7-Sonnet-thinking": {
+        "feedback": "Grade: A-",
+        "grade": "A-",
+        "numeric_grade": 3.7,
+        "cost_info": {
+          "input_tokens": 812,
+          "output_tokens": 7,
+          "input_cost": 0.00040600000000000006,
+          "output_cost": 1.0500000000000001e-05,
+          "total_cost": 0.00041650000000000004,
+          "duration": 0.8568310737609863
+        }
+      },
+      "o3-mini-high": {
+        "feedback": "**Grade: A-**",
+        "grade": "A-",
+        "numeric_grade": 3.7,
+        "cost_info": {
+          "input_tokens": 1031,
+          "output_tokens": 330,
+          "input_cost": 0.0005155,
+          "output_cost": 0.000495,
+          "total_cost": 0.0010105000000000001,
+          "duration": 7.793341159820557
+        }
+      },
+      "o1": {
+        "feedback": "Grade: B+",
+        "grade": "B+",
+        "numeric_grade": 3.3,
+        "cost_info": {
+          "input_tokens": 1178,
+          "output_tokens": 373,
+          "input_cost": 0.000589,
+          "output_cost": 0.0005595,
+          "total_cost": 0.0011485,
+          "duration": 15.531282901763916
+        }
+      },
+      "DeepSeek-R1-Full": {
+        "feedback": "**Feedback:**\n\n1. **Depth of Analysis**: The essay provides a comprehensive overview of AI policy across different regions, offering insights into the regulatory frameworks, economic drivers, and ethical considerations in each case. The analysis of the EU\u2019s AI Act, the U.S.'s innovation-focused approach, and China\u2019s state-driven strategy is thorough and nuanced. However, the discussion of smaller economies (Singapore, UAE, UK) is somewhat brief, with less analysis of the specific challenges or opportunities they face. More detailed exploration of the unique contexts and innovations in these smaller economies would enhance the depth of the essay.\n\n2. **Clarity and Structure**: The essay is well-organized, with clear sections dedicated to each region and thematic areas such as public safety concerns. The use of subheadings and consistent formatting aids in readability. However, the conclusion feels a bit rushed, with less emphasis on synthesizing the key findings and implications of the analysis. Additionally, the title of the essay repeats \"United States (EU),\" which appears to be a typo and could confuse readers initially. A more precise title would improve clarity.\n\n3. **Accuracy of Facts or References**: The essay cites specific policies, regulations, and initiatives, such as the EU\u2019s AI Act, the U.S. Executive Order on AI, and China\u2019s Next-Generation AI Development Plan, which adds credibility. However, some details could benefit from more precise sourcing or context. For example, the discussions of the UAE\u2019s Falcon AI model and Singapore\u2019s AI Governance Framework could include more specifics to substantiate claims. Additionally, the mention of \"The New York Times v. OpenAI\" would benefit from a brief explanation of the case\u2019s significance.\n\n4. **Overall Coherence**: The essay maintains a logical flow, with each section building on the previous one to explore the different AI policy approaches. However, there are occasional redundancies, particularly in discussing the tension between innovation and regulation, which could be streamlined for greater conciseness. The conclusion also could better connect the global coordination initiatives mentioned (e.g., UN\u2019s AI Advisory Body, G7 Hiroshima Process) to the challenges outlined earlier in the essay.\n\n**Grade: B+**",
+        "grade": "B+",
+        "numeric_grade": 3.3,
+        "cost_info": {
+          "input_tokens": 1281,
+          "output_tokens": 722,
+          "input_cost": 0.0006405,
+          "output_cost": 0.001083,
+          "total_cost": 0.0017235,
+          "duration": 15.998223781585693
+        }
+      }
+    },
+    "o3-mini-high": {
+      "o1": {
+        "feedback": "Depth of Analysis:\nYour essay offers a clear comparative overview of AI policies across various jurisdictions, identifying key strengths and challenges in each approach. While you effectively highlight how regulation, innovation, and public safety concerns interact differently in the EU, the U.S., China, Japan, Canada, and Singapore, the analysis could be deepened by engaging with more theoretical or conceptual frameworks. Exploring the underlying political philosophies or historical factors that have shaped these diverse responses would provide a richer analysis beyond the descriptive level.\n\nClarity and Structure:\nThe essay is well-organized, with a logical progression from an introduction to region-specific discussions, culminating in a concise conclusion. Each section is clearly delineated, making it easy for the reader to follow your comparisons. To further enhance clarity, consider adding smoother transitions between sections. This would help emphasize the contrasts and similarities between the different policy approaches even more explicitly.\n\nAccuracy of Facts or References:\nYour discussion of the EU\u2019s Artificial Intelligence Act, the decentralized U.S. approach, China\u2019s top-down strategy, and Japan\u2019s \u201cSociety 5.0\u201d is accurate and reflects a sound understanding of current AI policy debates. The inclusion of specific examples, such as the Canadian research institutes and Singapore\u2019s Model AI Governance Framework, adds credibility. To solidify your analysis, you might consider incorporating citations or references to key documents and studies, which would bolster the factual grounding of your essay.\n\nOverall Coherence:\nOverall, the essay maintains a strong internal consistency. The way you frame the trade-offs between innovation and regulation connects the different policy cases effectively. The conclusion neatly ties together the main points, echoing the central theme of striking a balance between progress and protection. Integrating additional critiques or contrasting perspectives within each section could further strengthen your argumentative thread.\n\nGrade: A-",
+        "grade": "A-",
+        "numeric_grade": 3.7,
+        "cost_info": {
+          "input_tokens": 1172,
+          "output_tokens": 2351,
+          "input_cost": 0.0005859999999999999,
+          "output_cost": 0.0035265,
+          "total_cost": 0.0041125,
+          "duration": 23.916595935821533
+        }
+      },
+      "Claude-3.7-Sonnet-thinking": {
+        "feedback": "Below is a detailed evaluation of your essay:\n\n1) Depth of Analysis  \n\u2022 You provide a balanced overview by highlighting both strengths and weaknesses for multiple jurisdictions.  \n\u2022 The discussion of common challenges and emerging trends shows an awareness of the broader issues in AI governance.  \n\u2022 However, while you list many aspects succinctly, some sections could be deepened with more critical analysis or examples to explain why certain policies have produced specific outcomes in each jurisdiction.\n\n2) Clarity and Structure  \n\u2022 The essay is well organized, with clear headings for each section and jurisdiction, which makes it easy to follow.  \n\u2022 Each section neatly outlines the strengths and weaknesses of the governance approach, contributing to an overall logical flow.  \n\u2022 You might consider stronger transitional elements between the sections and a more developed conclusion that synthesizes the comparative perspectives in a more compelling way.\n\n3) Accuracy of Facts or References  \n\u2022 Your references to key initiatives\u2014such as the US Executive Order on AI, the EU AI Act, and China\u2019s AI Development Plan\u2014are accurate and relevant.  \n\u2022 The inclusion of additional approaches (Canada, Japan, Singapore) enhances the global perspective.  \n\u2022 The essay would benefit from citing specific studies, reports, or examples that substantiate the assertions, which would further solidify the factual accuracy and credibility.\n\n4) Overall Coherence  \n\u2022 The essay is coherent, with all parts contributing to a comprehensive discussion of global AI governance.  \n\u2022 The balance between describing individual national approaches and identifying common challenges is effective.  \n\u2022 To increase overall coherence, you might consider integrating more comparative commentary between cases to highlight deeper insights into why different approaches succeed or struggle in balancing innovation with regulation.\n\nGrade: A-",
+        "grade": "A-",
+        "numeric_grade": 3.7,
+        "cost_info": {
+          "input_tokens": 811,
+          "output_tokens": 862,
+          "input_cost": 0.00040550000000000004,
+          "output_cost": 0.001293,
+          "total_cost": 0.0016985000000000001,
+          "duration": 31.511696100234985
+        }
+      },
+      "GPT-4o": {
+        "feedback": "Below is my detailed feedback:\n\n1) Depth of Analysis:\n\u2003\u2022 The essay effectively identifies key strengths and weaknesses across several major jurisdictions, providing a solid overview of the regulatory approaches in the EU, US, China, and Japan.\n\u2003\u2022 It outlines fundamental issues (such as ethical standards, innovation barriers, privacy, and surveillance concerns) but could delve deeper by discussing, for example, empirical impacts or case studies illustrating how these policies have played out in practice.\n\u2003\u2022 Adding nuance about international implications or comparisons with other emerging models (like those in developing countries or international bodies) would have further enriched the analysis.\n\n2) Clarity and Structure:\n\u2003\u2022 The essay is well organized, with a clear introduction, dedicated sections for each region, and a concise conclusion.\n\u2003\u2022 The use of headings and bullet points for strengths and weaknesses makes it easy to follow.\n\u2003\u2022 Transitions between sections are overall smooth, though a few additional connecting sentences could help strengthen the narrative flow.\n\n3) Accuracy of Facts or References:\n\u2003\u2022 The essay accurately references key regulatory frameworks, including the GDPR, the proposed EU Artificial Intelligence Act, the U.S. National AI Initiative Act of 2020, China\u2019s Next Generation AI Development Plan, and Japan\u2019s Society 5.0 initiative.\n\u2003\u2022 The factual content is reliable; however, integrating more diverse sources or mentioning recent developments could reinforce the credibility and up-to-dateness of the analysis.\n\n4) Overall Coherence:\n\u2003\u2022 The central argument\u2014that each government\u2019s approach embodies a distinct balance of innovation and ethical considerations\u2014is well maintained throughout the essay.\n\u2003\u2022 The conclusion effectively synthesizes the discussion from the individual sections, underscoring the need for balance and international cooperation.\n\u2003\u2022 Overall, the essay reads as a coherent and logically structured piece that provides a balanced view of global AI policies.\n\nGrade: A-",
+        "grade": "A-",
+        "numeric_grade": 3.7,
+        "cost_info": {
+          "input_tokens": 1109,
+          "output_tokens": 1662,
+          "input_cost": 0.0005545,
+          "output_cost": 0.002493,
+          "total_cost": 0.0030475,
+          "duration": 44.93664574623108
+        }
+      },
+      "DeepSeek-Distill-Qwen-32b": {
+        "feedback": "Below is the constructive feedback on the essay:\n\n1) Depth of Analysis:\n\u2003\u2022 The essay provides a broad yet clear overview of AI policies in the U.S., EU, China, and Japan, effectively outlining key strengths, weaknesses, and emerging issues.\n\u2003\u2022 While the discussion is well-organized, the analysis could benefit from deeper engagement with theoretical frameworks or more detailed exploration of the underlying trade-offs between innovation and regulation. For instance, the essay might elaborate on how differing political ideologies shape these policy choices or incorporate more specific case studies and empirical evidence.\n\n2) Clarity and Structure:\n\u2003\u2022 The structure is a strong point: each country is treated as its own section with subheadings for strengths, weaknesses, and innovations/public safety concerns, which makes the content easy to follow.\n\u2003\u2022 The overall clarity is high, although there is a minor language hiccup (the insertion of a non-English term \"\u5de8\u5927\" in the China section) that should be corrected for consistency.\n\n3) Accuracy of Facts or References:\n\u2003\u2022 The essay presents factual points that are generally accurate and reflect current discussions surrounding AI policy\u2014such as the U.S. National AI Initiative Act, the proposed EU AI Act, and the ongoing debates over ethical concerns in China.\n\u2003\u2022 However, the analysis would be further strengthened by citing specific sources or including representative examples and data to back up the claims, which would enhance the credibility of the factual statements.\n\n4) Overall Coherence:\n\u2003\u2022 The essay is coherent and maintains a balanced discussion by comparing diverse national strategies, culminating in a summary that encapsulates the central tension between fostering innovation and ensuring public safety.\n\u2003\u2022 The conclusion effectively ties the sections together, but it could be expanded to propose potential pathways for cross-border collaboration or policy convergence, thereby providing a forward-looking perspective.\n\nOverall, the essay is well-structured and clearly articulated, with scope for deeper analytical insights and enriched substantiation through additional evidence or references.\n\nGrade: A-",
+        "grade": "A-",
+        "numeric_grade": 3.7,
+        "cost_info": {
+          "input_tokens": 1149,
+          "output_tokens": 1815,
+          "input_cost": 0.0005745,
+          "output_cost": 0.0027225,
+          "total_cost": 0.003297,
+          "duration": 46.50287890434265
+        }
+      },
+      "DeepSeek-R1-Full": {
+        "feedback": "Below is my detailed feedback:\n\n1. Depth of Analysis:  \n\u2003\u2022 The essay does a strong job of breaking down the complex issue of AI regulation around the world, offering nuanced discussions of each region\u2019s approach.  \n\u2003\u2022 It covers various dimensions\u2014from ethical concerns and public safety to economic implications\u2014with specific examples like the EU\u2019s categorization scheme and China\u2019s state-directed policy.  \n\u2003\u2022 One suggestion for improvement is to delve even more into the long-term impacts of these policies and consider potential future shifts or enforcement challenges.\n\n2. Clarity and Structure:  \n\u2003\u2022 The clear headings and segmented sections (highlighting the EU, U.S., China, smaller economies, and public safety) contribute greatly to readability.  \n\u2003\u2022 Transitions between sections are generally smooth, though additional linking sentences could help integrate the comparisons more seamlessly.  \n\u2003\u2022 A minor point: in the introduction, the United States is mistakenly labeled as \u201c(EU)\u201d\u2014correcting this error would improve clarity.\n\n3. Accuracy of Facts or References:  \n\u2003\u2022 The essay supports its analysis with concrete examples (e.g., specific funding numbers, legislative measures, and policy initiatives) that lend credibility to its arguments.  \n\u2003\u2022 However, some details, such as the exact timing of the AI Act ratification and case references, could benefit from clearer sourcing or slight qualification, as these areas are rapidly evolving.  \n\u2003\u2022 Correcting the misidentification of the United States in the introduction is essential for maintaining factual accuracy.\n\n4. Overall Coherence:  \n\u2003\u2022 The essay maintains a coherent narrative throughout by consistently connecting each region\u2019s policies back to the central theme of balancing innovation with ethical and safety concerns.  \n\u2003\u2022 The conclusion effectively synthesizes the discussion, though a brief recap of the distinct regional approaches might further reinforce the overall message.\n\nGrade: A-",
+        "grade": "A-",
+        "numeric_grade": 3.7,
+        "cost_info": {
+          "input_tokens": 1255,
+          "output_tokens": 2300,
+          "input_cost": 0.0006274999999999999,
+          "output_cost": 0.00345,
+          "total_cost": 0.0040774999999999995,
+          "duration": 45.566936016082764
+        }
+      }
+    },
+    "DeepSeek-R1-Full": {
+      "DeepSeek-Distill-Qwen-32b": {
+        "feedback": "**Feedback:**\n\n**1. Depth of Analysis**:  \nThe essay provides a solid comparative analysis of AI policies, identifying key strengths, weaknesses, and public safety concerns for each country. However, the depth could be enhanced by incorporating specific examples (e.g., citing specific U.S. incidents of algorithmic bias or detailing China\u2019s \u201cSocial Credit System\u201d as an ethical concern) and data (e.g., compliance cost figures for EU SMEs or R&D expenditure comparisons). The section on Japan\u2019s risk-averse approach could benefit from concrete instances where caution limited innovation. Overall, the analysis is thorough but occasionally leans on generalizations.  \n\n**2. Clarity and Structure**:  \nThe structure is logically organized, with clear subheadings and a consistent format for each country. Transitions between sections are functional, though smoother linkages (e.g., connecting U.S. regulatory gaps to the EU\u2019s contrasting approach) would strengthen coherence. The language is accessible, but minor redundancies (e.g., repeating \u201cethics\u201d in EU and China sections without differentiation) could be streamlined.  \n\n**3. Accuracy of Facts or References**:  \nFactual claims (e.g., the U.S. National AI Initiative Act, EU AI Act proposal, and Japan\u2019s focus on aging populations) are accurate and up-to-date. However, specific citations (e.g., linking China\u2019s surveillance systems to documented cases or quoting the AI Act\u2019s risk categorizations) would bolster credibility. The Chinese term \u201c\u5de8\u5927\u201d in the China section appears unintentional and should be revised.  \n\n**4. Overall Coherence**:  \nThe essay effectively maintains focus on its thesis of balancing innovation and governance. The conclusion synthesizes key points cohesively, though it could better integrate lessons from country-specific comparisons (e.g., how the EU\u2019s regulatory rigor contrasts with U.S. fragmentation). A more nuanced exploration of shared challenges (e.g., global competitiveness vs. ethics) would elevate the central argument.  \n\n**Grade**: A-",
+        "grade": "A-",
+        "numeric_grade": 3.7,
+        "cost_info": {
+          "input_tokens": 1132,
+          "output_tokens": 1019,
+          "input_cost": 0.000566,
+          "output_cost": 0.0015285,
+          "total_cost": 0.0020945,
+          "duration": 19.718777894973755
+        }
+      },
+      "o1": {
+        "feedback": "**Feedback:**\n\n**1. Depth of Analysis:**  \nThe essay demonstrates a broad understanding of global AI policy approaches, effectively comparing key regions (EU, U.S., China, Japan, Canada, Singapore) and their distinct governance philosophies. Strengths and weaknesses are identified for each case, such as the EU\u2019s regulatory rigor versus innovation trade-offs, and China\u2019s centralized efficiency versus privacy concerns. However, the analysis occasionally lacks specificity. For example, the U.S. section could benefit from concrete examples of federal guidelines (e.g., the AI Bill of Rights) or state-level initiatives to ground claims about decentralization. Similarly, deeper exploration of how Japan\u2019s \u201cSociety 5.0\u201d addresses demographic challenges would enhance nuance. While the public safety paragraph acknowledges shared challenges, integrating these concerns into regional case studies might strengthen thematic cohesion.\n\n**2. Clarity and Structure:**  \nThe essay is logically organized, with clear regional subsections and a coherent progression from introduction to conclusion. Transitions between regions, however, could be smoother (e.g., explicitly contrasting the EU\u2019s regulatory model with the U.S.\u2019s decentralized approach). Sentences are generally concise, though some are overly long (e.g., the U.S. paragraph\u2019s critique of profit motives and oversight). The conclusion effectively synthesizes key points but could better emphasize the stakes of ongoing policy evolution.\n\n**3. Accuracy of Facts or References:**  \nFactual claims are accurate and well-supported. The EU\u2019s AI Act, China\u2019s 2017 strategic plan, Japan\u2019s \u201cSociety 5.0,\u201d and Canada\u2019s AI institutes (Vector, MILA) are correctly cited. Singapore\u2019s Model AI Governance Framework is also appropriately referenced. Minor gaps include the absence of specific U.S. federal policies (e.g., NIST\u2019s AI Risk Management Framework) to illustrate decentralized governance, but no outright inaccuracies are present.\n\n**4. Overall Coherence:**  \nThe essay maintains a strong central thesis about balancing innovation and regulation across diverse governance models. Regional case studies align with this thesis, and recurring themes (e.g., privacy vs. progress) create continuity. The public safety paragraph, while relevant, feels disconnected from the regional analyses; integrating safety concerns into each case study might improve flow. The conclusion successfully reinforces the essay\u2019s core argument but could more explicitly address unresolved tensions in global AI governance.\n\n**Grade: A-**",
+        "grade": "A-",
+        "numeric_grade": 3.7,
+        "cost_info": {
+          "input_tokens": 1169,
+          "output_tokens": 1045,
+          "input_cost": 0.0005845000000000001,
+          "output_cost": 0.0015674999999999999,
+          "total_cost": 0.002152,
+          "duration": 21.68108296394348
+        }
+      },
+      "o3-mini-high": {
+        "feedback": "**1. Depth of Analysis:**  \nThe essay demonstrates strong analytical depth by systematically comparing regulatory approaches in Europe, the U.S., China, and hybrid models. Strengths and weaknesses of each framework are explored with specificity (e.g., compliance costs in the EU, decentralized U.S. regulation, China\u2019s transparency concerns). Nuanced critiques, such as the trade-off between innovation and safety, reflect a sophisticated understanding. However, the analysis could delve deeper into how these regional strategies intersect (e.g., global competition, cross-border data governance) or address emerging issues like generative AI more explicitly.\n\n**2. Clarity and Structure:**  \nThe structure is logical, with clear sections for each region and a well-organized progression of ideas. Paragraphs consistently begin with a topic sentence and follow with supporting evidence. Transitions between regions, however, could be smoother (e.g., abrupt shifts from the U.S. to China). The conclusion succinctly synthesizes key points but could better integrate the hybrid models\u2019 implications into the broader argument.\n\n**3. Accuracy of Facts or References:**  \nFactual claims are accurate and well-supported. References to the EU AI Act, U.S. agencies\u2019 roles, China\u2019s AI Development Plan, and Singapore\u2019s Model Framework align with real-world policies. Criticisms (e.g., compliance burdens in the EU, China\u2019s data privacy concerns) are appropriately contextualized. No glaring inaccuracies are present.\n\n**4. Overall Coherence:**  \nThe essay maintains a cohesive thesis about divergent regulatory philosophies and their trade-offs. Regional comparisons consistently tie back to the central theme, though the hybrid models\u2019 section feels slightly underdeveloped in linking their scalability challenges to the global context. The concluding paragraph effectively reinforces the absence of a universal solution while emphasizing adaptability.\n\n---\n\n**Grade: A**",
+        "grade": "A",
+        "numeric_grade": 4.0,
+        "cost_info": {
+          "input_tokens": 1026,
+          "output_tokens": 905,
+          "input_cost": 0.000513,
+          "output_cost": 0.0013575,
+          "total_cost": 0.0018705,
+          "duration": 30.498159170150757
+        }
+      },
+      "Claude-3.7-Sonnet-thinking": {
+        "feedback": "**Feedback:**  \n\n**1. Depth of Analysis:**  \nThe essay provides a competent comparative analysis of AI governance models, demonstrating good understanding of key regional approaches. Strengths include relevant policy examples (e.g., EU AI Act, U.S. Executive Order) and balanced assessments of trade-offs between innovation and regulation. However, the analysis could be deepened by:  \n- Exploring *why* certain structural factors (e.g., U.S. regulatory fragmentation, China\u2019s centralized governance) emerge from each political system  \n- Critically evaluating claims (e.g., is the \"Brussels effect\" as impactful for AI as it was for GDPR?)  \n- Discussing case studies of policy successes/failures to ground abstract arguments  \n\n**2. Clarity and Structure:**  \nWell-organized with consistent subheadings and parallel structures (strengths/weaknesses per region). Transitions between sections could be smoother (e.g., linking \"Common Challenges\" to specific regional examples). Minimal jargon, but terms like \"foundation models\" should be briefly defined for non-technical readers.  \n\n**3. Accuracy of Facts/References:**  \nNo major inaccuracies. Key policies (EU AI Act, China\u2019s 2017 AI plan) are correctly contextualized. The critique of China\u2019s international trust issues aligns with scholarly consensus. Weaknesses like UK \"resource constraints\" would benefit from specific evidence (e.g., budget figures, parliamentary reports).  \n\n**4. Overall Coherence:**  \nThe conclusion effectively synthesizes regional comparisons without introducing new claims. However, the \"Emerging Trends\" section feels underdeveloped \u2013 connecting these trends to earlier governance models (e.g., how might the EU\u2019s AI Act adapt to regulate foundation models?) would strengthen cohesion.  \n\n**Grade: A-**  \n\nJustification: A strong effort with clear expertise, deducting marginally for limited depth in causal/practical analysis and minor structural optimizations. To reach an \"A,\" the essay would need more original insights (e.g., interrogating assumptions about innovation vs. regulation) and evidence-supported examples.",
+        "grade": "A-",
+        "numeric_grade": 3.7,
+        "cost_info": {
+          "input_tokens": 795,
+          "output_tokens": 1242,
+          "input_cost": 0.0003975,
+          "output_cost": 0.001863,
+          "total_cost": 0.0022605,
+          "duration": 25.855406045913696
+        }
+      },
+      "GPT-4o": {
+        "feedback": "**Feedback:**  \n\n**1. Depth of Analysis:**  \nThe essay demonstrates a solid understanding of AI governance frameworks across four major regions. Each section identifies key strengths and weaknesses, supported by relevant examples (e.g., GDPR in the EU, China\u2019s surveillance concerns). However, the analysis could delve deeper into *specific* case studies or quantitative data (e.g., innovation rates in the US vs. China, concrete outcomes of Japan\u2019s Society 5.0). Additionally, cross-country comparisons (e.g., how the EU\u2019s \u201crisk-based\u201d model contrasts with China\u2019s state-driven approach) would add critical depth.\n\n**2. Clarity and Structure:**  \nThe essay is well-organized, with clear subheadings and bullet points enhancing readability. Transitions between sections, however, feel abrupt (e.g., jumping from the EU to the US without contextualizing why these regions are prioritized). A stronger thematic thread\u2014such as grouping countries by regulatory philosophy (ethical vs. innovation-driven)\u2014could improve flow. The conclusion succinctly synthesizes key points but could more explicitly link back to the introduction\u2019s emphasis on public safety.\n\n**3. Accuracy of Facts or References:**  \nFacts and references are largely accurate. The EU\u2019s AI Act proposal (2021), China\u2019s Next Generation AI Plan, and Japan\u2019s Society 5.0 are well-cited. However, claims like \u201cregulatory lag\u201d in the US would benefit from specific examples (e.g., delayed federal laws versus state-level initiatives). The absence of recent post-2021 developments (e.g., updates to the AI Act) slightly undermines timeliness but does not invalidate the analysis.\n\n**4. Overall Coherence:**  \nThe essay maintains a consistent focus on evaluating strengths and weaknesses, aligning arguments with the thesis. However, repeating similar weaknesses (e.g., stifling innovation in both the EU and Japan) risks redundancy. Reframing these critiques to highlight region-specific nuances (e.g., Japan\u2019s consensus-driven culture vs. EU bureaucracy) would strengthen coherence.  \n\n**Grade: A-**  \n\nThe essay is analytically sound, well-structured, and factually accurate, meriting an A-level grade. Strengths include clear articulation of regional policy distinctions and strong sourcing. The grade is moderated to A- due to opportunities for deeper comparative analysis, more dynamic transitions, and inclusion of up-to-date examples.",
+        "grade": "A-",
+        "numeric_grade": 3.7,
+        "cost_info": {
+          "input_tokens": 1101,
+          "output_tokens": 1145,
+          "input_cost": 0.0005505,
+          "output_cost": 0.0017175,
+          "total_cost": 0.002268,
+          "duration": 52.95045709609985
+        }
+      }
+    }
+  },
+  "summary": {
+    "o1": {
+      "median_numeric": 3.3,
+      "grades_received": [
+        "B",
+        "B+",
+        "B+",
+        "A-",
+        "A-"
+      ]
+    },
+    "DeepSeek-Distill-Qwen-32b": {
+      "median_numeric": 3.7,
+      "grades_received": [
+        "A-",
+        "B+",
+        "A-",
+        "A-",
+        "A-"
+      ]
+    },
+    "o3-mini-high": {
+      "median_numeric": 3.7,
+      "grades_received": [
+        "A-",
+        "A-",
+        "A-",
+        "A-",
+        "A"
+      ]
+    },
+    "GPT-4o": {
+      "median_numeric": 3.7,
+      "grades_received": [
+        "B+",
+        "A-",
+        "B+",
+        "A-",
+        "A-"
+      ]
+    },
+    "Claude-3.7-Sonnet-thinking": {
+      "median_numeric": 3.7,
+      "grades_received": [
+        "A-",
+        "A",
+        "A-",
+        "A-",
+        "A-"
+      ]
+    },
+    "DeepSeek-R1-Full": {
+      "median_numeric": 3.7,
+      "grades_received": [
+        "A-",
+        "A-",
+        "A-",
+        "B+",
+        "A-"
+      ]
+    }
+  },
+  "bias_analysis": {
+    "overall_median": 3.7,
+    "overall_mean": 3.6166666666666667,
+    "grader_bias": {
+      "o1": {
+        "median_given": 3.7,
+        "median_bias": 0.0,
+        "mean_bias": 0.14333333333333353,
+        "letter_bias": "Neutral",
+        "count": 5
+      },
+      "DeepSeek-Distill-Qwen-32b": {
+        "median_given": 3.3,
+        "median_bias": -0.40000000000000036,
+        "mean_bias": -0.15666666666666673,
+        "letter_bias": "Strict (-1 grade)",
+        "count": 5
+      },
+      "o3-mini-high": {
+        "median_given": 3.7,
+        "median_bias": 0.0,
+        "mean_bias": 0.08333333333333348,
+        "letter_bias": "Neutral",
+        "count": 5
+      },
+      "GPT-4o": {
+        "median_given": 3.7,
+        "median_bias": 0.0,
+        "mean_bias": -0.05666666666666664,
+        "letter_bias": "Neutral",
+        "count": 5
+      },
+      "Claude-3.7-Sonnet-thinking": {
+        "median_given": 3.3,
+        "median_bias": -0.40000000000000036,
+        "mean_bias": -0.15666666666666673,
+        "letter_bias": "Strict (-1 grade)",
+        "count": 5
+      },
+      "DeepSeek-R1-Full": {
+        "median_given": 3.7,
+        "median_bias": 0.0,
+        "mean_bias": 0.14333333333333353,
+        "letter_bias": "Neutral",
+        "count": 5
+      }
+    }
+  },
+  "boswell_quotient": {
+    "model_scores": {
+      "o1": {
+        "boswell_quotient": 84.2,
+        "components": {
+          "performance": 76.74418604651163,
+          "evaluation": 100.0,
+          "efficiency": 78.99339100463703
+        },
+        "rank": 3
+      },
+      "DeepSeek-Distill-Qwen-32b": {
+        "boswell_quotient": 76.7,
+        "components": {
+          "performance": 86.04651162790698,
+          "evaluation": 59.999999999999964,
+          "efficiency": 78.37823586371704
+        },
+        "rank": 5
+      },
+      "o3-mini-high": {
+        "boswell_quotient": 88.4,
+        "components": {
+          "performance": 86.04651162790698,
+          "evaluation": 100.0,
+          "efficiency": 77.12681117259646
+        },
+        "rank": 1
+      },
+      "GPT-4o": {
+        "boswell_quotient": 86.7,
+        "components": {
+          "performance": 86.04651162790698,
+          "evaluation": 100.0,
+          "efficiency": 68.50418653661431
+        },
+        "rank": 2
+      },
+      "Claude-3.7-Sonnet-thinking": {
+        "boswell_quotient": 66.4,
+        "components": {
+          "performance": 86.04651162790698,
+          "evaluation": 59.999999999999964,
+          "efficiency": 27.100776761216245
+        },
+        "rank": 6
+      },
+      "DeepSeek-R1-Full": {
+        "boswell_quotient": 77.4,
+        "components": {
+          "performance": 86.04651162790698,
+          "evaluation": 100.0,
+          "efficiency": 21.68545633517568
+        },
+        "rank": 4
+      }
+    },
+    "component_weights": {
+      "performance": 0.5,
+      "evaluation": 0.3,
+      "efficiency": 0.2
+    }
+  },
+  "cost": {
+    "total_cost": 0.0808385,
+    "total_tokens": 76687,
+    "total_duration": 903.220178604126,
+    "essay_costs": {
+      "o1": {
+        "input_tokens": 101,
+        "output_tokens": 1096,
+        "input_cost": 5.05e-05,
+        "output_cost": 0.001644,
+        "total_cost": 0.0016945,
+        "duration": 12.051439762115479
+      },
+      "DeepSeek-Distill-Qwen-32b": {
+        "input_tokens": 104,
+        "output_tokens": 1009,
+        "input_cost": 5.2e-05,
+        "output_cost": 0.0015134999999999999,
+        "total_cost": 0.0015654999999999998,
+        "duration": 21.414127111434937
+      },
+      "o3-mini-high": {
+        "input_tokens": 101,
+        "output_tokens": 1977,
+        "input_cost": 5.05e-05,
+        "output_cost": 0.0029655000000000003,
+        "total_cost": 0.0030160000000000005,
+        "duration": 22.419379949569702
+      },
+      "GPT-4o": {
+        "input_tokens": 102,
+        "output_tokens": 958,
+        "input_cost": 5.1e-05,
+        "output_cost": 0.001437,
+        "total_cost": 0.001488,
+        "duration": 33.93180704116821
+      },
+      "Claude-3.7-Sonnet-thinking": {
+        "input_tokens": 150,
+        "output_tokens": 4419,
+        "input_cost": 7.5e-05,
+        "output_cost": 0.0066285,
+        "total_cost": 0.0067035,
+        "duration": 63.61605191230774
+      },
+      "DeepSeek-R1-Full": {
+        "input_tokens": 99,
+        "output_tokens": 2025,
+        "input_cost": 4.9500000000000004e-05,
+        "output_cost": 0.0030375,
+        "total_cost": 0.003087,
+        "duration": 98.01932191848755
+      }
+    },
+    "grading_costs": {
+      "GPT-4o": {
+        "Claude-3.7-Sonnet-thinking": {
+          "input_tokens": 812,
+          "output_tokens": 389,
+          "input_cost": 0.00040600000000000006,
+          "output_cost": 0.0005835,
+          "total_cost": 0.0009895000000000001,
+          "duration": 10.0936119556427
+        },
+        "o3-mini-high": {
+          "input_tokens": 1031,
+          "output_tokens": 357,
+          "input_cost": 0.0005155,
+          "output_cost": 0.0005355,
+          "total_cost": 0.0010509999999999999,
+          "duration": 10.169093132019043
+        },
+        "DeepSeek-Distill-Qwen-32b": {
+          "input_tokens": 1150,
+          "output_tokens": 324,
+          "input_cost": 0.000575,
+          "output_cost": 0.00048600000000000005,
+          "total_cost": 0.001061,
+          "duration": 10.27728796005249
+        },
+        "DeepSeek-R1-Full": {
+          "input_tokens": 1256,
+          "output_tokens": 409,
+          "input_cost": 0.000628,
+          "output_cost": 0.0006135,
+          "total_cost": 0.0012415,
+          "duration": 11.88280701637268
+        },
+        "o1": {
+          "input_tokens": 1173,
+          "output_tokens": 398,
+          "input_cost": 0.0005865,
+          "output_cost": 0.0005970000000000001,
+          "total_cost": 0.0011835,
+          "duration": 12.177358865737915
+        }
+      },
+      "o1": {
+        "DeepSeek-Distill-Qwen-32b": {
+          "input_tokens": 1149,
+          "output_tokens": 937,
+          "input_cost": 0.0005745,
+          "output_cost": 0.0014055,
+          "total_cost": 0.00198,
+          "duration": 9.865159273147583
+        },
+        "o3-mini-high": {
+          "input_tokens": 1030,
+          "output_tokens": 982,
+          "input_cost": 0.000515,
+          "output_cost": 0.001473,
+          "total_cost": 0.001988,
+          "duration": 10.458314895629883
+        },
+        "Claude-3.7-Sonnet-thinking": {
+          "input_tokens": 811,
+          "output_tokens": 894,
+          "input_cost": 0.00040550000000000004,
+          "output_cost": 0.001341,
+          "total_cost": 0.0017465,
+          "duration": 9.437672853469849
+        },
+        "GPT-4o": {
+          "input_tokens": 1109,
+          "output_tokens": 1079,
+          "input_cost": 0.0005545,
+          "output_cost": 0.0016185,
+          "total_cost": 0.002173,
+          "duration": 11.30421495437622
+        },
+        "DeepSeek-R1-Full": {
+          "input_tokens": 1255,
+          "output_tokens": 1573,
+          "input_cost": 0.0006274999999999999,
+          "output_cost": 0.0023595,
+          "total_cost": 0.002987,
+          "duration": 16.12042236328125
+        }
+      },
+      "DeepSeek-Distill-Qwen-32b": {
+        "GPT-4o": {
+          "input_tokens": 1124,
+          "output_tokens": 12,
+          "input_cost": 0.0005620000000000001,
+          "output_cost": 1.8e-05,
+          "total_cost": 0.0005800000000000001,
+          "duration": 0.993628978729248
+        },
+        "Claude-3.7-Sonnet-thinking": {
+          "input_tokens": 812,
+          "output_tokens": 7,
+          "input_cost": 0.00040600000000000006,
+          "output_cost": 1.0500000000000001e-05,
+          "total_cost": 0.00041650000000000004,
+          "duration": 0.8568310737609863
+        },
+        "o3-mini-high": {
+          "input_tokens": 1031,
+          "output_tokens": 330,
+          "input_cost": 0.0005155,
+          "output_cost": 0.000495,
+          "total_cost": 0.0010105000000000001,
+          "duration": 7.793341159820557
+        },
+        "o1": {
+          "input_tokens": 1178,
+          "output_tokens": 373,
+          "input_cost": 0.000589,
+          "output_cost": 0.0005595,
+          "total_cost": 0.0011485,
+          "duration": 15.531282901763916
+        },
+        "DeepSeek-R1-Full": {
+          "input_tokens": 1281,
+          "output_tokens": 722,
+          "input_cost": 0.0006405,
+          "output_cost": 0.001083,
+          "total_cost": 0.0017235,
+          "duration": 15.998223781585693
+        }
+      },
+      "Claude-3.7-Sonnet-thinking": {
+        "DeepSeek-Distill-Qwen-32b": {
+          "input_tokens": 1328,
+          "output_tokens": 1506,
+          "input_cost": 0.0006640000000000001,
+          "output_cost": 0.002259,
+          "total_cost": 0.0029230000000000003,
+          "duration": 29.892019033432007
+        },
+        "GPT-4o": {
+          "input_tokens": 1305,
+          "output_tokens": 1484,
+          "input_cost": 0.0006525,
+          "output_cost": 0.002226,
+          "total_cost": 0.0028785,
+          "duration": 29.901371002197266
+        },
+        "o3-mini-high": {
+          "input_tokens": 1175,
+          "output_tokens": 1571,
+          "input_cost": 0.0005875,
+          "output_cost": 0.0023565,
+          "total_cost": 0.002944,
+          "duration": 30.80706477165222
+        },
+        "DeepSeek-R1-Full": {
+          "input_tokens": 1475,
+          "output_tokens": 1657,
+          "input_cost": 0.0007375000000000001,
+          "output_cost": 0.0024855000000000003,
+          "total_cost": 0.003223,
+          "duration": 32.442002058029175
+        },
+        "o1": {
+          "input_tokens": 1331,
+          "output_tokens": 1661,
+          "input_cost": 0.0006655,
+          "output_cost": 0.0024915000000000002,
+          "total_cost": 0.003157,
+          "duration": 32.62770700454712
+        }
+      },
+      "o3-mini-high": {
+        "o1": {
+          "input_tokens": 1172,
+          "output_tokens": 2351,
+          "input_cost": 0.0005859999999999999,
+          "output_cost": 0.0035265,
+          "total_cost": 0.0041125,
+          "duration": 23.916595935821533
+        },
+        "Claude-3.7-Sonnet-thinking": {
+          "input_tokens": 811,
+          "output_tokens": 862,
+          "input_cost": 0.00040550000000000004,
+          "output_cost": 0.001293,
+          "total_cost": 0.0016985000000000001,
+          "duration": 31.511696100234985
+        },
+        "GPT-4o": {
+          "input_tokens": 1109,
+          "output_tokens": 1662,
+          "input_cost": 0.0005545,
+          "output_cost": 0.002493,
+          "total_cost": 0.0030475,
+          "duration": 44.93664574623108
+        },
+        "DeepSeek-Distill-Qwen-32b": {
+          "input_tokens": 1149,
+          "output_tokens": 1815,
+          "input_cost": 0.0005745,
+          "output_cost": 0.0027225,
+          "total_cost": 0.003297,
+          "duration": 46.50287890434265
+        },
+        "DeepSeek-R1-Full": {
+          "input_tokens": 1255,
+          "output_tokens": 2300,
+          "input_cost": 0.0006274999999999999,
+          "output_cost": 0.00345,
+          "total_cost": 0.0040774999999999995,
+          "duration": 45.566936016082764
+        }
+      },
+      "DeepSeek-R1-Full": {
+        "DeepSeek-Distill-Qwen-32b": {
+          "input_tokens": 1132,
+          "output_tokens": 1019,
+          "input_cost": 0.000566,
+          "output_cost": 0.0015285,
+          "total_cost": 0.0020945,
+          "duration": 19.718777894973755
+        },
+        "o1": {
+          "input_tokens": 1169,
+          "output_tokens": 1045,
+          "input_cost": 0.0005845000000000001,
+          "output_cost": 0.0015674999999999999,
+          "total_cost": 0.002152,
+          "duration": 21.68108296394348
+        },
+        "o3-mini-high": {
+          "input_tokens": 1026,
+          "output_tokens": 905,
+          "input_cost": 0.000513,
+          "output_cost": 0.0013575,
+          "total_cost": 0.0018705,
+          "duration": 30.498159170150757
+        },
+        "Claude-3.7-Sonnet-thinking": {
+          "input_tokens": 795,
+          "output_tokens": 1242,
+          "input_cost": 0.0003975,
+          "output_cost": 0.001863,
+          "total_cost": 0.0022605,
+          "duration": 25.855406045913696
+        },
+        "GPT-4o": {
+          "input_tokens": 1101,
+          "output_tokens": 1145,
+          "input_cost": 0.0005505,
+          "output_cost": 0.0017175,
+          "total_cost": 0.002268,
+          "duration": 52.95045709609985
+        }
+      }
+    }
+  },
+  "run_timestamp": "2025-02-26 20:43:48"
+}
