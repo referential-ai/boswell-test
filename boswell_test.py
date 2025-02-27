@@ -63,6 +63,37 @@ MODELS = [
 ]
 
 
+# Define a list of free/widely accessible models for use with the --free flag
+FREE_MODELS = [
+    "GPT-4o-mini",
+    "Llama-3-8B",
+    "GPT-3.5-Turbo",
+    "DeepSeek-Distill-Qwen-32b",
+    "Qwen-Plus",
+    "Qwen-Turbo",
+    "Perplexity: Llama 3.1 Sonar 8B Online",
+    "Gemini Flash 2.0"
+]
+
+# Define models to skip when using --free flag (premium models)
+PREMIUM_MODELS = [
+    "Claude-3-Opus",
+    "Claude-3-Sonnet",
+    "Claude-3.7-Sonnet",
+    "Claude-3.7-Sonnet-thinking",
+    "GPT-4o",
+    "o3-mini-high",
+    "o1",
+    "o1-mini",
+    "DeepSeek-R1-Full",
+    "grok2-1212",
+    "grok-beta",
+    "Qwen-Max",
+    "Perplexity: Llama 3.1 Sonar 405B Online",
+    "Perplexity: Llama 3.1 Sonar 70B",
+    "Gemini Pro 1.5"
+]
+
 # Additional models to try (commented out as they're not currently available)
 # ADDITIONAL_MODELS = [
 #     {"name": "Claude-3.5-Sonnet", "model_id": "anthropic/claude-3-5-sonnet-20240620"},
@@ -1449,9 +1480,9 @@ def calculate_boswell_quotient(results: Dict[str, Any], models: List[str]) -> Di
     quotient_results = {
         "model_scores": {},
         "component_weights": {
-            "performance": 0.70,  # 50% weight for performance
-            "evaluation": 0.20,   # 30% weight for evaluation capability
-            "efficiency": 0.10    # 20% weight for efficiency
+            "performance": 0.70,  # 70% weight for performance
+            "evaluation": 0.20,   # 20% weight for evaluation capability
+            "efficiency": 0.10    # 10% weight for efficiency
         }
     }
     
@@ -2224,12 +2255,26 @@ def list_domains() -> None:
         print(f"{domain_id:<15} | {description}")
 
 
-def list_models() -> None:
-    """Display available models."""
-    print("\nAvailable models:")
-    print("-" * 60)
-    for model in MODELS:
-        print(f"{model['name']:<25} | {model['model_id']}")
+def list_models(free_only: bool = False) -> None:
+    """Display available models.
+    
+    Args:
+        free_only: If True, only list free models
+    """
+    if free_only:
+        print("\nAvailable free models:")
+        print("-" * 60)
+        for model in MODELS:
+            if model['name'] in FREE_MODELS:
+                print(f"{model['name']:<25} | {model['model_id']}")
+        print(f"\nTotal: {len(FREE_MODELS)} free models")
+    else:
+        print("\nAvailable models:")
+        print("-" * 60)
+        for model in MODELS:
+            premium = " (premium)" if model['name'] in PREMIUM_MODELS else ""
+            print(f"{model['name']:<25} | {model['model_id']}{premium}")
+        print(f"\nTotal: {len(MODELS)} models ({len(FREE_MODELS)} free, {len(PREMIUM_MODELS)} premium)")
 
 
 def parse_arguments() -> argparse.Namespace:
@@ -2249,6 +2294,9 @@ def parse_arguments() -> argparse.Namespace:
     
     parser.add_argument("--models", type=str, nargs="+",
                         help="Specific models to test (default: all models)")
+    
+    parser.add_argument("--free", action="store_true",
+                        help="Use only free/widely accessible models, excluding premium models")
     
     parser.add_argument("--skip-verification", action="store_true",
                         help="Skip the model verification step (faster but less reliable)")
@@ -2277,10 +2325,15 @@ def run_all_domains(args) -> None:
     """Run Boswell Test on all available domains."""
     print(f"Starting Boswell Test for ALL available domains ({len(AVAILABLE_DOMAINS)} domains)...")
     
-    # If models specified, use them, otherwise use all
+    # Determine which models to use
+    models_to_use = None
     if args.models:
         print(f"Using {len(args.models)} specified models: {', '.join(args.models)}")
         models_to_use = args.models
+    elif args.free:
+        print(f"Using free models only: {', '.join(FREE_MODELS)}")
+        models_to_use = FREE_MODELS
+        print("Premium models will be excluded from the test.")
     else:
         print(f"Using all available models")
         models_to_use = None
@@ -2811,13 +2864,25 @@ def main() -> None:
         return
     
     if args.list_models:
-        list_models()
+        list_models(args.free)
         return
     
     # Handle model management
     if args.update_models:
         update_models_file(args.models_file)
         return
+    
+    # Determine which models to use
+    models_to_use = None
+    if args.models:
+        print(f"Using {len(args.models)} specified models: {', '.join(args.models)}")
+        models_to_use = args.models
+    elif args.free:
+        print(f"Using free models only: {', '.join(FREE_MODELS)}")
+        models_to_use = FREE_MODELS
+        print("Premium models will be excluded from the test.")
+    else:
+        print(f"Using all available models")
     
     # Run tests on all domains
     if args.all_domains:
@@ -2826,14 +2891,6 @@ def main() -> None:
     
     # Run the test on a single domain
     print(f"Starting Boswell Test for domain '{args.domain}'...")
-    
-    # If models specified, use them, otherwise use all
-    if args.models:
-        print(f"Using {len(args.models)} specified models: {', '.join(args.models)}")
-        models_to_use = args.models
-    else:
-        print(f"Using all available models")
-        models_to_use = None
     
     # Run the test with all options
     results = run_boswell_test(
