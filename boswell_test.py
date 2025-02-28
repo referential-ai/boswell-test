@@ -55,7 +55,6 @@ MODELS = [
     {"name": "Qwen-Plus", "model_id": "qwen/qwen-plus"},
     {"name": "Qwen-Turbo", "model_id": "qwen/qwen-turbo"},
     {"name": "Qwen-Max", "model_id": "qwen/qwen-max"},
-    {"name": "Perplexity: Llama 3.1 Sonar 405B Online", "model_id": "perplexity/llama-3.1-sonar-huge-128k-online"},
     {"name": "Perplexity: Llama 3.1 Sonar 70B", "model_id": "perplexity/llama-3.1-sonar-large-128k-chat"},
     {"name": "Perplexity: Llama 3.1 Sonar 8B Online", "model_id": "perplexity/llama-3.1-sonar-small-128k-online"},
     {"name": "Gemini Flash 2.0", "model_id": "google/gemini-2.0-flash-001"},
@@ -96,7 +95,9 @@ PREMIUM_MODELS = [
 
 # Additional models to try (commented out as they're not currently available)
 # ADDITIONAL_MODELS = [
-#     {"name": "Claude-3.5-Sonnet", "model_id": "anthropic/claude-3-5-sonnet-20240620"},
+#       {"name": "Claude-3.5-Sonnet", "model_id": "anthropic/claude-3-5-sonnet-20240620"},       
+#       {"name": "Perplexity: Llama 3.1 Sonar 405B Online", "model_id": "perplexity/llama-3.1-sonar-huge-128k-online"},
+
 # ]
 
 # Available domains
@@ -2288,6 +2289,11 @@ def parse_arguments() -> argparse.Namespace:
                         help="Domain to test (default: pol_sci_1)")
     domain_group.add_argument("--all-domains", action="store_true",
                         help="Run tests on all available domains")
+    domain_group.add_argument("--aggregate-results", action="store_true",
+                        help="Generate aggregate statistics from existing results directories")
+    
+    parser.add_argument("--results-dirs", type=str, nargs="+",
+                        help="Specific results directories to include in aggregation (default: auto-detect)")
     
     parser.add_argument("--output", type=str, default="boswell_results.json",
                         help="Output file name (default: boswell_results.json)")
@@ -2854,6 +2860,286 @@ def generate_aggregate_boswell_report(aggregated_data: Dict[str, Any], domain_de
     return "\n".join(lines)
 
 
+def find_result_directories() -> List[str]:
+    """Find all result directories from previous runs.
+    
+    Returns:
+        List of result directory paths sorted by timestamp (newest first)
+    """
+    if not os.path.exists("results"):
+        return []
+        
+    # Find directories that match the timestamp-domain pattern
+    result_dirs = []
+    for entry in os.listdir("results"):
+        entry_path = os.path.join("results", entry)
+        # Skip aggregate directories
+        if "aggregate" in entry:
+            continue
+            
+        # Check if it's a directory with the right format
+        if os.path.isdir(entry_path) and re.match(r"^\d{8}-\d{6}-[a-z_]+\d*$", entry):
+            # Check if it has a full_results.json file (indicating it was a complete run)
+            if os.path.exists(os.path.join(entry_path, "full_results.json")):
+                result_dirs.append(entry_path)
+    
+    # Sort by timestamp (newest first)
+    result_dirs.sort(reverse=True)
+    return result_dirs
+
+
+def load_domain_results(results_dir: str) -> Dict[str, Any]:
+    """Load results from a domain directory.
+    
+    Args:
+        results_dir: Path to the results directory
+        
+    Returns:
+        The loaded results dictionary or None if loading fails
+    """
+    try:
+        full_results_path = os.path.join(results_dir, "full_results.json")
+        if not os.path.exists(full_results_path):
+            print(f"Error: No full_results.json found in {results_dir}")
+            return None
+            
+        with open(full_results_path, 'r') as f:
+            results = json.load(f)
+            
+        # Extract domain name from path
+        domain_match = re.search(r"-([a-z_]+\d*)$", results_dir)
+        if domain_match:
+            domain_id = domain_match.group(1)
+            if domain_id not in AVAILABLE_DOMAINS:
+                print(f"Warning: Domain '{domain_id}' from {results_dir} is not in AVAILABLE_DOMAINS")
+                
+        return results
+    except Exception as e:
+        print(f"Error loading results from {results_dir}: {e}")
+        return None
+
+
+def aggregate_existing_results(results_dirs: List[str] = None) -> None:
+    """Generate an aggregate report from existing result directories.
+    
+    Args:
+        results_dirs: Optional list of specific result directories to include
+    """
+    # Find result directories if not specified
+    if not results_dirs:
+        results_dirs = find_result_directories()
+        
+    if not results_dirs:
+        print("Error: No result directories found. Run tests first before aggregating.")
+        return
+        
+    print(f"Aggregating results from {len(results_dirs)} directories:")
+    for dir_path in results_dirs:
+        print(f"  - {dir_path}")
+        
+    # Load results from each directory
+    results_by_domain = {}
+    
+    for dir_path in results_dirs:
+        results = load_domain_results(dir_path)
+        if results:
+            domain_info = results.get("domain", {})
+            domain_name = domain_info.get("name", "Unknown Domain")
+            
+            # Extract domain key from path
+            domain_match = re.search(r"-([a-z_]+\d*)$", dir_path)
+            if domain_match:
+                domain_key = domain_match.group(1)
+                results_by_domain[domain_key] = {
+                    "directory": dir_path,
+                    "domain": domain_name,
+                    "boswell_quotient": results.get("boswell_quotient", {}),
+                    "run_timestamp": results.get("run_timestamp", "")
+                }
+                print(f"  - Successfully loaded results for: {domain_name}")
+    
+    if not results_by_domain:
+        print("Error: Failed to load any valid result sets.")
+        return
+        
+    # Create timestamp for aggregate results
+    timestamp = time.strftime("%Y%m%d-%H%M%S")
+    
+    # Create aggregate results directory
+    aggregate_dir = f"results/{timestamp}-aggregate"
+    os.makedirs(aggregate_dir, exist_ok=True)
+    
+    # Generate aggregate data
+    aggregated_data = aggregate_boswell_quotient(results_by_domain)
+    
+    # Create mapping of domain IDs to descriptions
+    domain_descriptions = {name: desc for name, desc in AVAILABLE_DOMAINS.items()}
+    
+    # Generate aggregate report
+    aggregate_report = generate_aggregate_boswell_report(aggregated_data, domain_descriptions)
+    
+    # Save aggregate report
+    with open(f"{aggregate_dir}/aggregate_boswell_report.md", 'w') as f:
+        f.write(aggregate_report)
+    
+    # Generate aggregate visualizations
+    charts_dir = f"{aggregate_dir}/charts"
+    os.makedirs(charts_dir, exist_ok=True)
+    
+    # Create aggregate Boswell Quotient chart
+    plt.figure(figsize=(14, 8))
+    
+    # Prepare data
+    sorted_models = sorted(
+        aggregated_data["model_scores"].keys(),
+        key=lambda m: aggregated_data["model_scores"][m]["average_boswell_quotient"],
+        reverse=True
+    )
+    
+    scores = [aggregated_data["model_scores"][m]["average_boswell_quotient"] for m in sorted_models]
+    
+    # Create bar chart with a colorful gradient
+    # Create a colormap based on score values
+    cmap = plt.cm.viridis  # Choose a colorful colormap (viridis, plasma, magma, inferno, etc.)
+    colors = cmap(np.linspace(0.2, 0.8, len(scores)))
+    
+    # Create horizontal bar chart with custom colors and styling
+    bars = plt.barh(sorted_models, scores, color=colors)
+    
+    # Add score values at the end of each bar
+    for i, bar in enumerate(bars):
+        plt.text(bar.get_width() + 1, bar.get_y() + bar.get_height()/2, 
+                f'{scores[i]:.1f}', 
+                va='center', fontsize=9)
+    
+    # Style the chart
+    plt.title('Aggregate Boswell Quotient by Model (All Domains)', fontsize=16, fontweight='bold')
+    plt.xlabel('Boswell Quotient (0-100)', fontsize=12, fontweight='bold')
+    plt.yticks(fontsize=10)
+    plt.xlim(0, 105)  # Extend limit to allow space for score labels
+    plt.grid(axis='x', linestyle='--', alpha=0.7)
+    
+    # Add a gradient colorbar for reference
+    sm = plt.cm.ScalarMappable(cmap=cmap)
+    sm.set_array([])
+    # Fix: Provide the axis to the colorbar function
+    cbar = plt.colorbar(sm, ax=plt.gca(), orientation='horizontal', pad=0.1, aspect=40)
+    cbar.set_label('Higher Score → Better Performance', fontsize=10)
+    
+    # Background styling
+    ax = plt.gca()
+    ax.set_facecolor('#f8f9fa')  # Light background
+    plt.gcf().set_facecolor('#f8f9fa')
+    
+    plt.tight_layout()
+    
+    # Save chart
+    plt.savefig(f"{charts_dir}/aggregate_boswell_quotient.png", dpi=300)
+    plt.close()
+    
+    # Create domain comparison chart for top models
+    # Only include models that appear in all domains
+    all_domain_models = [m for m in sorted_models 
+                       if len(aggregated_data["model_scores"][m]["domain_scores"]) == len(results_by_domain)]
+    
+    # Take top 5 models or fewer if less available
+    top_models = all_domain_models[:min(5, len(all_domain_models))]
+    
+    if top_models:
+        plt.figure(figsize=(14, 8))
+        
+        # Set up domain names and positions
+        domains = list(aggregated_data["domains_analyzed"])
+        domain_names = [domain_descriptions.get(d, d) for d in domains]
+        
+        # Define a vibrant color palette
+        color_palette = [
+            '#FF6B6B',  # Coral Red
+            '#4ECDC4',  # Turquoise
+            '#FFD166',  # Yellow
+            '#6A0572',  # Purple
+            '#1A535C',  # Dark Teal
+        ]
+        
+        # Set up bar positions
+        bar_width = 0.15
+        positions = np.arange(len(domains))
+        
+        # Plot bars for each model with vibrant colors
+        for i, model in enumerate(top_models):
+            domain_scores = [aggregated_data["model_scores"][model]["domain_scores"].get(d, 0) for d in domains]
+            plt.bar(
+                positions + i*bar_width, 
+                domain_scores, 
+                bar_width, 
+                label=model,
+                color=color_palette[i % len(color_palette)],
+                edgecolor='white',
+                linewidth=0.7
+            )
+            
+            # Add score values on top of each bar
+            for j, score in enumerate(domain_scores):
+                plt.text(
+                    positions[j] + i*bar_width, 
+                    score + 2, 
+                    f'{score:.1f}', 
+                    ha='center', 
+                    va='bottom', 
+                    fontsize=8, 
+                    rotation=90,
+                    fontweight='bold'
+                )
+        
+        # Configure chart with enhanced styling
+        plt.title('Boswell Quotient Comparison Across Domains (Top Models)', fontsize=16, fontweight='bold')
+        plt.xlabel('Domain', fontsize=12, fontweight='bold')
+        plt.ylabel('Boswell Quotient', fontsize=12, fontweight='bold')
+        plt.xticks(positions + bar_width * (len(top_models)-1)/2, domain_names, rotation=45, ha='right')
+        plt.ylim(0, 110)  # Increased to accommodate score labels
+        
+        # Add a styled legend at the bottom right to avoid blocking bars
+        legend = plt.legend(
+            title='Models', 
+            title_fontsize=12,
+            loc='lower right',  # Changed from 'upper right' to 'lower right'
+            frameon=True, 
+            framealpha=0.95,
+            edgecolor='gray',
+            bbox_to_anchor=(1.0, 0.0),  # Position at bottom right corner
+            bbox_transform=plt.gcf().transFigure  # Use figure coordinates
+        )
+        
+        # Add background styling
+        ax = plt.gca()
+        ax.set_facecolor('#f8f9fa')  # Light background
+        plt.gcf().set_facecolor('#f8f9fa')
+        
+        # Add a grid for better readability
+        plt.grid(axis='y', linestyle='--', alpha=0.5)
+        
+        plt.tight_layout()
+        
+        # Save chart
+        plt.savefig(f"{charts_dir}/domain_comparison.png", dpi=300)
+        plt.close()
+    
+    # Save aggregate data as JSON
+    with open(f"{aggregate_dir}/aggregate_boswell_quotient.json", 'w') as f:
+        json.dump({
+            "timestamp": timestamp,
+            "aggregated_data": aggregated_data,
+            "source_domains": [d for d in aggregated_data["domains_analyzed"]],
+            "domain_descriptions": domain_descriptions,
+            "source_directories": results_dirs
+        }, f, indent=2)
+    
+    print(f"\nAggregate results generated successfully!")
+    print(f"  - Aggregate report: {aggregate_dir}/aggregate_boswell_report.md")
+    print(f"  - Visualizations: {aggregate_dir}/charts/aggregate_boswell_quotient.png")
+    print(f"                    {aggregate_dir}/charts/domain_comparison.png")
+
+
 def main() -> None:
     """Main entry point for the script."""
     args = parse_arguments()
@@ -2870,6 +3156,12 @@ def main() -> None:
     # Handle model management
     if args.update_models:
         update_models_file(args.models_file)
+        return
+        
+    # Handle aggregating existing results
+    if args.aggregate_results:
+        print("Aggregating results from previous runs...")
+        aggregate_existing_results(args.results_dirs)
         return
     
     # Determine which models to use
