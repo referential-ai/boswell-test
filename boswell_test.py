@@ -2283,17 +2283,29 @@ def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Boswell Test - LLM Comparative Analysis")
     
     # Main operation modes
-    domain_group = parser.add_mutually_exclusive_group()
-    domain_group.add_argument("--domain", type=str, choices=AVAILABLE_DOMAINS.keys(),
-                        default="pol_sci_1",
-                        help="Domain to test (default: pol_sci_1)")
-    domain_group.add_argument("--all-domains", action="store_true",
+    mode_group = parser.add_mutually_exclusive_group()
+    mode_group.add_argument("--all-domains", action="store_true",
                         help="Run tests on all available domains")
-    domain_group.add_argument("--aggregate-results", action="store_true",
+    mode_group.add_argument("--aggregate-results", action="store_true",
                         help="Generate aggregate statistics from existing results directories")
+    mode_group.add_argument("--synthesize-essays", action="store_true",
+                        help="Synthesize top essays from a domain into a combined essay")
+    
+    parser.add_argument("--domain", type=str, choices=AVAILABLE_DOMAINS.keys(),
+                        default="pol_sci_1",
+                        help="Domain to test or synthesize (default: pol_sci_1)")
     
     parser.add_argument("--results-dirs", type=str, nargs="+",
                         help="Specific results directories to include in aggregation (default: auto-detect)")
+    
+    parser.add_argument("--results-dir", type=str,
+                        help="Specific results directory to use for essay synthesis")
+    
+    parser.add_argument("--num-essays", type=int, default=5,
+                        help="Number of top essays to synthesize (default: 5)")
+    
+    parser.add_argument("--synthesis-model", type=str, default="openai/o1",
+                        help="Model ID to use for essay synthesis (default: openai/o1). Examples: anthropic/claude-3-opus, openai/gpt-4o")
     
     parser.add_argument("--output", type=str, default="boswell_results.json",
                         help="Output file name (default: boswell_results.json)")
@@ -2919,6 +2931,190 @@ def load_domain_results(results_dir: str) -> Dict[str, Any]:
         return None
 
 
+def synthesize_top_essays(domain_name: str, results_dir: str = None, num_essays: int = 5, 
+                   synthesis_model: str = "anthropic/claude-3-opus") -> None:
+    """Synthesize top essays from a domain into a combined essay.
+    
+    Args:
+        domain_name: The domain to synthesize essays for
+        results_dir: Specific results directory to use (auto-detect most recent if None)
+        num_essays: Number of top essays to synthesize (default: 5)
+        synthesis_model: Model to use for synthesis (default: anthropic/claude-3-opus)
+    """
+    # Find most recent results directory for the domain if not specified
+    if not results_dir:
+        latest_dirs = []
+        if not os.path.exists("results"):
+            print("Error: No results directory found.")
+            return
+            
+        for entry in os.listdir("results"):
+            entry_path = os.path.join("results", entry)
+            # Look for matching domain directories
+            if os.path.isdir(entry_path) and entry.endswith(f"-{domain_name}"):
+                # Check if it has grades.json (indicating it was a complete run)
+                if os.path.exists(os.path.join(entry_path, "grades.json")):
+                    latest_dirs.append(entry_path)
+                    
+        if not latest_dirs:
+            print(f"Error: No results directories found for domain '{domain_name}'.")
+            return
+            
+        # Sort by timestamp (newest first) and take the most recent
+        latest_dirs.sort(reverse=True)
+        results_dir = latest_dirs[0]
+        
+    print(f"Using results directory: {results_dir}")
+    
+    # Load Boswell Quotient data to identify top essays
+    boswell_path = os.path.join(results_dir, "boswell_quotient.md")
+    if not os.path.exists(boswell_path):
+        print(f"Error: Boswell Quotient file not found at {boswell_path}")
+        return
+        
+    # Parse the Boswell Quotient file to find top models
+    top_models = []
+    with open(boswell_path, 'r') as f:
+        content = f.read()
+        
+    # Extract model rankings from markdown table
+    for line in content.split('\n'):
+        if '|' in line:
+            parts = [p.strip() for p in line.split('|')]
+            if len(parts) >= 3 and parts[1] and parts[1].isdigit():
+                # This is likely a data row - format: | Rank | Model | Score | ...
+                try:
+                    rank = int(parts[1])
+                    model = parts[2].strip()
+                    if rank <= num_essays and model:
+                        top_models.append(model)
+                except (ValueError, IndexError):
+                    continue
+    
+    if not top_models:
+        print("Error: Could not identify top models from the Boswell Quotient file.")
+        return
+        
+    print(f"Top {len(top_models)} models identified: {', '.join(top_models)}")
+    
+    # Load and extract essay content for top models
+    essays = {}
+    essays_dir = os.path.join(results_dir, "essays")
+    
+    for model in top_models:
+        essay_path = os.path.join(essays_dir, f"{model}.md")
+        if not os.path.exists(essay_path):
+            print(f"Warning: Essay file not found for {model}, skipping.")
+            continue
+            
+        with open(essay_path, 'r') as f:
+            content = f.read()
+            
+        # Extract just the essay content (before the grading feedback)
+        if "# Grading Feedback" in content:
+            essay_text = content.split("# Grading Feedback")[0].strip()
+        else:
+            # Fallback to looking for horizontal rule
+            if "---" in content:
+                essay_text = content.split("---")[0].strip()
+            else:
+                essay_text = content
+                
+        # Remove the header line if present
+        if essay_text.startswith(f"# Essay by {model}"):
+            lines = essay_text.split('\n')
+            essay_text = '\n'.join(lines[1:]).strip()
+            
+        essays[model] = essay_text
+    
+    if not essays:
+        print("Error: No essay content could be extracted.")
+        return
+        
+    print(f"Successfully extracted {len(essays)} essays.")
+    
+    # Load domain info
+    domain_info = {}
+    try:
+        with open(os.path.join(results_dir, "full_results.json"), 'r') as f:
+            full_results = json.load(f)
+            domain_info = full_results.get("domain", {})
+    except Exception as e:
+        print(f"Warning: Could not load domain info from results: {e}")
+        # Try to get domain info from available domains
+        domain_info = {"name": AVAILABLE_DOMAINS.get(domain_name, domain_name)}
+    
+    # Prepare synthesis prompt
+    synthesis_prompt = f"""
+    # Essay Synthesis Task
+    
+    You are tasked with synthesizing the following {len(essays)} top-rated essays on the topic of {domain_info.get('name', domain_name)} into a single cohesive essay. 
+    
+    ## Guidelines:
+    1. Create a unified essay that combines the strongest points, insights, and analyses from each source essay
+    2. Maintain a coherent structure with clear introduction, body, and conclusion
+    3. Ensure the synthesized essay is comprehensive but concise
+    4. Preserve the academic tone and depth of the original essays
+    5. Do not simply concatenate or summarize the essays - create an integrated work that draws from all sources
+    6. Include novel connections between ideas across different essays when possible
+    
+    ## Source Essays:
+    
+    """
+    
+    for model, essay in essays.items():
+        synthesis_prompt += f"\n### Essay by {model}\n\n{essay}\n\n"
+    
+    synthesis_prompt += f"""
+    ## Synthesis Task:
+    
+    Produce a single cohesive essay that represents the best elements from all source essays. The final product should be a stand-alone essay that could be read independently without any reference to the source materials.
+    
+    Title your essay: "Synthesized Essay on {domain_info.get('name', domain_name)}"
+    
+    Begin your synthesis now.
+    """
+    
+    # Call the API to synthesize essays
+    print(f"Sending synthesis request to model: {synthesis_model}...")
+    response = call_openrouter_api(synthesis_model, synthesis_prompt)
+    
+    if "error" in response:
+        print(f"Error during synthesis: {response.get('error')}")
+        return
+        
+    synthesized_essay = response.get("choices", [{}])[0].get("message", {}).get("content", "")
+    
+    if not synthesized_essay:
+        print("Error: No essay content received from synthesis model.")
+        return
+    
+    # Create a combined essay file
+    timestamp = time.strftime("%Y%m%d-%H%M%S")
+    combined_filename = os.path.join(results_dir, "essays", f"Synthesized-Essay-{timestamp}.md")
+    
+    with open(combined_filename, 'w') as f:
+        f.write(f"# Synthesized Essay - Top {len(essays)} Models\n\n")
+        f.write(f"_Domain: {domain_info.get('name', domain_name)}_\n\n")
+        f.write(f"_Source Models: {', '.join(essays.keys())}_\n\n")
+        f.write(f"_Synthesis Model: {synthesis_model}_\n\n")
+        f.write(f"_Generated: {time.strftime('%Y-%m-%d %H:%M:%S')}_\n\n")
+        f.write("---\n\n")
+        f.write(synthesized_essay)
+    
+    print(f"\nSynthesis complete! Combined essay saved to: {combined_filename}")
+    
+    # Create a formatted cost report
+    if "cost_info" in response:
+        cost_info = response["cost_info"]
+        print("\nSynthesis Cost Information:")
+        print(f"- Input tokens: {cost_info['input_tokens']}")
+        print(f"- Output tokens: {cost_info['output_tokens']}")
+        print(f"- Total tokens: {cost_info['input_tokens'] + cost_info['output_tokens']}")
+        print(f"- Total cost: ${cost_info['total_cost']:.4f}")
+        print(f"- Duration: {cost_info['duration']:.2f} seconds")
+
+
 def aggregate_existing_results(results_dirs: List[str] = None) -> None:
     """Generate an aggregate report from existing result directories.
     
@@ -3162,6 +3358,12 @@ def main() -> None:
     if args.aggregate_results:
         print("Aggregating results from previous runs...")
         aggregate_existing_results(args.results_dirs)
+        return
+        
+    # Handle synthesizing top essays
+    if args.synthesize_essays:
+        print(f"Synthesizing top essays for domain '{args.domain}'...")
+        synthesize_top_essays(args.domain, args.results_dir, args.num_essays, args.synthesis_model)
         return
     
     # Determine which models to use

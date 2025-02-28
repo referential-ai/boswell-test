@@ -14,8 +14,9 @@ This tool automates the process of running a Boswell Test across multiple LLMs. 
 2. **Peer Evaluation**: Each LLM grades the essays written by all other models, providing detailed feedback and assigning letter grades (A+, A, A-, etc.)
 3. **Bias Analysis**: The system analyzes grading patterns to identify which models grade more strictly or leniently compared to the median
 4. **Boswell Quotient**: A comprehensive score (0-100) is calculated for each model based on performance (grades received), evaluation ability (grading consistency), and efficiency (response time)
-5. **Visualization**: The framework generates charts and graphs showing performance metrics, grading distributions, timing data, and Boswell Quotient rankings
-6. **Comprehensive Reporting**: Results are organized in timestamped directories with easy-to-read tables in multiple formats (Markdown, ASCII, CSV, JSON)
+5. **Essay Synthesis**: The top-performing essays can be synthesized into a single, comprehensive essay that combines the strongest elements from each source
+6. **Visualization**: The framework generates charts and graphs showing performance metrics, grading distributions, timing data, and Boswell Quotient rankings
+7. **Comprehensive Reporting**: Results are organized in timestamped directories with easy-to-read tables in multiple formats (Markdown, ASCII, CSV, JSON)
 
 The Boswell Test methodology offers several advantages over traditional benchmarks:
 - It captures nuanced evaluation capabilities, not just raw performance
@@ -150,6 +151,50 @@ python boswell_test.py --max-retries 5
 python boswell_test.py --output custom_results.json
 ```
 
+### Essay Synthesis
+
+The Boswell Test includes a feature to synthesize the top-performing essays from a domain into a single, cohesive essay that combines the best elements from each source:
+
+```bash
+python boswell_test.py --synthesize-essays --domain pol_sci_1 --synthesis-model anthropic/claude-3-opus --num-essays 4
+```
+
+This command will:
+1. Identify the top 4 essays (based on Boswell Quotient ranking) for the political science domain
+2. Extract their content
+3. Use Claude 3 Opus to synthesize them into a single, comprehensive essay
+4. Save the result in the results directory with metadata
+
+**Synthesis Options**:
+- `--domain`: Which domain to synthesize essays from (default: pol_sci_1)
+- `--num-essays`: How many top essays to synthesize (default: 5)
+- `--synthesis-model`: Which model to use for synthesis (default: openai/o1)
+- `--results-dir`: Specify a results directory (default: auto-detects the most recent for the domain)
+
+The synthesized essay includes:
+- A header showing the source models and metadata
+- A coherent, unified essay that combines the strongest points from each source
+- Preservation of the academic tone and depth of the original essays
+
+Sample synthesized essay header:
+```markdown
+# Synthesized Essay - Top 5 Models
+
+_Domain: Political Science - Level 1 AI Policy Analysis_
+
+_Source Models: o3-mini-high, Qwen-Plus, grok2-1212, DeepSeek-Distill-Qwen-32b, Perplexity: Llama 3.1 Sonar 70B_
+
+_Synthesis Model: anthropic/claude-3-opus_
+
+_Generated: 2025-02-28 13:18:03_
+
+---
+
+[Essay content begins here...]
+```
+
+This feature allows you to distill the best insights and analyses from top-performing models into a single, high-quality essay that captures diverse perspectives on the topic.
+
 ### Model Management
 
 #### Update local models file with available OpenRouter models:
@@ -190,6 +235,7 @@ results/
 │   ├── essays/                    # Individual essay files
 │   │   ├── GPT-4o.md              # Essay with feedback from all graders
 │   │   ├── Claude-3-Opus.md
+│   │   ├── Synthesized-Essay-20240626-123456.md  # Combined essay from top models
 │   │   └── ...
 │   ├── charts/                    # Data visualizations
 │   │   ├── grading_bias.png       # Bar chart of grading bias by model
