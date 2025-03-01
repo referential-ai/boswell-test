@@ -108,7 +108,8 @@ AVAILABLE_DOMAINS = {
     "comp_sci_2": "Computer Science - Level 2: System Design",
     "programming_1": "Programming - Level 1: Coding Fundamentals",
     "programming_2": "Programming - Level 2: Advanced Algorithms",
-    "programming_3": "Programming - Level 3: Competitive Programming Challenges"
+    "programming_3": "Programming - Level 3: Competitive Programming Challenges",
+    "humanities_1": "Humanities - Level 1: Social Philosophy"
 }
 
 
@@ -810,10 +811,10 @@ def run_boswell_test(domain_name: str, output_file: str, selected_models: List[s
             
             results["grades"][grader_name] = {}
         
-        # Create tasks for each author-grader pair (excluding self-grading)
+        # Create tasks for each author-grader pair (including self-grading)
         for author, essay in results["essays"].items():
-            if grader_name != author:  # Skip self-grading
-                grading_tasks.append((grader, author, essay))
+            # Allow self-grading (no longer skip when grader_name == author)
+            grading_tasks.append((grader, author, essay))
     
     # Use ThreadPoolExecutor to run grading concurrently
     # Limit to 10 concurrent tasks to avoid overwhelming the API
@@ -1981,10 +1982,7 @@ def generate_ascii_table(results: Dict[str, Any], models: List[str]) -> str:
         row = f"{author:{model_width}} |"
         
         for grader in models:
-            if grader == author:
-                # Self-grade
-                grade_display = "---"
-            elif grader in results["grades"] and author in results["grades"][grader]:
+            if grader in results["grades"] and author in results["grades"][grader]:
                 grade_data = results["grades"][grader][author]
                 letter_grade = grade_data["grade"]
                 numeric_grade = grade_data["numeric_grade"]
@@ -2033,10 +2031,7 @@ def generate_markdown_table(results: Dict[str, Any], models: List[str]) -> str:
         grades = []
         
         for grader in models:
-            if grader == author:
-                # Self-grade
-                grades.append("---")
-            elif grader in results["grades"] and author in results["grades"][grader]:
+            if grader in results["grades"] and author in results["grades"][grader]:
                 grade_data = results["grades"][grader][author]
                 letter_grade = grade_data["grade"]
                 numeric_grade = grade_data["numeric_grade"]
@@ -2078,10 +2073,7 @@ def generate_csv_table(results: Dict[str, Any], models: List[str]) -> str:
         grades = []
         
         for grader in models:
-            if grader == author:
-                # Self-grade
-                grades.append("---")
-            elif grader in results["grades"] and author in results["grades"][grader]:
+            if grader in results["grades"] and author in results["grades"][grader]:
                 grade_data = results["grades"][grader][author]
                 letter_grade = grade_data["grade"]
                 numeric_grade = grade_data["numeric_grade"]
