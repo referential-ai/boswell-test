@@ -37,6 +37,9 @@ wheels/
 boswell_results*.json
 openrouter_models.json
 
+# API response cache
+.cache/
+
 # Editor and OS files
 .idea/
 .vscode/

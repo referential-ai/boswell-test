@@ -6,6 +6,46 @@ The Boswell Test is an automated tool for comparing Large Language Models (LLMs)
 
 ![Aggregate Boswell Quotient Rankings](results/20250227-200756-aggregate/charts/aggregate_boswell_quotient.png)
 
+## 🚀 New Modular Structure
+
+This repository now features a fully modular architecture for better maintainability and extensibility. See [MODULAR_README.md](MODULAR_README.md) for details on the new structure and features.
+
+**Key Improvements:**
+- Clean package structure with separated concerns
+- Response caching system to improve performance and reduce costs
+- Enhanced reporting capabilities
+- Domain creation utilities
+- Expanded free model support with 12 additional LLMs
+- Improved documentation and tooling
+
+## 🚦 Quick Start
+
+Get up and running with the Boswell Test framework in minutes:
+
+```bash
+# Clone the repository
+git clone https://github.com/alanwilhelm/botwell.git
+cd botwell
+
+# Create a virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install the package
+pip install -e .
+
+# Set your API key
+export OPENROUTER_API_KEY="your_api_key_here"
+
+# Run a simple test with free models
+botwell --domain pol_sci_1 --free
+
+# Generate a summary report
+python generate_summary_report.py --latest
+```
+
+See [MODULAR_README.md](MODULAR_README.md) for more detailed instructions and advanced usage.
+
 ## 🌟 Introduction: How It Works
 
 This tool automates the process of running a Boswell Test across multiple LLMs. Here's how it works:

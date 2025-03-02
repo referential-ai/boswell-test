@@ -37,6 +37,7 @@ if not API_KEY:
 # Model configurations - customize as needed
 # Only models verified to work with OpenRouter are included
 MODELS = [
+    # Original models
     {"name": "GPT-4o", "model_id": "openai/gpt-4o"},
     {"name": "Claude-3-Opus", "model_id": "anthropic/claude-3-opus"},
     {"name": "Claude-3-Sonnet", "model_id": "anthropic/claude-3-sonnet"},
@@ -58,12 +59,27 @@ MODELS = [
     {"name": "Perplexity: Llama 3.1 Sonar 70B", "model_id": "perplexity/llama-3.1-sonar-large-128k-chat"},
     {"name": "Perplexity: Llama 3.1 Sonar 8B Online", "model_id": "perplexity/llama-3.1-sonar-small-128k-online"},
     {"name": "Gemini Flash 2.0", "model_id": "google/gemini-2.0-flash-001"},
-    {"name": "Gemini Pro 1.5", "model_id": "google/gemini-pro-1.5"}
+    {"name": "Gemini Pro 1.5", "model_id": "google/gemini-pro-1.5"},
+    
+    # New free models
+    {"name": "Moonshot AI: Moonlight 16b A3b Instruct (free)", "model_id": "moonshotai/moonlight-16b-a3b-instruct:free"},
+    {"name": "Nous: DeepHermes 3 Llama 3 8B Preview (free)", "model_id": "nousresearch/deephermes-3-llama-3-8b-preview:free"},
+    {"name": "Google: Gemini Flash Lite 2.0 Preview (free)", "model_id": "google/gemini-2.0-flash-lite-preview-02-05:free"},
+    {"name": "Google: Gemini Pro 2.0 Experimental (free)", "model_id": "google/gemini-2.0-pro-exp-02-05:free"},
+    {"name": "Dolphin3.0 R1 Mistral 24B (free)", "model_id": "cognitivecomputations/dolphin3.0-r1-mistral-24b:free"},
+    {"name": "DeepSeek: R1 (free)", "model_id": "deepseek/deepseek-r1:free"},
+    {"name": "Mistral: Mistral Small 3 (free)", "model_id": "mistralai/mistral-small-24b-instruct-2501:free"},
+    {"name": "Meta: Llama 3.1 8B Instruct (free)", "model_id": "meta-llama/llama-3.1-8b-instruct:free"},
+    {"name": "Meta: Llama 3.3 70B Instruct (free)", "model_id": "meta-llama/llama-3.3-70b-instruct:free"},
+    {"name": "NVIDIA: Llama 3.1 Nemotron 70B Instruct (free)", "model_id": "nvidia/llama-3.1-nemotron-70b-instruct:free"},
+    {"name": "Mistral: Mistral Nemo (free)", "model_id": "mistralai/mistral-nemo:free"},
+    {"name": "Meta: Llama 3.2 1B Instruct (free)", "model_id": "meta-llama/llama-3.2-1b-instruct:free"}
 ]
 
 
 # Define a list of free/widely accessible models for use with the --free flag
 FREE_MODELS = [
+    # Original free models
     "GPT-4o-mini",
     "Llama-3-8B",
     "GPT-3.5-Turbo",
@@ -71,7 +87,21 @@ FREE_MODELS = [
     "Qwen-Plus",
     "Qwen-Turbo",
     "Perplexity: Llama 3.1 Sonar 8B Online",
-    "Gemini Flash 2.0"
+    "Gemini Flash 2.0",
+    
+    # Newer free models
+    "Moonshot AI: Moonlight 16b A3b Instruct (free)",
+    "Nous: DeepHermes 3 Llama 3 8B Preview (free)",
+    "Google: Gemini Flash Lite 2.0 Preview (free)",
+    "Google: Gemini Pro 2.0 Experimental (free)",
+    "Dolphin3.0 R1 Mistral 24B (free)",
+    "DeepSeek: R1 (free)",
+    "Mistral: Mistral Small 3 (free)",
+    "Meta: Llama 3.1 8B Instruct (free)",
+    "Meta: Llama 3.3 70B Instruct (free)",
+    "NVIDIA: Llama 3.1 Nemotron 70B Instruct (free)",
+    "Mistral: Mistral Nemo (free)",
+    "Meta: Llama 3.2 1B Instruct (free)"
 ]
 
 # Define models to skip when using --free flag (premium models)
@@ -418,18 +448,24 @@ def load_domain(domain_name: str) -> Tuple[str, str, Dict[str, str]]:
         sys.exit(1)
 
 
-def create_results_directory(domain_name: str, timestamp: str) -> Tuple[str, str]:
+def create_results_directory(domain_name: str, timestamp: str, is_free_run: bool = False) -> Tuple[str, str]:
     """Create a timestamped directory for results."""
     # Create base results directory if it doesn't exist
     if not os.path.exists("results"):
         os.makedirs("results")
     
     # Create timestamped directory for this run
-    run_dir = f"results/{timestamp}-{domain_name}"
+    # Include "free" in the directory name if it's a free run
+    free_tag = "-free" if is_free_run else ""
+    run_dir = f"results/{timestamp}-{domain_name}{free_tag}"
     essays_dir = f"{run_dir}/essays"
     
     os.makedirs(run_dir, exist_ok=True)
     os.makedirs(essays_dir, exist_ok=True)
+    
+    # Debug message
+    print(f"Created results directory: {run_dir}")
+    print(f"Free run: {is_free_run}")
     
     return run_dir, essays_dir
 
@@ -673,7 +709,7 @@ def get_essay_from_model(model: Dict[str, str], essay_prompt: str, max_retries: 
 
 
 def run_boswell_test(domain_name: str, output_file: str, selected_models: List[str] = None, 
-                 skip_verification: bool = False, max_retries: int = 3) -> Dict[str, Any]:
+                 skip_verification: bool = False, max_retries: int = 3, is_free_run: bool = False) -> Dict[str, Any]:
     """Run the full Boswell Test and return results."""
     # Start timing the entire process
     run_start_time = time.time()
@@ -736,7 +772,8 @@ def run_boswell_test(domain_name: str, output_file: str, selected_models: List[s
         "selected_models": [m["name"] for m in models_to_use],
         "run_timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
         "cost": cost_tracking,  # Add cost tracking
-        "timing": timing_tracking  # Add timing tracking
+        "timing": timing_tracking,  # Add timing tracking
+        "is_free_run": is_free_run  # Track if this is a free run
     }
     
     # Step 1: Get essays from each model concurrently
@@ -787,7 +824,15 @@ def run_boswell_test(domain_name: str, output_file: str, selected_models: List[s
     if len(results["essays"]) < 2:
         print("Error: Not enough valid essays received to perform grading (minimum 2 required).")
         print("Saving partial results and exiting.")
+        
+        # Still create a results directory to save the partial results
+        run_dir, essays_dir = create_results_directory(domain_name, timestamp, results["is_free_run"])
+        results["results_dir"] = run_dir
+        
+        # Save the partial results
         save_results(results, output_file)
+        save_results(results, f"{run_dir}/partial_results.json")
+        
         return results
     
     # Step 2: Grade each essay with each model concurrently
@@ -900,7 +945,7 @@ def run_boswell_test(domain_name: str, output_file: str, selected_models: List[s
     file_gen_start_time = time.time()
     
     # Use the timestamp from the beginning of the run
-    run_dir, essays_dir = create_results_directory(domain_name, timestamp)
+    run_dir, essays_dir = create_results_directory(domain_name, timestamp, results["is_free_run"])
     
     for author in results["essays"].keys():
         # Get all grades for this author
@@ -2366,7 +2411,8 @@ def run_all_domains(args) -> None:
                 output_file=domain_output,
                 selected_models=models_to_use,
                 skip_verification=args.skip_verification,
-                max_retries=args.max_retries
+                max_retries=args.max_retries,
+                is_free_run=args.free
             )
             
             # Store results
@@ -3384,7 +3430,8 @@ def main() -> None:
         output_file=args.output,
         selected_models=models_to_use,
         skip_verification=args.skip_verification,
-        max_retries=args.max_retries
+        max_retries=args.max_retries,
+        is_free_run=args.free
     )
     
     # Print summary
