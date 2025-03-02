@@ -18,6 +18,8 @@ This repository now features a fully modular architecture for better maintainabi
 - Expanded free model support with 12 additional LLMs
 - Improved documentation and tooling
 
+For detailed documentation, see the [docs/](docs/) directory.
+
 ## 🚦 Quick Start
 
 Get up and running with the Boswell Test framework in minutes:
@@ -44,7 +46,7 @@ botwell --domain pol_sci_1 --free
 python generate_summary_report.py --latest
 ```
 
-See [MODULAR_README.md](MODULAR_README.md) for more detailed instructions and advanced usage.
+See [docs/usage/quick_start.md](docs/usage/quick_start.md) for more details and [docs/usage/advanced_usage.md](docs/usage/advanced_usage.md) for advanced usage.
 
 ## 🌟 Introduction: How It Works
 
