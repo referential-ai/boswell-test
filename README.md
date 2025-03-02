@@ -8,7 +8,7 @@ The Boswell Test is an automated tool for comparing Large Language Models (LLMs)
 
 ## 🚀 New Modular Structure
 
-This repository now features a fully modular architecture for better maintainability and extensibility. See [MODULAR_README.md](MODULAR_README.md) for details on the new structure and features.
+This repository now features a fully modular architecture for better maintainability and extensibility. Full details are available in the [docs/technical/architecture.md](docs/technical/architecture.md) documentation.
 
 **Key Improvements:**
 - Clean package structure with separated concerns
@@ -46,7 +46,7 @@ botwell --domain pol_sci_1 --free
 python generate_summary_report.py --latest
 ```
 
-See [docs/usage/quick_start.md](docs/usage/quick_start.md) for more details and [docs/usage/advanced_usage.md](docs/usage/advanced_usage.md) for advanced usage.
+See [docs/usage/quick_start.md](docs/usage/quick_start.md) for more details and [docs/usage/advanced_usage.md](docs/usage/advanced_usage.md) for advanced usage scenarios.
 
 ## 🌟 Introduction: How It Works
 
