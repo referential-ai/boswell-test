@@ -348,7 +348,7 @@ def generate_aggregate_visualizations(aggregated_data: Dict[str, Any], aggregate
     for component in components:
         # Convert raw scores to weighted scores (0-25 points each)
         weight = component_weights.get(component, 0.25)
-        weighted_scores = [aggregated_data["model_scores"][model].get("average_components", {}).get(component, 0) * weight for model in sorted_models]
+        weighted_scores = [aggregated_data["model_scores"][model].get("aggregated_components", {}).get(component, 0) * weight for model in sorted_models]
         
         ax.barh(sorted_models, weighted_scores, left=left, height=0.7,
                 label=f"{component.capitalize()} ({int(weight*100)}%)", color=component_colors[component])

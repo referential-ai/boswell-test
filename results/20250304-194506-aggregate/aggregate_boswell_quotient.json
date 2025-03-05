@@ -1,5 +1,5 @@
 {
-  "timestamp": "20250304-193440",
+  "timestamp": "20250304-194506",
   "aggregated_data": {
     "model_scores": {
       "o3-mini-high": {
@@ -26,7 +26,8 @@
         "aggregated_components": {
           "performance": 86.04651162790698,
           "evaluation": 85.0,
-          "efficiency": 64.19363688542099
+          "efficiency": 64.19363688542099,
+          "empathy": 44.333333333333336
         },
         "consistency": 97.2,
         "domain_count": 2,
@@ -57,7 +58,8 @@
         "aggregated_components": {
           "performance": 86.04651162790698,
           "evaluation": 79.99999999999999,
-          "efficiency": 56.278528300465624
+          "efficiency": 56.278528300465624,
+          "empathy": 50.0
         },
         "consistency": 97.60000000000001,
         "domain_count": 2,
@@ -88,7 +90,8 @@
         "aggregated_components": {
           "performance": 86.04651162790698,
           "evaluation": 54.999999999999986,
-          "efficiency": 55.440250907627686
+          "efficiency": 55.440250907627686,
+          "empathy": 46.0
         },
         "consistency": 98.9,
         "domain_count": 2,
@@ -118,7 +121,8 @@
         "aggregated_components": {
           "performance": 81.3953488372093,
           "evaluation": 90.0,
-          "efficiency": 84.02031698822672
+          "efficiency": 84.02031698822672,
+          "empathy": 48.666666666666664
         },
         "consistency": 94.2,
         "domain_count": 2,
@@ -149,7 +153,8 @@
         "aggregated_components": {
           "performance": 81.3953488372093,
           "evaluation": 100.0,
-          "efficiency": 61.56107439398711
+          "efficiency": 61.56107439398711,
+          "empathy": 54.0
         },
         "consistency": 93.0,
         "domain_count": 2,
@@ -180,7 +185,8 @@
         "aggregated_components": {
           "performance": 81.3953488372093,
           "evaluation": 100.0,
-          "efficiency": 51.826587859812086
+          "efficiency": 51.826587859812086,
+          "empathy": 53.0
         },
         "consistency": 91.1,
         "domain_count": 2,
@@ -211,7 +217,8 @@
         "aggregated_components": {
           "performance": 81.97674418604652,
           "evaluation": 54.999999999999986,
-          "efficiency": 51.336851796461985
+          "efficiency": 51.336851796461985,
+          "empathy": 45.0
         },
         "consistency": 93.80000000000001,
         "domain_count": 2,
@@ -241,7 +248,8 @@
         "aggregated_components": {
           "performance": 86.04651162790698,
           "evaluation": 100.0,
-          "efficiency": 36.10526653149037
+          "efficiency": 36.10526653149037,
+          "empathy": 28.333333333333332
         },
         "consistency": 91.1,
         "domain_count": 2,
@@ -254,9 +262,10 @@
       "pol_sci_1"
     ],
     "component_weights": {
-      "performance": 0.7,
-      "evaluation": 0.2,
-      "efficiency": 0.1
+      "performance": 0.25,
+      "evaluation": 0.25,
+      "efficiency": 0.25,
+      "empathy": 0.25
     }
   },
   "source_domains": [

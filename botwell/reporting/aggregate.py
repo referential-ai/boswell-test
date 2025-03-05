@@ -24,10 +24,11 @@ def aggregate_boswell_quotient(domain_results: Dict[str, Dict[str, Any]]) -> Dic
     aggregated = {
         "model_scores": {},
         "domains_analyzed": list(domain_results.keys()),
-        "component_weights": {
-            "performance": 0.70,
-            "evaluation": 0.20,
-            "efficiency": 0.10
+        "component_weights": {  
+            "performance": 0.25,
+            "evaluation": 0.25,
+            "efficiency": 0.25,
+            "empathy": 0.25
         }
     }
     
@@ -68,7 +69,8 @@ def aggregate_boswell_quotient(domain_results: Dict[str, Dict[str, Any]]) -> Dic
             all_components = {
                 "performance": [],
                 "evaluation": [],
-                "efficiency": []
+                "efficiency": [],
+                "empathy": []
             }
             
             # Collect component scores from all domains
