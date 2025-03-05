@@ -566,7 +566,7 @@ This file contains everything needed to reconstruct the entire test session.
 
 Below are results from a recent Boswell Test run in the Computer Science domain (system design - February 2025), showing median grades for each model:
 
-| Model                                  | Median Grade | Sample of Grades Received                  |
+| Model                                  | Median Grade | Sample of Grades Received                 |
 |----------------------------------------|--------------|-------------------------------------------|
 | GPT-3.5-Turbo                          | B+           | A, A-, B+, B, B+, B-, B, B-, B+, A-       |
 | Llama-3-8B                             | B+           | A, B+, B-, B-, C+, B, B-, B, B+, A        |
@@ -577,7 +577,9 @@ Below are results from a recent Boswell Test run in the Computer Science domain 
 | Claude-3.7-Sonnet                      | A-           | A-, B+, A-, B+, A-, B+, A-, B+, A-, A     |
 | Claude-3.7-Sonnet-thinking             | A-           | A-, B-, A-, B+, A-, B+, A, B+, B+, A      |
 
+
 Additionally, the system now supports many more free models, including:
+```
 |----------------------------------------|--------------|-------------------------------------------|
 | GPT-3.5-Turbo                          | B+           | A, A-, B+, B, B+, B-, B, B-, B+, A-       |
 | Llama-3-8B                             | B+           | A, B+, B-, B-, C+, B, B-, B, B+, A        |
@@ -592,7 +594,7 @@ Additionally, the system now supports many more free models, including:
 | o1                                     | A-           | A-, A+, B, B+, A-, B+, A-, B+, A-, A      |
 | o1-mini                                | B+           | A, B+, A-, B, B+, B+, A, B+, B+, A-       |
 | o3-mini-high                           | B+           | A, B+, A-, A-, A-, B+, A-, B+, B+, A-     |
-
+```
 New free models available include:
 - Meta: Llama 3.1 8B Instruct
 - Meta: Llama 3.3 70B Instruct
