@@ -43,7 +43,7 @@ export OPENROUTER_API_KEY="your_api_key_here"
 botwell --domain pol_sci_1 --free
 
 # Generate a summary report
-python generate_summary_report.py --latest
+botwell report --latest
 ```
 
 See [docs/usage/quick_start.md](docs/usage/quick_start.md) for more details and [docs/usage/advanced_usage.md](docs/usage/advanced_usage.md) for advanced usage scenarios.
@@ -87,6 +87,14 @@ The framework includes multiple testing domains, each with different difficulty 
   - `pol_sci_1`: Level 1: AI policy analysis
   - `pol_sci_2`: Level 2: AI governance analysis with rigorous grading
 
+- **Programming**
+  - `programming_1`: Level 1: Coding Fundamentals
+  - `programming_2`: Level 2: Advanced Algorithms
+  - `programming_3`: Level 3: Competitive Programming Challenges
+
+- **Humanities**
+  - `humanities_1`: Level 1: Social Philosophy
+
 - **Computer Science**
   - `comp_sci_1`: Level 1: Algorithm analysis and complexity
   - `comp_sci_2`: Level 2: System design for distributed applications
@@ -123,7 +131,9 @@ The framework includes multiple testing domains, each with different difficulty 
 
 4. **Install dependencies**:
    ```bash
+   # Either install dependencies directly
    pip install -r requirements.txt
+   # Or install as a package (recommended): pip install -e .
    ```
 
 5. **Set your OpenRouter API key**:
@@ -138,8 +148,10 @@ The framework includes multiple testing domains, each with different difficulty 
 Run a test with default settings:
 
 ```bash
-python boswell_test.py
+botwell
 ```
+
+This uses the newly added command-line interface that provides a simpler way to run tests and manage the framework.
 
 This will run the basic political science test with all verified models.
 
@@ -148,13 +160,13 @@ This will run the basic political science test with all verified models.
 #### Select a specific domain:
 
 ```bash
-python boswell_test.py --domain pol_sci_2
+botwell --domain pol_sci_2
 ```
 
 #### Run tests on all available domains:
 
 ```bash
-python boswell_test.py --all-domains
+botwell --all-domains
 ```
 
 This will sequentially run tests on all domains with the same set of models, creating separate results directories for each domain. When multiple domains are tested, it will also generate:
@@ -166,31 +178,31 @@ This will sequentially run tests on all domains with the same set of models, cre
 #### Use specific models:
 
 ```bash
-python boswell_test.py --models "GPT-4o" "Claude-3-Opus" "Claude-3.7-Sonnet"
+botwell --models "GPT-4o" "Claude-3-Opus" "Claude-3.7-Sonnet"
 ```
 
 #### Combine options:
 
 ```bash
-python boswell_test.py --all-domains --models "GPT-4o" "Claude-3.7-Sonnet" --skip-verification
+botwell --all-domains --models "GPT-4o" "Claude-3.7-Sonnet" --skip-verification
 ```
 
 #### Skip model verification (faster but less reliable):
 
 ```bash
-python boswell_test.py --skip-verification
+botwell --skip-verification
 ```
 
 #### Configure retry attempts for API calls:
 
 ```bash
-python boswell_test.py --max-retries 5
+botwell --max-retries 5
 ```
 
 #### Custom output file (in addition to organized results directory):
 
 ```bash
-python boswell_test.py --output custom_results.json
+botwell --output custom_results.json
 ```
 
 ### Essay Synthesis
@@ -198,7 +210,7 @@ python boswell_test.py --output custom_results.json
 The Boswell Test includes a feature to synthesize the top-performing essays from a domain into a single, cohesive essay that combines the best elements from each source:
 
 ```bash
-python boswell_test.py --synthesize-essays --domain pol_sci_1 --synthesis-model anthropic/claude-3-opus --num-essays 4
+botwell --synthesize-essays --domain pol_sci_1 --synthesis-model anthropic/claude-3-opus --num-essays 4
 ```
 
 This command will:
@@ -242,7 +254,7 @@ This feature allows you to distill the best insights and analyses from top-perfo
 #### Update local models file with available OpenRouter models:
 
 ```bash
-python boswell_test.py --update-models
+botwell --update-models
 ```
 
 This command fetches the current list of available models from OpenRouter's API and saves them to a local JSON file. The output includes model IDs, context lengths, pricing information, and descriptions.
@@ -250,7 +262,48 @@ This command fetches the current list of available models from OpenRouter's API 
 #### Specify custom models file:
 
 ```bash
-python boswell_test.py --update-models --models-file my_models.json
+botwell --update-models --models-file my_models.json
+```
+
+### Cache Management
+The Boswell Test includes cache management utilities to improve performance and reduce costs. The response caching system stores API responses to avoid redundant API calls, especially useful during development and testing.
+
+```bash
+# View cache statistics
+botwell cache stats
+
+# Clear the entire cache
+botwell cache clear
+
+# Clear only expired cache entries
+botwell cache clear --expired-only
+```
+
+### Domain Creation
+You can create new domain definitions easily with the built-in domain creation utility:
+
+```bash
+botwell create-domain
+```
+
+This interactive tool will guide you through creating a new domain with appropriate prompts for essay generation and grading.
+
+### Report Generation
+
+Reports can now be generated using the built-in report command rather than requiring a separate script execution. This simplifies the workflow and ensures all features are accessible through the same command interface.
+
+
+Generate comprehensive summary reports from test results:
+
+```bash
+# Generate a report for the most recent test results
+botwell report --latest
+
+# Generate a report for a specific results directory
+botwell report --directory results/20250301-145232-pol_sci_1
+
+# Generate reports for all results directories
+botwell report --all
 ```
 
 ### Information Commands
@@ -258,13 +311,16 @@ python boswell_test.py --update-models --models-file my_models.json
 #### List available domains:
 
 ```bash
-python boswell_test.py --list-domains
+botwell --list-domains
 ```
 
 #### List available models:
 
 ```bash
-python boswell_test.py --list-models
+botwell --list-models
+
+# List only free models
+botwell --list-models --free
 ```
 
 ## 📊 Results Organization
@@ -623,11 +679,34 @@ Below are results from a recent Boswell Test run in the Computer Science domain 
 | Claude-3-Sonnet                        | B+           | A, A, B+, B+, B, B-, B+, B, B-, A-        |
 | Claude-3.7-Sonnet                      | A-           | A-, B+, A-, B+, A-, B+, A-, B+, A-, A     |
 | Claude-3.7-Sonnet-thinking             | A-           | A-, B-, A-, B+, A-, B+, A, B+, B+, A      |
+
+Additionally, the system now supports many more free models, including:
+|----------------------------------------|--------------|-------------------------------------------|
+| GPT-3.5-Turbo                          | B+           | A, A-, B+, B, B+, B-, B, B-, B+, A-       |
+| Llama-3-8B                             | B+           | A, B+, B-, B-, C+, B, B-, B, B+, A        |
+| GPT-4o-mini                            | B+           | A-, A, B+, B, B+, B-, A-, B+, B, A-       |
+| GPT-4o                                 | B+           | A, A-, B+, B, B+, B-, A-, B+, B, A-       |
+| Claude-3-Opus                          | B+           | A, B+, B+, B+, B, A-, B+, B+, B-, A-      |
+| Claude-3-Sonnet                        | B+           | A, A, B+, B+, B, B-, B+, B, B-, A-        |
+| Claude-3.7-Sonnet                      | A-           | A-, B+, A-, B+, A-, B+, A-, B+, A-, A     |
+| Claude-3.7-Sonnet-thinking             | A-           | A-, B-, A-, B+, A-, B+, A, B+, B+, A      |
 | Gemini Flash 1.5                       | B+           | A-, B+, B+, B, B+, B, A-, B+, B+, A-      |
 | Gemini Pro 1.5                         | B+           | A, B+, B+, B, B+, B+, A-, B-, B+, A-      |
 | o1                                     | A-           | A-, A+, B, B+, A-, B+, A-, B+, A-, A      |
 | o1-mini                                | B+           | A, B+, A-, B, B+, B+, A, B+, B+, A-       |
 | o3-mini-high                           | B+           | A, B+, A-, A-, A-, B+, A-, B+, B+, A-     |
+
+New free models available include:
+- Meta: Llama 3.1 8B Instruct
+- Meta: Llama 3.3 70B Instruct
+- Meta: Llama 3.2 1B Instruct
+- NVIDIA: Llama 3.1 Nemotron 70B Instruct
+- Mistral: Mistral Small 3
+- Mistral: Mistral Nemo
+- DeepSeek: R1
+- Moonshot AI: Moonlight 16b A3b Instruct
+- Nous: DeepHermes 3 Llama 3 8B Preview
+- Google: Gemini models (Flash Lite 2.0 Preview, Pro 2.0 Experimental)
 
 ### Grading Bias Analysis
 
@@ -800,11 +879,13 @@ The Boswell Test framework includes several features to ensure reliable and effi
 
 ## 🧩 Extending the Framework
 
-### Creating New Domains
+The modular design of the framework makes it easy to extend with new functionality. The code has been refactored into a proper Python package with separated concerns, making it much easier to maintain and extend.
+
+### Creating New Domains Using the CLI
 
 To create a new test domain:
 
-1. Create a new file in the `domains/` directory (e.g., `domains/my_domain.py`)
+1. Use the domain creation tool: `botwell create-domain`
 2. Define `ESSAY_PROMPT`, `GRADING_PROMPT`, and `DOMAIN_INFO` variables
 3. Add the domain to the `AVAILABLE_DOMAINS` dictionary in `boswell_test.py`
 4. The domain will automatically be available via the `--domain` flag
