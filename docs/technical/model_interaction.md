@@ -41,12 +41,11 @@ flowchart TD
         G --> H1[Calculate Performance Scores]
         G --> H2[Analyze Grading Bias]
         G --> H3[Measure Response Times]
-        G --> H4[Evaluate Empathy]
 
         H1 --> I[Calculate Boswell Quotient]
         H2 --> I
         H3 --> I
-        H4 --> I
+        
     end
 
     subgraph Reporting
@@ -67,7 +66,7 @@ flowchart TD
     
     class D1,D2,D3,Dn,F1,F2,F3,Fn model
     class E1,G,K data
-    class H1,H2,H3,H4,I process
+    class H1,H2,H3,I process
 ```
 
 ## Model Interaction Detail
@@ -116,7 +115,6 @@ flowchart LR
         Perf[Performance Scores]
         Bias[Grading Bias Analysis]
         Time[Timing Analysis]
-        Emp[Empathy Evaluation]
         BQ[Boswell Quotient]
     end
 
@@ -182,7 +180,6 @@ flowchart LR
     Perf --> BQ
     Bias --> BQ
     Time --> BQ
-    Emp --> BQ
 
     classDef modelNode fill:#226699,stroke:#fff,stroke-width:3px,color:#fff,font-weight:bold
     classDef essayNode fill:#884488,stroke:#fff,stroke-width:2px,color:#fff,font-weight:bold
@@ -192,37 +189,33 @@ flowchart LR
     class M1,M2,M3,M4 modelNode
     class E1,E2,E3,E4 essayNode
     class G12,G13,G14,G21,G23,G24,G31,G32,G34,G41,G42,G43 gradeNode
-    class Perf,Bias,Time,Emp,BQ analysisNode
+    class Perf,Bias,Time,BQ analysisNode
 ```
 
 ## Boswell Quotient Calculation
 
-This diagram illustrates how the Boswell Quotient is calculated from the four component scores.
+This diagram illustrates how the Boswell Quotient is calculated from the three component scores.
 
 ```mermaid
 flowchart TD
     subgraph Components
         P[Performance Score]
         E[Evaluation Score]
-        Ef[Efficiency Score]
-        Em[Empathy Score]
+        Ef[Efficiency Score]        
     end
     
     subgraph Calculation
-        W1[Weight: 25%]
-        W2[Weight: 25%]
-        W3[Weight: 25%]
-        W4[Weight: 25%]
+        W1[Weight: 33.3%]
+        W2[Weight: 33.3%]
+        W3[Weight: 33.4%]
         
         P --> |×| W1
         E --> |×| W2
         Ef --> |×| W3
-        Em --> |×| W4
         
         W1 --> Sum
         W2 --> Sum
         W3 --> Sum
-        W4 --> Sum
         Sum[Sum of Weighted Scores]
     end
     
@@ -233,8 +226,8 @@ flowchart TD
     classDef weightNode fill:#884488,stroke:#fff,stroke-width:2px,color:#fff,font-weight:bold
     classDef resultNode fill:#66BB66,stroke:#fff,stroke-width:2px,color:#fff,font-weight:bold
     
-    class P,E,Ef,Em componentNode
-    class W1,W2,W3,W4 weightNode
+    class P,E,Ef componentNode
+    class W1,W2,W3 weightNode
     class Sum,BQ,Grade resultNode
 ```
 
