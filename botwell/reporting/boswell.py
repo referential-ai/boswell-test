@@ -3,6 +3,8 @@ Boswell report generation functionality.
 """
 
 from typing import Dict, Any
+from botwell.reporting.tables import generate_boswell_quotient_table
+from botwell.reporting.boswell_quotient import interpret_boswell_quotient
 
 
 def generate_boswell_report(results: Dict[str, Any], quotient_results: Dict[str, Any]) -> str:
@@ -32,7 +34,8 @@ def generate_boswell_report(results: Dict[str, Any], quotient_results: Dict[str,
     component_leaders = {
         "performance": {"model": "", "score": 0},
         "evaluation": {"model": "", "score": 0},
-        "efficiency": {"model": "", "score": 0}
+        "efficiency": {"model": "", "score": 0},
+        "empathy": {"model": "", "score": 0}
     }
     
     for model in sorted_models:
@@ -59,17 +62,15 @@ def generate_boswell_report(results: Dict[str, Any], quotient_results: Dict[str,
         "Named after James Boswell, who was known for his deep understanding and insightful observations of Samuel Johnson, "
         "this quotient aims to measure how well an AI model can serve as an indispensable companion in academic and analytical tasks."
     )
-    lines.append("\nThe Boswell Quotient (0-100) is calculated from three key components:")
-    lines.append("1. **Performance (70%)**: How well the model performs in generating content, based on grades received from peers")
-    lines.append("2. **Evaluation (20%)**: How accurately and consistently the model evaluates others' work")
-    lines.append("3. **Efficiency (10%)**: How quickly and resource-efficiently the model completes tasks")
+    lines.append("\nThe Boswell Quotient (0-100) is calculated from four key components:")
+    lines.append("1. **Performance (25%)**: How well the model performs in generating content, based on grades received from peers")
+    lines.append("2. **Evaluation (25%)**: How accurately and consistently the model evaluates others' work")
+    lines.append("3. **Efficiency (25%)**: How quickly the model completes tasks")
+    lines.append("4. **Empathy (25%)**: How well the model demonstrates emotional intelligence in responses")
     
     # Overall ranking section
     lines.append("\n## Overall Model Rankings")
     lines.append("The table below shows all models ranked by their Boswell Quotient:")
-    
-    # Import needed from reporting.tables
-    from botwell.reporting.tables import generate_boswell_quotient_table
     
     # Add the full table
     lines.append("\n" + generate_boswell_quotient_table(quotient_results))
@@ -144,6 +145,17 @@ def generate_boswell_report(results: Dict[str, Any], quotient_results: Dict[str,
         lines.append(
             f"**{efficiency_leader}** demonstrates superior Efficiency with a score of **{efficiency_score:.1f}**. "
             f"This reflects the model's ability to generate responses and evaluations quickly while using resources effectively."
+        )
+        
+    # Empathy component
+    lines.append("\n### Empathy Component")
+    empathy_leader = component_leaders["empathy"]["model"]
+    empathy_score = component_leaders["empathy"]["score"]
+    
+    if empathy_leader:
+        lines.append(
+            f"**{empathy_leader}** excels in the Empathy component with a score of **{empathy_score:.1f}**. "
+            f"This indicates the model's ability to recognize emotions, validate feelings, and provide supportive responses."
         )
     
     # Observations and insights

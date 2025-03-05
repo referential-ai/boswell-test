@@ -2,7 +2,7 @@
 """
 Domain creation utility for Botwell.
 
-This script helps create new domain definition files for the Boswell test.
+This module helps create new domain definition files for the Boswell test.
 """
 
 import os
@@ -186,30 +186,6 @@ def update_domains_init(domain_id: str, domain_title: str) -> None:
         f.write(updated_content)
 
 
-def parse_args():
-    """Parse command-line arguments."""
-    parser = argparse.ArgumentParser(description="Create a new domain definition file")
-    
-    parser.add_argument("domain_id", type=str,
-                      help="Short ID for the domain (e.g., 'econ_1', 'physics_2')")
-    parser.add_argument("--title", "-t", type=str,
-                      help="Full title of the domain")
-    parser.add_argument("--description", "-d", type=str,
-                      help="Description of the domain")
-    parser.add_argument("--expertise", "-e", type=str,
-                      help="Area of expertise for the system role")
-    parser.add_argument("--question", "-q", type=str,
-                      help="The main essay prompt question")
-    parser.add_argument("--topic", type=str,
-                      help="Short name for the topic (used in grading prompt)")
-    parser.add_argument("--words", "-w", type=int, default=700,
-                      help="Target word count for essays (default: 700)")
-    parser.add_argument("--interactive", "-i", action="store_true",
-                      help="Use interactive mode to prompt for missing values")
-    
-    return parser.parse_args()
-
-
 def prompt_for_value(prompt: str, default: str = None) -> str:
     """Prompt the user for a value with an optional default."""
     if default:
@@ -282,6 +258,30 @@ def interactive_mode(args):
         "topic_short_name": topic_short_name,
         "word_count": word_count
     }
+
+
+def parse_args():
+    """Parse command-line arguments."""
+    parser = argparse.ArgumentParser(description="Create a new domain definition file")
+    
+    parser.add_argument("domain_id", type=str,
+                      help="Short ID for the domain (e.g., 'econ_1', 'physics_2')")
+    parser.add_argument("--title", "-t", type=str,
+                      help="Full title of the domain")
+    parser.add_argument("--description", "-d", type=str,
+                      help="Description of the domain")
+    parser.add_argument("--expertise", "-e", type=str,
+                      help="Area of expertise for the system role")
+    parser.add_argument("--question", "-q", type=str,
+                      help="The main essay prompt question")
+    parser.add_argument("--topic", type=str,
+                      help="Short name for the topic (used in grading prompt)")
+    parser.add_argument("--words", "-w", type=int, default=700,
+                      help="Target word count for essays (default: 700)")
+    parser.add_argument("--interactive", "-i", action="store_true",
+                      help="Use interactive mode to prompt for missing values")
+    
+    return parser.parse_args()
 
 
 def main():

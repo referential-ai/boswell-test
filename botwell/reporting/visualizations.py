@@ -217,7 +217,7 @@ def generate_visualizations(results: Dict[str, Any], run_dir: str) -> None:
         plt.figure(figsize=(14, 10))
         
         # Prepare component data
-        components = ["performance", "evaluation", "efficiency"]
+        components = ["performance", "evaluation", "efficiency", "empathy"]
         component_data = {component: [] for component in components}
         
         for model in sorted_models:
@@ -226,14 +226,14 @@ def generate_visualizations(results: Dict[str, Any], run_dir: str) -> None:
                 component_data[component].append(model_components.get(component, 0))
         
         # Set up the bar chart
-        bar_width = 0.25
+        bar_width = 0.2
         index = np.arange(len(sorted_models))
         
         # Plot each component
         fig, ax = plt.subplots(figsize=(14, 10))
         
         # Set colors for components
-        colors = ['#4CAF50', '#2196F3', '#FF9800']  # Green, Blue, Orange
+        colors = ['#4CAF50', '#2196F3', '#FF9800', '#E91E63']  # Green, Blue, Orange, Pink
         
         # Plot bars for each component
         for i, component in enumerate(components):
@@ -241,7 +241,7 @@ def generate_visualizations(results: Dict[str, Any], run_dir: str) -> None:
                    bar_width, label=component.capitalize(), color=colors[i])
         
         # Configure axes and labels
-        ax.set_yticks(index + bar_width)
+        ax.set_yticks(index + 1.5*bar_width)
         ax.set_yticklabels(sorted_models)
         ax.set_xlabel('Component Score (0-100)')
         ax.set_title('Boswell Quotient Component Breakdown by Model')
@@ -272,6 +272,23 @@ def generate_aggregate_visualizations(aggregated_data: Dict[str, Any], aggregate
     )
     
     scores = [aggregated_data["model_scores"][m]["average_boswell_quotient"] for m in sorted_models]
+    
+    # Get component scores for stacked bars
+    components = ["performance", "evaluation", "efficiency", "empathy"]
+    component_data = {component: [] for component in components}
+    component_weights = aggregated_data.get("component_weights", {
+        "performance": 0.25,
+        "evaluation": 0.25,
+        "efficiency": 0.25,
+        "empathy": 0.25
+    })
+    
+    for model in sorted_models:
+        model_components = aggregated_data["model_scores"][model].get("average_components", {})
+        for component in components:
+            # Scale the component by its weight for the stacked bar
+            value = model_components.get(component, 0) * component_weights.get(component, 0.25)
+            component_data[component].append(value)
     
     # Create bar chart with a colorful gradient
     cmap = plt.cm.viridis  # Choose a colorful colormap
@@ -308,6 +325,51 @@ def generate_aggregate_visualizations(aggregated_data: Dict[str, Any], aggregate
     
     # Save chart
     plt.savefig(f"{charts_dir}/aggregate_boswell_quotient.png", dpi=300)
+    plt.close()
+    
+    # Create component breakdown chart for aggregate data
+    plt.figure(figsize=(14, 10))
+    
+    # Create stacked horizontal bar chart for components
+    fig, ax = plt.subplots(figsize=(14, 10))
+    
+    # Set colors for components
+    component_colors = {
+        "performance": '#4CAF50',  # Green
+        "evaluation": '#2196F3',   # Blue
+        "efficiency": '#FF9800',   # Orange
+        "empathy": '#E91E63'       # Pink
+    }
+    
+    # Initialize left position for each bar
+    left = np.zeros(len(sorted_models))
+    
+    for component in components:
+        # Convert raw scores to weighted scores (0-25 points each)
+        weight = component_weights.get(component, 0.25)
+        weighted_scores = [aggregated_data["model_scores"][model].get("average_components", {}).get(component, 0) * weight for model in sorted_models]
+        
+        ax.barh(sorted_models, weighted_scores, left=left, height=0.7,
+                label=f"{component.capitalize()} ({int(weight*100)}%)", color=component_colors[component])
+        
+        # Update left position for next component
+        left += weighted_scores
+    
+    # Style the chart
+    ax.set_title('Boswell Quotient Component Breakdown (Aggregate)', fontsize=16, fontweight='bold')
+    ax.set_xlabel('Weighted Component Score (0-100 total)', fontsize=12)
+    ax.set_xlim(0, 100)
+    ax.grid(axis='x', linestyle='--', alpha=0.5)
+    ax.legend(loc='upper right')
+    
+    # Background styling
+    ax.set_facecolor('#f8f9fa')
+    fig.set_facecolor('#f8f9fa')
+    
+    plt.tight_layout()
+    
+    # Save component breakdown chart
+    plt.savefig(f"{charts_dir}/aggregate_component_breakdown.png", dpi=300)
     plt.close()
     
     # Domain comparison chart

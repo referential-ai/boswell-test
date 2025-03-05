@@ -7,7 +7,7 @@ from typing import Dict, Any, List
 from statistics import median
 
 from botwell.core.grading import percentage_to_letter_grade, grade_to_percentage, calculate_grading_bias
-from botwell.reporting.quotient import calculate_boswell_quotient
+from botwell.reporting.boswell_quotient import calculate_boswell_quotient
 
 
 def generate_grade_tables(results: Dict[str, Any], run_dir: str) -> None:
@@ -305,12 +305,16 @@ def generate_bias_markdown_table(bias_results: Dict[str, Any]) -> str:
 
 
 def generate_boswell_quotient_table(quotient_results: Dict[str, Any]) -> str:
-    """Generate a Markdown table showing the Boswell Quotient for each model."""
+    """Generate a Markdown table showing the Boswell Quotient for each model.
+    
+    This is a visualization utility that formats Boswell Quotient data as a Markdown table.
+    The core calculation happens in boswell_quotient.py.
+    """
     # Build header
-    header = "| Rank | Model | Boswell Quotient | Grade | Performance | Evaluation | Efficiency |"
+    header = "| Rank | Model | Boswell Quotient | Grade | Performance | Evaluation | Efficiency | Empathy |"
     
     # Build separator
-    separator = "|------|-------|-----------------|-------|------------|------------|------------|"
+    separator = "|------|-------|-----------------|-------|------------|------------|------------|---------|"
     
     # Build rows
     rows = []
@@ -341,7 +345,11 @@ def generate_boswell_quotient_table(quotient_results: Dict[str, Any]) -> str:
         if efficiency != "N/A":
             efficiency = f"{efficiency:.1f}"
         
-        rows.append(f"| {rank} | {model} | {quotient:.1f} | {letter_grade} | {performance} | {evaluation} | {efficiency} |")
+        empathy = components.get("empathy", "N/A")
+        if empathy != "N/A":
+            empathy = f"{empathy:.1f}"
+            
+        rows.append(f"| {rank} | {model} | {quotient:.1f} | {letter_grade} | {performance} | {evaluation} | {efficiency} | {empathy} |")
     
     # Combine everything
     return f"{header}\n{separator}\n" + "\n".join(rows)

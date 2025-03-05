@@ -11,6 +11,10 @@ from typing import List, Dict, Any
 
 from botwell.domains import AVAILABLE_DOMAINS
 from botwell.models.config import MODELS, FREE_MODELS, PREMIUM_MODELS
+from botwell.cmd.list_resources import main as list_resources_main
+from botwell.cmd.cache_manager import main as cache_manager_main
+from botwell.cmd.create_domain import main as create_domain_main
+from botwell.cmd.generate_summary_report import main as generate_summary_report_main
 from botwell.core.test import run_boswell_test
 
 
@@ -19,14 +23,48 @@ def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Boswell Test - LLM Comparative Analysis")
     
     # Main operation modes
-    mode_group = parser.add_mutually_exclusive_group()
+    mode_group = parser.add_argument_group("Main operations")
+    
     mode_group.add_argument("--all-domains", action="store_true",
                         help="Run tests on all available domains")
+    
     mode_group.add_argument("--aggregate-results", action="store_true",
                         help="Generate aggregate statistics from existing results directories")
+    
     mode_group.add_argument("--synthesize-essays", action="store_true",
                         help="Synthesize top essays from a domain into a combined essay")
     
+    # Utility subcommands
+    subparsers = parser.add_subparsers(dest="subcommand", help="Utility commands")
+    
+    # Cache management subcommand
+    cache_parser = subparsers.add_parser("cache", help="Cache management utilities")
+    cache_subparsers = cache_parser.add_subparsers(dest="cache_action", help="Cache action to perform")
+    
+    # Stats subcommand
+    stats_parser = cache_subparsers.add_parser("stats", 
+                             help="Display cache statistics")
+    
+    # Clear subcommand
+    clear_parser = cache_subparsers.add_parser("clear", 
+                              help="Clear the cache (all entries or expired only)")
+    clear_parser.add_argument("--expired-only", "-e", action="store_true",
+                             help="Clear only expired entries (with 'clear' action)")
+    
+    # Domain creation subcommand
+    domain_parser = subparsers.add_parser("create-domain", help="Create a new domain definition")
+    
+    # Summary report generation subcommand
+    report_parser = subparsers.add_parser("report", help="Generate summary reports for test results")
+    report_group = report_parser.add_mutually_exclusive_group(required=True)
+    report_group.add_argument("--directory", "-d", type=str,
+                             help="Generate report for a specific results directory")
+    report_group.add_argument("--all", "-a", action="store_true",
+                             help="Generate reports for all results directories")
+    report_group.add_argument("--latest", "-l", action="store_true",
+                             help="Generate report for the most recent results directory")
+    
+    # Regular CLI arguments
     parser.add_argument("--domain", type=str, choices=AVAILABLE_DOMAINS.keys(),
                         default="pol_sci_1",
                         help="Domain to test or synthesize (default: pol_sci_1)")
@@ -77,11 +115,9 @@ def parse_arguments() -> argparse.Namespace:
 
 def list_domains() -> None:
     """Display available domains."""
-    print("\nAvailable domains:")
-    print("-" * 60)
-    for domain_id, description in AVAILABLE_DOMAINS.items():
-        print(f"{domain_id:<15} | {description}")
-
+    # Use the modularized list_resources functionality
+    from botwell.cmd.list_resources import main as list_resources_main
+    list_resources_main()
 
 def list_models(free_only: bool = False) -> None:
     """Display available models.
@@ -118,31 +154,79 @@ def main() -> None:
     # Handle information modes
     if args.list_domains:
         list_domains()
-        return
+        return 0
     
     if args.list_models:
         list_models(args.free)
-        return
+        return 0
+    
+    # Handle utility subcommands
+    if args.subcommand == "cache":
+        if args.cache_action == "stats":
+            # Use a clean sys.argv to avoid conflicting arguments
+            old_argv = sys.argv
+            sys.argv = ["cache_manager", "stats"]
+            try:
+                cache_manager_main()
+            finally:
+                sys.argv = old_argv
+        elif args.cache_action == "clear":
+            # Override sys.argv to pass proper arguments to the cache manager
+            old_argv = sys.argv
+            sys.argv = ["cache_manager", "clear"]
+            if args.expired_only:
+                sys.argv.append("--expired-only")
+            try:
+                cache_manager_main()
+            finally:
+                sys.argv = old_argv
+        return 0
+    
+    elif args.subcommand == "create-domain":
+        # Use a clean sys.argv
+        old_argv = sys.argv
+        sys.argv = ["create_domain"]
+        try:
+            create_domain_main()
+        finally:
+            sys.argv = old_argv
+        return 0
+    
+    elif args.subcommand == "report":
+        # Override sys.argv to pass proper arguments to the report generator
+        old_argv = sys.argv
+        sys.argv = ["generate_summary_report"]
+        if args.directory:
+            sys.argv.extend(["--directory", args.directory])
+        elif args.all:
+            sys.argv.append("--all")
+        elif args.latest:
+            sys.argv.append("--latest")
+        try:
+            generate_summary_report_main()
+        finally:
+            sys.argv = old_argv
+        return 0
     
     # Handle model management
     if args.update_models:
         from botwell.models.management import update_models_file
         update_models_file(args.models_file)
-        return
+        return 0
         
     # Handle aggregating existing results
     if args.aggregate_results:
         from botwell.reporting.aggregate import aggregate_existing_results
         print("Aggregating results from previous runs...")
         aggregate_existing_results(args.results_dirs)
-        return
+        return 0
         
     # Handle synthesizing top essays
     if args.synthesize_essays:
         from botwell.reporting.synthesis import synthesize_top_essays
         print(f"Synthesizing top essays for domain '{args.domain}'...")
         synthesize_top_essays(args.domain, args.results_dir, args.num_essays, args.synthesis_model)
-        return
+        return 0
     
     # Determine which models to use
     models_to_use = None
@@ -160,7 +244,7 @@ def main() -> None:
     if args.all_domains:
         from botwell.core.test import run_all_domains
         run_all_domains(args)
-        return
+        return 0
     
     # Run the test on a single domain
     print(f"Starting Boswell Test for domain '{args.domain}'...")
@@ -184,7 +268,9 @@ def main() -> None:
     print(f"  - Tables directory: {results['results_dir']}/grades_table.*")
     print(f"  - Essays directory: {results['results_dir']}/essays/")
     print(f"  - Visualizations: {results['results_dir']}/charts/")
+    
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

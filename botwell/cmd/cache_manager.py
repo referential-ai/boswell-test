@@ -2,7 +2,7 @@
 """
 Cache management utility for Botwell.
 
-This script provides commands to manage the API response cache:
+This module provides commands to manage the API response cache:
 1. Clear the entire cache
 2. Clear only expired cache entries
 3. List cache statistics
@@ -183,8 +183,8 @@ def clear_cache(cache_dir: str = ".cache", expired_only: bool = False) -> None:
     print(f"Freed {format_size(freed_space)} of space.")
 
 
-def main():
-    """Command-line entry point."""
+def parse_arguments() -> argparse.Namespace:
+    """Parse command-line arguments for the cache manager."""
     parser = argparse.ArgumentParser(description="Botwell Cache Management Utility")
     
     # Set up subparsers for different commands
@@ -202,7 +202,12 @@ def main():
     stats_parser.add_argument("--cache-dir", type=str, default=".cache",
                             help="Cache directory (default: .cache)")
     
-    args = parser.parse_args()
+    return parser.parse_args()
+
+
+def main() -> None:
+    """Command-line entry point."""
+    args = parse_arguments()
     
     # Default to stats if no command specified
     if not args.command:

@@ -2,7 +2,7 @@
 """
 Generate summary reports for existing Boswell Test results.
 
-This script can:
+This module can:
 1. Generate a summary report for a specified results directory
 2. Generate summary reports for all results directories
 3. Generate a summary report for the most recent results
@@ -108,8 +108,8 @@ def generate_reports(directory: str = None, all_dirs: bool = False, latest: bool
             print(f"\nGenerated {success_count} reports successfully")
 
 
-def main():
-    """Main entry point for the script."""
+def parse_args():
+    """Parse command-line arguments."""
     parser = argparse.ArgumentParser(description="Generate summary reports for Boswell Test results")
     
     # Set up mutually exclusive group
@@ -121,7 +121,12 @@ def main():
     group.add_argument("--latest", "-l", action="store_true",
                       help="Generate report for the most recent results directory")
     
-    args = parser.parse_args()
+    return parser.parse_args()
+
+
+def main():
+    """Main entry point for the script."""
+    args = parse_args()
     
     generate_reports(
         directory=args.directory,

@@ -55,7 +55,7 @@ This tool automates the process of running a Boswell Test across multiple LLMs. 
 1. **Essay Generation**: The system prompts multiple LLMs with the same complex question in a specific domain (like political science or computer science)
 2. **Peer Evaluation**: Each LLM grades the essays written by all other models, providing detailed feedback and assigning letter grades (A+, A, A-, etc.)
 3. **Bias Analysis**: The system analyzes grading patterns to identify which models grade more strictly or leniently compared to the median
-4. **Boswell Quotient**: A comprehensive score (0-100) is calculated for each model based on performance (grades received), evaluation ability (grading consistency), and efficiency (response time)
+4. **Boswell Quotient**: A comprehensive score (0-100) is calculated for each model based on equal weighting of performance (grades received), evaluation ability (grading consistency), and efficiency (response time)
 5. **Essay Synthesis**: The top-performing essays can be synthesized into a single, comprehensive essay that combines the strongest elements from each source
 6. **Visualization**: The framework generates charts and graphs showing performance metrics, grading distributions, timing data, and Boswell Quotient rankings
 7. **Comprehensive Reporting**: Results are organized in timestamped directories with easy-to-read tables in multiple formats (Markdown, ASCII, CSV, JSON)
@@ -512,9 +512,9 @@ The Boswell Quotient is a comprehensive metric (0-100) designed to measure how w
 - **Conclusion**: Summary of most capable AI assistants for the tested domain
 
 **Calculation Components**:
-1. **Performance (50%)**: Based on grades received from peer models
-2. **Evaluation (30%)**: Based on grading accuracy and consistency 
-3. **Efficiency (20%)**: Based on response time and resource usage
+1. **Performance (34%)**: Based on grades received from peer models
+2. **Evaluation (33%)**: Based on grading accuracy and consistency 
+3. **Efficiency (33%)**: Based on response time and resource usage
 
 The Boswell Quotient helps identify which models are most likely to serve as highly capable, balanced AI assistants that would be difficult to replace - models you might feel "lost without," similar to Samuel Johnson's famous quote about Boswell.
 
@@ -746,7 +746,7 @@ From our most recent cross-domain analysis:
 
 #### Component Breakdown
 
-| Model | Overall BQ | Performance (50%) | Evaluation (30%) | Efficiency (20%) | Letter Grade |
+| Model | Overall BQ | Performance (34%) | Evaluation (33%) | Efficiency (33%) | Letter Grade |
 |-------|------------|-------------|------------|------------|--------------|
 | o3-mini-high | 89.8 | 88.5 | 100.0 | 75.3 | B+ |
 | GPT-4o | 89.2 | 84.2 | 100.0 | 82.6 | B+ |

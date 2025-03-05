@@ -6,21 +6,21 @@ The Boswell Quotient is a comprehensive metric (0-100) designed to measure how w
 
 The Boswell Quotient combines three key capabilities that an ideal AI assistant would possess:
 
-1. **Performance (50%)**: Based on grades received from peer models
-2. **Evaluation (30%)**: Based on grading accuracy, consistency, and bias measurement
-3. **Efficiency (20%)**: Based on response time and resource utilization
+1. **Performance (70%)**: Based on grades received from peer models
+2. **Evaluation (20%)**: Based on grading accuracy, consistency, and bias measurement
+3. **Efficiency (10%)**: Based on response time and resource utilization
 
 ## Calculation Components
 
-### Performance (50%)
+### Performance (70%)
 
 This component measures how well a model performs on the essay task itself:
 
 - Based primarily on the grades received from peer models
-- Calculated using a normalized score from the numeric grade equivalents
+- Calculated using a normalized score from the numeric grade equivalents (0-4.3 scale)
 - Higher grades translate to higher performance scores
 
-### Evaluation (30%)
+### Evaluation (20%)
 
 This component measures a model's capability to evaluate other models' work:
 
@@ -28,13 +28,13 @@ This component measures a model's capability to evaluate other models' work:
 - Considers bias measurements (whether it grades too strictly or leniently)
 - Higher consistency and neutrality result in higher evaluation scores
 
-### Efficiency (20%)
+### Efficiency (10%)
 
-This component measures how quickly and cost-effectively a model operates:
+This component measures how quickly a model operates:
 
 - Response time for both essay generation and grading
-- Token usage efficiency (output quality relative to tokens consumed)
-- Cost efficiency (results quality relative to API cost)
+- Equal weighting between essay generation time and grading time
+- Faster times get higher scores relative to the slowest model
 
 ## Sample Output
 
