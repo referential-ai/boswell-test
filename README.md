@@ -2,9 +2,9 @@
 
 The Boswell Test is an automated tool for comparing Large Language Models (LLMs) through peer-review, where models grade each other's essays. This implementation is based on the methodology introduced by Peter Luh in his article ["Is AI Chatbot My Boswell?"](https://peterl168.substack.com/p/is-ai-chatbot-my-boswell) (February 2025).
 
-![Boswell Test Domain Comparison](results/20250304-193440-aggregate/charts/domain_comparison.png)
+![Boswell Test Domain Comparison](results/20250304-194506-aggregate/charts/domain_comparison.png)
 
-![Aggregate Boswell Quotient Rankings](results/20250304-193440-aggregate/charts/aggregate_boswell_quotient.png)
+![Aggregate Boswell Quotient Rankings](results/20250304-194506-aggregate/charts/aggregate_boswell_quotient.png)
 
 ## 🚀 New Modular Structure
 
@@ -12,7 +12,7 @@ This repository now features a fully modular architecture for better maintainabi
 
 **Key Improvements:**
 - Clean package structure with separated concerns
-- Response caching system to improve performance and reduce costs
+- Response caching system to improve performance and reduce redundant API calls
 - Enhanced reporting capabilities
 - Domain creation utilities
 - Expanded free model support with 12 additional LLMs
@@ -57,10 +57,9 @@ This tool automates the process of running a Boswell Test across multiple LLMs. 
 1. **Essay Generation**: The system prompts multiple LLMs with the same complex question in a specific domain (like political science or computer science)
 2. **Peer Evaluation**: Each LLM grades the essays written by all other models, providing detailed feedback and assigning letter grades (A+, A, A-, etc.)
 3. **Bias Analysis**: The system analyzes grading patterns to identify which models grade more strictly or leniently compared to the median
-4. **Boswell Quotient**: A comprehensive score (0-100) is calculated for each model based on equal weighting of performance (grades received), evaluation ability (grading consistency), and efficiency (response time)
-5. **Essay Synthesis**: The top-performing essays can be synthesized into a single, comprehensive essay that combines the strongest elements from each source
-6. **Visualization**: The framework generates charts and graphs showing performance metrics, grading distributions, timing data, and Boswell Quotient rankings
-7. **Comprehensive Reporting**: Results are organized in timestamped directories with easy-to-read tables in multiple formats (Markdown, ASCII, CSV, JSON)
+4. **Boswell Quotient**: A comprehensive score (0-100) is calculated for each model based on equal weighting of performance (grades received), evaluation ability (grading consistency), efficiency (response time), and empathy (emotional intelligence)
+5. **Visualization**: The framework generates charts and graphs showing performance metrics, grading distributions, timing data, and Boswell Quotient rankings
+6. **Comprehensive Reporting**: Results are organized in timestamped directories with easy-to-read tables in multiple formats (Markdown, ASCII, CSV, JSON)
 
 The Boswell Test methodology offers several advantages over traditional benchmarks:
 - It captures nuanced evaluation capabilities, not just raw performance
@@ -207,50 +206,6 @@ botwell --max-retries 5
 botwell --output custom_results.json
 ```
 
-### Essay Synthesis
-
-The Boswell Test includes a feature to synthesize the top-performing essays from a domain into a single, cohesive essay that combines the best elements from each source:
-
-```bash
-botwell --synthesize-essays --domain pol_sci_1 --synthesis-model anthropic/claude-3-opus --num-essays 4
-```
-
-This command will:
-1. Identify the top 4 essays (based on Boswell Quotient ranking) for the political science domain
-2. Extract their content
-3. Use Claude 3 Opus to synthesize them into a single, comprehensive essay
-4. Save the result in the results directory with metadata
-
-**Synthesis Options**:
-- `--domain`: Which domain to synthesize essays from (default: pol_sci_1)
-- `--num-essays`: How many top essays to synthesize (default: 5)
-- `--synthesis-model`: Which model to use for synthesis (default: openai/o1)
-- `--results-dir`: Specify a results directory (default: auto-detects the most recent for the domain)
-
-The synthesized essay includes:
-- A header showing the source models and metadata
-- A coherent, unified essay that combines the strongest points from each source
-- Preservation of the academic tone and depth of the original essays
-
-Sample synthesized essay header:
-```markdown
-# Synthesized Essay - Top 5 Models
-
-_Domain: Political Science - Level 1 AI Policy Analysis_
-
-_Source Models: o3-mini-high, Qwen-Plus, grok2-1212, DeepSeek-Distill-Qwen-32b, Perplexity: Llama 3.1 Sonar 70B_
-
-_Synthesis Model: anthropic/claude-3-opus_
-
-_Generated: 2025-02-28 13:18:03_
-
----
-
-[Essay content begins here...]
-```
-
-This feature allows you to distill the best insights and analyses from top-performing models into a single, high-quality essay that captures diverse perspectives on the topic.
-
 ### Model Management
 
 #### Update local models file with available OpenRouter models:
@@ -268,7 +223,7 @@ botwell --update-models --models-file my_models.json
 ```
 
 ### Cache Management
-The Boswell Test includes cache management utilities to improve performance and reduce costs. The response caching system stores API responses to avoid redundant API calls, especially useful during development and testing.
+The Boswell Test includes cache management utilities to improve performance. The response caching system stores API responses to avoid redundant API calls, especially useful during development and testing.
 
 ```bash
 # View cache statistics
@@ -335,14 +290,12 @@ results/
 │   ├── essays/                    # Individual essay files
 │   │   ├── GPT-4o.md              # Essay with feedback from all graders
 │   │   ├── Claude-3-Opus.md
-│   │   ├── Synthesized-Essay-20240626-123456.md  # Combined essay from top models
 │   │   └── ...
 │   ├── charts/                    # Data visualizations
 │   │   ├── grading_bias.png       # Bar chart of grading bias by model
 │   │   ├── grade_distribution.png # Boxplot of grades received by each model
 │   │   ├── essay_generation_time.png  # Time comparison for essay generation
 │   │   ├── average_grading_time.png   # Time comparison for grading
-│   │   ├── cost_breakdown.png     # Cost analysis per model
 │   │   ├── time_breakdown.png     # Pie chart of process timing
 │   │   ├── boswell_quotient.png   # Bar chart of Boswell Quotient rankings
 │   │   └── boswell_quotient_components.png # Component breakdown analysis
@@ -353,7 +306,6 @@ results/
 │   ├── grading_bias.md            # Markdown table of grading bias analysis
 │   ├── boswell_quotient.md        # Table ranking models by Boswell Quotient
 │   ├── boswell_report.md          # Comprehensive Boswell Quotient analysis report
-│   ├── cost_report.md             # Detailed cost analysis report
 │   ├── timing_report.md           # Detailed timing analysis report  
 │   ├── grades.json                # Structured grade data in JSON
 │   └── full_results.json          # Complete results with all data
@@ -457,75 +409,7 @@ OVERALL   |      B+      | Baseline               |
 
 This analysis helps identify potential biases in how different models evaluate the same content. For example, some models might consistently grade more strictly or leniently than others.
 
-#### 4. Cost Analysis Report
 
-The framework provides detailed cost tracking and analysis:
-
-**Cost Summary Table** (console output):
-```
-=== COST SUMMARY ===
-Total Cost: $1.2086
-Total Tokens: 1,316,454
-Total Duration: 14145.40 seconds
-
-Essay Generation: $0.0519 (4.3%)
-Grading: $1.1567 (95.7%)
-See cost_report.md for detailed breakdown
-```
-
-**Detailed Cost Report** (`cost_report.md`):
-# Boswell Test Cost Report
-
-Run timestamp: 2025-02-26 18:13:58
-Domain: Computer Science - Level 2: System Design
-
-## Summary
-- **Total cost**: $1.2086
-- **Total tokens**: 1,316,454
-- **Total duration**: 14145.40 seconds
-
-## Essay Generation Costs
-| Model | Tokens | Cost | Duration (s) |
-|-------|--------|------|--------------|
-| GPT-3.5-Turbo | 818 | $0.0010 | 4.81 |
-| Llama-3-8B | 1,227 | $0.0016 | 9.89 |
-| GPT-4o-mini | 1,380 | $0.0019 | 12.84 |
-| GPT-4o | 1,263 | $0.0017 | 31.38 |
-| Claude-3-Opus | 1,320 | $0.0018 | 37.39 |
-| Claude-3-Sonnet | 1,642 | $0.0022 | 27.32 |
-| Claude-3.7-Sonnet | 1,465 | $0.0020 | 23.52 |
-| Gemini Flash 1.5 | 1,336 | $0.0018 | 7.79 |
-| Gemini Pro 1.5 | 1,263 | $0.0017 | 20.03 |
-| o1 | 2,428 | $0.0034 | 23.17 |
-| o1-mini | 1,996 | $0.0028 | 9.05 |
-| o3-mini-high | 2,219 | $0.0031 | 20.61 |
-| **TOTAL** | | **$0.0519** | |
-
-## Grading Costs
-| Grader | Essays Graded | Total Tokens | Total Cost | Avg. Cost per Essay |
-|--------|---------------|--------------|------------|---------------------|
-| GPT-3.5-Turbo | 22 | 36,612 | $0.0223 | $0.0010 |
-| Llama-3-8B | 22 | 41,110 | $0.0294 | $0.0013 |
-| GPT-4o-mini | 22 | 47,626 | $0.0392 | $0.0018 |
-| GPT-4o | 22 | 45,577 | $0.0360 | $0.0016 |
-| Claude-3-Opus | 22 | 51,693 | $0.0401 | $0.0018 |
-| Claude-3-Sonnet | 22 | 47,799 | $0.0346 | $0.0016 |
-| Claude-3.7-Sonnet | 22 | 56,741 | $0.0478 | $0.0022 |
-| Gemini Flash 1.5 | 22 | 43,615 | $0.0325 | $0.0015 |
-| Gemini Pro 1.5 | 22 | 46,950 | $0.0374 | $0.0017 |
-| o1 | 22 | 79,314 | $0.0873 | $0.0040 |
-| o1-mini | 22 | 74,479 | $0.0774 | $0.0035 |
-| o3-mini-high | 22 | 96,650 | $0.1133 | $0.0051 |
-| **TOTAL** | | | **$1.1567** | |
-
-## Cost Breakdown by Phase
-| Phase | Cost | Percentage |
-|-------|------|------------|
-| Essay Generation | $0.0519 | 4.3% |
-| Grading | $1.1567 | 95.7% |
-| **TOTAL** | **$1.2086** | **100%** |
-
-This cost reporting helps users understand the economics of running comprehensive model evaluations and make informed decisions about model selection and test size.
 
 #### 4. Data Visualizations (`charts/` directory)
 
@@ -543,9 +427,6 @@ A horizontal bar chart comparing how long each model took to generate its essay,
 **Average Grading Time** (`average_grading_time.png`):
 A horizontal bar chart showing the average time each model took to grade essays from other models.
 
-**Cost Breakdown** (`cost_breakdown.png`):
-A stacked bar chart showing the cost breakdown for each model, split between essay generation costs and grading costs.
-
 **Process Timing** (`time_breakdown.png`):
 A pie chart showing the proportion of time spent on each phase of the test: essay generation, grading, analysis, and file generation.
 
@@ -553,7 +434,7 @@ A pie chart showing the proportion of time spent on each phase of the test: essa
 A horizontal bar chart showing each model's Boswell Quotient score (0-100), ranked from highest to lowest. This visualization provides a quick overview of which models perform best overall when considering performance, evaluation capabilities, and efficiency.
 
 **Boswell Quotient Components** (`boswell_quotient_components.png`):
-A breakdown of each component that contributes to the Boswell Quotient (performance, evaluation, efficiency), showing the relative strengths and weaknesses of each model.
+A breakdown of each component that contributes to the Boswell Quotient (performance, evaluation, efficiency, empathy), showing the relative strengths and weaknesses of each model across all four dimensions.
 
 These visualizations provide at-a-glance insights into model performance, efficiency, and cost-effectiveness across the different test aspects.
 
@@ -570,11 +451,23 @@ The Boswell Quotient is a comprehensive metric (0-100) designed to measure how w
 - **Conclusion**: Summary of most capable AI assistants for the tested domain
 
 **Calculation Components**:
-1. **Performance (34%)**: Based on grades received from peer models
-2. **Evaluation (33%)**: Based on grading accuracy and consistency 
-3. **Efficiency (33%)**: Based on response time and resource usage
+1. **Performance (25%)**: Based on grades received from peer models
+2. **Evaluation (25%)**: Based on grading accuracy and consistency 
+3. **Efficiency (25%)**: Based on response time and resource usage
+4. **Empathy (25%)**: Based on emotional intelligence and supportive responses
 
 The Boswell Quotient helps identify which models are most likely to serve as highly capable, balanced AI assistants that would be difficult to replace - models you might feel "lost without," similar to Samuel Johnson's famous quote about Boswell.
+
+**Empathy Component Details**:
+
+The Empathy component (25% of the Boswell Quotient) evaluates a model's ability to respond appropriately to emotional scenarios across four key dimensions:
+
+1. **Emotion Recognition**: The ability to accurately identify the emotional state expressed in a given scenario
+2. **Validation**: Acknowledging the legitimacy of the emotions being expressed without dismissing or minimizing them
+3. **Perspective-Taking**: Demonstrating understanding of the situation from the user's viewpoint
+4. **Support Provision**: Offering helpful guidance and emotionally appropriate responses
+
+This component recognizes that an indispensable AI companion must not only perform well analytically but also demonstrate emotional intelligence in human interactions.
 
 #### 6. Aggregate Boswell Analysis (Cross-Domain)
 
@@ -623,9 +516,10 @@ This cross-domain analysis is particularly useful for identifying:
   },
   "boswell_quotient": {
     "component_weights": {
-      "performance": 0.5,
-      "evaluation": 0.3,
-      "efficiency": 0.2
+      "performance": 0.25,
+      "evaluation": 0.25,
+      "efficiency": 0.25,
+    "empathy": 0.25
     },
     "model_scores": {
       "GPT-4o": {
@@ -633,7 +527,8 @@ This cross-domain analysis is particularly useful for identifying:
         "components": {
           "performance": 82.0,
           "evaluation": 95.0,
-          "efficiency": 76.0
+          "efficiency": 76.0,
+          "empathy": 75.0
         },
         "rank": 2
       },
@@ -642,7 +537,8 @@ This cross-domain analysis is particularly useful for identifying:
         "components": {
           "performance": 90.0,
           "evaluation": 100.0,
-          "efficiency": 68.0
+          "efficiency": 68.0,
+          "empathy": 85.0
         },
         "rank": 1
       }
@@ -661,7 +557,6 @@ A comprehensive JSON file containing:
 - Run metadata (timestamp, models used, domain info)
 - File paths to all generated artifacts
 - Timing data for all operations
-- Cost tracking information
 
 This file contains everything needed to reconstruct the entire test session.
 
@@ -806,11 +701,12 @@ The Boswell Quotient is a comprehensive metric (0-100) designed to identify the 
 
 ### How it's Calculated
 
-The Boswell Quotient combines three key components:
+The Boswell Quotient combines four key components with equal weighting:
 
-1. **Performance (50%)**: Based on grades received from peer models
-2. **Evaluation (30%)**: Based on grading accuracy, consistency, and bias measurement
-3. **Efficiency (20%)**: Based on response time and resource utilization
+1. **Performance (25%)**: Based on grades received from peer models
+2. **Evaluation (25%)**: Based on grading accuracy, consistency, and bias measurement
+3. **Efficiency (25%)**: Based on response time and resource utilization
+4. **Empathy (25%)**: Based on emotional intelligence and ability to respond appropriately to different emotional scenarios
 
 ### Latest Boswell Quotient Rankings (February 2025)
 
@@ -818,23 +714,27 @@ From our most recent cross-domain analysis:
 
 | Rank | Model | Boswell Quotient | Grade | Domain Count | Consistency | Best Domain | Worst Domain |
 |------|-------|-----------------|-------|--------------|-------------|------------|-------------|
-| 1 | o3-mini-high | 89.8 | B+ | 4 | 95.2 | Computer Science - Level 1: Algorithm Analysis | Political Science - Level 2: AI Governance Analysis |
-| 2 | GPT-4o | 89.2 | B+ | 4 | 90.8 | Computer Science - Level 1: Algorithm Analysis | Political Science - Level 2: AI Governance Analysis |
-| 3 | DeepSeek-R1-Full | 85.2 | B | 4 | 80.7 | Computer Science - Level 1: Algorithm Analysis | Computer Science - Level 2: System Design |
-| 4 | o1 | 83.3 | B | 4 | 90.7 | Computer Science - Level 2: System Design | Political Science - Level 2: AI Governance Analysis |
-| 5 | DeepSeek-Distill-Qwen-32b | 79.1 | C+ | 4 | 80.8 | Computer Science - Level 1: Algorithm Analysis | Political Science - Level 2: AI Governance Analysis |
-| 6 | Claude-3.7-Sonnet-thinking | 71.5 | C- | 4 | 66.3 | Computer Science - Level 1: Algorithm Analysis | Political Science - Level 2: AI Governance Analysis |
+| 1 | GPT-4o | 75.3 | B | 2 | 94.2 | Political Science - Level 1: AI Policy Analysis | Political Science - Level 2: AI Governance Analysis |
+| 2 | grok2-1212 | 74.2 | B | 2 | 93.0 | Political Science - Level 2: AI Governance Analysis | Political Science - Level 1: AI Policy Analysis |
+| 3 | Perplexity: Llama 3.1 Sonar 70B | 71.6 | C | 2 | 91.1 | Political Science - Level 2: AI Governance Analysis | Political Science - Level 1: AI Policy Analysis |
+| 4 | o3-mini-high | 69.9 | C- | 2 | 97.2 | Political Science - Level 2: AI Governance Analysis | Political Science - Level 1: AI Policy Analysis |
+| 5 | o1 | 68.1 | D+ | 2 | 97.6 | Political Science - Level 2: AI Governance Analysis | Political Science - Level 1: AI Policy Analysis |
+| 6 | DeepSeek-R1-Full | 67.1 | D+ | 2 | 91.1 | Political Science - Level 2: AI Governance Analysis | Political Science - Level 1: AI Policy Analysis |
+| 7 | Claude-3.7-Sonnet | 60.7 | F | 2 | 98.9 | Political Science - Level 2: AI Governance Analysis | Political Science - Level 1: AI Policy Analysis |
+| 8 | Qwen-Max | 58.3 | F | 2 | 93.8 | Political Science - Level 1: AI Policy Analysis | Political Science - Level 2: AI Governance Analysis |
 
 #### Component Breakdown
 
-| Model | Overall BQ | Performance (34%) | Evaluation (33%) | Efficiency (33%) | Letter Grade |
-|-------|------------|-------------|------------|------------|--------------|
-| o3-mini-high | 89.8 | 88.5 | 100.0 | 75.3 | B+ |
-| GPT-4o | 89.2 | 84.2 | 100.0 | 82.6 | B+ |
-| DeepSeek-R1-Full | 85.2 | 90.7 | 87.2 | 68.4 | B |
-| o1 | 83.3 | 81.5 | 92.0 | 70.1 | B |
-| DeepSeek-Distill-Qwen-32b | 79.1 | 80.3 | 85.5 | 65.7 | C+ |
-| Claude-3.7-Sonnet-thinking | 71.5 | 91.3 | 60.2 | 45.8 | C- |
+| Model | Overall BQ | Performance (25%) | Evaluation (25%) | Efficiency (25%) | Empathy (25%) | Letter Grade |
+|-------|------------|-------------|------------|------------|------------|--------------|
+| GPT-4o | 75.3 | 81.4 | 90.0 | 84.0 | 48.7 | B |
+| grok2-1212 | 74.2 | 81.4 | 100.0 | 61.6 | 54.0 | B |
+| Perplexity: Llama 3.1 Sonar 70B | 71.6 | 81.4 | 100.0 | 51.8 | 53.0 | C |
+| o3-mini-high | 69.9 | 86.0 | 85.0 | 64.2 | 44.3 | C- |
+| o1 | 68.1 | 86.0 | 80.0 | 56.3 | 50.0 | D+ |
+| DeepSeek-R1-Full | 67.1 | 86.0 | 100.0 | 36.1 | 28.3 | D+ |
+| Claude-3.7-Sonnet | 60.7 | 86.0 | 55.0 | 55.4 | 46.0 | F |
+| Qwen-Max | 58.3 | 82.0 | 55.0 | 51.3 | 45.0 | F |
 
 ### Domain-Specific Leaders
 
@@ -842,24 +742,21 @@ The Boswell Test also reveals which models excel in specific domains:
 
 | Domain | Top Model | Boswell Quotient | Grade |
 |--------|-----------|------------------|-------|
-| Political Science - Level 1: AI Policy Analysis | o3-mini-high | 88.4 | B+ |
-| Political Science - Level 2: AI Governance Analysis | DeepSeek-R1-Full | 91.3 | A- |
-| Computer Science - Level 1: Algorithm Analysis | DeepSeek-R1-Full | 95.6 | A |
-| Computer Science - Level 2: System Design | GPT-4o | 91.4 | A- |
+| Political Science - Level 1: AI Policy Analysis | GPT-4o | 78.2 | B |
+| Political Science - Level 2: AI Governance Analysis | grok2-1212 | 77.7 | B |
 
 ### Consistency vs. Specialization
 
 Some models perform consistently well across all domains, while others specialize in specific areas:
 
 **Most Consistent Models** (Consistency Score):
-- o3-mini-high: 95.2
-- GPT-4o: 90.8
-- o1: 90.7
+- Claude-3.7-Sonnet: 98.9
+- o1: 97.6
+- o3-mini-high: 97.2
 
 **Domain Specialists** (Models with significantly better performance in specific domains):
-- Claude-3.7-Sonnet-thinking: excels in CS Level 1 (26.4 points above its average)
-- DeepSeek-Distill-Qwen-32b: excels in CS Level 1 (17.9 points above its average)
-- DeepSeek-R1-Full: excels in CS Level 1 (13.9 points above its average)
+- GPT-4o: performs 8% better in Political Science Level 1 than Level 2
+- Qwen-Max: performs 11% better in Political Science Level 1 than Level 2
 
 The Boswell Quotient provides a multidimensional view of model capabilities, helping identify which models are likely to serve as the most capable, well-rounded AI assistants across different domains and tasks.
 
@@ -900,21 +797,21 @@ Edit the `MODELS` list in `boswell_test.py` to add or remove models from OpenRou
 2. Add them to the `MODELS` list in the format `{"name": "Model-Name", "model_id": "provider/model-id"}`
 3. The model verification step will automatically filter out any models that aren't available
 
-## 💰 Cost and Performance Considerations
+## 📊 Performance Considerations
 
-Running a full Boswell Test across multiple models and domains can be resource-intensive:
+The Boswell Test framework is optimized for efficient operation with multiple models:
 
-- **API Costs**: A complete run with 20+ models across all domains can cost approximately $5-10 in OpenRouter credits
-- **Runtime**: With concurrency enabled, a full test run takes approximately 4-5 hours for all four domains with 20+ models
-- **Resource Usage**: The framework is optimized for I/O-bound operations and efficiently manages multiple concurrent API calls
-- **Output Size**: Results are comprehensive, with a full run generating several megabytes of data artifacts
-- **Token Usage**: A complete run with 20+ models generates over 5 million tokens across all domains
+- **Concurrent Processing**: Parallel execution of model verification, essay generation, and grading significantly reduces overall runtime
+- **Thread Safety**: Proper locking mechanisms prevent race conditions when updating shared data
+- **Resource Management**: The framework is optimized for I/O-bound operations and efficiently manages multiple concurrent API calls
+- **Scalability**: Successfully tested with 20+ models running in parallel
+- **Comprehensive Results**: A full run generates detailed analysis and visualizations for in-depth insights
 
-You can customize the test scope to reduce costs:
-- Run tests on a single domain instead of all domains
-- Select a smaller subset of models to test
+You can customize the test scope for specific needs:
+- Run tests on a single domain for targeted analysis
+- Select a specific subset of models to test
 - Use the `--skip-verification` flag to bypass the model verification step
-- Consider using more efficient models for testing routines
+- Leverage the caching system to avoid redundant API calls
 
 ## 📝 License
 
