@@ -31,7 +31,7 @@ export OPENROUTER_API_KEY="your_api_key_here"
 botwell --domain pol_sci_1 --free
 
 # Generate a summary report
-python generate_summary_report.py --latest
+botwell report --latest
 ```
 
 ## Viewing Results
@@ -52,5 +52,5 @@ ls -l results/TIMESTAMP-DOMAIN/charts/
 ## Next Steps
 
 - See [advanced_usage.md](advanced_usage.md) for more complex usage scenarios
-- Check [models.md](models.md) for information about available models
+- Use `botwell --list-models` to see information about available models
 - Learn about [domains.md](domains.md) for test domains and how to create your own

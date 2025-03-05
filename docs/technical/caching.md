@@ -44,13 +44,13 @@ The framework includes tools for managing the cache:
 
 ```bash
 # View cache statistics
-python cache_manager.py stats
+botwell cache stats
 
 # Clear expired cache entries
-python cache_manager.py clear --expired-only
+botwell cache clear --expired-only
 
 # Clear all cache entries
-python cache_manager.py clear
+botwell cache clear
 ```
 
 ## Example Cache Statistics

@@ -15,12 +15,12 @@ The framework includes multiple testing domains, each with different difficulty 
 - `comp_sci_2`: Level 2: System design for distributed applications
 
 ### Programming
-- `programming_1`: Level 1: Software engineering best practices
-- `programming_2`: Level 2: Architectural patterns and implementation
-- `programming_3`: Level 3: Advanced system design and optimization
+- `programming_1`: Level 1: Coding Fundamentals
+- `programming_2`: Level 2: Advanced Algorithms
+- `programming_3`: Level 3: Competitive Programming Challenges
 
 ### Humanities
-- `humanities_1`: Level 1: Literary analysis
+- `humanities_1`: Level 1: Social Philosophy
 
 ## Listing Available Domains
 
@@ -32,12 +32,12 @@ botwell --list-domains
 
 ## Creating New Domains
 
-You can create your own custom domains using the `create_domain.py` script:
+You can create your own custom domains using the `create-domain` subcommand:
 
 ### Interactive Mode
 
 ```bash
-python create_domain.py new_domain_name --interactive
+botwell create-domain
 ```
 
 This will guide you through the process of defining:
@@ -46,12 +46,7 @@ This will guide you through the process of defining:
 - Essay question
 - Other necessary parameters
 
-### Command Line Mode
-
-```bash
-python create_domain.py econ_1 --title "Economics - Level 1: Microeconomics" \
-  --expertise "Economics" --question "Analyze the pros and cons of price controls..."
-```
+The tool works in interactive mode, guiding you through the creation process.
 
 ## Domain Structure
 

@@ -73,35 +73,34 @@ botwell --output custom_results.json
 
 ```bash
 # View cache statistics
-python cache_manager.py stats
+botwell cache stats
 
 # Clear expired cache entries
-python cache_manager.py clear --expired-only
+botwell cache clear --expired-only
 
 # Clear all cache entries
-python cache_manager.py clear
+botwell cache clear
 ```
 
 ## Creating New Domains
 
 ```bash
 # Create a new domain definition with interactive prompts
-python create_domain.py new_domain_1 --interactive
+botwell create-domain
 
-# Create a domain with command-line parameters
-python create_domain.py econ_1 --title "Economics - Level 1: Microeconomics" \
-  --expertise "Economics" --question "Analyze the pros and cons of price controls..."
+# The tool will guide you through the interactive process
+# of creating a new domain with appropriate prompts
 ```
 
 ## Working with Results
 
 ```bash
 # Generate a summary report for the most recent test
-python generate_summary_report.py --latest
+botwell report --latest
 
 # Generate reports for all test runs
-python generate_summary_report.py --all
+botwell report --all
 
 # Generate a report for a specific results directory
-python generate_summary_report.py --directory results/20250227-152739-pol_sci_1
+botwell report --directory results/20250227-152739-pol_sci_1
 ```
