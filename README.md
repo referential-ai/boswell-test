@@ -62,7 +62,7 @@ This tool automates the process of running a Boswell Test across multiple LLMs. 
 1. **Essay Generation**: The system prompts multiple LLMs with the same complex question in a specific domain (like political science or computer science)
 2. **Peer Evaluation**: Each LLM grades the essays written by all other models, providing detailed feedback and assigning letter grades (A+, A, A-, etc.)
 3. **Bias Analysis**: The system analyzes grading patterns to identify which models grade more strictly or leniently compared to the median
-4. **Boswell Quotient**: A comprehensive score (0-100) is calculated for each model based on equal weighting of performance (grades received), evaluation ability (grading consistency), efficiency (response time), and empathy (emotional intelligence)
+4. **Boswell Quotient**: A comprehensive score (0-100) is calculated for each model based on equal weighting of performance (grades received), evaluation ability (grading consistency), and efficiency (response time)
 5. **Visualization**: The framework generates charts and graphs showing performance metrics, grading distributions, timing data, and Boswell Quotient rankings
 6. **Comprehensive Reporting**: Results are organized in timestamped directories with easy-to-read tables in multiple formats (Markdown, ASCII, CSV, JSON)
 
@@ -456,23 +456,12 @@ The Boswell Quotient is a comprehensive metric (0-100) designed to measure how w
 - **Conclusion**: Summary of most capable AI assistants for the tested domain
 
 **Calculation Components**:
-1. **Performance (25%)**: Based on grades received from peer models
-2. **Evaluation (25%)**: Based on grading accuracy and consistency 
-3. **Efficiency (25%)**: Based on response time and resource usage
-4. **Empathy (25%)**: Based on emotional intelligence and supportive responses
+1. **Performance (33.3%)**: Based on grades received from peer models
+2. **Evaluation (33.3%)**: Based on grading accuracy and consistency 
+3. **Efficiency (33.3%)**: Based on response time and resource usage
 
 The Boswell Quotient helps identify which models are most likely to serve as highly capable, balanced AI assistants that would be difficult to replace - models you might feel "lost without," similar to Samuel Johnson's famous quote about Boswell.
 
-**Empathy Component Details**:
-
-The Empathy component (25% of the Boswell Quotient) evaluates a model's ability to respond appropriately to emotional scenarios across four key dimensions:
-
-1. **Emotion Recognition**: The ability to accurately identify the emotional state expressed in a given scenario
-2. **Validation**: Acknowledging the legitimacy of the emotions being expressed without dismissing or minimizing them
-3. **Perspective-Taking**: Demonstrating understanding of the situation from the user's viewpoint
-4. **Support Provision**: Offering helpful guidance and emotionally appropriate responses
-
-This component recognizes that an indispensable AI companion must not only perform well analytically but also demonstrate emotional intelligence in human interactions.
 
 #### 6. Aggregate Boswell Analysis (Cross-Domain)
 
@@ -521,10 +510,9 @@ This cross-domain analysis is particularly useful for identifying:
   },
   "boswell_quotient": {
     "component_weights": {
-      "performance": 0.25,
-      "evaluation": 0.25,
-      "efficiency": 0.25,
-    "empathy": 0.25
+      "performance": 0.333,
+      "evaluation": 0.333,
+      "efficiency": 0.334
     },
     "model_scores": {
       "GPT-4o": {
@@ -532,8 +520,7 @@ This cross-domain analysis is particularly useful for identifying:
         "components": {
           "performance": 82.0,
           "evaluation": 95.0,
-          "efficiency": 76.0,
-          "empathy": 75.0
+          "efficiency": 76.0
         },
         "rank": 2
       },
@@ -542,8 +529,7 @@ This cross-domain analysis is particularly useful for identifying:
         "components": {
           "performance": 90.0,
           "evaluation": 100.0,
-          "efficiency": 68.0,
-          "empathy": 85.0
+          "efficiency": 68.0
         },
         "rank": 1
       }
@@ -712,12 +698,11 @@ The Boswell Quotient is a comprehensive metric (0-100) designed to identify the 
 
 ### How it's Calculated
 
-The Boswell Quotient combines four key components with equal weighting:
+The Boswell Quotient combines three key components with equal weighting:
 
-1. **Performance (25%)**: Based on grades received from peer models
-2. **Evaluation (25%)**: Based on grading accuracy, consistency, and bias measurement
-3. **Efficiency (25%)**: Based on response time and resource utilization
-4. **Empathy (25%)**: Based on emotional intelligence and ability to respond appropriately to different emotional scenarios
+1. **Performance (33.3%)**: Based on grades received from peer models
+2. **Evaluation (33.3%)**: Based on grading accuracy, consistency, and bias measurement
+3. **Efficiency (33.3%)**: Based on response time and resource utilization
 
 ### Latest Boswell Quotient Rankings (February 2025)
 
@@ -736,16 +721,16 @@ From our most recent cross-domain analysis:
 
 #### Component Breakdown
 
-| Model | Overall BQ | Performance (25%) | Evaluation (25%) | Efficiency (25%) | Empathy (25%) | Letter Grade |
-|-------|------------|-------------|------------|------------|------------|--------------|
-| GPT-4o | 75.3 | 81.4 | 90.0 | 84.0 | 48.7 | B |
-| grok2-1212 | 74.2 | 81.4 | 100.0 | 61.6 | 54.0 | B |
-| Perplexity: Llama 3.1 Sonar 70B | 71.6 | 81.4 | 100.0 | 51.8 | 53.0 | C |
-| o3-mini-high | 69.9 | 86.0 | 85.0 | 64.2 | 44.3 | C- |
-| o1 | 68.1 | 86.0 | 80.0 | 56.3 | 50.0 | D+ |
-| DeepSeek-R1-Full | 67.1 | 86.0 | 100.0 | 36.1 | 28.3 | D+ |
-| Claude-3.7-Sonnet | 60.7 | 86.0 | 55.0 | 55.4 | 46.0 | F |
-| Qwen-Max | 58.3 | 82.0 | 55.0 | 51.3 | 45.0 | F |
+| Model | Overall BQ | Performance (33.3%) | Evaluation (33.3%) | Efficiency (33.3%) | Letter Grade |
+|-------|------------|-------------|------------|------------|--------------|
+| GPT-4o | 75.3 | 81.4 | 90.0 | 84.0 | B |
+| grok2-1212 | 74.2 | 81.4 | 100.0 | 61.6 | B |
+| Perplexity: Llama 3.1 Sonar 70B | 71.6 | 81.4 | 100.0 | 51.8 | C |
+| o3-mini-high | 69.9 | 86.0 | 85.0 | 64.2 | C- |
+| o1 | 68.1 | 86.0 | 80.0 | 56.3 | D+ |
+| DeepSeek-R1-Full | 67.1 | 86.0 | 100.0 | 36.1 | D+ |
+| Claude-3.7-Sonnet | 60.7 | 86.0 | 55.0 | 55.4 | F |
+| Qwen-Max | 58.3 | 82.0 | 55.0 | 51.3 | F |
 
 ### Domain-Specific Leaders
 
