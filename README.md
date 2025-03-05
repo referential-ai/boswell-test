@@ -44,6 +44,8 @@ botwell --domain pol_sci_1 --free
 
 # Generate a summary report
 botwell report --latest
+
+botwell --domain pol_sci_1 --models "o3-mini-high" "Claude-3.7-Sonnet" "GPT-4o" "o1" "grok2-1212" "Qwen-Max" "Perplexity: Llama 3.1 Sonar 70B" "DeepSeek-R1-Full"
 ```
 
 See [docs/usage/quick_start.md](docs/usage/quick_start.md) for more details and [docs/usage/advanced_usage.md](docs/usage/advanced_usage.md) for advanced usage scenarios.

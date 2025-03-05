@@ -313,11 +313,12 @@ def generate_aggregate_visualizations(aggregated_data: Dict[str, Any], aggregate
     # Add a gradient colorbar for reference
     sm = plt.cm.ScalarMappable(cmap=cmap)
     sm.set_array([])
-    cbar = plt.colorbar(sm, orientation='horizontal', pad=0.1, aspect=40)
-    cbar.set_label('Higher Score → Better Performance', fontsize=10)
     
     # Background styling
     ax = plt.gca()
+    cbar = plt.colorbar(sm, ax=ax, orientation='horizontal', pad=0.1, aspect=40)
+    cbar.set_label('Higher Score → Better Performance', fontsize=10)
+    
     ax.set_facecolor('#f8f9fa')  # Light background
     plt.gcf().set_facecolor('#f8f9fa')
     
