@@ -61,9 +61,9 @@ flowchart TD
         J4 --> K
     end
 
-    classDef model fill:#f96,stroke:#333,stroke-width:2px
-    classDef data fill:#bbf,stroke:#333,stroke-width:2px
-    classDef process fill:#9f6,stroke:#333,stroke-width:2px
+    classDef model fill:#5d8aa8,stroke:#000,stroke-width:2px,color:#fff
+    classDef data fill:#d8bfd8,stroke:#000,stroke-width:2px
+    classDef process fill:#b0e0e6,stroke:#000,stroke-width:2px
     
     class D1,D2,D3,Dn,F1,F2,F3,Fn model
     class E1,G,K data
@@ -184,10 +184,10 @@ flowchart LR
     Time --> BQ
     Emp --> BQ
 
-    classDef modelNode fill:#f96,stroke:#333,stroke-width:2px
-    classDef essayNode fill:#bbf,stroke:#333,stroke-width:2px
-    classDef gradeNode fill:#9f6,stroke:#333,stroke-width:1px
-    classDef analysisNode fill:#fcf,stroke:#333,stroke-width:2px
+    classDef modelNode fill:#5d8aa8,stroke:#000,stroke-width:2px,color:#fff
+    classDef essayNode fill:#d8bfd8,stroke:#000,stroke-width:2px
+    classDef gradeNode fill:#fff0f5,stroke:#000,stroke-width:1px
+    classDef analysisNode fill:#b0e0e6,stroke:#000,stroke-width:2px
     
     class M1,M2,M3,M4 modelNode
     class E1,E2,E3,E4 essayNode
@@ -229,9 +229,9 @@ flowchart TD
     Sum --> BQ[Boswell Quotient]
     BQ --> Grade[Letter Grade]
     
-    classDef componentNode fill:#f96,stroke:#333,stroke-width:2px
-    classDef weightNode fill:#bbf,stroke:#333,stroke-width:1px
-    classDef resultNode fill:#9f6,stroke:#333,stroke-width:2px
+    classDef componentNode fill:#5d8aa8,stroke:#000,stroke-width:2px,color:#fff
+    classDef weightNode fill:#d8bfd8,stroke:#000,stroke-width:1px
+    classDef resultNode fill:#b0e0e6,stroke:#000,stroke-width:2px
     
     class P,E,Ef,Em componentNode
     class W1,W2,W3,W4 weightNode
