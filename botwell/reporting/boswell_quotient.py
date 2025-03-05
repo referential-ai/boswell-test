@@ -36,11 +36,11 @@ def calculate_boswell_quotient(results: Dict[str, Any], models: List[str]) -> Di
     
     # Collect all performance scores (grades received)
     performance_scores = {}
-    max_performance_score = 4.3  # A+ = 4.3
+    max_performance_score = 4.25  # Updated to university standard A+ = 4.25
     
     for model in models:
         if model in results["summary"]:
-            # Get median numeric grade received (on 0-4.3 scale)
+            # Get median numeric grade received (on 0-4.25 scale)
             median_grade = results["summary"][model]["median_numeric"]
             # Convert to 0-100 scale for the performance component
             performance_score = (median_grade / max_performance_score) * 100
@@ -59,8 +59,8 @@ def calculate_boswell_quotient(results: Dict[str, Any], models: List[str]) -> Di
                 
                 # Convert bias to a score (0-100)
                 # Perfect score for no bias, decreasing as bias increases
-                # Bias of 0.7 (very lenient/strict) gives ~40% evaluation score
-                # Bias of 0.3 (slightly lenient/strict) gives ~70% evaluation score
+                # Bias of 0.75 (very lenient/strict) gives ~40% evaluation score
+                # Bias of 0.25 (slightly lenient/strict) gives ~75% evaluation score
                 evaluation_score = max(0, 100 - (bias_magnitude * 100))
                 evaluation_scores[model] = evaluation_score
     
@@ -87,18 +87,21 @@ def calculate_boswell_quotient(results: Dict[str, Any], models: List[str]) -> Di
         for model in models:
             essay_time_score = 0
             grading_time_score = 0
+            efficiency_components = {}
             
             # Essay generation efficiency (faster is better)
             if model in timing_data["essay"]:
                 # Inverse relationship - faster times get higher scores
                 essay_time = timing_data["essay"][model]
                 essay_time_score = max(0, 100 * (1 - (essay_time / max_essay_time)))
+                efficiency_components["essay_time"] = essay_time_score
             
             # Grading efficiency
             if model in avg_grading_times:
                 # Inverse relationship - faster times get higher scores
                 grading_time = avg_grading_times[model]
                 grading_time_score = max(0, 100 * (1 - (grading_time / max_grading_time)))
+                efficiency_components["grading_time"] = grading_time_score
             
             # Combine essay and grading efficiency (equal weight)
             if essay_time_score > 0 or grading_time_score > 0:
@@ -115,7 +118,9 @@ def calculate_boswell_quotient(results: Dict[str, Any], models: List[str]) -> Di
                 
                 total_weight = sum(weights)
                 if total_weight > 0:
-                    efficiency_scores[model] = sum(w * s for w, s in zip(weights, scores)) / total_weight
+                    composite_score = sum(w * s for w, s in zip(weights, scores)) / total_weight
+                    efficiency_scores[model] = composite_score
+                    efficiency_components["composite"] = composite_score
     
     # Calculate the final Boswell Quotient for each model
     for model in models:
@@ -153,7 +158,7 @@ def calculate_boswell_quotient(results: Dict[str, Any], models: List[str]) -> Di
                 
                 # Store results
                 quotient_results["model_scores"][model] = {
-                    "boswell_quotient": round(final_score, 1),
+                    "boswell_quotient": round(final_score, 2),  # Increased precision to 2 decimal places
                     "components": components,
                     "rank": 0  # Will be filled in later
                 }
@@ -185,5 +190,11 @@ def interpret_boswell_quotient(score: float) -> str:
         return "Strong performance with some areas for improvement"
     elif score >= 60:
         return "Capable but with significant limitations"
+    elif score >= 50:
+        return "Limited capability with serious deficiencies"
+    elif score >= 40:
+        return "Significant issues across all dimensions"
+    elif score >= 30:
+        return "Minimal functional capability as an assistant"
     else:
         return "Not recommended for general assistant purposes"

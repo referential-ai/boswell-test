@@ -11,7 +11,7 @@ from typing import List, Dict, Any, Optional
 from botwell.domains import load_domain, AVAILABLE_DOMAINS
 from botwell.models.api import call_openrouter_api
 from botwell.core.files import create_results_directory, save_essay_with_grades, save_results
-from botwell.core.grading import extract_grade, grade_to_numeric, calculate_grading_bias
+from botwell.core.grading import extract_grade, grade_to_numeric, calculate_grading_bias, log_failed_extraction
 from botwell.core.verification import verify_available_models
 from botwell.models.config import MODELS
 from botwell.reporting.tables import generate_grade_tables
@@ -90,6 +90,55 @@ def get_essay_from_model(model: Dict[str, str], essay_prompt: str, max_retries: 
     return result
 
 
+def retry_grade_extraction(grader_id: str, grader_name: str, author: str, essay: str, feedback: str, max_retries: int = 2) -> Dict[str, Any]:
+    """Specialized retry for grade extraction failures.
+    
+    If the initial grading fails to extract a grade, this function sends a followup
+    prompt specifically asking for the grade in the expected format.
+    
+    Args:
+        grader_id: The model ID for the grader
+        grader_name: The name of the grader model
+        author: The name of the essay author
+        essay: The essay content
+        feedback: The original feedback that failed grade extraction
+        max_retries: Maximum number of retries to attempt
+    
+    Returns:
+        Dictionary with grade extraction results
+    """
+    print(f"  Attempting specialized grade extraction retry for {grader_name} grading {author}'s essay...")
+    
+    # Truncate essay to keep prompt size reasonable
+    truncated_essay = essay[:1000] + ("..." if len(essay) > 1000 else "")
+    
+    # Create a specialized prompt focused on extracting just the grade
+    fallback_prompt = f"""
+    You previously provided feedback on an essay but I couldn't find a clear letter grade.
+    Please provide ONLY a letter grade (A+, A, A-, B+, B, B-, C+, C, C-) for the essay in the exact format:
+    
+    Grade: [LETTER GRADE]
+    
+    Original essay for reference:
+    {truncated_essay}
+    
+    Your previous feedback was:
+    {feedback[:300]}...
+    """
+    
+    for retry in range(max_retries):
+        try:
+            response = call_openrouter_api(grader_id, fallback_prompt)
+            clarification = response.get("choices", [{}])[0].get("message", {}).get("content", "")
+            
+            grade = extract_grade(clarification, f"{grader_name}-retry")
+            if grade != "N/A":
+                return {"grade": grade, "numeric_grade": grade_to_numeric(grade), "retry_success": True}
+        except Exception as e:
+            print(f"  Error in grade extraction retry {retry+1}: {e}")
+    
+    return {"grade": "N/A", "numeric_grade": 0.0, "retry_success": False}
+
 def grade_essay(grader: Dict[str, str], author: str, essay: str, grading_prompt: str, max_retries: int) -> Dict[str, Any]:
     """Grade an essay with retry logic.
     
@@ -139,13 +188,25 @@ def grade_essay(grader: Dict[str, str], author: str, essay: str, grading_prompt:
                     result["error"] = "Empty feedback after all retries"
                     break
             
-            # Extract grade from feedback
-            grade = extract_grade(feedback)
-            
+            # Extract grade from feedback with the model name for better logging
+            grade = extract_grade(feedback, grader_name)
+            numeric_grade = grade_to_numeric(grade)
+
+            # If grade extraction failed, try specialized retry
+            retry_result = None
+            if grade == "N/A":
+                print(f"  Failed to extract grade from {grader_name}'s feedback, attempting specialized retry...")
+                retry_result = retry_grade_extraction(
+                    grader_id, grader_name, author, essay, feedback
+                )
+                if retry_result.get("retry_success", False):
+                    grade = retry_result["grade"]
+                    numeric_grade = retry_result["numeric_grade"]
+
             # Store results
-            result["feedback"] = feedback
+            result["feedback"] = feedback + (f"\n\nSpecialized grade clarification: {retry_result}" if retry_result else "")
             result["grade"] = grade
-            result["numeric_grade"] = grade_to_numeric(grade)
+            result["numeric_grade"] = numeric_grade
             result["response"] = response
             result["duration"] = time.time() - result["start_time"]
             

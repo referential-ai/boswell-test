@@ -4,6 +4,7 @@ Table generation functionality for Boswell test results.
 
 import os
 from typing import Dict, Any, List
+import re
 from statistics import median
 
 from botwell.core.grading import percentage_to_letter_grade, grade_to_percentage, calculate_grading_bias
@@ -122,14 +123,14 @@ def generate_ascii_table(results: Dict[str, Any], models: List[str]) -> str:
                 letter_grade = grade_data["grade"]
                 numeric_grade = grade_data["numeric_grade"]
                 percentage = grade_to_percentage(numeric_grade)
-                grade_display = f"{letter_grade} ({percentage})"
+                grade_display = f"{letter_grade} ({percentage:.2f})"
             else:
-                grade_display = "N/A"
+                grade_display = "N/A (0.00)"
             
             # Truncate if too long
             if len(grade_display) > grade_width - 1:
                 grade_display = grade_display[:grade_width-2] + "…"
-                
+            
             row += f" {grade_display:{grade_width-1}} |"
         
         # Add median and percentage
@@ -138,12 +139,12 @@ def generate_ascii_table(results: Dict[str, Any], models: List[str]) -> str:
             
             # Calculate percentage
             percentage = grade_to_percentage(median_num)
-            
+
             # Convert numeric back to letter grade for display
             median_letter = percentage_to_letter_grade(percentage)
         else:
-            median_letter = "N/A"
-            percentage = "N/A"
+            median_letter = "N/A (0.00)"
+            percentage = "0.00"
             
         row += f" {median_letter:^{median_width}} | {percentage:^{pct_width}} |"
         rows.append(row)
@@ -156,6 +157,13 @@ def generate_markdown_table(results: Dict[str, Any], models: List[str]) -> str:
     """Generate a Markdown table of grades with percentage scores."""
     # Build header
     header = "| Model | " + " | ".join(models) + " | Median Grade | Percentage |"
+
+    # Add N/A count row for statistics
+    na_counts = {}
+    for model in models:
+        na_counts[model] = sum(1 for grader in models 
+                               if grader in results["grades"] 
+                               and model in results["grades"][grader] and results["grades"][grader][model].get("grade") == "N/A")
     
     # Build separator
     separator = "|------|" + "|".join(["---" for _ in models]) + "|-------------|-----------|"
@@ -172,9 +180,9 @@ def generate_markdown_table(results: Dict[str, Any], models: List[str]) -> str:
                 numeric_grade = grade_data["numeric_grade"]
                 percentage = grade_to_percentage(numeric_grade)
                 # Add percentage in parentheses
-                grades.append(f"{letter_grade} ({percentage})")
+                grades.append(f"{letter_grade} ({percentage:.2f})")
             else:
-                grades.append("N/A")
+                grades.append("N/A (0.00)")
         
         # Add median
         if author in results["summary"]:
@@ -186,12 +194,22 @@ def generate_markdown_table(results: Dict[str, Any], models: List[str]) -> str:
             # Convert numeric back to letter grade for display
             median_letter = percentage_to_letter_grade(percentage)
             
-            median_display = f"{median_letter} | {percentage}"
+            median_display = f"{median_letter} | {percentage:.2f}"
         else:
-            median_display = "N/A | N/A"
+            median_display = "N/A (0.00) | 0.00"
             
         row = f"| {author} | " + " | ".join(grades) + f" | {median_display} |"
         rows.append(row)
+
+    # Add N/A statistics row if any N/A values exist
+    if any(count > 0 for count in na_counts.values()):
+        na_stats = []
+        for model in models:
+            if na_counts[model] > 0:
+                na_stats.append(f"{na_counts[model]} N/A")
+            else:
+                na_stats.append("-")
+        rows.append(f"| **N/A Count** | " + " | ".join(na_stats) + " | - | - |")
     
     # Combine everything
     return f"{header}\n{separator}\n" + "\n".join(rows)
@@ -213,12 +231,12 @@ def generate_csv_table(results: Dict[str, Any], models: List[str]) -> str:
                 letter_grade = grade_data["grade"]
                 numeric_grade = grade_data["numeric_grade"]
                 percentage = grade_to_percentage(numeric_grade)
-                # Add percentage in parentheses for CSV
-                grades.append(f"{letter_grade} ({percentage})")
+                # Add percentage with 2 decimal places
+                grades.append(f"{letter_grade} ({percentage:.2f})")
             else:
-                grades.append("N/A")
+                grades.append("N/A (0.00)")
         
-        # Add median
+        # Add median with 2 decimal precision
         if author in results["summary"]:
             median_num = results["summary"][author]["median_numeric"]
             
@@ -227,11 +245,12 @@ def generate_csv_table(results: Dict[str, Any], models: List[str]) -> str:
             
             # Convert numeric back to letter grade for display
             median_letter = percentage_to_letter_grade(percentage)
+            formatted_percentage = f"{percentage:.2f}"
         else:
-            median_letter = "N/A"
-            percentage = "N/A"
+            median_letter = "N/A (0.00)"
+            formatted_percentage = "0.00"
             
-        row = f"{author}," + ",".join(grades) + f",{median_letter},{percentage}"
+        row = f"{author}," + ",".join(grades) + f",{median_letter},{formatted_percentage}"
         rows.append(row)
     
     # Combine everything
@@ -332,20 +351,33 @@ def generate_boswell_quotient_table(quotient_results: Dict[str, Any]) -> str:
         
         # Add letter grade equivalent of the Boswell Quotient
         letter_grade = percentage_to_letter_grade(int(quotient))
+
+        # Format quotient with 2 decimal places for precision
+        quotient_display = f"{quotient:.2f}"
         
         performance = components.get("performance", "N/A")
         if performance != "N/A":
-            performance = f"{performance:.1f}"
+            performance_display = f"{performance:.2f}"
+        else:
+            performance_display = "N/A (0.00)"
         
         evaluation = components.get("evaluation", "N/A")
         if evaluation != "N/A":
-            evaluation = f"{evaluation:.1f}"
+            evaluation_display = f"{evaluation:.2f}"
+        else:
+            evaluation_display = "N/A (0.00)"
             
         efficiency = components.get("efficiency", "N/A")
         if efficiency != "N/A":
-            efficiency = f"{efficiency:.1f}"
+            efficiency_display = f"{efficiency:.2f}"
+        else:
+            efficiency_display = "N/A (0.00)"
+            
+        # Count number of components that aren't N/A to note completeness
+        component_count = sum(1 for c in components.values() if c != "N/A")
+        missing_indication = "" if component_count == 3 else f" ({component_count}/3)"
         
-        rows.append(f"| {rank} | {model} | {quotient:.1f} | {letter_grade} | {performance} | {evaluation} | {efficiency} |")
+        rows.append(f"| {rank} | {model} | {quotient_display} | {letter_grade}{missing_indication} | {performance_display} | {evaluation_display} | {efficiency_display} |")
     
     # Combine everything
     return f"{header}\n{separator}\n" + "\n".join(rows)

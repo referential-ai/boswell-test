@@ -17,7 +17,7 @@ The Boswell Quotient combines three equal components that measure how indispensa
 This component measures how well a model performs on the essay task itself:
 
 - Based primarily on the grades received from peer models
-- Calculated using a normalized score from the numeric grade equivalents (0-4.3 scale)
+- Calculated using a normalized score from the numeric grade equivalents (0-4.25 scale, university standard)
 - Higher grades translate to higher performance scores
 
 ### Evaluation (33.3%)
@@ -42,11 +42,11 @@ Here's a sample of what the Boswell Quotient rankings look like:
 
 ```
 | Rank | Model | Boswell Quotient | Grade | Components (Perf/Eval/Eff) |
-|------|-------|-----------------|-------|---------------------------|
-| 1 | o3-mini-high | 87.9 | B+ | 88.5 / 100.0 / 75.3 |
-| 2 | GPT-4o | 88.9 | B+ | 84.2 / 100.0 / 82.6 |
-| 3 | DeepSeek-R1-Full | 82.1 | B | 90.7 / 87.2 / 68.4 |
-| 4 | o1 | 81.2 | B | 81.5 / 92.0 / 70.1 |
+|------|-------|------------------|-------|---------------------------|
+| 1 | o3-mini-high | 87.90 | B+ | 88.50 / 100.00 / 75.30 |
+| 2 | GPT-4o | 88.90 | B+ | 84.20 / 100.00 / 82.60 |
+| 3 | DeepSeek-R1-Full | 82.10 | B | 90.70 / 87.20 / 68.40 |
+| 4 | o1 | 81.20 | B | 81.50 / 92.00 / 70.10 |
 | 5 | DeepSeek-Distill-Qwen-32b | 77.2 | C+ | 80.3 / 85.5 / 65.7 |
 ```
 
@@ -58,7 +58,14 @@ The Boswell Quotient helps identify models that are most likely to serve as high
 - **80-89**: Excellent overall capability
 - **70-79**: Strong performance with some areas for improvement
 - **60-69**: Capable but with significant limitations
-- **Below 60**: Not recommended for general assistant purposes
+- **50-59**: Limited capability with serious deficiencies
+- **40-49**: Significant issues across all dimensions
+- **30-39**: Minimal functional capability as an assistant
+- **Below 30**: Not recommended for general assistant purposes
+
+All scores are now displayed with two decimal places for greater precision in reporting and comparisons.
+
+For detailed information about how grades are calculated and how N/A grades are handled, see the [Grading System Documentation](../grading.md).
 
 ## Cross-Domain Analysis
 
