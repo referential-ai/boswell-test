@@ -50,7 +50,7 @@ botwell --domain pol_sci_1 --free
 # Generate a summary report
 botwell report --latest
 
-botwell --domain pol_sci_1 --models "o3-mini-high" "Claude-3.7-Sonnet" "GPT-4o" "o1" "grok2-1212" "Qwen-Max" "Perplexity: Llama 3.1 Sonar 70B" "DeepSeek-R1-Full"
+botwell --domain pol_sci_1 --models "Qwen-Turbo" "Perplexity: Llama 3.1 Sonar 8B Online" "o3-mini-high" "Claude-3-Opus" "grok2-1212" "Perplexity: Llama 3.1 Sonar 70B" "grok-beta" "o1-mini"
 ```
 
 See [docs/usage/quick_start.md](docs/usage/quick_start.md) for more details and [docs/usage/advanced_usage.md](docs/usage/advanced_usage.md) for advanced usage scenarios.
@@ -184,13 +184,13 @@ This will sequentially run tests on all domains with the same set of models, cre
 #### Use specific models:
 
 ```bash
-botwell --models "GPT-4o" "Claude-3-Opus" "Claude-3.7-Sonnet"
+botwell --models "Qwen-Turbo" "Claude-3-Opus" "o3-mini-high"
 ```
 
 #### Combine options:
 
 ```bash
-botwell --all-domains --models "GPT-4o" "Claude-3.7-Sonnet" --skip-verification
+botwell --all-domains --models "Qwen-Turbo" "o3-mini-high" --skip-verification
 ```
 
 #### Skip model verification (faster but less reliable):
@@ -335,7 +335,7 @@ Each essay file is a Markdown document named after the model that produced it, c
 
 Example content:
 ```markdown
-# Essay by GPT-4o
+# Essay by Qwen-Turbo
 
 [Original essay content...]
 
@@ -352,9 +352,9 @@ Example content:
 
 ---
 
-## Graded by: Claude-3.7-Sonnet
+## Graded by: o3-mini-high
 
-[Detailed feedback from Claude-3.7-Sonnet...]
+[Detailed feedback from o3-mini-high...]
 
 **Letter Grade:** B+
 **Numeric Grade:** 3.3
@@ -366,27 +366,27 @@ Example content:
 
 **ASCII Table** (`grades_table.txt`):
 ```
-Model     | GPT-4o | Claude | Claude-S | Median |
+Model     | Qwen-T | Claude | o3-mini | Median |
 ----------|--------|--------|----------|--------|
-GPT-4o    |  ---   |   A-   |    B+    |   B+   |
-Claude    |   A    |  ---   |    A-    |   A-   |
-Claude-S  |   B+   |   A    |   ---    |   A-   |
+Qwen-T    |  ---   |   A-   |    A     |   A-   |
+Claude    |   B+   |  ---   |    A-    |   B+   |
+o3-mini   |   A    |   B+   |   ---    |   A-   |
 ```
 
 **Markdown Table** (`grades_table.md`):
-| Model | GPT-4o | Claude | Claude-S | Median Grade |
+| Model | Qwen-T | Claude | o3-mini | Median Grade |
 |-------|--------|--------|----------|--------------|
-| GPT-4o | --- | A- | B+ | B+ |
-| Claude | A | --- | A- | A- |
-| Claude-S | B+ | A | --- | A- |
+| Qwen-T | --- | A- | A | A- |
+| Claude | B+ | --- | A- | B+ |
+| o3-mini | A | B+ | --- | A- |
 
 
 **CSV Table** (`grades_table.csv`):
 ```csv
-Model,GPT-4o,Claude,Claude-S,Median Grade
-GPT-4o,---,A-,B+,B+
-Claude,A,---,A-,A-
-Claude-S,B+,A,---,A-
+Model,Qwen-T,Claude,o3-mini,Median Grade
+Qwen-T,---,A-,A,A-
+Claude,B+,---,A-,B+
+o3-mini,A,B+,---,A-
 ```
 
 #### 3. Grading Bias Analysis
@@ -395,21 +395,21 @@ The framework analyzes each model's grading tendencies to identify which models 
 
 **ASCII Table** (`grading_bias.txt`):
 ```
-Model     | Median Given | Grading Bias           |
+Model     | Median Given | Grading Bias          |
 ----------|--------------|------------------------|
-GPT-4o    |      B+      | Slightly Strict (-1/3) |
-Claude    |      A       | Lenient (+1 grade)     |
-Claude-S  |      B+      | Neutral                |
+Qwen-T    |      A-      | Lenient (+1/3 grade)  |
+Claude    |      B       | Slightly Strict (-1/3) |
+o3-mini   |      B+      | Neutral               |
 ----------|--------------|------------------------|
-OVERALL   |      B+      | Baseline               |
+OVERALL   |      B+      | Baseline              |
 ```
 
 **Markdown Table** (`grading_bias.md`):
 | Model | Median Given | Grading Bias | Numeric Bias |
 |-------|-------------|-------------|-------------|
-| GPT-4o | B+ | Slightly Strict (-1/3 grade) | -0.33 |
-| Claude | A | Lenient (+1 grade) | 0.35 |
-| Claude-S | B+ | Neutral | -0.05 |
+| Qwen-T | A- | Lenient (+1/3 grade) | 0.33 |
+| Claude | B | Slightly Strict (-1/3 grade) | -0.33 |
+| o3-mini | B+ | Neutral | 0.0 |
 | **OVERALL** | B+ | **Baseline** | 0.00 |
 
 This analysis helps identify potential biases in how different models evaluate the same content. For example, some models might consistently grade more strictly or leniently than others.
@@ -512,30 +512,30 @@ This cross-domain analysis is particularly useful for identifying:
     "component_weights": {
       "performance": 0.333,
       "evaluation": 0.333,
-      "efficiency": 0.334
+      "efficiency": 0.334  
     },
     "model_scores": {
-      "GPT-4o": {
-        "boswell_quotient": 84.5,
+      "Claude-3.7-Sonnet-thinking": {
+        "boswell_quotient": 86.2,
         "components": {
-          "performance": 82.0,
-          "evaluation": 95.0,
-          "efficiency": 76.0
-        },
-        "rank": 2
-      },
-      "Claude": {
-        "boswell_quotient": 88.2,
-        "components": {
-          "performance": 90.0,
-          "evaluation": 100.0,
-          "efficiency": 68.0
+          "performance": 88.2,
+          "evaluation": 75.0,
+          "efficiency": 95.2
         },
         "rank": 1
+      },
+      "o3-mini-high": {
+        "boswell_quotient": 84.7,
+        "components": {
+          "performance": 88.2,
+          "evaluation": 100.0,
+          "efficiency": 65.8
+        },
+        "rank": 2
       }
     }
   },
-  "run_timestamp": "2024-06-26 12:34:56"
+  "run_timestamp": "2025-03-05 13:08:51"
 }
 ```
 
@@ -551,11 +551,11 @@ A comprehensive JSON file containing:
 
 This file contains everything needed to reconstruct the entire test session.
 
-## 📈 Latest Results (February 2025)
+## 📈 Latest Results (March 2025)
 
 ### Performance Grades
 
-Below are results from a recent Boswell Test run in the Computer Science domain (system design - February 2025), showing median grades for each model:
+Below are results from a recent Boswell Test run in the Political Science domain (AI Policy Analysis - March 2025), showing median grades for each model:
 
 | Model                                  | Median Grade | Sample of Grades Received                 |
 |----------------------------------------|--------------|-------------------------------------------|
@@ -624,7 +624,7 @@ This bias analysis helps identify patterns in how different models evaluate thei
 
 ## 📊 Timing and Performance Metrics
 
-The Boswell Test framework tracks detailed timing information throughout the testing process. From our most recent Computer Science domain test (February 2025):
+The Boswell Test framework tracks detailed timing information throughout the testing process. From our most recent Political Science domain test (March 2025):
 
 ### Essay Generation Timing
 
@@ -704,7 +704,7 @@ The Boswell Quotient combines three key components with equal weighting:
 2. **Evaluation (33.3%)**: Based on grading accuracy, consistency, and bias measurement
 3. **Efficiency (33.3%)**: Based on response time and resource utilization
 
-### Latest Boswell Quotient Rankings (February 2025)
+### Latest Boswell Quotient Rankings (March 2025)
 
 From our most recent cross-domain analysis:
 
@@ -722,15 +722,15 @@ From our most recent cross-domain analysis:
 #### Component Breakdown
 
 | Model | Overall BQ | Performance (33.3%) | Evaluation (33.3%) | Efficiency (33.3%) | Letter Grade |
-|-------|------------|-------------|------------|------------|--------------|
-| GPT-4o | 75.3 | 81.4 | 90.0 | 84.0 | B |
-| grok2-1212 | 74.2 | 81.4 | 100.0 | 61.6 | B |
-| Perplexity: Llama 3.1 Sonar 70B | 71.6 | 81.4 | 100.0 | 51.8 | C |
-| o3-mini-high | 69.9 | 86.0 | 85.0 | 64.2 | C- |
-| o1 | 68.1 | 86.0 | 80.0 | 56.3 | D+ |
-| DeepSeek-R1-Full | 67.1 | 86.0 | 100.0 | 36.1 | D+ |
-| Claude-3.7-Sonnet | 60.7 | 86.0 | 55.0 | 55.4 | F |
-| Qwen-Max | 58.3 | 82.0 | 55.0 | 51.3 | F |
+|-------|------------|--------------|--------------|--------------|--------------|
+| Qwen-Turbo | 87.2 | 86.8 | 87.5 | 87.4 | B+ |
+| Perplexity: Llama 3.1 Sonar 8B Online | 83.8 | 85.3 | 87.5 | 78.6 | B |
+| o3-mini-high | 82.8 | 88.2 | 87.5 | 72.6 | B- |
+| Claude-3-Opus | 81.7 | 83.8 | 93.8 | 67.7 | B- |
+| grok2-1212 | 80.4 | 86.8 | 93.8 | 60.8 | B- |
+| Perplexity: Llama 3.1 Sonar 70B | 80.4 | 85.3 | 87.5 | 68.4 | B- |
+| grok-beta | 79.9 | 85.3 | 87.5 | 66.9 | C+ |
+| o1-mini | 78.4 | 82.4 | 87.5 | 65.5 | C+ |
 
 ### Domain-Specific Leaders
 
@@ -738,21 +738,22 @@ The Boswell Test also reveals which models excel in specific domains:
 
 | Domain | Top Model | Boswell Quotient | Grade |
 |--------|-----------|------------------|-------|
-| Political Science - Level 1: AI Policy Analysis | GPT-4o | 78.2 | B |
-| Political Science - Level 2: AI Governance Analysis | grok2-1212 | 77.7 | B |
+| Political Science - Level 1: AI Policy Analysis | Claude-3.7-Sonnet-thinking | 86.2 | B |
+| Political Science - Level 2: AI Governance Analysis | Qwen-Turbo | 95.1 | A |
 
 ### Consistency vs. Specialization
 
 Some models perform consistently well across all domains, while others specialize in specific areas:
 
 **Most Consistent Models** (Consistency Score):
-- Claude-3.7-Sonnet: 98.9
-- o1: 97.6
-- o3-mini-high: 97.2
+- Qwen-Max: 96.7
+– DeepSeek-Distill-Qwen-32b: 96.3
+- o3-mini-high: 96.2
 
 **Domain Specialists** (Models with significantly better performance in specific domains):
-- GPT-4o: performs 8% better in Political Science Level 1 than Level 2
-- Qwen-Max: performs 11% better in Political Science Level 1 than Level 2
+- Claude-3.7-Sonnet-thinking: performs 25.7 points better in Political Science Level 1 than Level 2
+- DeepSeek-R1-Full: performs 25.6 points better in Political Science Level 1 than Level 2
+– Gemini Pro 1.5: performs 17.6 points better in Political Science Level 1 than Level 2
 
 The Boswell Quotient provides a multidimensional view of model capabilities, helping identify which models are likely to serve as the most capable, well-rounded AI assistants across different domains and tasks.
 
