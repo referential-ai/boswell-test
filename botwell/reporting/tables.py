@@ -311,10 +311,10 @@ def generate_boswell_quotient_table(quotient_results: Dict[str, Any]) -> str:
     The core calculation happens in boswell_quotient.py.
     """
     # Build header
-    header = "| Rank | Model | Boswell Quotient | Grade | Performance | Evaluation | Efficiency | Empathy |"
+    header = "| Rank | Model | Boswell Quotient | Grade | Performance | Evaluation | Efficiency |"
     
     # Build separator
-    separator = "|------|-------|-----------------|-------|------------|------------|------------|---------|"
+    separator = "|------|-------|-----------------|-------|------------|------------|------------|"
     
     # Build rows
     rows = []
@@ -345,11 +345,7 @@ def generate_boswell_quotient_table(quotient_results: Dict[str, Any]) -> str:
         if efficiency != "N/A":
             efficiency = f"{efficiency:.1f}"
         
-        empathy = components.get("empathy", "N/A")
-        if empathy != "N/A":
-            empathy = f"{empathy:.1f}"
-            
-        rows.append(f"| {rank} | {model} | {quotient:.1f} | {letter_grade} | {performance} | {evaluation} | {efficiency} | {empathy} |")
+        rows.append(f"| {rank} | {model} | {quotient:.1f} | {letter_grade} | {performance} | {evaluation} | {efficiency} |")
     
     # Combine everything
     return f"{header}\n{separator}\n" + "\n".join(rows)

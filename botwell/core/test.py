@@ -1,4 +1,4 @@
-"""
+u"""
 Core testing functionality for Boswell tests.
 """
 
@@ -380,16 +380,6 @@ def run_boswell_test(domain_name: str, output_file: str, selected_models: List[s
     
     # Record total time for grading
     results["timing"]["step_durations"]["grading"] = time.time() - grading_start_time
-    
-    # Step 2.5: Measure empathy
-    print("\nStep 2.5: Measuring empathy capabilities...")
-    empathy_start_time = time.time()
-    
-    # Import here to avoid circular imports
-    from botwell.core.empathy import measure_empathy
-    empathy_results = measure_empathy(MODELS, list(results["essays"].keys()), max_retries)
-    results["empathy"] = empathy_results
-    results["timing"]["step_durations"]["empathy"] = time.time() - empathy_start_time
     
     # Step 3: Calculate summary statistics
     print("\nStep 3: Calculating summary statistics...")

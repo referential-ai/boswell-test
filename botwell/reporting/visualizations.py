@@ -217,7 +217,7 @@ def generate_visualizations(results: Dict[str, Any], run_dir: str) -> None:
         plt.figure(figsize=(14, 10))
         
         # Prepare component data
-        components = ["performance", "evaluation", "efficiency", "empathy"]
+        components = ["performance", "evaluation", "efficiency"]
         component_data = {component: [] for component in components}
         
         for model in sorted_models:
@@ -233,7 +233,7 @@ def generate_visualizations(results: Dict[str, Any], run_dir: str) -> None:
         fig, ax = plt.subplots(figsize=(14, 10))
         
         # Set colors for components
-        colors = ['#4CAF50', '#2196F3', '#FF9800', '#E91E63']  # Green, Blue, Orange, Pink
+        colors = ['#4CAF50', '#2196F3', '#FF9800']  # Green, Blue, Orange
         
         # Plot bars for each component
         for i, component in enumerate(components):
@@ -274,13 +274,12 @@ def generate_aggregate_visualizations(aggregated_data: Dict[str, Any], aggregate
     scores = [aggregated_data["model_scores"][m]["average_boswell_quotient"] for m in sorted_models]
     
     # Get component scores for stacked bars
-    components = ["performance", "evaluation", "efficiency", "empathy"]
+    components = ["performance", "evaluation", "efficiency"]
     component_data = {component: [] for component in components}
     component_weights = aggregated_data.get("component_weights", {
-        "performance": 0.25,
-        "evaluation": 0.25,
-        "efficiency": 0.25,
-        "empathy": 0.25
+        "performance": 0.333,
+        "evaluation": 0.333,
+        "efficiency": 0.334
     })
     
     for model in sorted_models:
@@ -338,8 +337,7 @@ def generate_aggregate_visualizations(aggregated_data: Dict[str, Any], aggregate
     component_colors = {
         "performance": '#4CAF50',  # Green
         "evaluation": '#2196F3',   # Blue
-        "efficiency": '#FF9800',   # Orange
-        "empathy": '#E91E63'       # Pink
+        "efficiency": '#FF9800'    # Orange
     }
     
     # Initialize left position for each bar
@@ -350,8 +348,8 @@ def generate_aggregate_visualizations(aggregated_data: Dict[str, Any], aggregate
         weight = component_weights.get(component, 0.25)
         weighted_scores = [aggregated_data["model_scores"][model].get("aggregated_components", {}).get(component, 0) * weight for model in sorted_models]
         
-        ax.barh(sorted_models, weighted_scores, left=left, height=0.7,
-                label=f"{component.capitalize()} ({int(weight*100)}%)", color=component_colors[component])
+        ax.barh(sorted_models, weighted_scores, left=left, height=0.75,
+                label=f"{component.capitalize()} ({round(weight*100)}%)", color=component_colors[component])
         
         # Update left position for next component
         left += weighted_scores

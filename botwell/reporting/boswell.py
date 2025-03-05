@@ -34,8 +34,7 @@ def generate_boswell_report(results: Dict[str, Any], quotient_results: Dict[str,
     component_leaders = {
         "performance": {"model": "", "score": 0},
         "evaluation": {"model": "", "score": 0},
-        "efficiency": {"model": "", "score": 0},
-        "empathy": {"model": "", "score": 0}
+        "efficiency": {"model": "", "score": 0}
     }
     
     for model in sorted_models:
@@ -62,11 +61,10 @@ def generate_boswell_report(results: Dict[str, Any], quotient_results: Dict[str,
         "Named after James Boswell, who was known for his deep understanding and insightful observations of Samuel Johnson, "
         "this quotient aims to measure how well an AI model can serve as an indispensable companion in academic and analytical tasks."
     )
-    lines.append("\nThe Boswell Quotient (0-100) is calculated from four key components:")
-    lines.append("1. **Performance (25%)**: How well the model performs in generating content, based on grades received from peers")
-    lines.append("2. **Evaluation (25%)**: How accurately and consistently the model evaluates others' work")
-    lines.append("3. **Efficiency (25%)**: How quickly the model completes tasks")
-    lines.append("4. **Empathy (25%)**: How well the model demonstrates emotional intelligence in responses")
+    lines.append("\nThe Boswell Quotient (0-100) is calculated from three key components:")
+    lines.append("1. **Performance (33.3%)**: How well the model performs in generating content, based on grades received from peers")
+    lines.append("2. **Evaluation (33.3%)**: How accurately and consistently the model evaluates others' work")
+    lines.append("3. **Efficiency (33.3%)**: How quickly the model completes tasks")
     
     # Overall ranking section
     lines.append("\n## Overall Model Rankings")
@@ -147,16 +145,6 @@ def generate_boswell_report(results: Dict[str, Any], quotient_results: Dict[str,
             f"This reflects the model's ability to generate responses and evaluations quickly while using resources effectively."
         )
         
-    # Empathy component
-    lines.append("\n### Empathy Component")
-    empathy_leader = component_leaders["empathy"]["model"]
-    empathy_score = component_leaders["empathy"]["score"]
-    
-    if empathy_leader:
-        lines.append(
-            f"**{empathy_leader}** excels in the Empathy component with a score of **{empathy_score:.1f}**. "
-            f"This indicates the model's ability to recognize emotions, validate feelings, and provide supportive responses."
-        )
     
     # Observations and insights
     lines.append("\n## Observations and Insights")
@@ -166,7 +154,7 @@ def generate_boswell_report(results: Dict[str, Any], quotient_results: Dict[str,
     for model in sorted_models:
         components = model_scores[model]["components"]
         if len(components) >= 3:  # Has all three components
-            scores = [components.get(c, 0) for c in ["performance", "evaluation", "efficiency"]]
+            scores = [components.get(c, 0) for c in ["performance", "evaluation", "efficiency"]] 
             if scores[0] > 0 and scores[1] > 0 and scores[2] > 0:
                 # Check if all scores are within 15 points of each other
                 if max(scores) - min(scores) <= 15:

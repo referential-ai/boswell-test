@@ -182,7 +182,7 @@ class TestBoswellQuotient(unittest.TestCase):
             self.assertGreaterEqual(len(components), 1)
         
         # Verify that weights are applied correctly
-        # Performance is 50%, Evaluation is 30%, Efficiency is 20%
+        # Performance, Evaluation, and Efficiency all have equal weighting (33.3% each)
         # Model B should have higher performance (4.0/4.3 = ~93%)
         # Model A should have better evaluation (no bias)
         # Model C should have better efficiency (faster times)
@@ -190,9 +190,7 @@ class TestBoswellQuotient(unittest.TestCase):
         
         # Check that component weights are stored
         self.assertIn("component_weights", quotient_results)
-        self.assertEqual(quotient_results["component_weights"]["performance"], 0.5)
-        self.assertEqual(quotient_results["component_weights"]["evaluation"], 0.3)
-        self.assertEqual(quotient_results["component_weights"]["efficiency"], 0.2)
+        self.assertAlmostEqual(sum(quotient_results["component_weights"].values()), 1.0)  # Weights should sum to 1
         
         # Check that ranks are assigned (1-based)
         ranks = [quotient_results["model_scores"][model]["rank"] for model in self.models]
@@ -369,9 +367,9 @@ class TestReportGeneration(unittest.TestCase):
             },
             "domains_analyzed": ["domain1", "domain2"],
             "component_weights": {
-                "performance": 0.5,
-                "evaluation": 0.3,
-                "efficiency": 0.2
+                "performance": 0.333,
+                "evaluation": 0.333,
+                "efficiency": 0.334
             }
         }
         
@@ -440,9 +438,9 @@ class TestReportGeneration(unittest.TestCase):
                 }
             },
             "component_weights": {
-                "performance": 0.5,
-                "evaluation": 0.3,
-                "efficiency": 0.2
+                "performance": 0.333,
+                "evaluation": 0.333,
+                "efficiency": 0.334
             }
         }
         

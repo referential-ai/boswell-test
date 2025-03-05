@@ -1,0 +1,5 @@
+| Model | GPT-3.5-Turbo | Llama-3-8B | GPT-4o-mini | Median Grade | Percentage |
+|------|---|---|---|-------------|-----------|
+| GPT-3.5-Turbo | B+ (87) | B+ (87) | B (83) | B+ | 87 |
+| Llama-3-8B | A- (90) | B+ (87) | B+ (87) | B+ | 87 |
+| GPT-4o-mini | A (93) | B+ (87) | B+ (87) | B+ | 87 |

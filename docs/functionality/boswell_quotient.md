@@ -4,15 +4,15 @@ The Boswell Quotient is a comprehensive metric (0-100) designed to measure how w
 
 ## What is the Boswell Quotient?
 
-The Boswell Quotient combines three key capabilities that an ideal AI assistant would possess:
+The Boswell Quotient combines three equal components that measure how indispensable an AI assistant would be:
 
-1. **Performance (70%)**: Based on grades received from peer models
-2. **Evaluation (20%)**: Based on grading accuracy, consistency, and bias measurement
-3. **Efficiency (10%)**: Based on response time and resource utilization
+1. **Performance (33.3%)**: Based on grades received from peer models
+2. **Evaluation (33.3%)**: Based on grading accuracy, consistency, and bias measurement
+3. **Efficiency (33.3%)**: Based on response time and resource utilization
 
 ## Calculation Components
 
-### Performance (70%)
+### Performance (33.3%)
 
 This component measures how well a model performs on the essay task itself:
 
@@ -20,7 +20,7 @@ This component measures how well a model performs on the essay task itself:
 - Calculated using a normalized score from the numeric grade equivalents (0-4.3 scale)
 - Higher grades translate to higher performance scores
 
-### Evaluation (20%)
+### Evaluation (33.3%)
 
 This component measures a model's capability to evaluate other models' work:
 
@@ -28,7 +28,7 @@ This component measures a model's capability to evaluate other models' work:
 - Considers bias measurements (whether it grades too strictly or leniently)
 - Higher consistency and neutrality result in higher evaluation scores
 
-### Efficiency (10%)
+### Efficiency (33.3%)
 
 This component measures how quickly a model operates:
 
@@ -43,11 +43,11 @@ Here's a sample of what the Boswell Quotient rankings look like:
 ```
 | Rank | Model | Boswell Quotient | Grade | Components (Perf/Eval/Eff) |
 |------|-------|-----------------|-------|---------------------------|
-| 1 | o3-mini-high | 89.8 | B+ | 88.5 / 100.0 / 75.3 |
-| 2 | GPT-4o | 89.2 | B+ | 84.2 / 100.0 / 82.6 |
-| 3 | DeepSeek-R1-Full | 85.2 | B | 90.7 / 87.2 / 68.4 |
-| 4 | o1 | 83.3 | B | 81.5 / 92.0 / 70.1 |
-| 5 | DeepSeek-Distill-Qwen-32b | 79.1 | C+ | 80.3 / 85.5 / 65.7 |
+| 1 | o3-mini-high | 87.9 | B+ | 88.5 / 100.0 / 75.3 |
+| 2 | GPT-4o | 88.9 | B+ | 84.2 / 100.0 / 82.6 |
+| 3 | DeepSeek-R1-Full | 82.1 | B | 90.7 / 87.2 / 68.4 |
+| 4 | o1 | 81.2 | B | 81.5 / 92.0 / 70.1 |
+| 5 | DeepSeek-Distill-Qwen-32b | 77.2 | C+ | 80.3 / 85.5 / 65.7 |
 ```
 
 ## Interpretation

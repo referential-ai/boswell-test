@@ -1,13 +1,12 @@
 """
 Boswell Quotient calculation core functionality.
 
-The Boswell Quotient is a comprehensive metric (0-100) designed to measure how well
-a model can serve as an AI companion. It combines four key components:
+The Boswell Quotient is a comprehensive metric (0-100) designed to measure how well a model can 
+serve as an indispensable AI companion. It combines three key components:
 
-1. Performance (25%): Based on grades received from peer models
-2. Evaluation (25%): Based on grading consistency and bias measurement  
-3. Efficiency (25%): Based on response time
-4. Empathy (25%): Based on emotional intelligence and supportive responses
+1. Performance (33.3%): Based on grades received from peer models
+2. Evaluation (33.3%): Based on grading accuracy, consistency, and bias measurement
+3. Efficiency (33.3%): Based on response time and resource utilization
 
 This module contains the core functionality for calculating the Boswell Quotient.
 """
@@ -19,10 +18,9 @@ def calculate_boswell_quotient(results: Dict[str, Any], models: List[str]) -> Di
     """Calculate the Boswell Quotient for each model.
     
     The Boswell Quotient is a composite score (0-100) based on:
-    1. Performance Score (25%): Based on grades received from other models
-    2. Evaluation Score (25%): Based on grading accuracy and consistency
-    3. Efficiency Score (25%): Based on timing measurements
-    4. Empathy Score (25%): Based on emotional intelligence measurements
+    1. Performance Score (33.3%): Based on grades received from other models
+    2. Evaluation Score (33.3%): Based on grading accuracy and consistency
+    3. Efficiency Score (33.3%): Based on timing measurements
     
     Returns:
         Dictionary with Boswell Quotient scores and component scores for each model
@@ -30,10 +28,9 @@ def calculate_boswell_quotient(results: Dict[str, Any], models: List[str]) -> Di
     quotient_results = {
         "model_scores": {},
         "component_weights": {
-            "performance": 0.25,  # 25% weight for performance
-            "evaluation": 0.25,   # 25% weight for evaluation capability
-            "efficiency": 0.25,   # 25% weight for efficiency
-            "empathy": 0.25       # 25% weight for empathy
+            "performance": 0.333,  # 33.3% weight for performance
+            "evaluation": 0.333,   # 33.3% weight for evaluation capability
+            "efficiency": 0.334    # 33.3% weight for efficiency (slightly higher to ensure sum is 1.0)
         }
     }
     
@@ -147,13 +144,6 @@ def calculate_boswell_quotient(results: Dict[str, Any], models: List[str]) -> Di
             weighted_scores.append(efficiency * quotient_results["component_weights"]["efficiency"])
             weights.append(quotient_results["component_weights"]["efficiency"])
         
-        # Add empathy component if available
-        if "empathy" in results and model in results["empathy"]["scores"]:
-            empathy = results["empathy"]["scores"][model]
-            components["empathy"] = empathy
-            weighted_scores.append(empathy * quotient_results["component_weights"]["empathy"])
-            weights.append(quotient_results["component_weights"]["empathy"])
-            
         # Calculate final score if we have any components
         if weighted_scores:
             total_weight = sum(weights)
