@@ -579,7 +579,8 @@ Below are results from a recent Boswell Test run in the Computer Science domain 
 
 
 Additionally, the system now supports many more free models, including:
-```
+
+|                                        |              |                                           |
 |----------------------------------------|--------------|-------------------------------------------|
 | GPT-3.5-Turbo                          | B+           | A, A-, B+, B, B+, B-, B, B-, B+, A-       |
 | Llama-3-8B                             | B+           | A, B+, B-, B-, C+, B, B-, B, B+, A        |
@@ -594,7 +595,7 @@ Additionally, the system now supports many more free models, including:
 | o1                                     | A-           | A-, A+, B, B+, A-, B+, A-, B+, A-, A      |
 | o1-mini                                | B+           | A, B+, A-, B, B+, B+, A, B+, B+, A-       |
 | o3-mini-high                           | B+           | A, B+, A-, A-, A-, B+, A-, B+, B+, A-     |
-```
+
 New free models available include:
 - Meta: Llama 3.1 8B Instruct
 - Meta: Llama 3.3 70B Instruct
@@ -610,7 +611,7 @@ New free models available include:
 ### Grading Bias Analysis
 
 The analysis also identifies which models tend to grade more strictly or leniently:
-```
+
 | Model                               | Median Given | Grading Bias       | Numeric Bias |
 |-------------------------------------|--------------|-------------------|-------------|
 | GPT-3.5-Turbo                       | A            | Lenient (+1 grade) | 0.55 |
@@ -627,7 +628,7 @@ The analysis also identifies which models tend to grade more strictly or lenient
 | o1-mini                             | B+           | Neutral           | 0.00 |
 | o3-mini-high                        | A-           | Lenient (+1 grade) | 0.40 |
 | **OVERALL**                         | B+           | **Baseline**      | 0.00 |
-```
+
 This bias analysis helps identify patterns in how different models evaluate their peers. For instance, in this sample from the Computer Science domain, models like Gemini Pro 1.5, Claude-3.7-Sonnet, and Gemini Flash 1.5 appear to be stricter graders, while GPT-3.5-Turbo, Claude-3-Sonnet, o1, and o3-mini-high tend to be more lenient.
 
 ## 📊 Timing and Performance Metrics
@@ -635,7 +636,7 @@ This bias analysis helps identify patterns in how different models evaluate thei
 The Boswell Test framework tracks detailed timing information throughout the testing process. From our most recent Computer Science domain test (February 2025):
 
 ### Essay Generation Timing
-```
+
 | Model | Duration (s) |
 |-------|-------------|
 | GPT-3.5-Turbo | 4.81 |
@@ -661,10 +662,10 @@ The Boswell Test framework tracks detailed timing information throughout the tes
 | Perplexity: Llama 3.1 Sonar 405B Online | 42.94 |
 | Claude-3.7-Sonnet-thinking | 54.95 |
 | DeepSeek-R1-Full | 343.05 |
-```
+
 
 ### Average Grading Time Per Essay
-```
+
 | Grader | Avg. Seconds per Essay |
 |--------|------------------------|
 | GPT-3.5-Turbo | 2.60 |
@@ -690,7 +691,7 @@ The Boswell Test framework tracks detailed timing information throughout the tes
 | Claude-3.7-Sonnet-thinking | 39.86 |
 | Qwen-Max | 38.38 |
 | DeepSeek-R1-Full | 207.74 |
-```
+
 The framework provides:
 - **Total Runtime**: Precise tracking of the entire test duration
 - **Phase Timing**: Breakdown of time spent in essay generation, grading, analysis, and file generation
