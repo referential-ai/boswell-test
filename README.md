@@ -303,7 +303,7 @@ results/
 │   │   ├── average_grading_time.png   # Time comparison for grading
 │   │   ├── time_breakdown.png     # Pie chart of process timing
 │   │   ├── boswell_quotient.png   # Bar chart of Boswell Quotient rankings
-│   │   └── boswell_quotient_components.png # Component breakdown analysis
+│   │   └── boswell_quotient_components.png # Component breakdown of the three dimensions
 │   ├── grades_table.txt           # ASCII table of all grades
 │   ├── grades_table.md            # Markdown table of all grades
 │   ├── grades_table.csv           # CSV format for spreadsheet import
@@ -439,7 +439,7 @@ A pie chart showing the proportion of time spent on each phase of the test: essa
 A horizontal bar chart showing each model's Boswell Quotient score (0-100), ranked from highest to lowest. This visualization provides a quick overview of which models perform best overall when considering performance, evaluation capabilities, and efficiency.
 
 **Boswell Quotient Components** (`boswell_quotient_components.png`):
-A breakdown of each component that contributes to the Boswell Quotient (performance, evaluation, efficiency, empathy), showing the relative strengths and weaknesses of each model across all four dimensions.
+A breakdown of each component that contributes to the Boswell Quotient (performance, evaluation, efficiency), showing the relative strengths and weaknesses of each model across all three dimensions.
 
 These visualizations provide at-a-glance insights into model performance, efficiency, and cost-effectiveness across the different test aspects.
 
