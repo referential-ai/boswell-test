@@ -3,10 +3,10 @@
 The Boswell Test is an automated tool for comparing Large Language Models (LLMs) through peer-review, where models grade each other's essays. This implementation is based on the methodology introduced by Dr. Peter Luh in his article ["Is AI Chatbot My Boswell?"](https://peterl168.substack.com/p/is-ai-chatbot-my-boswell) (February 2025).
 
 ## Example grading report for essay questions as seen in the original article:
-![Example Grade Performance](results/20250305-130851-pol_sci_1/charts/grade_distribution.png)
+![Example Grade Performance](results/20250305-214416-pol_sci_1/boswell-final-v4.jpg)
 
 ## Example overall performance metrics:
-![Boswell Test Domain Comparison](results/20250305-131233-aggregate/charts/domain_comparison.png)
+![Boswell Test Domain Comparison](results/20250305-214416-pol_sci_1/charts/grade_distribution.png)
 <!--
 ![Aggregate Boswell Quotient Rankings](results/20250305-131233-aggregate/charts/aggregate_boswell_quotient.png)
 
@@ -22,6 +22,7 @@ This repository now features a fully modular architecture for better maintainabi
 - Domain creation utilities
 - Expanded free model support with 12 additional LLMs
 - Improved documentation and tooling
+- Automatic Excel cross-assessment matrix generation (Table 1 format with median bias)
 
 For detailed documentation, see the [docs/](docs/) directory.
 
@@ -31,7 +32,7 @@ Get up and running with the Boswell Test framework in minutes:
 
 ```bash
 # Clone the repository
-git clone https://github.com/alanwilhelm/botwell.git
+git clone https://github.com/referential.ai/boswell-test.git
 cd botwell
 
 # Create a virtual environment
@@ -50,7 +51,10 @@ botwell --domain pol_sci_1 --free
 # Generate a summary report
 botwell report --latest
 
-botwell --domain pol_sci_1 --models "Qwen-Turbo" "Perplexity: Llama 3.1 Sonar 8B Online" "o3-mini-high" "Claude-3-Opus" "grok2-1212" "Perplexity: Llama 3.1 Sonar 70B" "grok-beta" "o1-mini"
+botwell --domain pol_sci_1 --models "Qwen-Turbo" "Perplexity: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B: Llama 3.1 Sonar 8B Online Online" "o3-mini-high" "Claude-3-Opus" "grok2-1212" "Perplexity: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B" "grok-beta" "o1-mini"
+
+# Generate cross-assessment Excel table with exact Table 1 styling from the paper
+python create_cross_grading_table.py results/[timestamp]-[domain]/full_results.json
 ```
 
 See [docs/usage/quick_start.md](docs/usage/quick_start.md) for more details and [docs/usage/advanced_usage.md](docs/usage/advanced_usage.md) for advanced usage scenarios.
@@ -191,6 +195,36 @@ botwell --models "Qwen-Turbo" "Claude-3-Opus" "o3-mini-high"
 
 ```bash
 botwell --all-domains --models "Qwen-Turbo" "o3-mini-high" --skip-verification
+```
+
+#### Expire or clear the cache:
+
+```bash
+# Expire old cache entries only
+botwell cache clear --expired-only
+```
+
+#### Run a comprehensive model cross-assessment:
+
+```bash
+# Run with the top-performing premium models mentioned in the research
+botwell --domain pol_sci_1 --models "GPT-4o" "GPT-4o-mini" "Claude-3.7-Sonnet" \
+"Claude-3-Sonnet" "Claude-3-Opus" "Claude-3.7-Sonnet-thinking" "Gemini Pro 1.5" "Gemini Flash 2.0" \
+"o1" "o1-mini" "o3-mini-high" "Qwen-Max" "grok2-1212" "DeepSeek-R1-Full" \
+"DeepSeek-Distill-Qwen-32b" "Perplexity: Llama 3.1 Sonar 70B" "Perplexity: Llama 3.1 Sonar 8B Online"
+```
+
+#### Run with only free models:
+
+```bash
+botwell --domain pol_sci_1 --free
+```
+
+#### Note on accessing premium models:
+
+```bash
+# To access premium models, you'll need to pay for API credits on OpenRouter.ai
+# Set your paid API key to access these models with: export OPENROUTER_API_KEY="your_paid_api_key_here"
 ```
 
 #### Skip model verification (faster but less reliable):
@@ -441,6 +475,9 @@ A horizontal bar chart showing each model's Boswell Quotient score (0-100), rank
 **Boswell Quotient Components** (`boswell_quotient_components.png`):
 A breakdown of each component that contributes to the Boswell Quotient (performance, evaluation, efficiency), showing the relative strengths and weaknesses of each model across all three dimensions.
 
+**Cross-Assessment Excel Table** (`cross_grading_table.xlsx`):
+An Excel spreadsheet containing the complete cross-assessment matrix (Table 1) with color highlighting, showing how each model grades every other model. The table includes the median bias data as the last row, matching the format shown in the research paper.
+
 These visualizations provide at-a-glance insights into model performance, efficiency, and cost-effectiveness across the different test aspects.
 
 #### 5. Boswell Quotient Report (`boswell_report.md`)
@@ -596,7 +633,7 @@ New free models available include:
 - Mistral: Mistral Nemo
 - DeepSeek: R1
 - Moonshot AI: Moonlight 16b A3b Instruct
-- Nous: DeepHermes 3 Llama 3 8B Preview
+- Nous: DeepHermes 3 Llama-3-8B Preview
 - Google: Gemini models (Flash Lite 2.0 Preview, Pro 2.0 Experimental)
 
 ### Grading Bias Analysis
@@ -634,7 +671,7 @@ The Boswell Test framework tracks detailed timing information throughout the tes
 | Gemini Flash 1.5 | 7.79 |
 | o1-mini | 9.05 |
 | Llama-3-8B | 9.89 |
-| Perplexity: Llama 3.1 Sonar 8B Online | 9.21 |
+| Perplexity: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B: Llama 3.1 Sonar 8B Online Online | 9.21 |
 | Qwen-Turbo | 11.10 |
 | GPT-4o-mini | 12.84 |
 | grok-beta | 15.99 |
@@ -646,11 +683,11 @@ The Boswell Test framework tracks detailed timing information throughout the tes
 | Claude-3-Sonnet | 27.32 |
 | DeepSeek-Distill-Qwen-32b | 29.60 |
 | GPT-4o | 31.39 |
-| Perplexity: Llama 3.1 Sonar 70B | 36.41 |
+| Perplexity: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B | 36.41 |
 | Claude-3-Opus | 37.39 |
 | Qwen-Plus | 40.88 |
 | Qwen-Max | 41.51 |
-| Perplexity: Llama 3.1 Sonar 405B Online | 42.94 |
+| Perplexity: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B | 42.94 |
 | Claude-3.7-Sonnet-thinking | 54.95 |
 | DeepSeek-R1-Full | 343.05 |
 
@@ -662,7 +699,7 @@ The Boswell Test framework tracks detailed timing information throughout the tes
 | GPT-3.5-Turbo | 2.60 |
 | Gemini Flash 1.5 | 3.71 |
 | Llama-3-8B | 5.95 |
-| Perplexity: Llama 3.1 Sonar 8B Online | 8.05 |
+| Perplexity: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B: Llama 3.1 Sonar 8B Online Online | 8.05 |
 | Qwen-Turbo | 8.52 |
 | GPT-4o-mini | 8.62 |
 | o1-mini | 11.11 |
@@ -670,14 +707,14 @@ The Boswell Test framework tracks detailed timing information throughout the tes
 | Gemini Pro 1.5 | 12.78 |
 | grok-beta | 12.37 |
 | GPT-4o | 14.87 |
-| Perplexity: Llama 3.1 Sonar 70B | 15.10 |
+| Perplexity: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B | 15.10 |
 | grok2-1212 | 16.37 |
 | o1 | 19.38 |
 | Claude-3.7-Sonnet | 18.36 |
 | o3-mini-high | 27.12 |
 | Qwen-Plus | 29.98 |
 | DeepSeek-Distill-Qwen-32b | 32.94 |
-| Perplexity: Llama 3.1 Sonar 405B Online | 33.43 |
+| Perplexity: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B | 33.43 |
 | Claude-3-Opus | 24.58 |
 | Claude-3.7-Sonnet-thinking | 39.86 |
 | Qwen-Max | 38.38 |
@@ -712,7 +749,7 @@ From our most recent cross-domain analysis:
 |------|-------|-----------------|-------|--------------|-------------|------------|-------------|
 | 1 | GPT-4o | 75.3 | B | 2 | 94.2 | Political Science - Level 1: AI Policy Analysis | Political Science - Level 2: AI Governance Analysis |
 | 2 | grok2-1212 | 74.2 | B | 2 | 93.0 | Political Science - Level 2: AI Governance Analysis | Political Science - Level 1: AI Policy Analysis |
-| 3 | Perplexity: Llama 3.1 Sonar 70B | 71.6 | C | 2 | 91.1 | Political Science - Level 2: AI Governance Analysis | Political Science - Level 1: AI Policy Analysis |
+| 3 | Perplexity: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B | 71.6 | C | 2 | 91.1 | Political Science - Level 2: AI Governance Analysis | Political Science - Level 1: AI Policy Analysis |
 | 4 | o3-mini-high | 69.9 | C- | 2 | 97.2 | Political Science - Level 2: AI Governance Analysis | Political Science - Level 1: AI Policy Analysis |
 | 5 | o1 | 68.1 | D+ | 2 | 97.6 | Political Science - Level 2: AI Governance Analysis | Political Science - Level 1: AI Policy Analysis |
 | 6 | DeepSeek-R1-Full | 67.1 | D+ | 2 | 91.1 | Political Science - Level 2: AI Governance Analysis | Political Science - Level 1: AI Policy Analysis |
@@ -724,11 +761,11 @@ From our most recent cross-domain analysis:
 | Model | Overall BQ | Performance (33.3%) | Evaluation (33.3%) | Efficiency (33.3%) | Letter Grade |
 |-------|------------|--------------|--------------|--------------|--------------|
 | Qwen-Turbo | 87.2 | 86.8 | 87.5 | 87.4 | B+ |
-| Perplexity: Llama 3.1 Sonar 8B Online | 83.8 | 85.3 | 87.5 | 78.6 | B |
+| Perplexity: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B: Llama 3.1 Sonar 8B Online Online | 83.8 | 85.3 | 87.5 | 78.6 | B |
 | o3-mini-high | 82.8 | 88.2 | 87.5 | 72.6 | B- |
 | Claude-3-Opus | 81.7 | 83.8 | 93.8 | 67.7 | B- |
 | grok2-1212 | 80.4 | 86.8 | 93.8 | 60.8 | B- |
-| Perplexity: Llama 3.1 Sonar 70B | 80.4 | 85.3 | 87.5 | 68.4 | B- |
+| Perplexity: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B | 80.4 | 85.3 | 87.5 | 68.4 | B- |
 | grok-beta | 79.9 | 85.3 | 87.5 | 66.9 | C+ |
 | o1-mini | 78.4 | 82.4 | 87.5 | 65.5 | C+ |
 

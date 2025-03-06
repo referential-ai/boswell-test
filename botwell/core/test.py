@@ -11,6 +11,7 @@ from typing import List, Dict, Any, Optional
 from botwell.domains import load_domain, AVAILABLE_DOMAINS
 from botwell.models.api import call_openrouter_api
 from botwell.core.files import create_results_directory, save_essay_with_grades, save_results
+from botwell.utils.model_standardization import standardize_model_name, standardize_model_names_in_dict
 from botwell.core.grading import extract_grade, grade_to_numeric, calculate_grading_bias, log_failed_extraction
 from botwell.core.verification import verify_available_models
 from botwell.models.config import MODELS
@@ -25,7 +26,8 @@ def get_essay_from_model(model: Dict[str, str], essay_prompt: str, max_retries: 
     Returns:
         Dict containing the model name, essay content, response info, and timing data
     """
-    model_name = model["name"]
+    # Standardize model name
+    model_name = standardize_model_name(model["name"])
     model_id = model["model_id"]
     result = {
         "model_name": model_name,
@@ -147,7 +149,8 @@ def grade_essay(grader: Dict[str, str], author: str, essay: str, grading_prompt:
     Returns:
         Dict containing grading results and metadata
     """
-    grader_name = grader["name"]
+    # Standardize grader name
+    grader_name = standardize_model_name(grader["name"])
     grader_id = grader["model_id"]
     
     result = {
@@ -294,8 +297,11 @@ def run_boswell_test(domain_name: str, output_file: str, selected_models: List[s
         "grades": {},
         "summary": {},
         "essay_files": {},  # Track essay files
-        "available_models": [m["name"] for m in verified_models],
-        "selected_models": [m["name"] for m in models_to_use],
+        # Standardize model names in lists 
+        "available_models": [
+            standardize_model_name(m["name"]) for m in verified_models
+        ],
+        "selected_models": [standardize_model_name(m["name"]) for m in models_to_use],
         "run_timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
         "cost": cost_tracking,  # Add cost tracking
         "timing": timing_tracking,  # Add timing tracking
@@ -507,6 +513,9 @@ def run_boswell_test(domain_name: str, output_file: str, selected_models: List[s
         save_results(results, output_file)
     
     # Record time for file generation
+    
+    # Apply standardization to all model names in the results
+    results = standardize_model_names_in_dict(results)
     results["timing"]["step_durations"]["file_generation"] = time.time() - file_gen_start_time
     
     # Calculate and record total run time

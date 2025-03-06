@@ -83,14 +83,14 @@ flowchart LR
         M1[GPT-4o]
         M2[Claude-3.7-Sonnet]
         M3[Llama-3-8B]
-        M4[Perplexity-70B]
+        M4[Perplexity: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B]
     end
 
     subgraph Essays
         E1[Essay by GPT-4o]
         E2[Essay by Claude-3.7-Sonnet]
         E3[Essay by Llama-3-8B]
-        E4[Essay by Perplexity-70B]
+        E4[Essay by Perplexity: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B]
     end
 
     subgraph Grading
@@ -106,9 +106,9 @@ flowchart LR
         G32[Llama-3-8B → B+]
         G34[Llama-3-8B → C+]
         
-        G41[Perplexity-70B → A]
-        G42[Perplexity-70B → A-]
-        G43[Perplexity-70B → B+]
+        G41[Perplexity: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B → A]
+        G42[Perplexity: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B → A-]
+        G43[Perplexity: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B → B+]
     end
 
     subgraph Analysis

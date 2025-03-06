@@ -6,7 +6,7 @@ import os
 from typing import Dict, Any, List
 import re
 from statistics import median
-
+import importlib.util
 from botwell.core.grading import percentage_to_letter_grade, grade_to_percentage, calculate_grading_bias
 from botwell.reporting.boswell_quotient import calculate_boswell_quotient
 
@@ -76,6 +76,15 @@ def generate_grade_tables(results: Dict[str, Any], run_dir: str) -> None:
     # Generate visualizations
     from botwell.reporting.visualizations import generate_visualizations
     generate_visualizations(results, run_dir)
+
+    # Generate Excel cross-assessment table
+    try:
+        from botwell.reporting.excel import generate_cross_grading_excel
+        # Generate the Excel table
+        generate_cross_grading_excel(results, run_dir)
+    except ImportError as e:
+        print(f"Warning: Excel table generation skipped: {e}")
+        print("To enable Excel output, install openpyxl: pip install openpyxl")
     
     # Generate JSON grades file (just the grades and summary)
     import json
@@ -99,18 +108,19 @@ def generate_ascii_table(results: Dict[str, Any], models: List[str]) -> str:
     grade_width = 10  # Enough for "A+ (97)" format
     median_width = 7  # Just for the letter grade
     pct_width = 5     # For percentage
+    raw_avg_width = 8  # Adequate for raw numeric average with 2 decimals
     
     # Build header
     header = f"{'Model':{model_width}} |"
     for grader in models:
         header += f" {grader[:grade_width-1]:{grade_width-1}} |"
-    header += f" {'Median':{median_width}} | {'Pct':{pct_width}} |"
+    header += f" {'Median':{median_width}} | {'Pct':{pct_width}} | {'Raw Num':{raw_avg_width}} |"
     
     # Build separator
     separator = "-" * model_width + "+"
     for _ in models:
         separator += "-" * (grade_width + 1) + "+"
-    separator += "-" * (median_width + 2) + "+" + "-" * (pct_width + 2) + "+"
+    separator += "-" * (median_width + 2) + "+" + "-" * (pct_width + 2) + "+" + "-" * (raw_avg_width + 2) + "+"
     
     # Build rows
     rows = []
@@ -139,14 +149,22 @@ def generate_ascii_table(results: Dict[str, Any], models: List[str]) -> str:
             
             # Calculate percentage
             percentage = grade_to_percentage(median_num)
+            
+            # Calculate raw mean (average) of numeric grades
+            raw_grades = []
+            for grader in models:
+                if grader in results["grades"] and author in results["grades"][grader]:
+                    raw_grades.append(results["grades"][grader][author]["numeric_grade"])
+            raw_avg = sum(raw_grades) / len(raw_grades) if raw_grades else 0.0
 
             # Convert numeric back to letter grade for display
             median_letter = percentage_to_letter_grade(percentage)
         else:
-            median_letter = "N/A (0.00)"
+            median_letter = "N/A"
             percentage = "0.00"
+            raw_avg = 0.0
             
-        row += f" {median_letter:^{median_width}} | {percentage:^{pct_width}} |"
+        row += f" {median_letter:^{median_width}} | {percentage:^{pct_width}} | {raw_avg:.2f} |"  # 2 decimal places for precision
         rows.append(row)
     
     # Combine everything
@@ -158,6 +176,9 @@ def generate_markdown_table(results: Dict[str, Any], models: List[str]) -> str:
     # Build header
     header = "| Model | " + " | ".join(models) + " | Median Grade | Percentage |"
 
+    # Add raw average column with better name
+    header += " Raw Numeric Average |"
+
     # Add N/A count row for statistics
     na_counts = {}
     for model in models:
@@ -167,6 +188,9 @@ def generate_markdown_table(results: Dict[str, Any], models: List[str]) -> str:
     
     # Build separator
     separator = "|------|" + "|".join(["---" for _ in models]) + "|-------------|-----------|"
+    
+    # Add separator for raw average column
+    separator += "------------|"
     
     # Build rows
     rows = []
@@ -191,12 +215,19 @@ def generate_markdown_table(results: Dict[str, Any], models: List[str]) -> str:
             # Calculate percentage
             percentage = grade_to_percentage(median_num)
             
+            # Calculate raw mean (average) of numeric grades
+            raw_grades = []
+            for grader in models:
+                if grader in results["grades"] and author in results["grades"][grader]:
+                    raw_grades.append(results["grades"][grader][author]["numeric_grade"])
+            raw_avg = sum(raw_grades) / len(raw_grades) if raw_grades else 0.0
+            
             # Convert numeric back to letter grade for display
             median_letter = percentage_to_letter_grade(percentage)
             
-            median_display = f"{median_letter} | {percentage:.2f}"
+            median_display = f"{median_letter} | {percentage:.2f} | {raw_avg:.2f}"
         else:
-            median_display = "N/A (0.00) | 0.00"
+            median_display = "N/A (0.00) | 0.00 | 0.00"
             
         row = f"| {author} | " + " | ".join(grades) + f" | {median_display} |"
         rows.append(row)
@@ -209,7 +240,7 @@ def generate_markdown_table(results: Dict[str, Any], models: List[str]) -> str:
                 na_stats.append(f"{na_counts[model]} N/A")
             else:
                 na_stats.append("-")
-        rows.append(f"| **N/A Count** | " + " | ".join(na_stats) + " | - | - |")
+        rows.append(f"| **N/A Count** | " + " | ".join(na_stats) + " | - | - | - |")
     
     # Combine everything
     return f"{header}\n{separator}\n" + "\n".join(rows)
@@ -218,7 +249,7 @@ def generate_markdown_table(results: Dict[str, Any], models: List[str]) -> str:
 def generate_csv_table(results: Dict[str, Any], models: List[str]) -> str:
     """Generate a CSV table of grades with percentage scores."""
     # Build header
-    header = "Model," + ",".join(models) + ",Median Grade,Percentage"
+    header = "Model," + ",".join(models) + ",Median Grade,Percentage,Raw Numeric Average"
     
     # Build rows
     rows = []
@@ -243,14 +274,23 @@ def generate_csv_table(results: Dict[str, Any], models: List[str]) -> str:
             # Calculate percentage
             percentage = grade_to_percentage(median_num)
             
+            # Calculate raw mean (average) of numeric grades
+            raw_grades = []
+            for grader in models:
+                if grader in results["grades"] and author in results["grades"][grader]:
+                    raw_grades.append(results["grades"][grader][author]["numeric_grade"])
+            raw_avg = sum(raw_grades) / len(raw_grades) if raw_grades else 0.0
+            
             # Convert numeric back to letter grade for display
             median_letter = percentage_to_letter_grade(percentage)
             formatted_percentage = f"{percentage:.2f}"
         else:
-            median_letter = "N/A (0.00)"
+            median_letter = "N/A"
             formatted_percentage = "0.00"
+            raw_avg = 0.0
             
-        row = f"{author}," + ",".join(grades) + f",{median_letter},{formatted_percentage}"
+        # Format the raw average with 2 decimal places for precision
+        row = f"{author}," + ",".join(grades) + f",{median_letter},{formatted_percentage},{raw_avg:.2f}"
         rows.append(row)
     
     # Combine everything

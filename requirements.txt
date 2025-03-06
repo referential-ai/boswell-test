@@ -12,5 +12,7 @@ pillow==11.1.0
 pyparsing==3.2.1
 python-dateutil==2.9.0.post0
 requests==2.32.3
+pandas
+openpyxl==3.1.5  # For Excel cross-assessment table generation
 six==1.17.0
 urllib3==2.3.0

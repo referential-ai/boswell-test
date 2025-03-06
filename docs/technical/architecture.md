@@ -48,7 +48,7 @@ botwell/
    
 2. Updated free models list with 12 additional models:
    - Moonshot AI: Moonlight 16b
-   - Nous: DeepHermes 3 Llama 3 8B
+   - Nous: DeepHermes 3 Llama-3-8B
    - Google: Gemini Flash Lite 2.0
    - Google: Gemini Pro 2.0 Experimental
    - Dolphin3.0 R1 Mistral 24B

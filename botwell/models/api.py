@@ -10,6 +10,7 @@ import os
 
 from botwell.models.config import MODELS
 from botwell.utils.tokenization import calculate_tokens
+from botwell.utils.model_standardization import standardize_model_name
 
 
 from botwell.utils.caching import cached_api_call
@@ -139,8 +140,10 @@ def fetch_available_openrouter_models() -> List[Dict[str, Any]]:
                 return None
                 
             model_name = model_data.get("name", model_id.split("/")[-1])
+            # Standardize model name
+            standardized_name = standardize_model_name(model_name)
             return {
-                "name": model_name,
+                "name": standardized_name,
                 "model_id": model_id,
                 "context_length": model_data.get("context_length"),
                 "pricing": model_data.get("pricing", {}),

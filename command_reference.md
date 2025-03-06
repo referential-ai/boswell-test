@@ -1,68 +1,57 @@
-# Botwell Command Reference
+# Boswell Test Command Reference
 
-This document provides a comprehensive reference of all available commands in the Botwell framework.
+## Excel Cross-Assessment Table Generation
 
-## Basic Usage
+The Boswell Test now automatically generates an Excel spreadsheet file (`cross_grading_table.xlsx`) as part of the standard output. This file contains the complete model cross-assessment matrix as seen in Table 1 of the research paper, with appropriate color highlighting and the median bias data included in the last row.
 
-| Command | Description |
-|---------|-------------|
-| `botwell` | Run a test with default settings (pol_sci_1 domain with all verified models) |
-| `botwell --domain <domain_name>` | Run a test with a specific domain |
-| `botwell --free` | Run a test with only free models |
-| `botwell --models "Model1" "Model2" ...` | Run a test with specific models |
+### Features
 
-## Information Commands
+- Full cross-assessment matrix showing how each model grades every other model
+- Color highlighting to visually indicate grade levels (A+, A, A-, B+, etc.)
+- Median grade for each model shown in the rightmost column
+- Grading bias statistics included in the bottom row
+- Formatted for easy reading and analysis
 
-| Command | Description |
-|---------|-------------|
-| `botwell --list-domains` | List all available test domains |
-| `botwell --list-models` | List all available models |
-| `botwell --list-models --free` | List only free models |
+### Default Behavior
 
-## Domain Management
+This Excel table is generated automatically with every test run - no additional flags or commands needed. You'll find it in your results directory:
 
-| Command | Description |
-|---------|-------------|
-| `botwell --all-domains` | Run tests on all available domains |
-| `botwell create-domain` | Create a new domain definition with interactive prompts |
+```
+results/[timestamp]-[domain]/cross_grading_table.xlsx
+```
 
-## Model Management
+### Usage Examples
 
-| Command | Description |
-|---------|-------------|
-| `botwell --update-models` | Update local models file with available OpenRouter models |
-| `botwell --update-models --models-file <file>` | Specify custom models file for updating |
-| `botwell --skip-verification` | Skip the model verification step (faster but less reliable) |
+Running any Boswell test automatically generates this Excel file:
 
-## Cache Management
+```bash
+# All of these commands will generate the Excel cross-assessment table
+botwell --domain pol_sci_1
+botwell --domain pol_sci_1 --free
+botwell --domain pol_sci_1 --models "GPT-4o" "Claude-3.7-Sonnet" "Gemini Pro 1.5" "o1"
+```
 
-| Command | Description |
-|---------|-------------|
-| `botwell cache stats` | View cache statistics |
-| `botwell cache clear` | Clear all cache entries |
-| `botwell cache clear --expired-only` | Clear only expired cache entries |
+### Integration With Other Tools
 
-## Report Generation
+The Excel file can be directly opened in Microsoft Excel, Google Sheets, LibreOffice Calc, or any other spreadsheet application for further analysis or presentation.
 
-| Command | Description |
-|---------|-------------|
-| `botwell report --latest` | Generate a report for the most recent test results |
-| `botwell report --all` | Generate reports for all results directories |
-| `botwell report --directory <path>` | Generate a report for a specific results directory |
+## Standalone Excel Table Generation
 
-## Advanced Features
+If you want to generate the cross-assessment Excel table separately after a test run has completed, you can use the standalone command:
 
-| Command | Description |
-|---------|-------------|
-| `botwell --max-retries <number>` | Configure retry attempts for API calls |
-| `botwell --output <file>` | Specify custom output file for results |
-| `botwell --synthesize-essays` | Synthesize top essays into a combined essay |
-| `botwell --aggregate-results` | Generate aggregate statistics from existing results |
+```bash
+# Generate cross-assessment Excel table with exact Table 1 styling from the paper
+python create_cross_grading_table.py results/[timestamp]-[domain]/full_results.json
+```
 
-## Environment Variables
+### Features
 
-| Variable | Purpose |
-|----------|---------|
-| `OPENROUTER_API_KEY` | Required API key for accessing models |
-| `BOTWELL_CACHE_EXPIRATION` | Set cache expiration time in days (default: 7) |
-| `BOTWELL_DISABLE_CACHE` | Set to 1 to disable caching entirely |
+- Works with any existing result directory that contains a `full_results.json` file
+- Generates the same Excel table format as the automatic process
+- Preserves all formatting, colors, and layout exactly as shown in Table 1
+- Uses the default system font for optimal readability in different spreadsheet apps 
+
+### Example
+
+```bash
+python create_cross_grading_table.py results/20250305-184949-pol_sci_1/full_results.json

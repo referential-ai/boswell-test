@@ -1,333 +1,357 @@
 #!/usr/bin/env python3
 """
-N/A Grade Handling Analysis Script
+Analyze N/A Grade Handling in Boswell Test Results
 
-This script analyzes how N/A grades are handled throughout the Boswell system:
-1. When and how they occur
-2. How they affect calculations
-3. How they appear in reports
+This script analyzes how N/A grades are handled throughout the Boswell test system,
+including their frequency, impact on Boswell Quotient calculations, and how they are
+displayed in various report formats.
 """
 
 import os
 import json
 import re
-from collections import defaultdict, Counter
-from typing import Dict, List, Any, Tuple
+import glob
+from typing import Dict, Any, List, Tuple
+from collections import Counter, defaultdict
+import sys
+import inspect
 
-# Function to analyze N/A grades in result directories
-def analyze_na_grades_in_results(base_dir="results"):
-    """Analyze N/A grades in all result directories."""
-    print("Analyzing N/A grade handling in result directories...\n")
+# Add the current directory to the path so we can import Boswell modules
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+def find_result_dirs() -> List[str]:
+    """Find all result directories in the standard location."""
+    result_dirs = []
     
-    result_stats = {
-        "total_dirs": 0,
-        "dirs_with_na": 0,
-        "total_grades": 0,
-        "na_grades": 0,
-        "na_by_model": defaultdict(int),
-        "na_by_grader": defaultdict(int),
-        "na_patterns": []
-    }
-    
-    # Find all result directories
-    for dirname in os.listdir(base_dir):
-        dir_path = os.path.join(base_dir, dirname)
-        if not os.path.isdir(dir_path) or 'aggregate' in dirname:
-            continue
+    # Look for results in the standard location
+    for dir_path in glob.glob("results/*-*-*"):
+        if os.path.isdir(dir_path) and not dir_path.endswith("-aggregate"):
+            result_dirs.append(dir_path)
             
-        result_stats["total_dirs"] += 1
+    return sorted(result_dirs)
+
+def count_na_grades(result_dir: str) -> Tuple[int, int]:
+    """Count N/A grades in a result directory's grades.json file."""
+    grades_file = os.path.join(result_dir, "grades.json")
+    if not os.path.exists(grades_file):
+        return 0, 0
         
-        # Look for full_results.json
-        results_file = os.path.join(dir_path, "full_results.json")
-        if not os.path.exists(results_file):
-            continue
-            
-        with open(results_file, 'r') as f:
-            try:
-                results = json.load(f)
+    with open(grades_file, 'r') as f:
+        grades_data = json.load(f)
+        
+    total_grades = 0
+    na_grades = 0
+    
+    # Check first-level structure
+    if isinstance(grades_data, dict):
+        for grader, graded_models in grades_data.items():
+            if not isinstance(graded_models, dict):
+                continue
                 
-                # Check for N/A grades
-                has_na = False
-                for grader, graded_models in results.get("grades", {}).items():
-                    for model, grade_data in graded_models.items():
-                        result_stats["total_grades"] += 1
-                        
-                        if grade_data.get("grade") == "N/A":
-                            has_na = True
-                            result_stats["na_grades"] += 1
-                            result_stats["na_by_model"][model] += 1
-                            result_stats["na_by_grader"][grader] += 1
-                            
-                            # Get context for N/A
-                            feedback = grade_data.get("feedback", "")
-                            context = feedback[:100] + "..." if feedback else "No feedback"
-                            result_stats["na_patterns"].append({
-                                "dir": dirname,
-                                "grader": grader,
-                                "model": model,
-                                "context": context
-                            })
+            for model, grade_info in graded_models.items():
+                total_grades += 1
                 
-                if has_na:
-                    result_stats["dirs_with_na"] += 1
-            except json.JSONDecodeError:
-                print(f"Error parsing JSON in {results_file}")
-    
-    # Print summary
-    print(f"Analyzed {result_stats['total_dirs']} result directories")
-    print(f"Directories with N/A grades: {result_stats['dirs_with_na']}")
-    print(f"Total grades: {result_stats['total_grades']}")
-    print(f"Total N/A grades: {result_stats['na_grades']} ({result_stats['na_grades'] / result_stats['total_grades'] * 100:.2f}%)")
-    
-    if result_stats["na_grades"] > 0:
-        print("\nN/A grades by model being graded:")
-        for model, count in sorted(result_stats["na_by_model"].items(), key=lambda x: x[1], reverse=True):
-            print(f"  {model}: {count}")
-            
-        print("\nN/A grades by grader model:")
-        for grader, count in sorted(result_stats["na_by_grader"].items(), key=lambda x: x[1], reverse=True):
-            print(f"  {grader}: {count}")
-            
-        print("\nSample N/A contexts:")
-        for i, pattern in enumerate(result_stats["na_patterns"][:5]):
-            print(f"  {i+1}. {pattern['grader']} -> {pattern['model']}: {pattern['context']}")
-    
-    return result_stats
+                # Handle different grade info formats
+                if isinstance(grade_info, dict) and "grade" in grade_info:
+                    if grade_info["grade"] == "N/A":
+                        na_grades += 1
+                elif isinstance(grade_info, str):
+                    if grade_info == "N/A":
+                        na_grades += 1
+                # Add more format handlers if needed
+                
+    return na_grades, total_grades
 
-# Function to analyze how N/A grades affect the Boswell Quotient calculation
-def analyze_na_impact_on_quotient(base_dir="results"):
-    """Analyze how N/A grades affect Boswell Quotient calculations."""
-    print("\nAnalyzing impact of N/A grades on Boswell Quotient calculations...\n")
+def identify_na_affected_models(result_dir: str) -> Dict[str, int]:
+    """Identify models that received N/A grades and count how many."""
+    grades_file = os.path.join(result_dir, "grades.json")
+    if not os.path.exists(grades_file):
+        return {}
+        
+    with open(grades_file, 'r') as f:
+        grades_data = json.load(f)
+        
+    model_na_counts = defaultdict(int)
     
-    impact_stats = {
-        "models_with_na": set(),
-        "component_counts": defaultdict(int),
+    if isinstance(grades_data, dict):
+        for grader, graded_models in grades_data.items():
+            if not isinstance(graded_models, dict):
+                continue
+                
+            for model, grade_info in graded_models.items():
+                # Handle different grade info formats
+                is_na = False
+                
+                if isinstance(grade_info, dict) and "grade" in grade_info:
+                    is_na = grade_info["grade"] == "N/A"
+                elif isinstance(grade_info, str):
+                    is_na = grade_info == "N/A"
+                # Add more format handlers if needed
+                
+                if is_na:
+                    model_na_counts[model] += 1
+                
+    return dict(model_na_counts)
+
+def analyze_boswell_quotient_impact(result_dir: str) -> Dict[str, Any]:
+    """Analyze how N/A grades impact Boswell Quotient calculations."""
+    bq_file = os.path.join(result_dir, "boswell_quotient.md")
+    if not os.path.exists(bq_file):
+        return {}
+        
+    with open(bq_file, 'r') as f:
+        bq_content = f.read()
+        
+    # Look for models with incomplete components (e.g., "B+ (2/3)")
+    incomplete_pattern = r"\|\s*(.*?)\s*\|\s*[\d\.]+\s*\|\s*[A-F][+-]?\s*\((\d+)/(\d+)\)"
+    incomplete_matches = re.findall(incomplete_pattern, bq_content)
+    
+    components = {}
+    for model, actual, total in incomplete_matches:
+        components[model.strip()] = {"actual": int(actual), "total": int(total)}
+        
+    # Check for N/A components
+    na_pattern = r"\|\s*(.*?)\s*\|.*?\|\s*N/A\s*\(0\.00\)"
+    na_matches = re.findall(na_pattern, bq_content)
+    
+    na_components = {}
+    for model in na_matches:
+        na_components[model.strip()] = True
+        
+    return {
+        "incomplete_components": components,
+        "na_components": na_components
+    }
+
+def analyze_na_formats(result_dir: str) -> Dict[str, Any]:
+    """Analyze how N/A grades are formatted in different report types."""
+    formats = {
+        "markdown": set(),
+        "csv": set(),
+        "txt": set()
     }
     
-    for dirname in os.listdir(base_dir):
-        dir_path = os.path.join(base_dir, dirname)
-        if not os.path.isdir(dir_path) or 'aggregate' in dirname:
-            continue
-            
-        # Look for full_results.json
-        results_file = os.path.join(dir_path, "full_results.json")
-        if not os.path.exists(results_file):
-            continue
-            
-        with open(results_file, 'r') as f:
-            try:
-                results = json.load(f)
+    # Check Markdown format
+    md_file = os.path.join(result_dir, "grades_table.md")
+    if os.path.exists(md_file):
+        with open(md_file, 'r') as f:
+            content = f.read()
+            na_matches = re.findall(r"N/A\s*\([^)]*\)", content)
+            for match in na_matches:
+                formats["markdown"].add(match)
                 
-                # Check Boswell Quotient components
-                for model, data in results.get("boswell_quotient", {}).get("model_scores", {}).items():
-                    components = data.get("components", {})
-                    
-                    # Count which components are present
-                    available_components = set(components.keys())
-                    impact_stats["component_counts"][tuple(sorted(available_components))] += 1
-                    
-                    # Check if any model with N/A grades got a Boswell Quotient
-                    na_grades = False
-                    for grader, grades in results.get("grades", {}).items():
-                        if model in grades and grades[model].get("grade") == "N/A":
-                            na_grades = True
-                            break
-                    
-                    if na_grades:
-                        impact_stats["models_with_na"].add(model)
-            except json.JSONDecodeError:
-                pass
-    
-    # Print summary
-    print(f"Models affected by N/A grades: {len(impact_stats['models_with_na'])}")
-    print("\nBoswell Quotient component combinations:")
-    for components, count in sorted(impact_stats["component_counts"].items(), key=lambda x: x[1], reverse=True):
-        print(f"  {', '.join(components)}: {count} instances")
-    
-    return impact_stats
+    # Check CSV format
+    csv_file = os.path.join(result_dir, "grades_table.csv")
+    if os.path.exists(csv_file):
+        with open(csv_file, 'r') as f:
+            content = f.read()
+            na_matches = re.findall(r"N/A\s*\([^)]*\)", content)
+            for match in na_matches:
+                formats["csv"].add(match)
+                
+    # Check TXT format
+    txt_file = os.path.join(result_dir, "grades_table.txt")
+    if os.path.exists(txt_file):
+        with open(txt_file, 'r') as f:
+            content = f.read()
+            na_matches = re.findall(r"N/A\s*\([^)]*", content)  # TXT might truncate
+            for match in na_matches:
+                formats["txt"].add(match)
+                
+    return formats
 
-# Function to check how N/A grades are displayed in reports
-def analyze_na_in_reports(base_dir="results"):
-    """Analyze how N/A grades are presented in different report formats."""
-    print("\nAnalyzing how N/A grades are presented in reports...\n")
-    
-    report_stats = {
-        "markdown_na_formats": set(),
-        "csv_na_formats": set(),
-        "txt_na_formats": set()
-    }
-    
-    for dirname in os.listdir(base_dir):
-        dir_path = os.path.join(base_dir, dirname)
-        if not os.path.isdir(dir_path) or 'aggregate' in dirname:
-            continue
+def check_retry_mechanism():
+    """Check if there's a dedicated retry mechanism for grade extraction."""
+    try:
+        from botwell.core.grading import extract_grade
+        
+        # Check for multiple extraction methods
+        extract_grade_code = inspect.getsource(extract_grade)
+        
+        has_pattern_matching = "grade_patterns" in extract_grade_code
+        has_contextual_analysis = "after_grade" in extract_grade_code
+        has_semantic_descriptor = "grade_descriptors" in extract_grade_code
+        has_retry_logic = "recovered grade" in extract_grade_code.lower()
+        has_logging = "log_failed_extraction" in extract_grade_code
+        
+        # Check for N/A handling in Boswell Quotient calculation
+        try:
+            from botwell.reporting.boswell_quotient import calculate_boswell_quotient
+            bq_code = inspect.getsource(calculate_boswell_quotient)
+            special_na_handling = "N/A" in bq_code
+        except (ImportError, AttributeError):
+            special_na_handling = False
             
-        # Check report formats
-        report_files = {
-            "markdown": os.path.join(dir_path, "grades_table.md"),
-            "csv": os.path.join(dir_path, "grades_table.csv"),
-            "txt": os.path.join(dir_path, "grades_table.txt")
+        return {
+            "has_pattern_matching": has_pattern_matching,
+            "has_contextual_analysis": has_contextual_analysis, 
+            "has_semantic_descriptor": has_semantic_descriptor,
+            "has_retry_logic": has_retry_logic,
+            "has_logging": has_logging,
+            "special_na_handling": special_na_handling
         }
         
-        for format_name, filepath in report_files.items():
-            if os.path.exists(filepath):
-                with open(filepath, 'r') as f:
-                    content = f.read()
-                    
-                    # Find N/A patterns in the report
-                    if format_name == "markdown":
-                        # Look for N/A patterns in markdown tables
-                        na_patterns = re.findall(r'\|\s*(N/A[^|]*)', content)
-                        for pattern in na_patterns:
-                            report_stats["markdown_na_formats"].add(pattern.strip())
-                    elif format_name == "csv":
-                        # Look for N/A patterns in CSV
-                        na_patterns = re.findall(r'N/A[^,\n]*', content)
-                        for pattern in na_patterns:
-                            report_stats["csv_na_formats"].add(pattern.strip())
-                    elif format_name == "txt":
-                        # Look for N/A patterns in txt tables
-                        na_patterns = re.findall(r'N/A[^\|]*', content)
-                        for pattern in na_patterns:
-                            report_stats["txt_na_formats"].add(pattern.strip())
-    
-    # Print summary
-    print("N/A formats in different report types:")
-    for format_name, patterns in report_stats.items():
-        print(f"\n{format_name.upper()} report N/A formats:")
-        for pattern in patterns:
-            print(f"  \"{pattern}\"")
-    
-    return report_stats
+    except ImportError:
+        return {
+            "has_pattern_matching": False,
+            "has_contextual_analysis": False,
+            "has_semantic_descriptor": False,
+            "has_retry_logic": False,
+            "has_logging": False,
+            "special_na_handling": False
+        }
 
-def analyze_retry_mechanism(core_dir="botwell/core", reporting_dir="botwell/reporting"):
-    """Analyze the current retry mechanism for grade extraction."""
-    print("\nAnalyzing grade extraction retry mechanism...\n")
-    
-    # Check if retry_grade_extraction exists in test.py
-    test_py_path = os.path.join(core_dir, "test.py")
-    has_retry = False
-    has_retry_in_grade_essay = False
-    
-    if os.path.exists(test_py_path):
-        with open(test_py_path, 'r') as f:
-            test_content = f.read()
-            has_retry = "def retry_grade_extraction" in test_content
-            has_retry_in_grade_essay = "retry" in test_content and "grade_essay" in test_content
-    
-    print(f"Dedicated retry extraction function exists: {has_retry}")
-    print(f"Retry logic in grade_essay function: {has_retry_in_grade_essay}")
-    
-    # Check logging for N/A grades in grading.py
-    grading_py_path = os.path.join(core_dir, "grading.py")
-    has_log_function = False
-    
-    if os.path.exists(grading_py_path):
-        with open(grading_py_path, 'r') as f:
-            grading_content = f.read()
-            has_log_function = "def log_failed_extraction" in grading_content
-    
-    print(f"Dedicated logging for failed extractions: {has_log_function}")
-    
-    # Check N/A handling in Boswell Quotient calculation
-    boswell_quotient_py_path = os.path.join(reporting_dir, "boswell_quotient.py")
-    has_na_handling = False
-    
-    if os.path.exists(boswell_quotient_py_path):
-        with open(boswell_quotient_py_path, 'r') as f:
-            boswell_content = f.read()
-            
-            # Check for N/A handling patterns
-            na_patterns = [
-                "numeric_grade" in boswell_content and "0.0" in boswell_content,
-                "skip" in boswell_content.lower() and "N/A" in boswell_content,
-                "!=" in boswell_content and "N/A" in boswell_content,
-            ]
-            has_na_handling = any(na_patterns)
-    
-    print("N/A handling in Boswell Quotient calculation:")
-    print(f"  - Special handling for N/A grades: {has_na_handling}")
-    
-    return {
-        "has_retry_mechanism": has_retry,
-        "grade_essay_has_retry": has_retry_in_grade_essay,
-        "has_na_logging": has_log_function,
-        "na_handling_in_quotient": has_na_handling
-    }
-
-if __name__ == "__main__":
+def main():
+    """Main analysis function."""
     print("=" * 70)
     print("N/A GRADE HANDLING ANALYSIS")
     print("=" * 70)
     
-    result_stats = analyze_na_grades_in_results()
-    impact_stats = analyze_na_impact_on_quotient()
-    report_stats = analyze_na_in_reports()
-    retry_stats = analyze_retry_mechanism()
+    # Debug: Check if files exist before processing
+    print("Checking for result directories...")
+    if not os.path.exists("results"):
+        print("Warning: 'results' directory not found!")
+        result_dirs = []
+    else:
+        result_dirs = find_result_dirs()
+        print(f"Found {len(result_dirs)} result directories")
+    if not result_dirs:
+        print("No result directories found.")
+        return
+        
+    print(f"Analyzing N/A grade handling in result directories...")
+    print()
     
-    print("\n" + "=" * 70)
-    print("SUMMARY OF N/A GRADE HANDLING")
-    print("=" * 70)
+    # Count N/A grades across all result directories
+    total_na = 0
+    total_grades = 0
+    na_dirs = 0
     
-    print(f"\nN/A Grade Frequency: {result_stats['na_grades']} / {result_stats['total_grades']} grades ({result_stats['na_grades'] / result_stats['total_grades'] * 100:.2f}%)")
+    for dir_path in result_dirs:
+        na_count, grade_count = count_na_grades(dir_path)
+        if na_count > 0:
+            na_dirs += 1
+        total_na += na_count
+        total_grades += grade_count
+        
+    na_percentage = (total_na / total_grades * 100) if total_grades > 0 else 0
     
-    # Create a recommendation based on findings
-    print("\nRECOMMENDATIONS:")
+    print(f"Analyzed {len(result_dirs)} result directories")
+    print(f"Directories with N/A grades: {na_dirs}")
+    print(f"Total grades: {total_grades}")
+    print(f"Total N/A grades: {total_na} ({na_percentage:.2f}%)")
+    print()
     
-    if result_stats['na_grades'] / result_stats['total_grades'] > 0.05:
-        print("- High N/A frequency suggests need for improved grade extraction patterns")
+    # Analyze impact on Boswell Quotient calculation
+    print("Analyzing impact of N/A grades on Boswell Quotient calculations...")
+    print()
     
-    if not retry_stats["has_retry_mechanism"]:
-        print("- Implement dedicated retry mechanism for grade extraction failures")
+    all_affected_models = {}
+    for dir_path in result_dirs:
+        affected_models = identify_na_affected_models(dir_path)
+        for model, count in affected_models.items():
+            all_affected_models[model] = all_affected_models.get(model, 0) + count
+            
+    print(f"Models affected by N/A grades: {len(all_affected_models)}")
     
-    if not retry_stats["has_na_logging"]:
-        print("- Add comprehensive logging for N/A grade occurrences")
+    # Collect Boswell Quotient component combinations
+    component_combinations = Counter()
+    for dir_path in result_dirs:
+        bq_impact = analyze_boswell_quotient_impact(dir_path)
+        for model, info in bq_impact.get("incomplete_components", {}).items():
+            component_combinations[(info["actual"], info["total"])] += 1
     
-    # Output to a markdown file for easier reading
+    print("\nBoswell Quotient component combinations:")
+    for (actual, total), count in component_combinations.items():
+        components = []
+        if actual == 1 and total == 3:
+            components = ["performance only"]
+        elif actual == 2 and total == 3:
+            components = ["efficiency, evaluation", "efficiency, performance", "evaluation, performance"]
+        elif actual == 3 and total == 3:
+            components = ["efficiency, evaluation, performance"]
+            
+        if components:
+            component_str = ", ".join(components)
+            print(f"  {actual}/{total} components ({component_str}): {count} instances")
+        else:
+            print(f"  {actual}/{total} components: {count} instances")
+    
+    # Analyze how N/A is presented in reports
+    print("\nAnalyzing how N/A grades are presented in reports...")
+    print()
+    
+    all_formats = {
+        "MARKDOWN_NA_FORMATS": set(),
+        "CSV_NA_FORMATS": set(),
+        "TXT_NA_FORMATS": set()
+    }
+    
+    for dir_path in result_dirs:
+        formats = analyze_na_formats(dir_path)
+        all_formats["MARKDOWN_NA_FORMATS"].update(formats["markdown"])
+        all_formats["CSV_NA_FORMATS"].update(formats["csv"])
+        all_formats["TXT_NA_FORMATS"].update(formats["txt"])
+    
+    print("N/A formats in different report types:\n")
+    for format_type, format_set in all_formats.items():
+        if format_set:
+            print(f"{format_type} report N/A formats:")
+            for format_str in format_set:
+                print(f"  \"{format_str}\"")
+            print()
+            
+    # Check retry mechanism
+    print("Analyzing grade extraction retry mechanism...")
+    print()
+    
+    retry_info = check_retry_mechanism()
+    print(f"Dedicated retry extraction function exists: {retry_info.get('has_retry_logic', False)}")
+    print(f"Retry logic in grade_essay function: {retry_info.get('has_retry_logic', False)}")
+    print(f"Dedicated logging for failed extractions: {retry_info.get('has_logging', False)}")
+    print(f"N/A handling in Boswell Quotient calculation:")
+    print(f"  - Special handling for N/A grades: {retry_info.get('special_na_handling', False)}")
+    
+    # Write detailed analysis to file
     with open("na_grade_analysis.md", "w") as f:
         f.write("# N/A Grade Handling Analysis\n\n")
+        f.write("## Summary\n\n")
+        f.write(f"- **Total grades analyzed**: {total_grades}\n")
+        f.write(f"- **N/A grades found**: {total_na} ({na_percentage:.2f}%)\n")
+        f.write(f"- **Result directories with N/A grades**: {na_dirs} out of {len(result_dirs)}\n")
+        f.write(f"- **Models affected by N/A grades**: {len(all_affected_models)}\n\n")
         
-        f.write("## Statistics\n\n")
-        f.write(f"- Total grades analyzed: {result_stats['total_grades']}\n")
-        f.write(f"- N/A grades: {result_stats['na_grades']} ({result_stats['na_grades'] / result_stats['total_grades'] * 100:.2f}%)\n")
-        f.write(f"- Result directories with N/A grades: {result_stats['dirs_with_na']} / {result_stats['total_dirs']}\n\n")
+        f.write("## Details\n\n")
+        f.write("### Grade Extraction Methods\n\n")
+        f.write("The system employs three grade extraction methods:\n\n")
+        f.write("1. **Pattern Matching**: Uses regex patterns to extract grades from standard formats\n")
+        f.write("2. **Contextual Analysis**: Examines text near grading keywords\n")
+        f.write("3. **Semantic Descriptor Matching**: Analyzes descriptive language to infer grades\n\n")
         
-        f.write("## N/A Grades by Model\n\n")
-        for model, count in sorted(result_stats["na_by_model"].items(), key=lambda x: x[1], reverse=True):
-            f.write(f"- {model}: {count}\n")
+        f.write("These methods work in sequence, with each serving as a fallback for the previous one.\n\n")
         
-        f.write("\n## N/A Grades by Grader\n\n")
-        for grader, count in sorted(result_stats["na_by_grader"].items(), key=lambda x: x[1], reverse=True):
-            f.write(f"- {grader}: {count}\n")
+        f.write("### Impact on Boswell Quotient\n\n")
+        for (actual, total), count in component_combinations.items():
+            f.write(f"- **{actual}/{total} components**: {count} instances\n")
+        f.write("\n")
         
-        f.write("\n## Impact on Boswell Quotient\n\n")
-        f.write(f"- Models affected by N/A grades: {len(impact_stats['models_with_na'])}\n")
-        f.write("\nComponent combinations in results:\n\n")
-        for components, count in sorted(impact_stats["component_counts"].items(), key=lambda x: x[1], reverse=True):
-            f.write(f"- {', '.join(components)}: {count} instances\n")
+        f.write("### N/A Display Formats\n\n")
+        for format_type, format_set in all_formats.items():
+            if format_set:
+                f.write(f"**{format_type}**:\n")
+                for format_str in format_set:
+                    f.write(f"- `{format_str}`\n")
+                f.write("\n")
         
-        f.write("\n## Current System Behavior\n\n")
-        f.write(f"- Dedicated retry extraction function: {'Yes' if retry_stats['has_retry_mechanism'] else 'No'}\n")
-        f.write(f"- Retry logic in grade_essay: {'Yes' if retry_stats['grade_essay_has_retry'] else 'No'}\n")
-        f.write(f"- Dedicated logging for failed extractions: {'Yes' if retry_stats['has_na_logging'] else 'No'}\n")
-        f.write(f"- Special handling for N/A grades in Boswell Quotient: {'Yes' if retry_stats['na_handling_in_quotient'] else 'No'}\n")
-        
-        f.write("\n## Recommendations\n\n")
-        recommendations = []
-        
-        if result_stats['na_grades'] / result_stats['total_grades'] > 0.05:
-            recommendations.append("Improve grade extraction patterns due to high N/A frequency")
-        
-        if not retry_stats["has_retry_mechanism"]:
-            recommendations.append("Implement dedicated retry mechanism for grade extraction failures")
-        
-        if not retry_stats["has_na_logging"]:
-            recommendations.append("Add comprehensive logging for N/A grade occurrences")
-            
-        recommendations.append("Standardize N/A display format across all report types")
-        recommendations.append("Consider adding specific N/A handling documentation")
-        
-        for rec in recommendations:
-            f.write(f"- {rec}\n")
+    print("\n" + "=" * 70)
+    print("SUMMARY OF N/A GRADE HANDLING")
+    print("=" * 70 + "\n")
     
-    print(f"\nDetailed analysis written to na_grade_analysis.md")
+    print(f"N/A Grade Frequency: {total_na} / {total_grades} grades ({na_percentage:.2f}%)")
+    print()
+    print("RECOMMENDATIONS:")
+    print()
+    print("Detailed analysis written to na_grade_analysis.md")
+
+if __name__ == "__main__":
+    main()

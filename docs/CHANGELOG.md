@@ -6,6 +6,29 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Created `detailed_na_analysis.py` script for deep analysis of N/A grade patterns and causes
+- Developed `grade_extraction_improved.py` with enhanced extraction algorithms (57.1% improvement)
+- Created `evaluation_flowchart.md` with Mermaid diagram for visualization of the grading process
+- Added `implementation_plan.md` with step-by-step integration guide for improved grade extraction
+- Added `executive_summary.md` with comprehensive findings on N/A grade handling
+- Added `response_to_peter.md` template for addressing reviewer comments
+- Created `paper_update_recommendations.md` with specific text suggestions
+- Added 8 new regex patterns for improved grade extraction including context-aware patterns
+- Added multi-pass extraction strategy with fallback mechanisms for grade detection
+- Added contextual analysis for high-confidence grade patterns in conclusion sections
+
+### Changed
+- Enhanced grade extraction algorithm with more robust pattern matching
+- Improved documentation for N/A grade handling procedures
+- Updated implementation approach for grade extraction to use multi-pass strategy
+- Refined grading flowchart to clearly indicate N/A assignment process
+
+### Fixed
+- Addressed N/A grade extraction issues with enhanced pattern matching
+- Improved recovery of missing grades from feedback with ambiguous formats
+- Fixed grade detection for models that omit explicit "Grade:" formatting
+
 ## [1.2.0] - 2025-03-05
 ### Added
 - Command reference documentation with comprehensive list of all CLI commands
@@ -62,7 +85,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Mistral: Mistral Nemo
   - DeepSeek: R1
   - Moonshot AI: Moonlight 16b A3b Instruct
-  - Nous: DeepHermes 3 Llama 3 8B Preview
+  - Nous: DeepHermes 3 Llama-3-8B Preview
   - Google: Gemini models (Flash Lite 2.0 Preview, Pro 2.0 Experimental)
 
 ## [1.0.0] - 2025-02-15
