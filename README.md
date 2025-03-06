@@ -66,16 +66,17 @@ This tool automates the process of running a Boswell Test across multiple LLMs. 
 1. **Essay Generation**: The system prompts multiple LLMs with the same complex question in a specific domain (like political science or computer science)
 2. **Peer Evaluation**: Each LLM grades the essays written by all other models, providing detailed feedback and assigning letter grades (A+, A, A-, etc.)
 3. **Bias Analysis**: The system analyzes grading patterns to identify which models grade more strictly or leniently compared to the median
-4. **Boswell Quotient**: A comprehensive score (0-100) is calculated for each model based on equal weighting of performance (grades received), evaluation ability (grading consistency), and efficiency (response time)
-5. **Visualization**: The framework generates charts and graphs showing performance metrics, grading distributions, timing data, and Boswell Quotient rankings
-6. **Comprehensive Reporting**: Results are organized in timestamped directories with easy-to-read tables in multiple formats (Markdown, ASCII, CSV, JSON)
+4. **Visualization**: The framework generates charts and graphs showing performance metrics, grading distributions, timing data, and Boswell Quotient rankings
+5. **Comprehensive Reporting**: Results are organized in timestamped directories with easy-to-read tables in multiple formats (Markdown, ASCII, CSV, JSON)
+
+<!-- 4. **Boswell Quotient**: A comprehensive score (0-100) is calculated for each model based on equal weighting of performance (grades received), evaluation ability (grading consistency), and efficiency (response time) -->
 
 The Boswell Test methodology offers several advantages over traditional benchmarks:
 - It captures nuanced evaluation capabilities, not just raw performance
 - It leverages LLMs' own analytical skills to provide detailed feedback
 - It reveals biases in how different models evaluate the same work
 - It creates a multidimensional view of model capabilities across different domains
-- It calculates a comprehensive "Boswell Quotient" that measures a model's ability to serve as an indispensable AI companion
+<!-- - It calculates a comprehensive "Boswell Quotient" that measures a model's ability to serve as an indispensable AI companion -->
 
 All of this is automated through a simple command-line interface that handles the entire testing process from essay generation to final report creation.
 
@@ -181,9 +182,9 @@ botwell --all-domains
 
 This will sequentially run tests on all domains with the same set of models, creating separate results directories for each domain. When multiple domains are tested, it will also generate:
 
-1. An **aggregate Boswell Quotient** analysis across all domains
-2. Visualizations comparing model performance across domains
-3. Detailed reports identifying which models are consistent across domains vs. specialized in specific areas
+<!-- 1. An **aggregate Boswell Quotient** analysis across all domains -->
+1. Visualizations comparing model performance across domains
+2. Detailed reports identifying which models are consistent across domains vs. specialized in specific areas
 
 #### Use specific models:
 
@@ -469,17 +470,17 @@ A horizontal bar chart showing the average time each model took to grade essays 
 **Process Timing** (`time_breakdown.png`):
 A pie chart showing the proportion of time spent on each phase of the test: essay generation, grading, analysis, and file generation.
 
-**Boswell Quotient** (`boswell_quotient.png`):
+<!-- **Boswell Quotient** (`boswell_quotient.png`):
 A horizontal bar chart showing each model's Boswell Quotient score (0-100), ranked from highest to lowest. This visualization provides a quick overview of which models perform best overall when considering performance, evaluation capabilities, and efficiency.
 
 **Boswell Quotient Components** (`boswell_quotient_components.png`):
-A breakdown of each component that contributes to the Boswell Quotient (performance, evaluation, efficiency), showing the relative strengths and weaknesses of each model across all three dimensions.
+A breakdown of each component that contributes to the Boswell Quotient (performance, evaluation, efficiency), showing the relative strengths and weaknesses of each model across all three dimensions. -->
 
 **Cross-Assessment Excel Table** (`cross_grading_table.xlsx`):
 An Excel spreadsheet containing the complete cross-assessment matrix (Table 1) with color highlighting, showing how each model grades every other model. The table includes the median bias data as the last row, matching the format shown in the research paper.
 
 These visualizations provide at-a-glance insights into model performance, efficiency, and cost-effectiveness across the different test aspects.
-
+<!-- 
 #### 5. Boswell Quotient Report (`boswell_report.md`)
 
 The Boswell Quotient is a comprehensive metric (0-100) designed to measure how well a model can serve as an indispensable AI companion, inspired by James Boswell's role as Samuel Johnson's biographer:
@@ -497,20 +498,20 @@ The Boswell Quotient is a comprehensive metric (0-100) designed to measure how w
 2. **Evaluation (33.3%)**: Based on grading accuracy and consistency 
 3. **Efficiency (33.3%)**: Based on response time and resource usage
 
-The Boswell Quotient helps identify which models are most likely to serve as highly capable, balanced AI assistants that would be difficult to replace - models you might feel "lost without," similar to Samuel Johnson's famous quote about Boswell.
+The Boswell Quotient helps identify which models are most likely to serve as highly capable, balanced AI assistants that would be difficult to replace - models you might feel "lost without," similar to Samuel Johnson's famous quote about Boswell. -->
 
 
-#### 6. Aggregate Boswell Analysis (Cross-Domain)
+#### 5. Aggregate Boswell Analysis (Cross-Domain)
 
 When running tests across multiple domains (`--all-domains`), the framework also generates a cross-domain analysis that identifies models' strengths and weaknesses across different subject areas:
 
 **Aggregate Report Structure**:
-- **Overall Model Rankings**: Models ranked by their average Boswell Quotient across all tested domains
 - **Top Performing Models**: Analysis of models that excel across all domains
 - **Domain-Specific Leaders**: Table showing which models performed best in each domain
 - **Key Insights**: Analysis of consistent performers vs. domain specialists
 - **Consistency Metrics**: Scores showing how uniformly models perform across domains
 - **Conclusion**: Identification of the most adaptable, versatile AI assistants
+<!-- - **Overall Model Rankings**: Models ranked by their average Boswell Quotient across all tested domains -->
 
 This cross-domain analysis is particularly useful for identifying:
 1. **Generalist models** that perform well across all types of tasks
@@ -605,6 +606,27 @@ Below are results from a recent Boswell Test run in the Political Science domain
 | Claude-3.7-Sonnet                      | A-           | A-, B+, A-, B+, A-, B+, A-, B+, A-, A     |
 | Claude-3.7-Sonnet-thinking             | A-           | A-, B-, A-, B+, A-, B+, A, B+, B+, A      |
 
+### Latest Grading Results (March 2025)
+
+| Model                                  | Median Grade | Raw Average | Notable Grades                            |
+|----------------------------------------|--------------|-------------|-------------------------------------------|
+| o1-mini                                | A-           | 3.63        | A (93.00), A- (90.00), B+ (87.00)         |
+| GPT-4o-mini                            | A-           | 3.56        | A (93.00), A- (90.00), B+ (87.00)         |
+| Claude-3.7-Sonnet                      | A-           | 3.44        | A- (90.00), B+ (87.00), C (73.00)         |
+| Claude-3-Sonnet                        | B+           | 3.40        | A (93.00), A- (90.00), B+ (87.00)         |
+| GPT-4o                                 | A-           | 3.53        | A (93.00), A- (90.00), B+ (87.00)         |
+| Gemini Flash 2.0                       | B+           | 3.47        | A- (90.00), B+ (87.00), B (83.00)         |
+| DeepSeek-Distill-Qwen-32b              | B            | 2.82        | B+ (87.00), B (83.00), C+ (77.00)         |
+| Gemini Pro 1.5                         | B+           | 3.47        | A (93.00), A- (90.00), B+ (87.00)         |
+| grok2-1212                             | A-           | 3.56        | A (93.00), A- (90.00), B+ (87.00)         |
+| Perplexity: Llama 3.1 Sonar 8B Online  | B+           | 3.43        | A (93.00), A- (90.00), B+ (87.00)         |
+| Perplexity: Llama 3.1 Sonar 70B        | A-           | 3.54        | A (93.00), A- (90.00), B+ (87.00)         |
+| o1                                     | A-           | 3.60        | A (93.00), A- (90.00), B+ (87.00)         |
+| o3-mini-high                           | A-           | 3.60        | A (93.00), A- (90.00), C (73.00)          |
+| Qwen-Max                               | A-           | 3.62        | A (93.00), A- (90.00), C (73.00)          |
+| Claude-3-Opus                          | A-           | 3.56        | A (93.00), A- (90.00), C (73.00)          |
+| Claude-3.7-Sonnet-thinking             | A-           | 3.49        | A- (90.00), B+ (87.00), B (83.00)         |
+| DeepSeek-R1-Full                       | B+           | 3.47        | A (93.00), A- (90.00), B- (80.00)         |
 
 Additionally, the system now supports many more free models, including:
 
@@ -632,196 +654,10 @@ New free models available include:
 - Mistral: Mistral Small 3
 - Mistral: Mistral Nemo
 - DeepSeek: R1
-- Moonshot AI: Moonlight 16b A3b Instruct
+- Moonshot AI: Moonlight 16b Instruct
 - Nous: DeepHermes 3 Llama-3-8B Preview
 - Google: Gemini models (Flash Lite 2.0 Preview, Pro 2.0 Experimental)
 
-### Grading Bias Analysis
-
-The analysis also identifies which models tend to grade more strictly or leniently:
-
-| Model                               | Median Given | Grading Bias       | Numeric Bias |
-|-------------------------------------|--------------|-------------------|-------------|
-| GPT-3.5-Turbo                       | A            | Lenient (+1 grade) | 0.55 |
-| Llama-3-8B                          | B+           | Neutral           | 0.00 |
-| GPT-4o-mini                         | B+           | Neutral           | 0.00 |
-| GPT-4o                              | B+           | Slightly Lenient  | 0.20 |
-| Claude-3-Opus                       | B+           | Neutral           | 0.00 |
-| Claude-3-Sonnet                     | A-           | Lenient (+1 grade) | 0.40 |
-| Claude-3.7-Sonnet                   | B            | Slightly Strict   | -0.30 |
-| Claude-3.7-Sonnet-thinking          | B            | Slightly Strict   | -0.30 |
-| Gemini Flash 1.5                    | B            | Slightly Strict   | -0.30 |
-| Gemini Pro 1.5                      | B-           | Strict (-1 grade) | -0.60 |
-| o1                                  | A-           | Lenient (+1 grade) | 0.40 |
-| o1-mini                             | B+           | Neutral           | 0.00 |
-| o3-mini-high                        | A-           | Lenient (+1 grade) | 0.40 |
-| **OVERALL**                         | B+           | **Baseline**      | 0.00 |
-
-This bias analysis helps identify patterns in how different models evaluate their peers. For instance, in this sample from the Computer Science domain, models like Gemini Pro 1.5, Claude-3.7-Sonnet, and Gemini Flash 1.5 appear to be stricter graders, while GPT-3.5-Turbo, Claude-3-Sonnet, o1, and o3-mini-high tend to be more lenient.
-
-## 📊 Timing and Performance Metrics
-
-The Boswell Test framework tracks detailed timing information throughout the testing process. From our most recent Political Science domain test (March 2025):
-
-### Essay Generation Timing
-
-| Model | Duration (s) |
-|-------|-------------|
-| GPT-3.5-Turbo | 4.81 |
-| Gemini Flash 1.5 | 7.79 |
-| o1-mini | 9.05 |
-| Llama-3-8B | 9.89 |
-| Perplexity: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B: Llama 3.1 Sonar 8B Online Online | 9.21 |
-| Qwen-Turbo | 11.10 |
-| GPT-4o-mini | 12.84 |
-| grok-beta | 15.99 |
-| Gemini Pro 1.5 | 20.03 |
-| grok2-1212 | 20.52 |
-| o3-mini-high | 20.61 |
-| o1 | 23.17 |
-| Claude-3.7-Sonnet | 23.52 |
-| Claude-3-Sonnet | 27.32 |
-| DeepSeek-Distill-Qwen-32b | 29.60 |
-| GPT-4o | 31.39 |
-| Perplexity: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B | 36.41 |
-| Claude-3-Opus | 37.39 |
-| Qwen-Plus | 40.88 |
-| Qwen-Max | 41.51 |
-| Perplexity: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B | 42.94 |
-| Claude-3.7-Sonnet-thinking | 54.95 |
-| DeepSeek-R1-Full | 343.05 |
-
-
-### Average Grading Time Per Essay
-
-| Grader | Avg. Seconds per Essay |
-|--------|------------------------|
-| GPT-3.5-Turbo | 2.60 |
-| Gemini Flash 1.5 | 3.71 |
-| Llama-3-8B | 5.95 |
-| Perplexity: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B: Llama 3.1 Sonar 8B Online Online | 8.05 |
-| Qwen-Turbo | 8.52 |
-| GPT-4o-mini | 8.62 |
-| o1-mini | 11.11 |
-| Claude-3-Sonnet | 11.42 |
-| Gemini Pro 1.5 | 12.78 |
-| grok-beta | 12.37 |
-| GPT-4o | 14.87 |
-| Perplexity: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B | 15.10 |
-| grok2-1212 | 16.37 |
-| o1 | 19.38 |
-| Claude-3.7-Sonnet | 18.36 |
-| o3-mini-high | 27.12 |
-| Qwen-Plus | 29.98 |
-| DeepSeek-Distill-Qwen-32b | 32.94 |
-| Perplexity: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B | 33.43 |
-| Claude-3-Opus | 24.58 |
-| Claude-3.7-Sonnet-thinking | 39.86 |
-| Qwen-Max | 38.38 |
-| DeepSeek-R1-Full | 207.74 |
-
-The framework provides:
-- **Total Runtime**: Precise tracking of the entire test duration
-- **Phase Timing**: Breakdown of time spent in essay generation, grading, analysis, and file generation
-- **Per-Model Timing**: Tracking how long each model takes to generate essays and grade others
-- **Timing Visualizations**: Charts showing relative performance of different models
-- **Timing Reports**: Detailed Markdown reports with all timing metrics
-
-This timing information helps identify which models are more efficient and how overall test time is distributed across different phases.
-
-## 📊 Boswell Quotient: Comprehensive Assessment
-
-The Boswell Quotient is a comprehensive metric (0-100) designed to identify the most capable AI assistants - models that would be difficult to replace, much like James Boswell was to Samuel Johnson.
-
-### How it's Calculated
-
-The Boswell Quotient combines three key components with equal weighting:
-
-1. **Performance (33.3%)**: Based on grades received from peer models
-2. **Evaluation (33.3%)**: Based on grading accuracy, consistency, and bias measurement
-3. **Efficiency (33.3%)**: Based on response time and resource utilization
-
-### Latest Boswell Quotient Rankings (March 2025)
-
-From our most recent cross-domain analysis:
-
-| Rank | Model | Boswell Quotient | Grade | Domain Count | Consistency | Best Domain | Worst Domain |
-|------|-------|-----------------|-------|--------------|-------------|------------|-------------|
-| 1 | GPT-4o | 75.3 | B | 2 | 94.2 | Political Science - Level 1: AI Policy Analysis | Political Science - Level 2: AI Governance Analysis |
-| 2 | grok2-1212 | 74.2 | B | 2 | 93.0 | Political Science - Level 2: AI Governance Analysis | Political Science - Level 1: AI Policy Analysis |
-| 3 | Perplexity: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B | 71.6 | C | 2 | 91.1 | Political Science - Level 2: AI Governance Analysis | Political Science - Level 1: AI Policy Analysis |
-| 4 | o3-mini-high | 69.9 | C- | 2 | 97.2 | Political Science - Level 2: AI Governance Analysis | Political Science - Level 1: AI Policy Analysis |
-| 5 | o1 | 68.1 | D+ | 2 | 97.6 | Political Science - Level 2: AI Governance Analysis | Political Science - Level 1: AI Policy Analysis |
-| 6 | DeepSeek-R1-Full | 67.1 | D+ | 2 | 91.1 | Political Science - Level 2: AI Governance Analysis | Political Science - Level 1: AI Policy Analysis |
-| 7 | Claude-3.7-Sonnet | 60.7 | F | 2 | 98.9 | Political Science - Level 2: AI Governance Analysis | Political Science - Level 1: AI Policy Analysis |
-| 8 | Qwen-Max | 58.3 | F | 2 | 93.8 | Political Science - Level 1: AI Policy Analysis | Political Science - Level 2: AI Governance Analysis |
-
-#### Component Breakdown
-
-| Model | Overall BQ | Performance (33.3%) | Evaluation (33.3%) | Efficiency (33.3%) | Letter Grade |
-|-------|------------|--------------|--------------|--------------|--------------|
-| Qwen-Turbo | 87.2 | 86.8 | 87.5 | 87.4 | B+ |
-| Perplexity: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B: Llama 3.1 Sonar 8B Online Online | 83.8 | 85.3 | 87.5 | 78.6 | B |
-| o3-mini-high | 82.8 | 88.2 | 87.5 | 72.6 | B- |
-| Claude-3-Opus | 81.7 | 83.8 | 93.8 | 67.7 | B- |
-| grok2-1212 | 80.4 | 86.8 | 93.8 | 60.8 | B- |
-| Perplexity: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B | 80.4 | 85.3 | 87.5 | 68.4 | B- |
-| grok-beta | 79.9 | 85.3 | 87.5 | 66.9 | C+ |
-| o1-mini | 78.4 | 82.4 | 87.5 | 65.5 | C+ |
-
-### Domain-Specific Leaders
-
-The Boswell Test also reveals which models excel in specific domains:
-
-| Domain | Top Model | Boswell Quotient | Grade |
-|--------|-----------|------------------|-------|
-| Political Science - Level 1: AI Policy Analysis | Claude-3.7-Sonnet-thinking | 86.2 | B |
-| Political Science - Level 2: AI Governance Analysis | Qwen-Turbo | 95.1 | A |
-
-### Consistency vs. Specialization
-
-Some models perform consistently well across all domains, while others specialize in specific areas:
-
-**Most Consistent Models** (Consistency Score):
-- Qwen-Max: 96.7
-– DeepSeek-Distill-Qwen-32b: 96.3
-- o3-mini-high: 96.2
-
-**Domain Specialists** (Models with significantly better performance in specific domains):
-- Claude-3.7-Sonnet-thinking: performs 25.7 points better in Political Science Level 1 than Level 2
-- DeepSeek-R1-Full: performs 25.6 points better in Political Science Level 1 than Level 2
-– Gemini Pro 1.5: performs 17.6 points better in Political Science Level 1 than Level 2
-
-The Boswell Quotient provides a multidimensional view of model capabilities, helping identify which models are likely to serve as the most capable, well-rounded AI assistants across different domains and tasks.
-
-## 🧰 Reliability and Performance Features
-
-The Boswell Test framework includes several features to ensure reliable and efficient operation:
-
-- **Concurrent Processing**: Utilizes parallel processing for model verification, essay generation, and grading to significantly reduce total runtime
-- **Thread Safety**: Implements proper locking mechanisms to prevent race conditions when updating shared data
-- **Model Verification**: Automatically tests models with a small prompt before starting the main test
-- **Retry Logic**: Automatically retries failed API calls up to a configurable number of times
-- **Error Handling**: Gracefully handles API errors and prevents script crashes
-- **Flexible Grade Extraction**: Finds grades in different formats even if they don't follow the exact requested format
-- **Comprehensive Logging**: Detailed console feedback throughout the testing process
-- **Domain Independence**: Run tests across all domains with a single command
-- **Robust Visualizations**: Charts adapt to missing or incomplete data
-- **Model Diversity**: Supports a wide range of models from different providers
-- **Scaling**: Successfully tested with 20+ models in parallel
-
-## 🧩 Extending the Framework
-
-The modular design of the framework makes it easy to extend with new functionality. The code has been refactored into a proper Python package with separated concerns, making it much easier to maintain and extend.
-
-### Creating New Domains Using the CLI
-
-To create a new test domain:
-
-1. Use the domain creation tool: `botwell create-domain`
-2. Define `ESSAY_PROMPT`, `GRADING_PROMPT`, and `DOMAIN_INFO` variables
-3. Add the domain to the `AVAILABLE_DOMAINS` dictionary in `boswell_test.py`
-4. The domain will automatically be available via the `--domain` flag
 
 ### Adding New Models
 
