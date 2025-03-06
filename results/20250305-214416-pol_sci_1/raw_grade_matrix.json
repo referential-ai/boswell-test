@@ -1,0 +1,1192 @@
+{
+  "o1-mini": {
+    "o1-mini": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "GPT-4o-mini": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Claude-3.7-Sonnet": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Claude-3-Sonnet": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "GPT-4o": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Gemini Flash 2.0": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "DeepSeek-Distill-Qwen-32b": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Gemini Pro 1.5": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "grok2-1212": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Perplexity: Llama 3.1 Sonar 8B Online": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Perplexity: Llama 3.1 Sonar 70B": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "o1": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "o3-mini-high": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Qwen-Max": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Claude-3-Opus": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Claude-3.7-Sonnet-thinking": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "DeepSeek-R1-Full": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    }
+  },
+  "GPT-4o-mini": {
+    "o1-mini": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "GPT-4o-mini": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Claude-3.7-Sonnet": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Claude-3-Sonnet": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "GPT-4o": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Gemini Flash 2.0": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "DeepSeek-Distill-Qwen-32b": {
+      "letter_grade": "B",
+      "numeric_grade": 3.0
+    },
+    "Gemini Pro 1.5": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "grok2-1212": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Perplexity: Llama 3.1 Sonar 8B Online": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Perplexity: Llama 3.1 Sonar 70B": {
+      "letter_grade": "B",
+      "numeric_grade": 3.0
+    },
+    "o1": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "o3-mini-high": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Qwen-Max": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Claude-3-Opus": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Claude-3.7-Sonnet-thinking": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "DeepSeek-R1-Full": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    }
+  },
+  "Claude-3.7-Sonnet": {
+    "o1-mini": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "GPT-4o-mini": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Claude-3.7-Sonnet": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Claude-3-Sonnet": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "GPT-4o": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Gemini Flash 2.0": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "DeepSeek-Distill-Qwen-32b": {
+      "letter_grade": "C+",
+      "numeric_grade": 2.25
+    },
+    "Gemini Pro 1.5": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "grok2-1212": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Perplexity: Llama 3.1 Sonar 8B Online": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Perplexity: Llama 3.1 Sonar 70B": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "o1": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "o3-mini-high": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Qwen-Max": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Claude-3-Opus": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Claude-3.7-Sonnet-thinking": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "DeepSeek-R1-Full": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    }
+  },
+  "Claude-3-Sonnet": {
+    "o1-mini": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "GPT-4o-mini": {
+      "letter_grade": "A",
+      "numeric_grade": 4.0
+    },
+    "Claude-3.7-Sonnet": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Claude-3-Sonnet": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "GPT-4o": {
+      "letter_grade": "A",
+      "numeric_grade": 4.0
+    },
+    "Gemini Flash 2.0": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "DeepSeek-Distill-Qwen-32b": {
+      "letter_grade": "B",
+      "numeric_grade": 3.0
+    },
+    "Gemini Pro 1.5": {
+      "letter_grade": "A",
+      "numeric_grade": 4.0
+    },
+    "grok2-1212": {
+      "letter_grade": "A",
+      "numeric_grade": 4.0
+    },
+    "Perplexity: Llama 3.1 Sonar 8B Online": {
+      "letter_grade": "A",
+      "numeric_grade": 4.0
+    },
+    "Perplexity: Llama 3.1 Sonar 70B": {
+      "letter_grade": "A",
+      "numeric_grade": 4.0
+    },
+    "o1": {
+      "letter_grade": "A",
+      "numeric_grade": 4.0
+    },
+    "o3-mini-high": {
+      "letter_grade": "A",
+      "numeric_grade": 4.0
+    },
+    "Qwen-Max": {
+      "letter_grade": "A",
+      "numeric_grade": 4.0
+    },
+    "Claude-3-Opus": {
+      "letter_grade": "A",
+      "numeric_grade": 4.0
+    },
+    "Claude-3.7-Sonnet-thinking": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "DeepSeek-R1-Full": {
+      "letter_grade": "A",
+      "numeric_grade": 4.0
+    }
+  },
+  "GPT-4o": {
+    "o1-mini": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "GPT-4o-mini": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Claude-3.7-Sonnet": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Claude-3-Sonnet": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "GPT-4o": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Gemini Flash 2.0": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "DeepSeek-Distill-Qwen-32b": {
+      "letter_grade": "B",
+      "numeric_grade": 3.0
+    },
+    "Gemini Pro 1.5": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "grok2-1212": {
+      "letter_grade": "A",
+      "numeric_grade": 4.0
+    },
+    "Perplexity: Llama 3.1 Sonar 8B Online": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Perplexity: Llama 3.1 Sonar 70B": {
+      "letter_grade": "A",
+      "numeric_grade": 4.0
+    },
+    "o1": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "o3-mini-high": {
+      "letter_grade": "A",
+      "numeric_grade": 4.0
+    },
+    "Qwen-Max": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Claude-3-Opus": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Claude-3.7-Sonnet-thinking": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "DeepSeek-R1-Full": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    }
+  },
+  "Gemini Flash 2.0": {
+    "o1-mini": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "GPT-4o-mini": {
+      "letter_grade": "B",
+      "numeric_grade": 3.0
+    },
+    "Claude-3.7-Sonnet": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Claude-3-Sonnet": {
+      "letter_grade": "B",
+      "numeric_grade": 3.0
+    },
+    "GPT-4o": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Gemini Flash 2.0": {
+      "letter_grade": "B",
+      "numeric_grade": 3.0
+    },
+    "DeepSeek-Distill-Qwen-32b": {
+      "letter_grade": "C+",
+      "numeric_grade": 2.25
+    },
+    "Gemini Pro 1.5": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "grok2-1212": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Perplexity: Llama 3.1 Sonar 8B Online": {
+      "letter_grade": "B",
+      "numeric_grade": 3.0
+    },
+    "Perplexity: Llama 3.1 Sonar 70B": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "o1": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "o3-mini-high": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Qwen-Max": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Claude-3-Opus": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Claude-3.7-Sonnet-thinking": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "DeepSeek-R1-Full": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    }
+  },
+  "DeepSeek-Distill-Qwen-32b": {
+    "o1-mini": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "GPT-4o-mini": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Claude-3.7-Sonnet": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Claude-3-Sonnet": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "GPT-4o": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Gemini Flash 2.0": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "DeepSeek-Distill-Qwen-32b": {
+      "letter_grade": "B",
+      "numeric_grade": 3.0
+    },
+    "Gemini Pro 1.5": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "grok2-1212": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Perplexity: Llama 3.1 Sonar 8B Online": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Perplexity: Llama 3.1 Sonar 70B": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "o1": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "o3-mini-high": {
+      "letter_grade": "A",
+      "numeric_grade": 4.0
+    },
+    "Qwen-Max": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Claude-3-Opus": {
+      "letter_grade": "A",
+      "numeric_grade": 4.0
+    },
+    "Claude-3.7-Sonnet-thinking": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "DeepSeek-R1-Full": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    }
+  },
+  "Gemini Pro 1.5": {
+    "o1-mini": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "GPT-4o-mini": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Claude-3.7-Sonnet": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Claude-3-Sonnet": {
+      "letter_grade": "B-",
+      "numeric_grade": 2.75
+    },
+    "GPT-4o": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Gemini Flash 2.0": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "DeepSeek-Distill-Qwen-32b": {
+      "letter_grade": "C+",
+      "numeric_grade": 2.25
+    },
+    "Gemini Pro 1.5": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "grok2-1212": {
+      "letter_grade": "B",
+      "numeric_grade": 3.0
+    },
+    "Perplexity: Llama 3.1 Sonar 8B Online": {
+      "letter_grade": "B",
+      "numeric_grade": 3.0
+    },
+    "Perplexity: Llama 3.1 Sonar 70B": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "o1": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "o3-mini-high": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Qwen-Max": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Claude-3-Opus": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Claude-3.7-Sonnet-thinking": {
+      "letter_grade": "B",
+      "numeric_grade": 3.0
+    },
+    "DeepSeek-R1-Full": {
+      "letter_grade": "B-",
+      "numeric_grade": 2.75
+    }
+  },
+  "grok2-1212": {
+    "o1-mini": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "GPT-4o-mini": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Claude-3.7-Sonnet": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Claude-3-Sonnet": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "GPT-4o": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Gemini Flash 2.0": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "DeepSeek-Distill-Qwen-32b": {
+      "letter_grade": "B",
+      "numeric_grade": 3.0
+    },
+    "Gemini Pro 1.5": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "grok2-1212": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Perplexity: Llama 3.1 Sonar 8B Online": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Perplexity: Llama 3.1 Sonar 70B": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "o1": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "o3-mini-high": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Qwen-Max": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Claude-3-Opus": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Claude-3.7-Sonnet-thinking": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "DeepSeek-R1-Full": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    }
+  },
+  "Perplexity: Llama 3.1 Sonar 8B Online": {
+    "o1-mini": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "GPT-4o-mini": {
+      "letter_grade": "A",
+      "numeric_grade": 4.0
+    },
+    "Claude-3.7-Sonnet": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Claude-3-Sonnet": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "GPT-4o": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Gemini Flash 2.0": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "DeepSeek-Distill-Qwen-32b": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Gemini Pro 1.5": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "grok2-1212": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Perplexity: Llama 3.1 Sonar 8B Online": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Perplexity: Llama 3.1 Sonar 70B": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "o1": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "o3-mini-high": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Qwen-Max": {
+      "letter_grade": "C",
+      "numeric_grade": 2.0
+    },
+    "Claude-3-Opus": {
+      "letter_grade": "C",
+      "numeric_grade": 2.0
+    },
+    "Claude-3.7-Sonnet-thinking": {
+      "letter_grade": "B",
+      "numeric_grade": 3.0
+    },
+    "DeepSeek-R1-Full": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    }
+  },
+  "Perplexity: Llama 3.1 Sonar 70B": {
+    "o1-mini": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "GPT-4o-mini": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Claude-3.7-Sonnet": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Claude-3-Sonnet": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "GPT-4o": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Gemini Flash 2.0": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "DeepSeek-Distill-Qwen-32b": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Gemini Pro 1.5": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "grok2-1212": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Perplexity: Llama 3.1 Sonar 8B Online": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Perplexity: Llama 3.1 Sonar 70B": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "o1": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "o3-mini-high": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Qwen-Max": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Claude-3-Opus": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Claude-3.7-Sonnet-thinking": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "DeepSeek-R1-Full": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    }
+  },
+  "o1": {
+    "o1-mini": {
+      "letter_grade": "A",
+      "numeric_grade": 4.0
+    },
+    "GPT-4o-mini": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Claude-3.7-Sonnet": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Claude-3-Sonnet": {
+      "letter_grade": "A",
+      "numeric_grade": 4.0
+    },
+    "GPT-4o": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Gemini Flash 2.0": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "DeepSeek-Distill-Qwen-32b": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Gemini Pro 1.5": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "grok2-1212": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Perplexity: Llama 3.1 Sonar 8B Online": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Perplexity: Llama 3.1 Sonar 70B": {
+      "letter_grade": "A",
+      "numeric_grade": 4.0
+    },
+    "o1": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "o3-mini-high": {
+      "letter_grade": "A",
+      "numeric_grade": 4.0
+    },
+    "Qwen-Max": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Claude-3-Opus": {
+      "letter_grade": "A",
+      "numeric_grade": 4.0
+    },
+    "Claude-3.7-Sonnet-thinking": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "DeepSeek-R1-Full": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    }
+  },
+  "o3-mini-high": {
+    "o1-mini": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "GPT-4o-mini": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Claude-3.7-Sonnet": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Claude-3-Sonnet": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "GPT-4o": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Gemini Flash 2.0": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "DeepSeek-Distill-Qwen-32b": {
+      "letter_grade": "B",
+      "numeric_grade": 3.0
+    },
+    "Gemini Pro 1.5": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "grok2-1212": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Perplexity: Llama 3.1 Sonar 8B Online": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Perplexity: Llama 3.1 Sonar 70B": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "o1": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "o3-mini-high": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Qwen-Max": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Claude-3-Opus": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Claude-3.7-Sonnet-thinking": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "DeepSeek-R1-Full": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    }
+  },
+  "Qwen-Max": {
+    "o1-mini": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "GPT-4o-mini": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Claude-3.7-Sonnet": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Claude-3-Sonnet": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "GPT-4o": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Gemini Flash 2.0": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "DeepSeek-Distill-Qwen-32b": {
+      "letter_grade": "B",
+      "numeric_grade": 3.0
+    },
+    "Gemini Pro 1.5": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "grok2-1212": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Perplexity: Llama 3.1 Sonar 8B Online": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Perplexity: Llama 3.1 Sonar 70B": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "o1": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "o3-mini-high": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Qwen-Max": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Claude-3-Opus": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Claude-3.7-Sonnet-thinking": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "DeepSeek-R1-Full": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    }
+  },
+  "Claude-3-Opus": {
+    "o1-mini": {
+      "letter_grade": "A",
+      "numeric_grade": 4.0
+    },
+    "GPT-4o-mini": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Claude-3.7-Sonnet": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Claude-3-Sonnet": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "GPT-4o": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Gemini Flash 2.0": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "DeepSeek-Distill-Qwen-32b": {
+      "letter_grade": "B",
+      "numeric_grade": 3.0
+    },
+    "Gemini Pro 1.5": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "grok2-1212": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Perplexity: Llama 3.1 Sonar 8B Online": {
+      "letter_grade": "A",
+      "numeric_grade": 4.0
+    },
+    "Perplexity: Llama 3.1 Sonar 70B": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "o1": {
+      "letter_grade": "A",
+      "numeric_grade": 4.0
+    },
+    "o3-mini-high": {
+      "letter_grade": "A",
+      "numeric_grade": 4.0
+    },
+    "Qwen-Max": {
+      "letter_grade": "A",
+      "numeric_grade": 4.0
+    },
+    "Claude-3-Opus": {
+      "letter_grade": "A",
+      "numeric_grade": 4.0
+    },
+    "Claude-3.7-Sonnet-thinking": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "DeepSeek-R1-Full": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    }
+  },
+  "Claude-3.7-Sonnet-thinking": {
+    "o1-mini": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "GPT-4o-mini": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Claude-3.7-Sonnet": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Claude-3-Sonnet": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "GPT-4o": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Gemini Flash 2.0": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "DeepSeek-Distill-Qwen-32b": {
+      "letter_grade": "C+",
+      "numeric_grade": 2.25
+    },
+    "Gemini Pro 1.5": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "grok2-1212": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Perplexity: Llama 3.1 Sonar 8B Online": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Perplexity: Llama 3.1 Sonar 70B": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "o1": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "o3-mini-high": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Qwen-Max": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Claude-3-Opus": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "Claude-3.7-Sonnet-thinking": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    },
+    "DeepSeek-R1-Full": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    }
+  },
+  "DeepSeek-R1-Full": {
+    "o1-mini": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "GPT-4o-mini": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Claude-3.7-Sonnet": {
+      "letter_grade": "C",
+      "numeric_grade": 2.0
+    },
+    "Claude-3-Sonnet": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "GPT-4o": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Gemini Flash 2.0": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "DeepSeek-Distill-Qwen-32b": {
+      "letter_grade": "C",
+      "numeric_grade": 2.0
+    },
+    "Gemini Pro 1.5": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "grok2-1212": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Perplexity: Llama 3.1 Sonar 8B Online": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Perplexity: Llama 3.1 Sonar 70B": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "o1": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "o3-mini-high": {
+      "letter_grade": "C",
+      "numeric_grade": 2.0
+    },
+    "Qwen-Max": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Claude-3-Opus": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "Claude-3.7-Sonnet-thinking": {
+      "letter_grade": "A-",
+      "numeric_grade": 3.75
+    },
+    "DeepSeek-R1-Full": {
+      "letter_grade": "B+",
+      "numeric_grade": 3.25
+    }
+  }
+}

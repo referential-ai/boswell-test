@@ -103,31 +103,44 @@ def generate_grade_tables(results: Dict[str, Any], run_dir: str) -> None:
 
 def generate_ascii_table(results: Dict[str, Any], models: List[str]) -> str:
     """Generate an ASCII table of grades with percentage scores."""
+    # Handle duplicate model names for display
+    display_models = models.copy()
+    if len(set(models)) < len(models):
+        model_counts = {}
+        for i, model in enumerate(models):
+            if model in model_counts:
+                model_counts[model] += 1
+                display_models[i] = f"{model} (Run {model_counts[model]})"
+            else:
+                model_counts[model] = 1
+                
     # Calculate column widths
-    model_width = max(len(model) for model in models) + 2
+    model_width = max(len(model) for model in display_models) + 2
     grade_width = 10  # Enough for "A+ (97)" format
     median_width = 7  # Just for the letter grade
     pct_width = 5     # For percentage
-    raw_avg_width = 8  # Adequate for raw numeric average with 2 decimals
+    raw_avg_width = 12  # Adequate for "Overall Score" with 2 decimals
     
     # Build header
-    header = f"{'Model':{model_width}} |"
-    for grader in models:
-        header += f" {grader[:grade_width-1]:{grade_width-1}} |"
-    header += f" {'Median':{median_width}} | {'Pct':{pct_width}} | {'Raw Num':{raw_avg_width}} |"
+    header = f"{'Model Evaluated':{model_width}} |"
+    for i, grader in enumerate(models):
+        display_grader = display_models[i]
+        header += f" {'Score: ' + display_grader[:grade_width-7]:{grade_width+5}} |"
+    header += f" {'Median':{median_width}} | {'Pct':{pct_width}} | {'Overall Score':{raw_avg_width}} |"
     
     # Build separator
     separator = "-" * model_width + "+"
-    for _ in models:
-        separator += "-" * (grade_width + 1) + "+"
+    for _ in range(len(models)):
+        separator += "-" * (grade_width + 6) + "+"
     separator += "-" * (median_width + 2) + "+" + "-" * (pct_width + 2) + "+" + "-" * (raw_avg_width + 2) + "+"
     
     # Build rows
     rows = []
-    for author in models:
-        row = f"{author:{model_width}} |"
+    for i, author in enumerate(models):
+        display_author = display_models[i]
+        row = f"{display_author:{model_width}} |"
         
-        for grader in models:
+        for j, grader in enumerate(models):
             if grader in results["grades"] and author in results["grades"][grader]:
                 grade_data = results["grades"][grader][author]
                 letter_grade = grade_data["grade"]
@@ -138,10 +151,10 @@ def generate_ascii_table(results: Dict[str, Any], models: List[str]) -> str:
                 grade_display = "N/A (0.00)"
             
             # Truncate if too long
-            if len(grade_display) > grade_width - 1:
-                grade_display = grade_display[:grade_width-2] + "…"
+            if len(grade_display) > grade_width + 5:
+                grade_display = grade_display[:grade_width+4] + "…"
             
-            row += f" {grade_display:{grade_width-1}} |"
+            row += f" {grade_display:{grade_width+5}} |"
         
         # Add median and percentage
         if author in results["summary"]:
@@ -174,10 +187,25 @@ def generate_ascii_table(results: Dict[str, Any], models: List[str]) -> str:
 def generate_markdown_table(results: Dict[str, Any], models: List[str]) -> str:
     """Generate a Markdown table of grades with percentage scores."""
     # Build header
-    header = "| Model | " + " | ".join(models) + " | Median Grade | Percentage |"
+    # Handle duplicate model names for display
+    display_models = models.copy()
+    if len(set(models)) < len(models):
+        model_counts = {}
+        for i, model in enumerate(models):
+            if model in model_counts:
+                model_counts[model] += 1
+                display_models[i] = f"{model} (Run {model_counts[model]})"
+            else:
+                model_counts[model] = 1
+                
+    # Create clear column headers with "Score from [Model Name]"
+    header = "| Model Being Evaluated |"
+    for model in display_models:
+        header += f" Score from {model} |"
+    header += " Median Grade | Percentage |"
 
     # Add raw average column with better name
-    header += " Raw Numeric Average |"
+    header += " Overall Score |"
 
     # Add N/A count row for statistics
     na_counts = {}
@@ -227,9 +255,13 @@ def generate_markdown_table(results: Dict[str, Any], models: List[str]) -> str:
             
             median_display = f"{median_letter} | {percentage:.2f} | {raw_avg:.2f}"
         else:
-            median_display = "N/A (0.00) | 0.00 | 0.00"
+            median_display = "N/A | 0.00 | 0.00"
             
-        row = f"| {author} | " + " | ".join(grades) + f" | {median_display} |"
+        # Handle duplicate model names for row labels too
+        author_index = models.index(author)
+        display_author = display_models[author_index]
+        
+        row = f"| {display_author} | " + " | ".join(grades) + f" | {median_display} |"
         rows.append(row)
 
     # Add N/A statistics row if any N/A values exist
@@ -248,15 +280,27 @@ def generate_markdown_table(results: Dict[str, Any], models: List[str]) -> str:
 
 def generate_csv_table(results: Dict[str, Any], models: List[str]) -> str:
     """Generate a CSV table of grades with percentage scores."""
+    # Handle duplicate model names for display
+    display_models = models.copy()
+    if len(set(models)) < len(models):
+        model_counts = {}
+        for i, model in enumerate(models):
+            if model in model_counts:
+                model_counts[model] += 1
+                display_models[i] = f"{model} (Run {model_counts[model]})"
+            else:
+                model_counts[model] = 1
+                
     # Build header
-    header = "Model," + ",".join(models) + ",Median Grade,Percentage,Raw Numeric Average"
+    header = "Model Being Evaluated," + ",".join([f"Score from {display_models[i]}" for i in range(len(models))]) + ",Median Grade,Percentage,Overall Score"
     
     # Build rows
     rows = []
-    for author in models:
+    for i, author in enumerate(models):
+        display_author = display_models[i]
         grades = []
         
-        for grader in models:
+        for j, grader in enumerate(models):
             if grader in results["grades"] and author in results["grades"][grader]:
                 grade_data = results["grades"][grader][author]
                 letter_grade = grade_data["grade"]
@@ -289,8 +333,8 @@ def generate_csv_table(results: Dict[str, Any], models: List[str]) -> str:
             formatted_percentage = "0.00"
             raw_avg = 0.0
             
-        # Format the raw average with 2 decimal places for precision
-        row = f"{author}," + ",".join(grades) + f",{median_letter},{formatted_percentage},{raw_avg:.2f}"
+        # Format the overall score with 2 decimal places for precision
+        row = f"{display_author}," + ",".join(grades) + f",{median_letter},{formatted_percentage},{raw_avg:.2f}"
         rows.append(row)
     
     # Combine everything
