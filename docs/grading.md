@@ -56,8 +56,8 @@ The system preserves and displays raw numeric scores with 4 decimal precision to
 ```python
 # Calculate raw average directly from numeric scores
 raw_grades = [results["grades"][grader][author]["numeric_grade"] 
-              for grader in models if grader in results["grades"] 
-              and author in results["grades"][grader]]
+               for grader in models if grader in results["grades"] 
+               and author in results["grades"][grader]]
 raw_avg = sum(raw_grades) / len(raw_grades) if raw_grades else 0.0
 ```
 
@@ -95,25 +95,118 @@ def percentage_to_letter_grade(percentage: int) -> str:
 
 ## Grade Extraction
 
-Grades are extracted from feedback text using the `extract_grade()` function, which uses regular expressions to find letter grades in various formats.
+Grades are extracted from feedback text using the `extract_grade()` function, which uses multiple regular expressions to find letter grades in various formats. The system uses a sophisticated approach with fallback mechanisms.
+
+### Primary Extraction Patterns
+
+The system uses 23 different regex patterns organized in order of specificity:
 
 ```python
 def extract_grade(feedback: str, model_name: str = "Unknown") -> str:
-    """Extract letter grade from grading feedback and store raw numeric value."""
-    # First try exact format: "Grade: A+"
+    """Extract letter grade from grading feedback."""
+    # First try to match the exact format we requested
     match = re.search(r"Grade:\s*([A-C][+-]?)", feedback)
     if match:
-        letter_grade = match.group(1).upper()
-        # Store both letter grade and its exact numeric equivalent
-        return letter_grade
+        return match.group(1)
     
-    # Fall back to more flexible patterns if needed
-    # ...
+    # Fall back to more flexible patterns if the exact format isn't found
+    grade_patterns = [
+        # Original patterns
+        r"([A-C][+-]?)\s*grade",  # "A+ grade" or "B- grade"
+        r"grade\s*(?:of|is|:)?\s*([A-C][+-]?)",  # "grade of A" or "grade: B+"
+        r"grade\s*[\"']([A-C][+-]?)[\"']",  # grade "A-" or grade 'B'
+        r"([A-C][+-]?)$",  # Just the grade at the end of a line
+        r"final\s*grade\s*[:\-=]\s*([A-C][+-]?)",  # "final grade: A+"
+        r"grade\s*for\s*this\s*essay\s*[:\-=]\s*([A-C][+-]?)",  # "grade for this essay: B"
+        r"([A-C][+-]?)\s*grade\s*for\s*this\s*essay",  # "A grade for this essay"
+        r"assign\s*a\s*grade\s*of\s*([A-C][+-]?)",  # "assign a grade of B+"
+        r"assign\s*([A-C][+-]?)",  # "assign B+"
+        r"grade\s*assignment\s*[:\-=]\s*([A-C][+-]?)",  # "grade assignment: A-"
+        r"overall\s*grade\s*[:\-=]\s*([A-C][+-]?)",  # "overall grade: C+"
+        
+        # Enhanced patterns for better coverage
+        r"Grade\s*([A-C][+-]?)\s*$",  # For cases ending with just "Grade A" with no punctuation
+        r"([A-C][+-]?)\s*grade\s*$",  # For cases ending with "A grade" 
+        r"grade[^A-Za-z0-9]*([A-C][+-]?)[^A-Za-z0-9]*$",  # For "grade: [A]" at the end
+        r"grade[^:]*?([A-C][+-]?)",  # More flexible pattern without colon
+        r"^\s*([A-C][+-]?)\s*$",  # For cases where a line contains just the grade
+        r"evaluation.*?([A-C][+-]?)",  # Looking for grades near evaluation-related words
+        r"assessment.*?([A-C][+-]?)",  # Looking for grades near assessment-related words
+        r"([A-C][+-]?)\s*(?:overall|rating|score)",  # For "A- overall" or similar
+        
+        # Conclusion section patterns
+        r"(?:in\s*conclusion|to\s*conclude|overall|summary|finally).*?([A-C][+-]?)",
+        r"([A-C][+-]?)\s*(?:is\s*appropriate|would\s*be\s*fair|seems\s*fair|is\s*a\s*fair\s*assessment)",
+        r"(?:deserve|earned|warrants|merits).*?([A-C][+-]?)",
+        r"(?:final|overall|appropriate)\s*grade\s*(?:is|would\s*be).*?([A-C][+-]?)"
+    ]
     
-    # If no grade found, log and return N/A
-    log_failed_extraction(model_name, feedback)
-    return "N/A"
+    # Try each pattern in order of specificity
+    for pattern in sorted(grade_patterns, key=len, reverse=True):
+        for line in feedback.split('\n'):
+            match = re.search(pattern, line, re.IGNORECASE)
+            if match:
+                return match.group(1).upper()  # Normalize to uppercase
 ```
+
+### Multi-Pass Recovery Strategy
+
+When primary patterns fail, the system employs a multi-pass recovery strategy to extract grades:
+
+```python
+# Special multi-pass attempt to recover grade when primary patterns fail
+# This is particularly helpful for cases with "Grade:" but no direct grade following
+if "Grade:" in feedback or "grade:" in feedback:
+    # Find the position of the last "Grade:" mention
+    grade_idx = max(feedback.lower().rfind("grade:"), feedback.lower().rfind("grade :"))
+    if grade_idx != -1:
+        # Check what comes after "Grade:" (50 chars should be enough to find a grade)
+        after_grade = feedback[grade_idx:grade_idx+50]
+        
+        # Look for any letter grade pattern after "Grade:"
+        match = re.search(r'[A-C][+-]?', after_grade, re.IGNORECASE)
+        if match:
+            print(f"  Recovered grade using multi-pass strategy: {match.group(0).upper()}")
+            return match.group(0).upper()
+```
+
+### Semantic Descriptor Matching
+
+As a last resort, the system uses semantic descriptor matching to infer the grade based on the presence of grade-describing keywords:
+
+```python
+# As a last resort, look for grade descriptors to infer the grade
+grade_descriptors = {
+    "A+": ["exceptional", "outstanding", "excellent", "superb", "flawless", "perfect"],
+    "A": ["excellent", "superior", "exceptional", "outstanding", "remarkable"],
+    "A-": ["very good", "strong", "impressive", "solid", "thorough"],
+    "B+": ["good", "above average", "commendable", "solid", "effective"],
+    "B": ["good", "competent", "satisfactory", "acceptable", "adequate"],
+    "B-": ["satisfactory", "acceptable", "adequate", "sufficient", "passable"],
+    "C+": ["fair", "average", "passable", "moderate", "mediocre"],
+    "C": ["average", "passable", "fair", "mediocre", "basic"],
+    "C-": ["below average", "minimal", "basic", "weak", "limited"]
+}
+
+# Implement semantic descriptor approach
+feedback_lower = feedback.lower()
+grade_scores = {grade: 0 for grade in grade_descriptors}
+
+for grade, descriptors in grade_descriptors.items():
+    for descriptor in descriptors:
+        count = feedback_lower.count(descriptor)
+        grade_scores[grade] += count
+
+# Find the grade with the highest descriptor count
+max_score = max(grade_scores.values())
+if max_score > 0:
+    # Get all grades with the max score
+    best_grades = [grade for grade, score in grade_scores.items() if score == max_score]
+    best_grade = best_grades[0]  # Default to first if multiple
+    return best_grade
+```
+
+This comprehensive approach ensures the highest possible grade extraction rate, significantly reducing N/A grades.
 
 ## N/A Grade Handling
 
@@ -193,7 +286,18 @@ The system includes an analysis script `analyze_na_handling.py` to examine N/A g
 
 ## Grading Bias
 
-The system calculates grading bias to identify models that are consistently lenient or strict:
+The system calculates grading bias to identify models that are consistently lenient or strict. Positive bias values indicate leniency, while negative values indicate strictness.
+
+### Bias Calculation
+
+Bias is calculated as the difference between a model's median given grade and the overall median grade across all models:
+
+- **Median Bias**: The difference between the median grade given by the model and the median of all grades
+- **Mean Bias**: The difference between the mean grade given by the model and the mean of all grades
+
+### Bias Categorization
+
+Bias is converted to descriptive labels based on the magnitude of deviation:
 
 ```python
 def calculate_grading_bias(results: Dict[str, Any], models: list) -> Dict[str, Any]:
@@ -221,6 +325,19 @@ The system uses multiple levels of precision for different types of data:
 - **Raw Numeric Grades**: Displayed with 2 decimal places (e.g., "3.75") for consistency
 - **Combined Format**: For clarity, some displays show both: "A- (3.75)"
 
+## Grade Scale Variations
+
+The system uses two different grade scales in different contexts:
+
+1. **University Standard Scale** (used in grading.md and most calculations):
+   - A+ = 4.25, A = 4.0, A- = 3.75, etc.
+
+2. **GPA Scale** (used in Excel module for certain calculations):
+   - A+ = 4.0 (same as A), A- = 3.7, B+ = 3.3, etc.
+
+The GPA scale is used primarily for converting between letter grades and numeric values in the Excel cross-grading table 
+generation, while the University Standard Scale is used for the core grading functions.
+
 ## Raw Numeric Averages
 
 The system now calculates and prominently displays raw numeric averages in all reports:
@@ -245,3 +362,25 @@ apply_cell_style(
 ```
 
 This approach ensures that no precision is lost when converting between different grading scales and provides users with the most accurate representation of model performance.
+
+## Cross-Grading Table Generation
+
+The system generates cross-grading tables showing how each model graded every other model's essay:
+
+### Excel Table Features
+
+- **Color Coding**: Each cell is color-coded based on the letter grade (green for A+/A, blue for B+/B, etc.)
+- **Raw Numeric Display**: Each grade is displayed with its raw numeric value for precision
+- **Self-Assessment Highlighting**: Self-grading cells use a distinct background color
+- **Median Calculation**: Each row includes the median grade received by that model
+- **Raw Average Column**: A dedicated column shows the raw numeric average with 2 decimal precision
+- **Grading Bias Row**: Shows each model's grading bias (Lenient, Strict, Neutral)
+- **Column Medians**: The bottom row shows median grades given by each model
+
+### Raw Average Calculation
+
+Raw averages are calculated directly from numeric grades with full precision:
+
+```python
+exact_raw_average = sum(raw_numeric_grades) / len(raw_numeric_grades) if raw_numeric_grades else 0.0
+display_value = f"{exact_raw_average:.2f}" if exact_raw_average > 0 else "N/A"
