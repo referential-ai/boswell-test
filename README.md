@@ -10,7 +10,6 @@ The Boswell Test is an automated tool for comparing Large Language Models (LLMs)
 <!--
 ![Aggregate Boswell Quotient Rankings](results/20250305-131233-aggregate/charts/aggregate_boswell_quotient.png)
 
-![Aggregate Component Breakdown](results/20250305-131233-aggregate/charts/aggregate_component_breakdown.png)
 ## 🚀 New Modular Structure -->
 
 This repository now features a fully modular architecture for better maintainability and extensibility. Full details are available in the [docs/technical/architecture.md](docs/technical/architecture.md) documentation.
@@ -69,14 +68,11 @@ This tool automates the process of running a Boswell Test across multiple LLMs. 
 4. **Visualization**: The framework generates charts and graphs showing performance metrics, grading distributions, timing data, and Boswell Quotient rankings
 5. **Comprehensive Reporting**: Results are organized in timestamped directories with easy-to-read tables in multiple formats (Markdown, ASCII, CSV, JSON)
 
-<!-- 4. **Boswell Quotient**: A comprehensive score (0-100) is calculated for each model based on equal weighting of performance (grades received), evaluation ability (grading consistency), and efficiency (response time) -->
-
 The Boswell Test methodology offers several advantages over traditional benchmarks:
 - It captures nuanced evaluation capabilities, not just raw performance
 - It leverages LLMs' own analytical skills to provide detailed feedback
 - It reveals biases in how different models evaluate the same work
 - It creates a multidimensional view of model capabilities across different domains
-<!-- - It calculates a comprehensive "Boswell Quotient" that measures a model's ability to serve as an indispensable AI companion -->
 
 All of this is automated through a simple command-line interface that handles the entire testing process from essay generation to final report creation.
 
@@ -182,7 +178,6 @@ botwell --all-domains
 
 This will sequentially run tests on all domains with the same set of models, creating separate results directories for each domain. When multiple domains are tested, it will also generate:
 
-<!-- 1. An **aggregate Boswell Quotient** analysis across all domains -->
 1. Visualizations comparing model performance across domains
 2. Detailed reports identifying which models are consistent across domains vs. specialized in specific areas
 
@@ -337,15 +332,11 @@ results/
 │   │   ├── essay_generation_time.png  # Time comparison for essay generation
 │   │   ├── average_grading_time.png   # Time comparison for grading
 │   │   ├── time_breakdown.png     # Pie chart of process timing
-│   │   ├── boswell_quotient.png   # Bar chart of Boswell Quotient rankings
-│   │   └── boswell_quotient_components.png # Component breakdown of the three dimensions
 │   ├── grades_table.txt           # ASCII table of all grades
 │   ├── grades_table.md            # Markdown table of all grades
 │   ├── grades_table.csv           # CSV format for spreadsheet import
 │   ├── grading_bias.txt           # ASCII table of grading bias analysis
 │   ├── grading_bias.md            # Markdown table of grading bias analysis
-│   ├── boswell_quotient.md        # Table ranking models by Boswell Quotient
-│   ├── boswell_report.md          # Comprehensive Boswell Quotient analysis report
 │   ├── timing_report.md           # Detailed timing analysis report  
 │   ├── grades.json                # Structured grade data in JSON
 │   └── full_results.json          # Complete results with all data
@@ -353,8 +344,6 @@ results/
 │   ├── charts/                    # Cross-domain visualizations
 │   │   ├── aggregate_boswell_quotient.png  # Overall ranking across domains
 │   │   └── domain_comparison.png  # How top models perform in each domain
-│   ├── aggregate_boswell_report.md # Comprehensive cross-domain analysis
-│   └── aggregate_boswell_quotient.json # Structured aggregate data
 └── ...
 ```
 
@@ -470,35 +459,12 @@ A horizontal bar chart showing the average time each model took to grade essays 
 **Process Timing** (`time_breakdown.png`):
 A pie chart showing the proportion of time spent on each phase of the test: essay generation, grading, analysis, and file generation.
 
-<!-- **Boswell Quotient** (`boswell_quotient.png`):
-A horizontal bar chart showing each model's Boswell Quotient score (0-100), ranked from highest to lowest. This visualization provides a quick overview of which models perform best overall when considering performance, evaluation capabilities, and efficiency.
-
-**Boswell Quotient Components** (`boswell_quotient_components.png`):
-A breakdown of each component that contributes to the Boswell Quotient (performance, evaluation, efficiency), showing the relative strengths and weaknesses of each model across all three dimensions. -->
-
 **Cross-Assessment Excel Table** (`cross_grading_table.xlsx`):
 An Excel spreadsheet containing the complete cross-assessment matrix (Table 1) with color highlighting, showing how each model grades every other model. The table includes the median bias data as the last row, matching the format shown in the research paper.
 
 These visualizations provide at-a-glance insights into model performance, efficiency, and cost-effectiveness across the different test aspects.
-<!-- 
-#### 5. Boswell Quotient Report (`boswell_report.md`)
 
-The Boswell Quotient is a comprehensive metric (0-100) designed to measure how well a model can serve as an indispensable AI companion, inspired by James Boswell's role as Samuel Johnson's biographer:
-
-**Comprehensive Report Structure**:
-- **Introduction**: Explanation of the Boswell Quotient methodology
-- **Overall Rankings**: Complete rankings of all models by their Boswell Quotient  
-- **Top Performers**: Analysis of the highest-scoring models
-- **Component Analysis**: Breakdown of which models excel in each component
-- **Observations & Insights**: Patterns, balanced models, and notable outliers
-- **Conclusion**: Summary of most capable AI assistants for the tested domain
-
-**Calculation Components**:
-1. **Performance (33.3%)**: Based on grades received from peer models
-2. **Evaluation (33.3%)**: Based on grading accuracy and consistency 
-3. **Efficiency (33.3%)**: Based on response time and resource usage
-
-The Boswell Quotient helps identify which models are most likely to serve as highly capable, balanced AI assistants that would be difficult to replace - models you might feel "lost without," similar to Samuel Johnson's famous quote about Boswell. -->
+#### 5. Aggregate Analysis (Cross-Domain)
 
 
 #### 5. Aggregate Boswell Analysis (Cross-Domain)
@@ -511,7 +477,6 @@ When running tests across multiple domains (`--all-domains`), the framework also
 - **Key Insights**: Analysis of consistent performers vs. domain specialists
 - **Consistency Metrics**: Scores showing how uniformly models perform across domains
 - **Conclusion**: Identification of the most adaptable, versatile AI assistants
-<!-- - **Overall Model Rankings**: Models ranked by their average Boswell Quotient across all tested domains -->
 
 This cross-domain analysis is particularly useful for identifying:
 1. **Generalist models** that perform well across all types of tasks
@@ -544,33 +509,6 @@ This cross-domain analysis is particularly useful for identifying:
     "grader_bias": {
       "GPT-4o": {"median_given": 4.0, "median_bias": 0.5, "letter_bias": "Lenient (+1 grade)"},
       "Claude": {"median_given": 3.5, "median_bias": 0.0, "letter_bias": "Neutral"}
-    }
-  },
-  "boswell_quotient": {
-    "component_weights": {
-      "performance": 0.333,
-      "evaluation": 0.333,
-      "efficiency": 0.334  
-    },
-    "model_scores": {
-      "Claude-3.7-Sonnet-thinking": {
-        "boswell_quotient": 86.2,
-        "components": {
-          "performance": 88.2,
-          "evaluation": 75.0,
-          "efficiency": 95.2
-        },
-        "rank": 1
-      },
-      "o3-mini-high": {
-        "boswell_quotient": 84.7,
-        "components": {
-          "performance": 88.2,
-          "evaluation": 100.0,
-          "efficiency": 65.8
-        },
-        "rank": 2
-      }
     }
   },
   "run_timestamp": "2025-03-05 13:08:51"
