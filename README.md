@@ -54,7 +54,7 @@ botwell report --latest
 botwell --domain pol_sci_1 --models "Qwen-Turbo" "Perplexity: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B: Llama 3.1 Sonar 8B Online Online" "o3-mini-high" "Claude-3-Opus" "grok2-1212" "Perplexity: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B: Llama 3.1 Perplexity: Llama 3.1 Sonar 70B" "grok-beta" "o1-mini"
 
 # Generate cross-assessment Excel table with exact Table 1 styling from the paper
-python create_cross_grading_table.py results/[timestamp]-[domain]/full_results.json
+botwell utils create-cross-grading-table results/[timestamp]-[domain]/full_results.json
 ```
 
 See [docs/usage/quick_start.md](docs/usage/quick_start.md) for more details and [docs/usage/advanced_usage.md](docs/usage/advanced_usage.md) for advanced usage scenarios.
@@ -320,6 +320,109 @@ botwell --list-models
 botwell --list-models --free
 ```
 
+## 📊 Project Structure
+
+The Boswell Test has been recently restructured for better organization and maintainability:
+
+```
+botwell/                       # Main package directory
+├── __init__.py                # Package initialization
+├── __main__.py                # Entry point for CLI commands
+├── cli.py                     # Command-line interface
+├── analysis/                  # Analysis modules 
+│   ├── __init__.py
+│   ├── advanced_grade_extraction.py
+│   ├── analyze_grade_responses.py
+│   ├── analyze_na_handling.py
+│   └── grade_extraction_improved.py
+├── core/                      # Core functionality
+│   ├── __init__.py
+│   ├── empathy.py
+│   ├── files.py
+│   ├── grading.py             # Main grading engine
+│   ├── test.py               
+│   └── verification.py
+├── cmd/                       # Command modules
+│   ├── __init__.py
+│   ├── cache_manager.py
+│   ├── create_domain.py
+│   ├── generate_summary_report.py
+│   └── list_resources.py
+├── domains/                   # Domain definitions
+│   └── definitions/
+│       ├── __init__.py
+│       ├── comp_sci_1.py
+│       ├── comp_sci_2.py
+│       ├── humanities_1.py
+│       └── ...
+├── grading/                   # Grading analysis modules
+│   ├── __init__.py
+│   ├── check_composite_values.py
+│   ├── count_composite_grades.py
+│   ├── find_average_composite_grades.py
+│   ├── find_composite_grades.py
+│   └── test_composite_grade_conversion.py
+├── models/                    # Model-related functionality
+│   ├── __init__.py
+│   ├── api.py
+│   ├── config.py
+│   └── management.py
+├── reporting/                 # Reporting and visualization
+│   ├── __init__.py
+│   ├── aggregate.py
+│   ├── boswell_quotient.py
+│   ├── cost.py
+│   ├── excel.py
+│   ├── summary.py
+│   ├── tables.py
+│   ├── timing.py
+│   └── visualizations.py
+└── utils/                     # Utility functions
+    ├── __init__.py
+    ├── caching.py
+    ├── create_cross_grading_table.py
+    ├── model_standardization.py
+    ├── standardize_model_names.py
+    └── tokenization.py
+data/                         # Data directory
+├── test_results/             # Test result JSON files
+│   ├── larger_test_results.json
+│   ├── simple_test_results.json
+│   └── test_individual_grades_20250306-143935.json
+└── raw/                      # Future raw data
+docs/                         # Documentation
+├── functionality/            # Functional documentation
+├── technical/                # Technical documentation
+│   ├── architecture.md
+│   ├── caching.md
+│   ├── code_style.md
+│   ├── development_guide.md
+│   ├── evaluation_flowchart.md
+│   ├── median_calculation.md
+│   ├── model_interaction.md
+│   ├── na_grade_analysis.md
+│   ├── next_steps.md
+│   ├── phase2_improvements.md
+│   └── three_tier_extraction_system.md
+└── usage/                    # Usage documentation
+    ├── advanced_usage.md
+    ├── domains.md
+    └── quick_start.md
+tests/                        # Test modules
+├── __init__.py
+├── test_cli_basic.py
+├── test_cli_commands_mock.py
+├── test_cli_commands.py
+├── test_cli_core.py
+├── test_composite_grades.py
+├── test_dir.py
+├── test_improved_grading.py
+├── test_individual_grades.py
+├── test_median_function.py
+└── test_unit.py
+results/                      # Results from test runs
+```
+
 ## 📊 Results Organization
 
 The Boswell Test organizes results in a timestamped directory structure:
@@ -448,7 +551,6 @@ OVERALL   |      B+      | Baseline              |
 | **OVERALL** | B+ | **Baseline** | 0.00 |
 
 This analysis helps identify potential biases in how different models evaluate the same content. For example, some models might consistently grade more strictly or leniently than others.
-
 
 
 #### 4. Data Visualizations (`charts/` directory)
