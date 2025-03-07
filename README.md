@@ -6,7 +6,7 @@ The Boswell Test is an automated tool for comparing Large Language Models (LLMs)
 ![Example Grade Performance](results/20250306-204050-pol_sci_1/boswell-final-v6.jpg)
 
 <!-- ## Example overall performance metrics: -->
-![Boswell Test Domain Comparison](results/20250305-214416-pol_sci_1/charts/grade_distribution.png)
+![Boswell Grades](results/20250306-204050-pol_sci_1/charts/grade_distribution.png)
 <!--
 ![Aggregate Boswell Quotient Rankings](results/20250305-131233-aggregate/charts/aggregate_boswell_quotient.png)
 
