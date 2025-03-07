@@ -3,7 +3,7 @@
 The Boswell Test is an automated tool for comparing Large Language Models (LLMs) through peer-review, where models grade each other's essays. This implementation is based on the methodology introduced by Dr. Peter Luh in his article ["Is AI Chatbot My Boswell?"](https://peterl168.substack.com/p/is-ai-chatbot-my-boswell) (February 2025).
 
 ## Example grading report for essay questions as seen in the original article:
-![Example Grade Performance](results/20250305-214416-pol_sci_1/boswell-final-v4.jpg)
+![Example Grade Performance](results/20250306-204050-pol_sci_1/boswell-final-v6.jpg)
 
 <!-- ## Example overall performance metrics: -->
 ![Boswell Test Domain Comparison](results/20250305-214416-pol_sci_1/charts/grade_distribution.png)
