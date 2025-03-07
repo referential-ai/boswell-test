@@ -12,6 +12,7 @@ from botwell.domains import load_domain, AVAILABLE_DOMAINS
 from botwell.models.api import call_openrouter_api
 from botwell.core.files import create_results_directory, save_essay_with_grades, save_results
 from botwell.utils.model_standardization import standardize_model_name, standardize_model_names_in_dict
+from botwell.utils import median_of_list
 from botwell.core.grading import extract_grade, grade_to_numeric, calculate_grading_bias, log_failed_extraction
 from botwell.core.verification import verify_available_models
 from botwell.models.config import MODELS
@@ -452,8 +453,7 @@ def run_boswell_test(domain_name: str, output_file: str, selected_models: List[s
     print("\nStep 3: Calculating summary statistics...")
     analysis_start_time = time.time()
     
-    from statistics import median as calc_median
-    
+        
     for author in results["essays"].keys():
         numeric_grades = [
             results["grades"][grader][author]["numeric_grade"]
@@ -463,7 +463,7 @@ def run_boswell_test(domain_name: str, output_file: str, selected_models: List[s
         
         if numeric_grades:
             results["summary"][author] = {
-                "median_numeric": calc_median(numeric_grades),
+                "median_numeric": median_of_list(numeric_grades),
                 "grades_received": [
                     results["grades"][grader][author]["grade"]
                     for grader in results["grades"]

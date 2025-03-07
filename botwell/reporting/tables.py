@@ -5,7 +5,7 @@ Table generation functionality for Boswell test results.
 import os
 from typing import Dict, Any, List
 import re
-from statistics import median
+from botwell.utils import median_of_list
 import importlib.util
 from botwell.core.grading import percentage_to_letter_grade, grade_to_percentage, calculate_grading_bias
 from botwell.reporting.boswell_quotient import calculate_boswell_quotient

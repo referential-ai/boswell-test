@@ -4,365 +4,377 @@
     "description": "Level 1 evaluation of AI policy analysis capabilities."
   },
   "essays": {
-    "GPT-4o-mini": "### The Strengths and Weaknesses of Government AI Policies Worldwide\n\nThe rapid advancement of artificial intelligence (AI) has prompted various governments to formulate policies that aim to harness its potential while managing associated risks. The strengths and weaknesses of these policies vary globally based on local contexts, societal attitudes, and economic capabilities. This essay explores the landscape of AI governance, highlighting notable innovations, recent regulations, and public safety concerns across different countries.\n\n#### Strengths of AI Policies\n\n1. **Innovation and Economic Growth**: Countries that actively promote AI innovation through supportive policies often see significant economic benefits. For instance, the United States has positioned itself as a leader in AI development, primarily due to substantial investments in research and development. The American AI Initiative, launched in 2019, aims to promote AI research, foster public-private partnerships, and ensure U.S. leadership in the field. The initiative, coupled with generous funding from both government and private sectors, has led to pioneering advancements in AI technologies.\n\n2. **Ethical Guidelines and Frameworks**: Some governments have established comprehensive ethical frameworks to guide the development and deployment of AI. The European Union (EU), for instance, introduced the AI Act in April 2021, which aims to regulate high-risk AI applications while promoting innovation. The legislation addresses critical ethical concerns, emphasizing transparency, accountability, and non-discrimination, thereby setting a global benchmark for responsible AI governance.\n\n3. **Community Engagement and Skill Development**: Countries like Canada have made significant strides in engaging communities and investing in workforce development for AI. The Canadian government\u2019s Pan-Canadian Artificial Intelligence Strategy has not only advanced research but also focused on fostering collaboration between academia, industry, and the public. By actively involving stakeholders and promoting education in AI, these policies address public concerns over job displacement and social equity.\n\n#### Weaknesses of AI Policies\n\n1. **Regulatory Lag and Overreach**: While some regions rush to regulate AI, there can be an imbalance in the speed of innovation versus regulation. In the U.S., concerns about overregulation have arisen, particularly among tech companies wary of stifling creativity and competitiveness. Bipartisan efforts to introduce comprehensive AI regulations often struggle with clarity and consensus, resulting in a fragmented approach that may hinder innovation.\n\n2. **Limited Scope and Inclusivity**: Many existing AI frameworks fail to encompass the full spectrum of AI technologies or consider the varying impacts across demographics. In the EU, while the AI Act aims to cover high-risk AI systems, critics argue that it does not adequately address the nuanced implications of AI in smaller applications or its broader societal consequences. This gap can lead to unintended biases and exclusions, underscoring the need for adaptable and inclusive policies.\n\n3. **Public Safety and Surveillance Concerns**: There are significant public safety issues associated with certain AI applications, particularly in law enforcement and surveillance. Countries like China have implemented extensive AI surveillance measures under the guise of public safety, employing facial recognition technologies that raise serious privacy and ethical concerns. Such policies have sparked international criticism and prompted discussions on the balance between safety and individual rights.\n\n#### Global Perspectives: Comparative Analysis\n\nGlobally, the landscape of AI policy reveals stark contrasts. In the United Kingdom, the government has emphasized a light-touch regulatory approach, which advocates innovation while encouraging core ethical principles. However, there is a risk of inadequate regulation leading to the unchecked development of potentially harmful technologies.\n\nConversely, China's aggressive AI policy framework seeks to dominate global AI leadership through strong government support for tech giants. While it has led to rapid advancements, concerns over civil liberties and the implications of extensive state surveillance pose significant ethical challenges.\n\nIn contrast, smaller countries like Estonia use their digital advancements to experiment with AI governance, showcasing flexible and adaptive policies in partnership with private stakeholders. Their approach highlights how nations with fewer resources can still lead in digital innovation by fostering collaboration and prioritizing citizen engagement.\n\n#### Conclusion\n\nIn conclusion, the strengths and weaknesses of AI policies around the world reflect diverse approaches to governance\u2014balancing innovation, ethical considerations, and public safety concerns. As the global AI landscape continues to evolve, there is an urgent need for nations to learn from one another and adapt their policies to ensure they not only facilitate growth but also uphold fundamental human rights and public trust. Achieving this balance will require continuous dialogue among governments, industry leaders, and civil society, emphasizing that effective AI governance is not merely a technical challenge, but a deeply societal one.",
-    "Llama-3-8B": "The adoption of Artificial Intelligence (AI) has sparked a global debate about the need for effective AI policies to ensure public safety, security, and the overall welfare of citizens. Governments worldwide are developing and implementing various AI policies, each with its strengths and weaknesses. This essay provides a comprehensive analysis of the strengths and weaknesses of different governments' AI policies, including recent regulations, innovations, and public safety concerns.\n\nThe United States has been at the forefront of AI development and has implemented several policies to regulate AI. The Federal Trade Commission (FTC) has enforced guidelines for AI developers, ensuring transparency and fairness in data collection and use. The National Institute of Standards and Technology (NIST) has developed standards for AI safety and security. These efforts have led to the growth of AI start-ups and innovation, making the US a hub for AI development (Stanley, 2020).\n\nHowever, the lack of a comprehensive AI policy at the federal level has led to criticisms about the lack of regulation and oversight. This has raised concerns about data privacy, job displacement, and bias in AI systems (Krauss, 2020). For instance, the Cambridge Analytica scandal highlighted the risks of data misuse and the need for stricter regulations.\n\nChina has taken a different approach, with a centralized AI policy that emphasizes the role of AI in achieving national objectives. The Chinese government has invested heavily in AI research and development, and has implemented regulations to ensure AI innovation and safety. The Cybersecurity Law of the People's Republic of China mandates data localization, online content regulation, and restricted access to foreign AI technologies (Cybersecurity Law of the People's Republic of China, 2017).\n\nHowever, China's heavy-handed approach has raised concerns about surveillance, censorship, and human rights violations. The country's AI-powered facial recognition systems have been used to monitor and control citizens, sparking concerns about privacy and autonomy (Horton, 2020). Furthermore, China's focus on national security and strategic objectives has led to criticism about the lack of transparency and accountability in AI decision-making processes.\n\nEurope has taken a more nuanced approach, emphasizing transparency, accountability, and human rights in AI development. The Ethereum AI platform, developed by the European Union, focuses on decentralized AI systems that prioritize transparency and user control (Ethereum AI, n.d.). The EU's General Data Protection Regulation (GDPR) sets strict standards for data protection and privacy, ensuring citizens have control over their personal data (GDPR, 2016).\n\nHowever, the EU's AI policies have been criticized for being too complex and unclear. The lack of a comprehensive AI framework has led to confusion and inconsistency in AI regulation across member states (Kavanagh, 2020). Furthermore, the EU's focus on data protection has led to concerns about the impact on AI innovation and competitiveness.\n\nCanada has taken a balanced approach, emphasizing collaboration and stakeholder engagement in AI policy-making. The federal government has established the AI-powered Personal Health Information (PHI) Standards, ensuring the secure and ethical use of AI in healthcare (PHI Standards, n.d.). The government has also launched the Pan-Canadian Artificial Intelligence Strategy, which focuses on AI innovation and talent development (Pan-Canadian Artificial Intelligence Strategy, n.d.).\n\nHowever, Canada's AI policies have been criticized for being too vague and lacking a clear vision for AI development. The country's reliance on international standards and best practices has raised concerns about the lack of autonomy and control over AI decision-making processes (Krauss, 2020).\n\nIn conclusion, governments around the world have implemented various AI policies, each with its strengths and weaknesses. While the US has emphasized innovation and transparency, China has prioritized national security and strategic objectives. Europe has emphasized transparency, accountability, and human rights, while Canada has taken a balanced approach. However, all governments face public safety concerns, such as data privacy, job displacement, and bias in AI systems. To address these concerns, governments must develop comprehensive and clear AI policies that balance innovation, security, and human rights.\n\nReferences:\n\nCybersecurity Law of the People's Republic of China. (2017). Retrieved from <https://www.wipo.int/edocs/pubdocs/en/pubdocs/wipo_pub_931.pdf>\n\nEthereum AI. (n.d.). Retrieved from <https://etherai.org/>\n\nGDPR. (2016). Retrieved from <https://eur-lex.europa.eu/eli/dir/2016/679/oj>\n\nKavanagh, J. (2020). The ethics of AI: A challenge for regulators. Journal of Information Technology & Politics, 17(1), 13-26.\n\nKrauss, C. (2020). AI policy is lagging behind the technology. Harvard Business Review.\n\nNational Institute of Standards and Technology. (n.d.). Retrieved from <https://www.nist.gov/>\n\nPan-Canadian Artificial Intelligence Strategy. (n.d.). Retrieved from <https://www.canada.ca/en/innovation-skills-planning/campaigns/artificial-intelligence.html>\n\nPHI Standards. (n.d.). Retrieved from <https://www.canada.ca/en/health-canada/services/health-care-system/health-care-technologies/personal-health-information-phi-standards.html>\n\nStanley, C. (2020). The future of artificial intelligence: Trends and predictions. Journal of Forecasting, 39(2), 143-156.",
-    "GPT-3.5-Turbo": "Governments around the world are increasingly recognizing the importance of establishing AI policies to regulate the development, deployment, and use of artificial intelligence. These policies aim to harness the potential benefits of AI technologies while addressing concerns related to ethics, privacy, and security. In this essay, we will explore the strengths and weaknesses of different governments' AI policies, with references to recent regulations, innovations, and public safety concerns.\n\nOne of the leading countries in AI policy development is the United States. The US government has taken a decentralized approach to AI regulation, with various agencies such as the National Institute of Standards and Technology (NIST) and the Federal Trade Commission (FTC) issuing guidelines and principles for AI development. The strength of this approach lies in its flexibility and adaptability to the rapidly evolving AI landscape. However, critics argue that this fragmented regulatory framework may lead to inconsistencies and gaps in oversight, hindering the effective regulation of AI technologies.\n\nOn the other hand, the European Union (EU) has adopted a more centralized approach to AI regulation through the implementation of the General Data Protection Regulation (GDPR) and the proposed AI Act. The GDPR sets strict rules for data protection and privacy, which are crucial considerations in the development of AI technologies. The proposed AI Act establishes a regulatory framework for high-risk AI applications, such as biometric identification and critical infrastructure systems. This centralized approach ensures a consistent regulatory framework across the EU member states, enhancing legal certainty and predictability for AI developers and users. However, some critics argue that the EU's regulatory approach may stifle innovation and competitiveness in the AI sector, as stringent regulations could impose burdensome compliance requirements on businesses.\n\nIn Asia, countries like China and South Korea have also implemented AI policies to promote innovation and regulate the use of AI technologies. China has launched the New Generation AI Development Plan, aiming to become the world leader in AI by 2030. The Chinese government has invested heavily in AI research and development, leading to significant advancements in areas such as facial recognition and autonomous vehicles. However, China's AI policies have raised concerns about mass surveillance and privacy violations, as the government uses AI technologies for social control and censorship.\n\nIn comparison, South Korea has focused on AI ethics and governance, establishing the AI ethics committee to address ethical issues related to AI development and deployment. South Korea's regulatory approach emphasizes the importance of ethical AI principles, such as transparency, accountability, and fairness. By prioritizing ethical considerations, South Korea seeks to build public trust in AI technologies and foster responsible AI innovation. However, the challenge lies in enforcing ethical guidelines and ensuring compliance with them, especially in the absence of strict regulatory enforcement mechanisms.\n\nOverall, the strengths and weaknesses of different governments' AI policies vary depending on their regulatory approaches, priorities, and considerations. While some countries prioritize innovation and economic growth, others prioritize ethical principles and public safety. Finding the right balance between promoting AI innovation and protecting societal values remains a key challenge for policymakers worldwide. By staying informed about the latest regulations, innovations, and public safety concerns in the AI sector, governments can navigate these challenges effectively and ensure the responsible development and deployment of AI technologies for the benefit of society as a whole."
+    "GPT-4o-mini": "### The Strengths and Weaknesses of Global AI Policies\n\nArtificial Intelligence (AI) is rapidly transforming various sectors worldwide, prompting governments to develop policies that regulate its development, deployment, and societal impact. These policies vary significantly across different nations, each with its own strengths and weaknesses. A comprehensive analysis reveals that while some countries are leading in innovative and effective regulatory frameworks, others face challenges, particularly regarding public safety and ethical considerations.\n\n#### Strengths of AI Policies\n\n1. **Proactive Regulation**: Countries like the European Union (EU) have adopted proactive AI regulations, exemplified by the European Commission's Proposal for an AI Act in 2021. This legislation aims to establish a comprehensive regulatory framework focusing on high-risk AI systems, emphasizing transparency, accountability, and safety. By integrating ethical considerations, the EU seeks to build public trust and enhance safety across AI applications.\n\n2. **Investment in Research and Innovation**: Nations such as the United States and China demonstrate robust investment in AI research and development. The U.S. government launched the National AI Initiative, focusing on ensuring America\u2019s global leadership in AI by fostering public-private partnerships and funding research projects. Similarly, China\u2019s \"Next Generation Artificial Intelligence Development Plan\" aims to make the country a global leader in AI by 2030, with significant investment in both government and private sector initiatives.\n\n3. **Public Engagement and Ethics**: Countries like Canada and the UK are increasingly emphasizing public engagement in AI policymaking. Canada's \"Directive on Automated Decision-Making\" includes standards for ethical considerations in AI applications, promoting transparency in public sector AI use. The UK\u2019s Centre for Data Ethics and Innovation encourages dialogue among stakeholders\u2014government, private sector, and civil society\u2014to address ethical concerns related to AI.\n\n#### Weaknesses of AI Policies\n\n1. **Regulatory Fragmentation**: One of the significant weaknesses in AI policy framework, particularly in larger regions like the United States, is the lack of a cohesive national strategy. Different states have introduced varying regulations, causing a fragmented approach that complicates compliance for AI developers and businesses. This disjointed regulatory environment can stymie innovation and lead to inconsistencies in AI safety and ethics.\n\n2. **Slow Adaptation to Rapid Technological Change**: Governments often struggle to keep pace with the rapid advancements in AI technology. For instance, while the EU has made commendable strides in regulatory frameworks, actual enforcement may lag due to the complexity of AI systems and the evolving nature of their applications. Consequently, there may be gaps in public safety measures, leaving citizens vulnerable to potential harms associated with unregulated AI systems.\n\n3. **Lack of Public Understanding**: Many citizens are unaware of the implications of AI technologies, which can lead to skepticism and fear. Governments may not be effectively communicating the benefits and risks associated with AI. This lack of public understanding can hinder the acceptance of AI initiatives and limit opportunities for beneficial applications in everyday life.\n\n#### Public Safety Concerns\n\nPublic safety remains a crucial concern across all nations in the context of AI. The deployment of AI technologies, particularly in sensitive areas like law enforcement, healthcare, and transportation, necessitates rigorous safety measures to prevent misuse and harm. High-profile cases, such as the deployment of facial recognition technologies by police in various countries, have sparked widespread debates about privacy and civil liberties. In the U.S., public backlash against such practices has led to calls for moratoriums, highlighting the need for balanced regulation that protects citizens while allowing for technological innovation.\n\nLastly, the ethical implications of AI\u2014ranging from algorithmic bias to data privacy\u2014necessitate clear guidelines. Governments must establish standards for fairness, accountability, and transparency in AI systems. Countries like Finland have taken steps in this direction by creating ethical AI frameworks that prioritize human-centric values, ensuring that AI benefits all citizens.\n\n#### Conclusion\n\nIn conclusion, while various governments are making significant strides in developing AI policies, substantial strengths and weaknesses persist within these frameworks. Proactive regulation, investment in innovation, and emphasis on public engagement highlight the strengths of such policies. However, the fragmentation of laws, slow adaptation to technology, and a lack of public understanding pose considerable weaknesses. Moving forward, a unified approach that addresses ethical concerns, while fostering innovation and ensuring public safety, will be essential for the successful integration of AI into societies worldwide. Collaborative efforts internationally may play a critical role in establishing effective global standards that guide responsible AI development.",
+    "GPT-3.5-Turbo": "The rapid advancement of artificial intelligence (AI) technologies has led governments around the world to establish policies and regulations to ensure the responsible development and deployment of AI systems. These policies vary widely in terms of their strengths and weaknesses, with some countries taking a more proactive approach to regulation while others lag behind. In this essay, we will analyze the AI policies of several countries, examining recent regulations, innovations, and public safety concerns.\n\nOne country at the forefront of AI regulation is the European Union (EU). In April 2019, the EU released its Ethical Guidelines for Trustworthy AI, which aims to ensure that AI systems are developed and used in a way that is ethical, transparent, and respects human rights. The guidelines outline seven key requirements for trustworthy AI, including transparency, accountability, and the protection of privacy and data. While the EU has been praised for its comprehensive approach to AI regulation, some critics argue that the guidelines lack teeth and may not be enforceable in practice.\n\nIn contrast, the United States has taken a more hands-off approach to AI regulation. While the US government has not implemented any specific AI regulations, several states have passed laws related to AI, such as restrictions on the use of facial recognition technology. The lack of federal regulation has allowed US companies to innovate more freely in the AI space, but it has also raised concerns about the potential for bias and discrimination in AI systems.\n\nAnother country with a proactive approach to AI regulation is China. In 2017, the Chinese government released a national plan to become the world leader in AI by 2030, investing heavily in AI research and development. China has also implemented regulations related to AI, such as guidelines for the ethical use of AI in healthcare and autonomous vehicles. However, China's approach to AI regulation has been criticized for its lack of transparency and concerns about surveillance and censorship.\n\nIn terms of public safety concerns, one of the most pressing issues related to AI is the potential for bias and discrimination in AI systems. Many AI systems are trained on biased data sets, leading to discriminatory outcomes for marginalized groups. For example, facial recognition technology has been found to have higher error rates for people of color, leading to concerns about racial profiling. Addressing bias in AI systems is essential to ensure that they are fair and equitable for all users.\n\nAnother public safety concern related to AI is the potential for autonomous weapons to be developed and used in warfare. Several countries, including the US, Russia, and China, are investing in the development of autonomous weapons systems, raising concerns about the ethics and legality of using AI in military operations. International efforts to ban or regulate autonomous weapons are ongoing, but progress has been slow.\n\nIn conclusion, governments around the world are grappling with the challenge of regulating AI technologies to ensure that they are developed and used in a responsible and ethical manner. While some countries have taken proactive steps to establish AI policies, others are lagging behind. Addressing public safety concerns related to AI, such as bias and discrimination, and the development of autonomous weapons, will be critical to ensuring that AI technologies benefit society as a whole.",
+    "Llama-3-8B": "The advent of Artificial Intelligence (AI) has raised significant concerns about its potential impact on society, economy, and governance. Governments worldwide are grappling with the challenge of formulating effective AI policies to harness its benefits while mitigating its risks. This response provides an analysis of the strengths and weaknesses of different governments' AI policies, highlighting recent regulations, innovations, and public safety concerns.\n\n**Strengths:**\n\n1. **Regulatory Frameworks:** The European Union (EU) has taken a lead in establishing a comprehensive regulatory framework for AI. The EU's General Data Protection Regulation (GDPR) and the AI Act aim to ensure transparency, accountability, and cybersecurity in AI development and deployment. The GDPR's emphasis on data privacy and consent sets a strong precedent for other jurisdictions.\n2. **Investment in AI Research:** The United States, China, and Canada have made significant investments in AI research and development. Governments recognize AI's potential to drive economic growth, improve healthcare, and enhance national security.\n3. **Public-Private Partnerships:** Governments worldwide have established partnerships with private companies, academia, and research institutions to facilitate AI innovation. Such collaborations enable the sharing of knowledge, resources, and expertise, accelerating AI development.\n\n**Weaknesses:**\n\n1. **Lack of Regulation:** The United States, despite being a leader in AI development, lacks a comprehensive regulatory framework for AI. This has raised concerns about the potential misuse of AI, particularly in areas like facial recognition and autonomous weapons.\n2. **Inadequate Transparency:** AI systems are often opaque, making it difficult to understand their decision-making processes and potential biases. This lack of transparency can lead to unintended consequences, such as discrimination and injustice.\n3. **Public Safety Concerns:** The potential for AI to be used in malicious ways, such as cyberattacks or propaganda, is a significant concern. Governments must ensure that AI is developed and deployed in a responsible manner to prevent such outcomes.\n\n**Recent Regulations and Innovations:**\n\n1. **EU AI Act:** The EU's AI Act is a comprehensive regulatory framework for AI, focusing on transparency, accountability, and cybersecurity. It aims to ensure responsible development and deployment of AI across the EU.\n2. **China's AI Strategy:** China has established a strategic plan for AI development, focusing on industry-specific applications, such as healthcare and finance. Its \"New Generation Artificial Intelligence Development Plan\" aims to position China as a global leader in AI development.\n3. **Canada's AI Strategy:** Canada has launched a national AI strategy, emphasizing the importance of ethical AI development and deployment. Its \"Talent and Collaboration\" initiative aims to strengthen Canada's AI talent pool and foster international collaboration.\n\n**Public Safety Concerns:**\n\n1. **Facial Recognition:** The use of facial recognition technology has raised concerns about privacy and discrimination. Governments must ensure that such technology is developed and deployed in a responsible manner to prevent abuse.\n2. **Autonomous Weapons:** The development of autonomous weapons, also known as \"killer robots,\" has raised grave concerns about ethical and legal implications. Governments must prioritize international cooperation to prevent the deployment of such weapons.\n3. **Cybersecurity:** As AI becomes more pervasive, cybersecurity threats will increase. Governments must prioritize AI-powered cybersecurity solutions to protect national critical infrastructure and prevent cyberattacks.\n\nIn conclusion, governments worldwide are embracing AI, with some showing greater success than others in developing effective policies. While there are strengths, such as regulatory frameworks and public-private partnerships, there are also weaknesses, including a lack of regulation and transparency. As AI continues to evolve, governments must prioritize public safety concerns, ensuring that AI is developed and deployed responsibly to benefit society as a whole."
   },
   "grades": {
     "GPT-4o-mini": {
-      "GPT-4o-mini": {
-        "feedback": "The essay titled \"The Strengths and Weaknesses of Government AI Policies Worldwide\" offers a broad overview of the subject matter, touching on various significant aspects of AI governance from a global perspective. Below is a breakdown of the feedback focusing on the specified areas.\n\n1. **Depth of Analysis**: The essay provides a solid analysis of both strengths and weaknesses of AI policies, incorporating specific examples from different countries, which enhances its depth. However, the analysis could benefit from more in-depth exploration of challenges faced by policymakers, particularly in areas like ethical considerations and societal impacts. Additionally, more empirical data or case studies could strengthen the argument further.\n\n2. **Clarity and Structure**: The structure is logical, with clear headings that demarcate strengths, weaknesses, and a comparative analysis. However, the transitions between sections might be improved to enhance the flow of arguments. The essay occasionally contains dense sentences that could be simplified for clarity. A concise introductory paragraph stating the thesis more explicitly would help set the tone early on.\n\n3. **Accuracy of Facts or References**: The essay contains generally accurate references to policies such as the AI Initiative and the AI Act. However, specific claims\u2014particularly around the perceived outcomes of these policies\u2014could benefit from citations or references to scholarly articles or official reports to enhance accuracy and credibility. For example, assertions regarding the effectiveness of community engagement in Canada could be substantiated with data.\n\n4. **Overall Coherence**: The essay maintains a coherent argument throughout, linking the themes of innovation, ethical governance, and public safety effectively. Nonetheless, some paragraphs could be tightened to eliminate redundancy and enhance persuasiveness. A more explicit discussion of the implications of the comparative analysis would also help clarify the overarching message of the essay.\n\nOverall, the essay presents a compelling discussion with room for enhanced depth and clarity. \n\n```\nGrade: B+\n```",
-        "grade": "B+",
-        "numeric_grade": 3.5,
-        "cost_info": {
-          "input_tokens": 1044,
-          "output_tokens": 376,
-          "input_cost": 0.000522,
-          "output_cost": 0.000564,
-          "total_cost": 0.0010860000000000002,
-          "duration": 5.048037052154541
-        }
-      },
       "Llama-3-8B": {
-        "feedback": "1) **Depth of Analysis**: The essay does a commendable job of identifying the strengths and weaknesses of AI policies across multiple countries. It presents a comparative analysis that highlights different governing approaches, which is insightful. However, it lacks a deeper exploration of the implications of these policies on various sectors, such as healthcare or employment. Furthermore, while it cites cases like the Cambridge Analytica scandal, it could enhance its analysis by incorporating more current examples or statistics to underpin its arguments about effectiveness and societal impact.\n\n2) **Clarity and Structure**: The essay is generally well-structured with clear headings guiding the reader through the various national policies. However, the transition between sections could be smoother. Each section discussing a different country's policy feels somewhat isolated; linking the discussions more clearly, perhaps by drawing direct comparisons or contrasts, would improve the flow and help reinforce key themes.\n\n3) **Accuracy of Facts or References**: The references appear to be generally accurate, but it relies on a mix of formal and informal citations (e.g., using \"n.d.\" for some sources), which may confuse readers about the reliability of the information. Additionally, mention of \"Ethereum AI\" appears unfamiliar to many readers--it could be beneficial to clarify its significance in the context of AI policies. Ensuring that all references follow a consistent format and accurately reflect the sources' content would enhance the essay's credibility.\n\n4) **Overall Coherence**: The argument is coherent in terms of discussing the varying approaches of countries towards AI policy. Each country\u2019s section effectively covers the general narrative, but reinforcing a central thesis\u2014perhaps around the notion of striking a balance between innovation and regulation\u2014would unify the essay. A more robust conclusion that synthesizes the discussed points, rather than just reiterating them, would strengthen the overall coherence.\n\n```\nGrade: B+\n```",
-        "grade": "B+",
-        "numeric_grade": 3.5,
-        "cost_info": {
-          "input_tokens": 1236,
-          "output_tokens": 371,
-          "input_cost": 0.0006180000000000001,
-          "output_cost": 0.0005565,
-          "total_cost": 0.0011745000000000002,
-          "duration": 4.950997829437256
-        }
-      },
-      "GPT-3.5-Turbo": {
-        "feedback": "The essay presents a thoughtful overview of global approaches to AI policy, touching on key factors related to ethics, privacy, and security. Below, I've provided feedback on the specified dimensions:\n\n1) **Depth of Analysis**: The essay does a commendable job of identifying the strengths and weaknesses of various AI regulatory frameworks in the US, EU, China, and South Korea. However, it could benefit from more in-depth examples or case studies that illustrate the consequences of these policies in real-world scenarios. Additionally, incorporating a discussion of potential future trends or unresolved issues within AI regulation would enhance the analysis.\n\n2) **Clarity and Structure**: The overall structure is logical, with each section addressing different regions and their respective AI policies. However, the transition between ideas could be smoother. For example, linking the discussion of the US policy directly with the EU approach could provide a more cohesive narrative. Clearer subheadings for each section could also improve readability.\n\n3) **Accuracy of Facts or References**: The mentions of the GDPR, AI Act, and specific policies in China and South Korea appear accurate, but the essay lacks in-text citations to support these claims. A brief mention of sources or evidence (such as studies, reports, or existing literature) would lend credibility and allow readers to verify claims. \n\n4) **Overall Coherence**: The essay maintains a generally coherent argument throughout; however, some sections feel slightly repetitive in their phrasing. For example, the themes of innovation vs. ethical considerations recur but could be framed differently to reinforce the discussion without seeming redundant. Additionally, a concise conclusion summarizing findings and reiterating the importance of balanced AI policy could strengthen the overall coherence.\n\nOverall, while the essay provides a solid foundation on the topic, there are areas for improvement in depth, transitions, and references that could elevate the analysis.\n\n```\nGrade: B\n```",
+        "feedback": "**Feedback:**\n\n1. **Depth of Analysis:** The essay adequately highlights the strengths and weaknesses of governments' AI policies and discusses recent regulations and innovations. However, it lacks deeper analysis in several areas, such as specific examples of how regulations have succeeded or failed in practice, or more detailed implications of the technologies discussed. Expanding on the societal impacts of AI beyond governance, incorporating ethical considerations, and exploring the global landscape of AI regulation would enhance the depth significantly.\n\n2. **Clarity and Structure:** The essay is generally well-structured, with clear headings that guide the reader through different aspects of the discussion. However, some sections could benefit from transitional phrases that more clearly connect ideas between paragraphs. For example, directly linking the discussion of public-private partnerships to the subsequent sections on regulations and innovations would improve flow.\n\n3. **Accuracy of Facts or References:** The facts presented in the essay seem mostly accurate. However, it would be beneficial to reference specific sources or studies to bolster claims, particularly when discussing the successes or failures of AI regulations in different countries. Including up-to-date statistics or studies on public perception and real-world impacts of AI policies would provide greater credibility.\n\n4. **Overall Coherence:** The essay maintains a coherent focus on AI policies and their implications throughout. However, some repetitions, particularly in the sections detailing public safety concerns, detract from the overall coherence. Streamlining these segments and ensuring that unique points are emphasized would strengthen the argument.\n\nOverall, the essay provides a solid overview but could be improved with deeper analysis and enhanced clarity in connections between ideas.\n\n```\nGrade: B\n```",
         "grade": "B",
         "numeric_grade": 3.0,
         "cost_info": {
-          "input_tokens": 786,
-          "output_tokens": 378,
-          "input_cost": 0.000393,
-          "output_cost": 0.000567,
-          "total_cost": 0.00096,
-          "duration": 6.050951957702637
+          "input_tokens": 889,
+          "output_tokens": 323,
+          "input_cost": 0.0004445,
+          "output_cost": 0.0004845,
+          "total_cost": 0.000929,
+          "duration": 5.324784755706787
+        }
+      },
+      "GPT-4o-mini": {
+        "feedback": "### Feedback\n\n1. **Depth of Analysis**: The essay provides a solid analysis of the strengths and weaknesses of global AI policies, touching on various crucial points such as proactive regulation, investment in innovation, and public engagement. However, it would benefit from deeper examination of some case studies or examples. For instance, while mentioning the EU\u2019s AI Act, elaborating on its specific implications or comparing it with other frameworks would add depth. Additionally, the discussion on public understanding could include insights from surveys or studies that reveal public perceptions of AI.\n\n2. **Clarity and Structure**: The structure is logical, with a clear division between strengths, weaknesses, public safety concerns, and a conclusion. Each section is titled, which aids in navigation. However, the essay could enhance clarity by incorporating transitional phrases between points or sections, allowing the reader to understand the connections between different concepts more intuitively. \n\n3. **Accuracy of Facts or References**: The essay includes accurate references to contemporary AI policies such as the EU\u2019s AI Act and the National AI Initiative in the U.S. However, it would strengthen the essay to include specific citations or references to reports or research articles that support the claims made, especially regarding the impact of these policies. Furthermore, terms like \"civil liberties\" could be contextualized with specific legal frameworks or recent events to provide a more accurate picture.\n\n4. **Overall Coherence**: The essay is coherent, with main ideas flowing logically from one to the next. The conclusion effectively summarizes the key points made throughout the essay. Yet, reiterating how the positives can mitigate the negatives might create a more cohesive narrative. Furthermore, a brief mention of potential global collaborations or organizations aimed at standardizing AI policies could enrich the discussion.\n\nOverall, the essay demonstrates a good understanding of global AI policies but could be improved with deeper analysis, clearer transitions, and supported references.\n\n```\nGrade: B+\n```",
+        "grade": "B+",
+        "numeric_grade": 3.25,
+        "cost_info": {
+          "input_tokens": 1040,
+          "output_tokens": 385,
+          "input_cost": 0.0005200000000000001,
+          "output_cost": 0.0005775,
+          "total_cost": 0.0010975,
+          "duration": 6.43058705329895
+        }
+      },
+      "GPT-3.5-Turbo": {
+        "feedback": "The essay presents a pertinent exploration of global AI policies and regulations, offering thoughtful comparisons between the approaches taken by various countries. Below is the constructive feedback:\n\n1) **Depth of Analysis**: The essay provides a good overview of AI policies in the EU, the US, and China and identifies some key issues such as ethical guidelines and public safety concerns. However, it could benefit from a deeper analysis of the specific impacts of these regulations on AI development and deployment. Including examples of successful implementation or failures due to regulatory gaps would strengthen the argument. Additionally, discussing the role of international cooperation on AI regulation would add depth.\n\n2) **Clarity and Structure**: The essay is generally clear and maintains a logical flow from one section to another. Each country's approach is presented in a structured manner. However, transitions between paragraphs could be smoother to enhance readability. Introducing subheadings could also help organize the content better and allow readers to follow the discussion more easily.\n\n3) **Accuracy of Facts or References**: Most factual statements appear accurate, particularly concerning the EU's guidelines and China's national plan. However, the assertion that the US has not implemented any specific AI regulations may be misleading, as there are indeed state-level regulations and frameworks that inform federal policies. It would be beneficial to cite specific laws or examples to back up claims about regulatory actions.\n\n4) **Overall Coherence**: The essay is largely coherent, with a clear thesis regarding the varying approaches to AI regulation. Nonetheless, some points could be elaborated on further to connect them back to the central argument, particularly around the implications of these regulations on public safety issues. Concluding remarks could reiterate the significance of balanced regulation and innovation rather than simply stating that different countries are at different levels of regulatory maturity.\n\nOverall, the essay provides a solid foundation on an urgent topic but could use more depth in analysis and clarity in structure. \n\n```\nGrade: B\n```",
+        "grade": "B",
+        "numeric_grade": 3.0,
+        "cost_info": {
+          "input_tokens": 773,
+          "output_tokens": 386,
+          "input_cost": 0.0003865,
+          "output_cost": 0.000579,
+          "total_cost": 0.0009655,
+          "duration": 7.964570999145508
+        }
+      }
+    },
+    "Llama-3-8B": {
+      "Llama-3-8B": {
+        "feedback": "Feedback on the essay:\n\n1. **Depth of analysis:** The essay provides a good overview of the current state of AI policies around the world, highlighting strengths and weaknesses of different governments' approaches. However, it could delve deeper into the specific implications of these policies and their potential outcomes.\n\n2. **Clarity and structure:** The essay is well-organized, with clear headings and a logical flow of ideas. It could benefit from more concise language and sentence structures to improve its readability.\n\n3. **Accuracy of facts or references:** The essay appears to be based on credible sources and accurate information. However, it could provide more specific references to support its claims and provide additional context about the policies and regulations being discussed.\n\n4. **Overall coherence:** The essay is generally coherent, with a clear thesis statement and supporting evidence. However, some paragraphs could be more tightly focused on the topic at hand, and the conclusion could be more specific about what the essay has demonstrated.\n\nGrade: B+",
+        "grade": "B+",
+        "numeric_grade": 3.25,
+        "cost_info": {
+          "input_tokens": 893,
+          "output_tokens": 197,
+          "input_cost": 0.0004465,
+          "output_cost": 0.0002955,
+          "total_cost": 0.000742,
+          "duration": 2.1484830379486084
+        }
+      },
+      "GPT-4o-mini": {
+        "feedback": "**Constructive Feedback:**\n\n1. **Depth of Analysis:** The essay provides a comprehensive overview of global AI policies, highlighting strengths and weaknesses. However, some points could be further elaborated upon, such as the specific challenges faced by smaller countries or the impact of AI on global economic inequality.\n\n2. **Clarity and Structure:** The essay is well-organized, with a clear introduction, body, and conclusion. The language is generally clear, but some sentences could be rewritten for improved concision and clarity.\n\n3. **Accuracy of Facts or References:** The essay appears to be well-researched, with accurate references to specific AI policies and initiatives. However, some aspects, such as the specifics of China's \"Next Generation Artificial Intelligence Development Plan,\" could be further supported with additional sources.\n\n4. **Overall Coherence:** The essay effectively ties together the various strengths and weaknesses of global AI policies, presenting a compelling case for the need for a more unified approach.\n\n**Grade: B+**",
+        "grade": "B+",
+        "numeric_grade": 3.25,
+        "cost_info": {
+          "input_tokens": 1037,
+          "output_tokens": 201,
+          "input_cost": 0.0005185,
+          "output_cost": 0.0003015,
+          "total_cost": 0.00082,
+          "duration": 2.1902382373809814
+        }
+      },
+      "GPT-3.5-Turbo": {
+        "feedback": "I'd be happy to provide constructive feedback on the essay and assign a letter grade.\n\n**Depth of Analysis**:\n\nWhile the essay provides a good overview of the current state of AI policies around the world, it doesn't delve deeper into the complexities of each policy or regulation. For example, the essay doesn't analyze the implications of the EU's Ethical Guidelines for Trustworthy AI or the potential legal challenges of implementing US state-level AI regulations. To improve, the essay could provide more specific examples and case studies to illustrate the effectiveness or drawbacks of each policy.\n\n**Clarity and Structure**:\n\nThe essay is well-organized and easy to follow, with each paragraph focusing on a specific country's approach to AI regulation. However, some points could be clarified or rephrased for greater clarity. For instance, the paragraph on China's approach to AI regulation is a bit disjointed and could be reorganized to provide a clearer picture of China's policies and concerns.\n\n**Accuracy of Facts or References**:\n\nThe essay appears to be well-researched, with accurate references to specific policies and regulations. However, it would be helpful to provide more citations to support the claims made in the essay. Additionally, some information, such as the exact date of China's national plan to become the world leader in AI, is unclear.\n\n**Overall Coherence**:\n\nThe essay's main argument is clear: that governments around the world are grappling with the challenge of regulating AI technologies. However, the essay could benefit from a stronger concluding sentence or paragraph to tie together the various points made throughout the essay.\n\n**Grade**:\n\nGrade: B+",
+        "grade": "B+",
+        "numeric_grade": 3.25,
+        "cost_info": {
+          "input_tokens": 774,
+          "output_tokens": 327,
+          "input_cost": 0.00038700000000000003,
+          "output_cost": 0.0004905,
+          "total_cost": 0.0008775,
+          "duration": 3.2389798164367676
         }
       }
     },
     "GPT-3.5-Turbo": {
-      "GPT-4o-mini": {
-        "feedback": "Grade: A",
-        "grade": "A",
-        "numeric_grade": 4.0,
-        "cost_info": {
-          "input_tokens": 1042,
-          "output_tokens": 4,
-          "input_cost": 0.000521,
-          "output_cost": 6e-06,
-          "total_cost": 0.000527,
-          "duration": 0.8550331592559814
-        }
-      },
       "Llama-3-8B": {
         "feedback": "Grade: A-",
         "grade": "A-",
         "numeric_grade": 3.75,
         "cost_info": {
-          "input_tokens": 1250,
+          "input_tokens": 892,
           "output_tokens": 5,
-          "input_cost": 0.000625,
+          "input_cost": 0.000446,
           "output_cost": 7.5e-06,
-          "total_cost": 0.0006325,
-          "duration": 0.7446341514587402
+          "total_cost": 0.0004535,
+          "duration": 0.7718760967254639
         }
       },
       "GPT-3.5-Turbo": {
-        "feedback": "Grade: B+\n\nFeedback:\n- Depth of analysis: The essay provides a good overview and comparison of AI policies in different governments, discussing strengths and weaknesses. However, more in-depth analysis of specific regulations and their impacts could enhance the analysis.\n- Clarity and structure: The essay is well-structured, with clear paragraphs discussing different countries' approaches to AI regulation. The ideas flow logically and cohesively.\n- Accuracy of facts or references: The essay accurately references key regulations and initiatives in the US, EU, China, and South Korea. However, providing more specific examples or case studies could further support the analysis.\n- Overall coherence: The essay maintains coherence by comparing and contrasting different countries' AI policies. The conclusion effectively summarizes the key points discussed throughout the essay. \n\nOverall, the essay provides a solid analysis of government AI policies, but could benefit from deeper analysis and more specific examples to increase the level of analysis.",
-        "grade": "B+",
-        "numeric_grade": 3.5,
+        "feedback": "Grade: A-",
+        "grade": "A-",
+        "numeric_grade": 3.75,
         "cost_info": {
-          "input_tokens": 788,
-          "output_tokens": 186,
-          "input_cost": 0.00039400000000000004,
-          "output_cost": 0.000279,
-          "total_cost": 0.000673,
-          "duration": 2.710620880126953
+          "input_tokens": 773,
+          "output_tokens": 5,
+          "input_cost": 0.0003865,
+          "output_cost": 7.5e-06,
+          "total_cost": 0.00039400000000000004,
+          "duration": 0.8482489585876465
         }
-      }
-    },
-    "Llama-3-8B": {
+      },
       "GPT-4o-mini": {
-        "feedback": "Here's the feedback and grade for the essay:\n\n**Feedback:**\n\n1. **Depth of analysis:** The essay provides a good overview of the strengths and weaknesses of AI policies worldwide, covering various aspects such as innovation, ethics, public safety, and regulatory frameworks. However, the analysis could be deeper and more nuanced, incorporating more specific examples and country-level comparisons to support the arguments.\n2. **Clarity and structure:** The essay is well-organized and easy to follow, with clear headings and a logical flow of ideas. The language is generally clear, but some sentences could be rephrased for better clarity and concision. The conclusion could be more impactful, summarizing the main points and reiterating the importance of balanced AI governance.\n3. **Accuracy of facts or references:** The essay relies heavily on general information and lacks specific references to support the claims. Including credible sources and statistics would strengthen the arguments and add credibility to the essay.\n4. **Overall coherence:** The essay explores various aspects of AI policies, but the connections between them could be more explicit. A clearer thread throughout the essay would help to tie the different ideas together and create a more cohesive narrative.\n\n**Grade:**\nGrade: B+",
-        "grade": "B+",
-        "numeric_grade": 3.5,
+        "feedback": "Overall, the essay provides a comprehensive analysis of the strengths and weaknesses of global AI policies. The structure is clear, with distinct sections highlighting different aspects of AI policy. The depth of analysis in discussing the strengths and weaknesses, as well as the public safety concerns, is commendable. The references to specific countries and their initiatives add credibility to the arguments presented. However, there are minor issues with clarity in a few sentences, and some points could benefit from further elaboration for enhanced coherence.\n\nGrade: A",
+        "grade": "A",
+        "numeric_grade": 4.0,
         "cost_info": {
-          "input_tokens": 1043,
-          "output_tokens": 246,
-          "input_cost": 0.0005214999999999999,
-          "output_cost": 0.000369,
-          "total_cost": 0.0008905,
-          "duration": 2.968109130859375
-        }
-      },
-      "GPT-3.5-Turbo": {
-        "feedback": "Here is the feedback on the essay:\n\n1. Depth of analysis: The essay provides a good overview of the different countries' AI policies, highlighting their strengths and weaknesses. However, the analysis is somewhat superficial and lacks a deeper exploration of the complexities and nuances of each country's approach. To improve, the author could delve deeper into specific regulations and their implications, as well as consider alternative perspectives and potential challenges.\n\n2. Clarity and structure: The essay is well-organized and easy to follow, with a clear introduction, body, and conclusion. The sentences are mostly clear and concise, but some could be revised for better clarity. For example, the author could provide more concrete examples or analogies to illustrate complex concepts, such as the decentralized approach to AI regulation in the US.\n\n3. Accuracy of facts or references: The essay appears to be accurate in its presentation of facts and references. The author provides specific examples and citations to support their arguments, which is helpful. However, some references could be more recent and relevant to the topic, and the author could benefit from incorporating more diverse sources, such as academic articles or government reports.\n\n4. Overall coherence: The essay coherently presents an overview of the different countries' AI policies, highlighting their strengths and weaknesses. The author successfully connects the different sections by highlighting the challenges and implications of each approach. To improve, the author could consider providing more explicit connections between the different countries' policies and the broader implications for AI development and deployment.\n\nGrade: B+\n\nPlease note that this grade is based on my assessment of the essay's strengths and weaknesses, but it is not intended to be a rigorous or definitive evaluation.",
-        "grade": "B+",
-        "numeric_grade": 3.5,
-        "cost_info": {
-          "input_tokens": 789,
-          "output_tokens": 334,
-          "input_cost": 0.00039450000000000005,
-          "output_cost": 0.000501,
-          "total_cost": 0.0008955,
-          "duration": 3.851574182510376
-        }
-      },
-      "Llama-3-8B": {
-        "feedback": "**Constructive Feedback**\n\n1. **Depth of analysis**: The essay provides a good overview of the strengths and weaknesses of various governments' AI policies, but could delve deeper into the nuances and complexities of each policy. For example, the discussion of China's centralized approach could benefit from more specific examples of how this has been implemented in practice.\n2. **Clarity and structure**: The essay is well-organized and easy to follow, with clear headings and a logical flow of ideas. However, some paragraphs could be more concise and to the point, with fewer tangential points.\n3. **Accuracy of facts or references**: The essay quotes credible sources and provides a solid foundation of research. However, some references could be more recent or direct quotes could be used to support the author's arguments.\n4. **Overall coherence**: The essay provides a clear thesis statement and supports it with a range of evidence from different countries. However, the conclusion could be more nuanced, addressing potential flaws or limitations in the current state of AI policy-making.\n\n**Grade:** B+\n\nPlease note that I've graded this essay as a B+, as it demonstrates a strong foundation of research and a clear understanding of the topic. However, there are areas for improvement, such as delving deeper into the nuances of each policy and providing more concise and focused arguments.",
-        "grade": "B+",
-        "numeric_grade": 3.5,
-        "cost_info": {
-          "input_tokens": 1251,
-          "output_tokens": 267,
-          "input_cost": 0.0006255,
-          "output_cost": 0.00040050000000000003,
-          "total_cost": 0.001026,
-          "duration": 3.180690050125122
+          "input_tokens": 1036,
+          "output_tokens": 101,
+          "input_cost": 0.000518,
+          "output_cost": 0.00015150000000000002,
+          "total_cost": 0.0006695000000000001,
+          "duration": 1.6671879291534424
         }
       }
     }
   },
   "summary": {
     "GPT-4o-mini": {
-      "median_numeric": 3.5,
+      "median_numeric": 3.25,
       "grades_received": [
         "B+",
-        "A",
-        "B+"
-      ]
-    },
-    "Llama-3-8B": {
-      "median_numeric": 3.5,
-      "grades_received": [
         "B+",
-        "A-",
-        "B+"
+        "A"
       ]
     },
     "GPT-3.5-Turbo": {
-      "median_numeric": 3.5,
+      "median_numeric": 3.25,
       "grades_received": [
         "B",
         "B+",
-        "B+"
+        "A-"
+      ]
+    },
+    "Llama-3-8B": {
+      "median_numeric": 3.25,
+      "grades_received": [
+        "B",
+        "B+",
+        "A-"
       ]
     }
   },
   "essay_files": {
-    "GPT-4o-mini": "results/20250305-131605-pol_sci_1-free/essays/GPT-4o-mini.md",
-    "Llama-3-8B": "results/20250305-131605-pol_sci_1-free/essays/Llama-3-8B.md",
-    "GPT-3.5-Turbo": "results/20250305-131605-pol_sci_1-free/essays/GPT-3.5-Turbo.md"
+    "GPT-4o-mini": "results/20250306-171605-pol_sci_1-free/essays/GPT-4o-mini.md",
+    "GPT-3.5-Turbo": "results/20250306-171605-pol_sci_1-free/essays/GPT-3.5-Turbo.md",
+    "Llama-3-8B": "results/20250306-171605-pol_sci_1-free/essays/Llama-3-8B.md"
   },
   "available_models": [
     "GPT-4o",
-    "Claude-3-Sonnet",
-    "Claude-3.7-Sonnet",
     "Claude-3-Opus",
+    "Claude-3.7-Sonnet",
     "GPT-4o-mini",
-    "GPT-3.5-Turbo",
-    "o3-mini-high",
-    "o1-mini",
-    "o1",
-    "grok2-1212",
-    "DeepSeek-R1-Full",
-    "DeepSeek-Distill-Qwen-32b",
+    "Claude-3-Sonnet",
     "Llama-3-8B",
-    "Qwen-Max",
-    "grok-beta",
-    "Perplexity: Llama 3.1 Sonar 8B Online",
-    "Perplexity: Llama 3.1 Sonar 70B",
     "Claude-3.7-Sonnet-thinking",
+    "DeepSeek-R1-Full",
+    "grok2-1212",
+    "GPT-3.5-Turbo",
+    "o1",
+    "o3-mini-high",
+    "DeepSeek-Distill-Qwen-32b",
+    "grok-beta",
+    "Perplexity: Llama 3.1 Sonar 70B",
+    "Qwen-Plus",
+    "Qwen-Max",
+    "Perplexity: Llama 3.1 Sonar 8B Online",
+    "o1-mini",
+    "Moonshot AI: Moonlight 16b A3b Instruct (free)",
+    "Qwen-Turbo",
+    "Google: Gemini Flash Lite 2.0 Preview (free)",
     "Gemini Pro 1.5",
     "Gemini Flash 2.0",
-    "Qwen-Plus",
-    "Qwen-Turbo"
+    "Google: Gemini Pro 2.0 Experimental (free)",
+    "Meta: Llama 3.1 8B Instruct (free)",
+    "DeepSeek: R1 (free)",
+    "Meta: Llama 3.3 70B Instruct (free)",
+    "Mistral: Mistral Nemo (free)",
+    "Dolphin3.0 R1 Mistral 24B (free)",
+    "NVIDIA: Llama 3.1 Nemotron 70B Instruct (free)",
+    "Mistral: Mistral Small 3 (free)",
+    "Meta: Llama 3.2 1B Instruct (free)",
+    "Nous: DeepHermes 3 Llama 3 8B Preview (free)"
   ],
   "selected_models": [
     "GPT-4o-mini",
-    "GPT-3.5-Turbo",
-    "Llama-3-8B"
+    "Llama-3-8B",
+    "GPT-3.5-Turbo"
   ],
-  "run_timestamp": "2025-03-05 13:16:05",
+  "run_timestamp": "2025-03-06 17:16:05",
   "cost": {
-    "total_cost": 0.011961000000000003,
-    "total_tokens": 14332,
-    "total_duration": 63.359538078308105,
+    "total_cost": 0.010477499999999997,
+    "total_tokens": 12595,
+    "total_duration": 56.47462844848633,
     "essay_costs": {
       "GPT-4o-mini": {
         "input_tokens": 102,
-        "output_tokens": 892,
+        "output_tokens": 888,
         "input_cost": 5.1e-05,
-        "output_cost": 0.001338,
-        "total_cost": 0.001389,
-        "duration": 12.339120149612427
-      },
-      "Llama-3-8B": {
-        "input_tokens": 104,
-        "output_tokens": 1099,
-        "input_cost": 5.2e-05,
-        "output_cost": 0.0016485,
-        "total_cost": 0.0017005,
-        "duration": 13.784603118896484
+        "output_cost": 0.001332,
+        "total_cost": 0.0013830000000000001,
+        "duration": 11.92069387435913
       },
       "GPT-3.5-Turbo": {
         "input_tokens": 102,
-        "output_tokens": 637,
+        "output_tokens": 622,
         "input_cost": 5.1e-05,
-        "output_cost": 0.0009555000000000001,
-        "total_cost": 0.0010065,
-        "duration": 6.875166416168213
+        "output_cost": 0.000933,
+        "total_cost": 0.000984,
+        "duration": 6.597299814224243
+      },
+      "Llama-3-8B": {
+        "input_tokens": 104,
+        "output_tokens": 740,
+        "input_cost": 5.2e-05,
+        "output_cost": 0.00111,
+        "total_cost": 0.001162,
+        "duration": 7.371677875518799
       }
     },
     "grading_costs": {
-      "GPT-4o-mini": {
-        "GPT-4o-mini": {
-          "input_tokens": 1044,
-          "output_tokens": 376,
-          "input_cost": 0.000522,
-          "output_cost": 0.000564,
-          "total_cost": 0.0010860000000000002,
-          "duration": 5.048037052154541
-        },
-        "Llama-3-8B": {
-          "input_tokens": 1236,
-          "output_tokens": 371,
-          "input_cost": 0.0006180000000000001,
-          "output_cost": 0.0005565,
-          "total_cost": 0.0011745000000000002,
-          "duration": 4.950997829437256
-        },
-        "GPT-3.5-Turbo": {
-          "input_tokens": 786,
-          "output_tokens": 378,
-          "input_cost": 0.000393,
-          "output_cost": 0.000567,
-          "total_cost": 0.00096,
-          "duration": 6.050951957702637
-        }
-      },
       "GPT-3.5-Turbo": {
-        "GPT-4o-mini": {
-          "input_tokens": 1042,
-          "output_tokens": 4,
-          "input_cost": 0.000521,
-          "output_cost": 6e-06,
-          "total_cost": 0.000527,
-          "duration": 0.8550331592559814
-        },
         "Llama-3-8B": {
-          "input_tokens": 1250,
+          "input_tokens": 892,
           "output_tokens": 5,
-          "input_cost": 0.000625,
+          "input_cost": 0.000446,
           "output_cost": 7.5e-06,
-          "total_cost": 0.0006325,
-          "duration": 0.7446341514587402
+          "total_cost": 0.0004535,
+          "duration": 0.7718760967254639
         },
         "GPT-3.5-Turbo": {
-          "input_tokens": 788,
-          "output_tokens": 186,
-          "input_cost": 0.00039400000000000004,
-          "output_cost": 0.000279,
-          "total_cost": 0.000673,
-          "duration": 2.710620880126953
+          "input_tokens": 773,
+          "output_tokens": 5,
+          "input_cost": 0.0003865,
+          "output_cost": 7.5e-06,
+          "total_cost": 0.00039400000000000004,
+          "duration": 0.8482489585876465
+        },
+        "GPT-4o-mini": {
+          "input_tokens": 1036,
+          "output_tokens": 101,
+          "input_cost": 0.000518,
+          "output_cost": 0.00015150000000000002,
+          "total_cost": 0.0006695000000000001,
+          "duration": 1.6671879291534424
         }
       },
       "Llama-3-8B": {
+        "Llama-3-8B": {
+          "input_tokens": 893,
+          "output_tokens": 197,
+          "input_cost": 0.0004465,
+          "output_cost": 0.0002955,
+          "total_cost": 0.000742,
+          "duration": 2.1484830379486084
+        },
         "GPT-4o-mini": {
-          "input_tokens": 1043,
-          "output_tokens": 246,
-          "input_cost": 0.0005214999999999999,
-          "output_cost": 0.000369,
-          "total_cost": 0.0008905,
-          "duration": 2.968109130859375
+          "input_tokens": 1037,
+          "output_tokens": 201,
+          "input_cost": 0.0005185,
+          "output_cost": 0.0003015,
+          "total_cost": 0.00082,
+          "duration": 2.1902382373809814
         },
         "GPT-3.5-Turbo": {
-          "input_tokens": 789,
-          "output_tokens": 334,
-          "input_cost": 0.00039450000000000005,
-          "output_cost": 0.000501,
-          "total_cost": 0.0008955,
-          "duration": 3.851574182510376
-        },
+          "input_tokens": 774,
+          "output_tokens": 327,
+          "input_cost": 0.00038700000000000003,
+          "output_cost": 0.0004905,
+          "total_cost": 0.0008775,
+          "duration": 3.2389798164367676
+        }
+      },
+      "GPT-4o-mini": {
         "Llama-3-8B": {
-          "input_tokens": 1251,
-          "output_tokens": 267,
-          "input_cost": 0.0006255,
-          "output_cost": 0.00040050000000000003,
-          "total_cost": 0.001026,
-          "duration": 3.180690050125122
+          "input_tokens": 889,
+          "output_tokens": 323,
+          "input_cost": 0.0004445,
+          "output_cost": 0.0004845,
+          "total_cost": 0.000929,
+          "duration": 5.324784755706787
+        },
+        "GPT-4o-mini": {
+          "input_tokens": 1040,
+          "output_tokens": 385,
+          "input_cost": 0.0005200000000000001,
+          "output_cost": 0.0005775,
+          "total_cost": 0.0010975,
+          "duration": 6.43058705329895
+        },
+        "GPT-3.5-Turbo": {
+          "input_tokens": 773,
+          "output_tokens": 386,
+          "input_cost": 0.0003865,
+          "output_cost": 0.000579,
+          "total_cost": 0.0009655,
+          "duration": 7.964570999145508
         }
       }
     }
   },
   "timing": {
-    "start_time": "20250305-131605",
+    "start_time": "20250306-171605",
     "step_durations": {
-      "essay_generation": 0.002937793731689453,
-      "grading": 0.0039179325103759766,
-      "analysis": 2.193450927734375e-05,
+      "essay_generation": 7.373110055923462,
+      "grading": 7.966395139694214,
+      "analysis": 2.4080276489257812e-05,
       "file_generation": 0.0,
       "total": 0.0
     },
     "model_timing": {
       "essay": {
-        "GPT-4o-mini": 0.0011548995971679688,
-        "Llama-3-8B": 0.0012180805206298828,
-        "GPT-3.5-Turbo": 0.0018990039825439453
+        "GPT-4o-mini": 0.00080108642578125,
+        "GPT-3.5-Turbo": 6.598703861236572,
+        "Llama-3-8B": 7.372694969177246
       },
       "grading": {
         "GPT-4o-mini": {
-          "GPT-4o-mini": 0.0016460418701171875,
-          "Llama-3-8B": 0.0007660388946533203,
-          "GPT-3.5-Turbo": 0.0010030269622802734
-        },
-        "GPT-3.5-Turbo": {
-          "GPT-4o-mini": 0.001112222671508789,
-          "Llama-3-8B": 0.0012431144714355469,
-          "GPT-3.5-Turbo": 0.0012798309326171875
+          "Llama-3-8B": 5.326184034347534,
+          "GPT-4o-mini": 6.432948112487793,
+          "GPT-3.5-Turbo": 7.965668201446533
         },
         "Llama-3-8B": {
-          "GPT-4o-mini": 0.0007672309875488281,
-          "GPT-3.5-Turbo": 0.0013158321380615234,
-          "Llama-3-8B": 0.0014467239379882812
+          "Llama-3-8B": 2.152985095977783,
+          "GPT-4o-mini": 2.1930201053619385,
+          "GPT-3.5-Turbo": 3.2424099445343018
+        },
+        "GPT-3.5-Turbo": {
+          "Llama-3-8B": 0.7777090072631836,
+          "GPT-3.5-Turbo": 0.8510751724243164,
+          "GPT-4o-mini": 1.6706147193908691
         }
       }
     }
   },
   "is_free_run": true,
   "bias_analysis": {
-    "overall_median": 3.5,
-    "overall_mean": 3.5277777777777777,
+    "overall_median": 3.25,
+    "overall_mean": 3.388888888888889,
     "grader_bias": {
       "GPT-4o-mini": {
-        "median_given": 3.5,
-        "median_bias": 0.0,
-        "mean_bias": -0.1944444444444442,
-        "letter_bias": "Neutral",
-        "count": 3
-      },
-      "Llama-3-8B": {
-        "median_given": 3.5,
-        "median_bias": 0.0,
-        "mean_bias": -0.02777777777777768,
-        "letter_bias": "Neutral",
+        "median_given": 3.0,
+        "median_bias": -0.25,
+        "mean_bias": -0.30555555555555536,
+        "letter_bias": "Slightly Strict (-1/3 grade)",
         "count": 3
       },
       "GPT-3.5-Turbo": {
         "median_given": 3.75,
-        "median_bias": 0.25,
-        "mean_bias": 0.22222222222222232,
-        "letter_bias": "Slightly Lenient (+1/3 grade)",
+        "median_bias": 0.5,
+        "mean_bias": 0.44444444444444464,
+        "letter_bias": "Lenient (+1 grade)",
+        "count": 3
+      },
+      "Llama-3-8B": {
+        "median_given": 3.25,
+        "median_bias": 0.0,
+        "mean_bias": -0.13888888888888884,
+        "letter_bias": "Neutral",
         "count": 3
       }
     }
@@ -370,30 +382,31 @@
   "boswell_quotient": {
     "model_scores": {
       "GPT-4o-mini": {
-        "boswell_quotient": 68.28,
+        "boswell_quotient": 83.84,
         "components": {
-          "performance": 82.35294117647058,
-          "evaluation": 100.0,
-          "efficiency": 22.618789795372457
+          "performance": 76.47058823529412,
+          "evaluation": 75.0,
+          "efficiency": 99.98913441517477
         },
-        "rank": 2
+        "rank": 1
       },
-      "Llama-3-8B": {
-        "boswell_quotient": 67.2,
+      "GPT-3.5-Turbo": {
+        "boswell_quotient": 57.77,
         "components": {
-          "performance": 82.35294117647058,
-          "evaluation": 100.0,
-          "efficiency": 19.377902380104533
+          "performance": 76.47058823529412,
+          "evaluation": 50.0,
+          "efficiency": 46.88545794833874
         },
         "rank": 3
       },
-      "GPT-3.5-Turbo": {
-        "boswell_quotient": 78.68,
+      "Llama-3-8B": {
+        "boswell_quotient": 79.32,
         "components": {
-          "performance": 82.35294117647058,
-          "evaluation": 75.0
+          "performance": 76.47058823529412,
+          "evaluation": 100.0,
+          "efficiency": 61.528557897241186
         },
-        "rank": 1
+        "rank": 2
       }
     },
     "component_weights": {

@@ -3,8 +3,8 @@ Grading functionality and utilities for Boswell tests.
 """
 
 import re
-from typing import Dict, Any
-from statistics import median
+from typing import Dict, Any, List, Union
+from botwell.utils import median_of_list
 import time
 import os
 from botwell.utils.model_standardization import standardize_model_name
@@ -246,7 +246,7 @@ def calculate_grading_bias(results: Dict[str, Any], models: list) -> Dict[str, A
         if numeric_grades:
             grader_grades[grader] = {
                 "numeric_grades": numeric_grades,
-                "median_given": median(numeric_grades),
+                "median_given": median_of_list(numeric_grades),
                 "mean_given": sum(numeric_grades) / len(numeric_grades),
                 "count": len(numeric_grades)
             }
@@ -262,7 +262,7 @@ def calculate_grading_bias(results: Dict[str, Any], models: list) -> Dict[str, A
         overall_median = 3.0  # Default to B grade
         overall_mean = 3.0
     else:
-        overall_median = median(all_numeric_grades)
+        overall_median = median_of_list(all_numeric_grades)
         overall_mean = sum(all_numeric_grades) / len(all_numeric_grades)
     
     # Calculate bias (difference from overall median)
@@ -305,3 +305,147 @@ def calculate_grading_bias(results: Dict[str, Any], models: list) -> Dict[str, A
         }
     
     return bias_results
+
+def get_single_grade_value(grade: str) -> float:
+    """Convert a single letter grade to its numeric value.
+    
+    Args:
+        grade: A single letter grade character (a, b, c, d, f)
+        
+    Returns:
+        The numeric value as a float: A=4.0, B=3.0, C=2.0, D=1.0, F=0.0
+    """
+    grade = grade.lower()
+    if grade == 'a':
+        return 4.0
+    elif grade == 'b':
+        return 3.0
+    elif grade == 'c':
+        return 2.0
+    elif grade == 'd':
+        return 1.0
+    elif grade == 'f':
+        return 0.0
+    return 0.0
+
+def get_plus_minus_value(modifier: str) -> float:
+    """Get the adjustment value for a plus or minus grade modifier.
+    
+    Args:
+        modifier: The modifier character (+ or -)
+        
+    Returns:
+        Value to add/subtract: +0.25 for plus, -0.25 for minus
+    """
+    return 0.25 if modifier == '+' else -0.25 if modifier == '-' else 0.0
+
+def convert_grades_to_numeric(grade_list: List[str]) -> List[float]:
+    """Convert a list of letter grades to numeric values, handling complex format.
+    
+    Supports formats like:
+    - Simple: 'A+', 'B', 'C-'
+    - Split: 'A/A-', 'B+/B'
+    
+    Args:
+        grade_list: List of letter grades as strings
+        
+    Returns:
+        List of converted numeric values
+    """
+    numeric_grades = []
+    
+    for grade in grade_list:
+        grade = grade.strip().lower()
+        n = len(grade)
+        value = 0.0
+        second_value = 0.0
+        
+        # Basic single grade (e.g., 'a', 'b+', 'c-')
+        if n >= 1:
+            value += get_single_grade_value(grade[0])
+            
+        if n >= 2 and grade[1] != '/':
+            value += get_plus_minus_value(grade[1])
+            
+        # Handle split grades (e.g., 'a/a-', 'b+/b')
+        if n > 2 and grade[1] == '/':
+            if n >= 3:
+                second_value += get_single_grade_value(grade[2])
+            if n > 3:
+                second_value += get_plus_minus_value(grade[3])
+            value = (value + second_value) / 2
+        elif n > 2 and grade[2] == '/':
+            if n >= 4:
+                second_value += get_single_grade_value(grade[3])
+            if n > 4:
+                second_value += get_plus_minus_value(grade[-1])
+            value = (value + second_value) / 2
+            
+        numeric_grades.append(value)
+        
+    return numeric_grades
+
+def median_of_letter_grades(grade_list: List[str]) -> str:
+    """Calculate the median letter grade from a list of letter grades.
+    
+    Args:
+        grade_list: List of letter grades as strings
+        
+    Returns:
+        The median letter grade
+    """
+    # Convert the letter grades to numeric values
+    numeric_grades = convert_grades_to_numeric(grade_list)
+    
+    # Calculate the median of the numeric values
+    median_value = median_of_list(numeric_grades)
+    
+    # Convert the median numeric value back to a letter grade
+    if median_value >= 4.126:
+        return "A+"
+    elif median_value >= 4.01:
+        return "A+/A"
+    elif median_value >= 3.88:
+        return "A"
+    elif median_value >= 3.76:
+        return "A/A-"
+    elif median_value >= 3.51:
+        return "A-"
+    elif median_value >= 3.26:
+        return "A-/B+"
+    elif median_value >= 3.126:
+        return "B+"
+    elif median_value >= 3.01:
+        return "B+/B"
+    elif median_value >= 2.88:
+        return "B"
+    elif median_value >= 2.76:
+        return "B/B-"
+    elif median_value >= 2.51:
+        return "B-"
+    elif median_value >= 2.26:
+        return "B-/C+"
+    elif median_value >= 2.126:
+        return "C+"
+    elif median_value >= 2.01:
+        return "C+/C"
+    elif median_value >= 1.88:
+        return "C"
+    elif median_value >= 1.76:
+        return "C/C-"
+    elif median_value >= 1.51:
+        return "C-"
+    elif median_value >= 1.26:
+        return "C-/D+"
+    elif median_value >= 1.126:
+        return "D+"
+    elif median_value >= 1.01:
+        return "D+/D"
+    elif median_value >= 0.88:
+        return "D"
+    elif median_value >= 0.76:
+        return "D/D-"
+    elif median_value >= 0.51:
+        return "D-"
+    else:
+        return "F"
