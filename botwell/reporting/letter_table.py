@@ -11,7 +11,7 @@ import openpyxl
 from openpyxl.styles import Font, Border, Side, Alignment
 from openpyxl.utils import get_column_letter
 from botwell.reporting.excel import abbreviate_model_name 
-from botwell.core.grading import grade_to_numeric
+from botwell.core.grading import grade_to_numeric, numeric_to_composite_grade
 from statistics import median
 
 # Define minimal styling constants
@@ -54,18 +54,8 @@ def calculate_median_letter_grade(letter_grades: list) -> str:
         median_score = numeric_grades[length//2]
     
     # Find corresponding letter grade
-    # This is a direct matching based on the grade_to_numeric mapping
-    grade_map = {
-        4.25: "A+", 4.0: "A", 3.75: "A-", 
-        3.25: "B+", 3.0: "B", 2.75: "B-",
-        2.25: "C+", 2.0: "C", 1.75: "C-",
-        1.25: "D+", 1.0: "D", 0.75: "D-",
-        0.0: "F"
-    }
-    
-    # Find the closest grade
-    closest_grade = min(grade_map.keys(), key=lambda x: abs(x - median_score))
-    return grade_map[closest_grade]
+    # Use the new composite grade function to get more precise grade notation
+    return numeric_to_composite_grade(median_score)
 
 def generate_letter_grade_table(results: Dict[str, Any], output_path: str) -> str:
     """
@@ -163,7 +153,18 @@ def generate_letter_grade_table(results: Dict[str, Any], output_path: str) -> st
             # Calculate and add BQ numeric average
             if numeric_grades:
                 bq_avg = sum(numeric_grades) / len(numeric_grades)
-                ws.cell(row=row, column=bq_avg_col, value=round(bq_avg, 2))
+                # Add the BQ numeric average with appropriate precision
+                numeric_value = round(bq_avg, 2)
+                ws.cell(row=row, column=bq_avg_col, value=numeric_value)
+                
+                # Optionally, add the equivalent composite letter grade in a note
+                # This helps users understand the exact meaning of the numeric value
+                composite_grade = numeric_to_composite_grade(bq_avg)
+                if "/" in composite_grade:  # It's a composite grade
+                    cell = ws.cell(row=row, column=bq_avg_col)
+                    cell.comment = openpyxl.comments.Comment(
+                        f"Equivalent to composite grade: {composite_grade}", "Boswell System"
+                    )
             
             # Add borders
             ws.cell(row=row, column=median_col).border = THIN_BORDER

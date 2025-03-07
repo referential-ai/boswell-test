@@ -11,6 +11,7 @@ import openpyxl
 from openpyxl.styles import Font, Border, Side, Alignment
 from openpyxl.utils import get_column_letter
 from botwell.reporting.excel import abbreviate_model_name
+from botwell.core.grading import numeric_to_composite_grade
 
 # Define minimal styling constants
 THIN_BORDER = Border(
@@ -108,11 +109,27 @@ def generate_raw_numeric_table(results: Dict[str, Any], output_path: str) -> Non
                     
                 # Add median to table
                 median_cell = ws.cell(row=row, column=median_col, value=round(median, 2))
+                
+                # Add composite grade notation as a comment if applicable
+                composite_grade = numeric_to_composite_grade(median)
+                if "/" in composite_grade:  # It's a composite grade
+                    median_cell.comment = openpyxl.comments.Comment(
+                        f"Equivalent to composite grade: {composite_grade}", "Boswell System"
+                    )
+                
                 median_cell.border = THIN_BORDER
                 
                 # Calculate and add average
                 avg = sum(sorted_grades) / len(sorted_grades)
                 avg_cell = ws.cell(row=row, column=avg_col, value=round(avg, 2))
+                
+                # Add composite grade notation as a comment if applicable
+                composite_grade = numeric_to_composite_grade(avg)
+                if "/" in composite_grade:  # It's a composite grade
+                    avg_cell.comment = openpyxl.comments.Comment(
+                        f"Equivalent to composite grade: {composite_grade}", "Boswell System"
+                    )
+                
                 avg_cell.border = THIN_BORDER
             else:
                 # Add empty cells with borders for median and average
@@ -150,8 +167,15 @@ def generate_raw_numeric_table(results: Dict[str, Any], output_path: str) -> Non
                 else:  # Odd number
                     col_median = col_grades[len(col_grades)//2]
                 
-                # Add to the cell
-                ws.cell(row=col_median_row, column=col, value=round(col_median, 2))
+                # Add median to the cell
+                median_cell = ws.cell(row=col_median_row, column=col, value=round(col_median, 2))
+                
+                # Add composite grade notation as a comment if applicable
+                composite_grade = numeric_to_composite_grade(col_median)
+                if "/" in composite_grade:  # It's a composite grade
+                    median_cell.comment = openpyxl.comments.Comment(
+                        f"Equivalent to composite grade: {composite_grade}", "Boswell System"
+                    )
             
             # Apply border to all cells in the row
             ws.cell(row=col_median_row, column=col).border = THIN_BORDER

@@ -5,15 +5,19 @@ Core testing functionality for Boswell tests.
 import time
 import json
 import concurrent.futures
+import os
 from threading import Lock
 from typing import List, Dict, Any, Optional
 
 from botwell.domains import load_domain, AVAILABLE_DOMAINS
 from botwell.models.api import call_openrouter_api
-from botwell.core.files import create_results_directory, save_essay_with_grades, save_results
+from botwell.core.files import create_results_directory, save_essay_with_grades, save_results, save_essay_grading_json
 from botwell.utils.model_standardization import standardize_model_name, standardize_model_names_in_dict
 from botwell.core.grading import extract_grade, grade_to_numeric, calculate_grading_bias, log_failed_extraction
 from botwell.core.verification import verify_available_models
+from botwell.reporting.excel import generate_cross_grading_excel
+from botwell.reporting.raw_table import generate_raw_numeric_table
+from botwell.reporting.letter_table import generate_letter_grade_table
 from botwell.models.config import MODELS
 from botwell.reporting.tables import generate_grade_tables
 
@@ -478,8 +482,8 @@ def run_boswell_test(domain_name: str, output_file: str, selected_models: List[s
     print("\nStep 4: Creating results directory and saving artifacts...")
     file_gen_start_time = time.time()
     
-    # Use the timestamp from the beginning of the run
     run_dir, essays_dir = create_results_directory(domain_name, timestamp, results["is_free_run"])
+    results["results_dir"] = run_dir
     
     for author in results["essays"].keys():
         # Get all grades for this author
@@ -498,15 +502,50 @@ def run_boswell_test(domain_name: str, output_file: str, selected_models: List[s
         )
         
         results["essay_files"][author] = filename
+        
+        # Save individual JSON files for each grading response
+        for grader_name, grade_info in author_grades.items():
+            # Create a complete grade data object with all available information
+            complete_grade_data = {
+                "author": author,
+                "grader": grader_name,
+                "feedback": grade_info["feedback"],
+                "grade": grade_info["grade"],
+                "numeric_grade": grade_info["numeric_grade"],
+                "cost_info": grade_info.get("cost_info", {}),
+                "timestamp": time.strftime("%Y-%m-%d %H:%M:%S")
+            }
+            
+            # Save as individual JSON file 
+            grade_file = save_essay_grading_json(author, grader_name, complete_grade_data, run_dir)
+        
         print(f"  Saved essay and feedback for {author} to {filename}")
     
     # Save tables and other formats
     print("  Generating formatted tables...")
     generate_grade_tables(results, run_dir)
+
+    # Generate Excel tables directly in the main run
+    try:
+        print("  Generating Excel cross-grading table...")
+        excel_file = generate_cross_grading_excel(results, run_dir)
+        print(f"  Generated enhanced Excel cross-grading table: {excel_file}")
+        
+        print("  Generating raw numeric table...")
+        raw_table_path = generate_raw_numeric_table(results, run_dir) 
+        print(f"  Generated raw numeric table: {raw_table_path}")
+        
+        print("  Generating letter grade table...")
+        letter_table_path = generate_letter_grade_table(results, run_dir)
+        print(f"  Generated letter grade table: {letter_table_path}")
+    except Exception as e:
+        print(f"  Warning: Could not generate all Excel tables: {str(e)}")
+        print("  You can run 'python create_cross_grading_table.py {run_dir}/full_results.json' to generate them manually.")
     
     # Save consolidated results
     save_results(results, f"{run_dir}/full_results.json")
     print(f"  All results saved to {run_dir} directory")
+    print(f"  Individual grading JSON files saved to {run_dir}/grades/")
     
     # Also save to original output file location if specified
     if output_file != "boswell_results.json":
@@ -521,10 +560,7 @@ def run_boswell_test(domain_name: str, output_file: str, selected_models: List[s
     # Calculate and record total run time
     total_run_time = time.time() - run_start_time
     results["timing"]["step_durations"]["total"] = total_run_time
-    
-    # Return path to results directory in results
-    results["results_dir"] = run_dir
-    
+        
     return results
 
 
@@ -584,6 +620,7 @@ def run_all_domains(args) -> None:
             print(f"  - Full results directory: {results['results_dir']}")
             print(f"  - Tables directory: {results['results_dir']}/grades_table.*")
             print(f"  - Essays directory: {results['results_dir']}/essays/")
+            print(f"  - Individual grading files: {results['results_dir']}/grades/[author]/[grader].json")
             print(f"  - Visualizations: {results['results_dir']}/charts/")
             
         except Exception as e:

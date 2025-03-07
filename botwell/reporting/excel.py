@@ -16,6 +16,7 @@ from openpyxl.styles import PatternFill, Font, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
 from openpyxl.styles.fonts import DEFAULT_FONT
 from openpyxl.worksheet.worksheet import Worksheet
+from botwell.core.grading import numeric_to_composite_grade
 from openpyxl.cell import Cell
 
 # Letter grades to numeric scores mapping (as shown in the image)
@@ -540,11 +541,12 @@ def generate_cross_grading_excel(results: Dict[str, Any], run_dir: str) -> None:
                 # Add the grade to the cell
                 cell = ws.cell(row=row, column=col)
                 # Show both letter grade and raw numeric score for more clarity
-                # Show ONLY the numeric value as requested by Peter
-                display_value = "N/A"
+                # Display composite grades when applicable
+                display_value = "N/A" 
                 if grade != "N/A" and raw_numeric_grade > 0:
-                    display_value = f"{raw_numeric_grade:.2f}"
-
+                    # Get composite grade if applicable
+                    composite_grade = numeric_to_composite_grade(raw_numeric_grade)
+                    display_value = composite_grade
                 
                 apply_cell_style(
                     cell,
@@ -578,6 +580,11 @@ def generate_cross_grading_excel(results: Dict[str, Any], run_dir: str) -> None:
             # Format median for display
             median_display = f"{raw_average:.2f}" if raw_average > 0 else "N/A"
             
+            # Add composite grade notation if applicable
+            if raw_average > 0:
+                composite_grade = numeric_to_composite_grade(raw_average)
+                median_display = composite_grade
+            
             apply_cell_style( 
                 cell,
                 value=median_display,
@@ -586,9 +593,19 @@ def generate_cross_grading_excel(results: Dict[str, Any], run_dir: str) -> None:
             )
             
             # Add the exact raw average to the raw average column with 4 decimal precision
+            exact_raw_display = f"{exact_raw_average:.2f}" if exact_raw_average > 0 else "N/A"
+            
+            # Apply composite grade to raw average if applicable
+            if exact_raw_average > 0:
+                composite_grade = numeric_to_composite_grade(exact_raw_average)
+                if "/" in composite_grade:  # If it's a composite grade
+                    exact_raw_display = f"{composite_grade} ({exact_raw_average:.2f})"
+                else:
+                    exact_raw_display = f"{composite_grade}"
+            
             apply_cell_style(
                 ws.cell(row=row, column=raw_avg_col),
-                value=f"{exact_raw_average:.2f}" if exact_raw_average > 0 else "N/A",
+                value=exact_raw_display,
                 alignment=CENTER_WRAP_ALIGNMENT,
                 border=THIN_BORDER,
                 font=Font(name="Helvetica Neue", bold=True, size=8),  # Make the raw average prominent with 8pt
@@ -671,11 +688,17 @@ def generate_cross_grading_excel(results: Dict[str, Any], run_dir: str) -> None:
             # Calculate median
             median_grade = "N/A"
             median_value = "N/A"
+            display_value = "N/A"
             median_score = 0.0
             descriptive_text = "N/A"
             
             if grades_given:
                 median_grade, median_score, median_value, _ = calculate_median_grade(grades_given)
+                
+                # Apply composite grade notation if applicable
+                if median_score > 0:
+                    composite_grade = numeric_to_composite_grade(median_score)
+                    display_value = composite_grade
                 
                 # Get descriptive text based on median grade
                 if median_grade == "A+":
@@ -692,12 +715,6 @@ def generate_cross_grading_excel(results: Dict[str, Any], run_dir: str) -> None:
                     descriptive_text = "Below Average"
                 elif median_grade == "F":
                     descriptive_text = "Poor"
-            
-                # Use numeric value for display
-                if median_score > 0:
-                    display_value = f"{median_score:.2f}"
-                else:
-                    display_value = "N/A"
             else:
                 display_value = "N/A\n(No Data)"
             

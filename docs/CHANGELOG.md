@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+- Implemented individual JSON files for each essay's grading responses
 - Created `detailed_na_analysis.py` script for deep analysis of N/A grade patterns and causes
 - Developed `grade_extraction_improved.py` with enhanced extraction algorithms (57.1% improvement)
 - Created `evaluation_flowchart.md` with Mermaid diagram for visualization of the grading process
@@ -19,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added contextual analysis for high-confidence grade patterns in conclusion sections
 
 ### Changed
+- Enhanced grading data storage with per-essay JSON files for easier analysis and offline iteration
 - Enhanced grade extraction algorithm with more robust pattern matching
 - Improved documentation for N/A grade handling procedures
 - Updated implementation approach for grade extraction to use multi-pass strategy
@@ -91,7 +93,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2025-02-15
 
 ### Added
-- Initial release of Boswell Test framework
+- Initial release of Botwell Test framework
 - Implementation of peer-review methodology for LLM evaluation
 - Support for multiple testing domains
 - Boswell Quotient calculation for comprehensive model ranking

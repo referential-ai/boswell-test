@@ -1,115 +1,39 @@
 # Composite Grades Implementation Plan
 
 ## Overview
+This document outlines the implementation plan for supporting composite grade notation (e.g., "A-/B+" for a score of 3.5) in the Boswell grading system. This enhancement will provide more nuanced evaluation and better distinguish between models with similar performance.
 
-This plan outlines a comprehensive approach to implement composite grade notation in the Botwell grading system, addressing Peter's request for finer-grained grade distinctions like "A-/B+ for 3.5 or B+/B for 3.125" in the next paper.
+## Background
+In the current system, numeric grades are mapped to discrete letter grades (A+, A, A-, B+, etc.) without intermediate values. However, academic grading systems often use composite notation for scores that fall exactly between two standard grade points, such as:
+- 3.5 (halfway between A- and B+) → "A-/B+"
+- 3.125 (halfway between B+ and B) → "B+/B"
 
-## 1. Implementation Strategy
+Peter has requested this enhancement for future papers to provide finer-grained distinctions between model performances.
 
-```mermaid
-flowchart TD
-    A[Analysis Phase] --> B[Core Implementation]
-    B --> C[Integration Phase]
-    C --> D[Testing & Validation]
-    D --> E[Documentation]
-    
-    subgraph "Analysis Phase"
-    A1[Identify affected components]
-    A2[Define composite grade boundaries]
-    A3[Plan backward compatibility]
-    end
-    
-    subgraph "Core Implementation"
-    B1[Create composite_grade function]
-    B2[Modify grade conversion utilities]
-    B3[Update grade display logic]
-    end
-    
-    subgraph "Integration Phase"
-    C1[Update Excel reports]
-    C2[Update Markdown reports]
-    C3[Update JSON serialization]
-    C4[Update visualizations]
-    end
-    
-    subgraph "Testing & Validation"
-    D1[Create unit tests]
-    D2[Run integration tests]
-    D3[Validate outputs]
-    end
-    
-    A --> A1 --> A2 --> A3
-    B --> B1 --> B2 --> B3
-    C --> C1 --> C2 --> C3 --> C4
-    D --> D1 --> D2 --> D3
-```
+## Implementation Details
 
-## 2. Analysis Phase
-
-### 2.1 Affected Components
-
-The following components will need modification:
-
-1. **Core Grading Module**: `botwell/core/grading.py`
-   - Grade conversion functions
-   - Numeric/letter grade utilities
-
-2. **Reporting Modules**:
-   - `botwell/reporting/tables.py` - Table generation
-   - `botwell/reporting/excel.py` - Excel report generation
-   - `botwell/reporting/boswell_quotient.py` - BQ calculation
-
-3. **Output Formats**:
-   - Markdown tables
-   - Excel spreadsheets
-   - CSV files
-   - JSON data
-
-### 2.2 Composite Grade Boundaries
-
-Define specific boundaries where composite grades will be used:
-
-| Numeric Range | Composite Grade |
-|---------------|----------------|
-| 3.5 - 3.6     | A-/B+          |
-| 3.1 - 3.15    | B+/B           |
-| 2.85 - 3.0    | B/B-           |
-| 2.5 - 2.6     | B-/C+          |
-| 2.1 - 2.15    | C+/C           |
-| 1.85 - 2.0    | C/C-           |
-| 1.5 - 1.6     | C-/D+          |
-| 1.1 - 1.15    | D+/D           |
-| 0.85 - 1.0    | D/D-           |
-| 0.35 - 0.5    | D-/F           |
-
-The exact ranges need careful calibration to balance:
-- Appropriate threshold sensitivity
-- Consistency with university grading standards
-- Clarity and usefulness of the composite grades
-
-### 2.3 Backward Compatibility
-
-Maintain backward compatibility:
-- Keep existing grade_to_numeric() function unchanged
-- Add new functions rather than modifying existing ones
-- Ensure JSON serialization remains compatible with older versions
-- Add feature flags to enable/disable composite grades if needed
-
-## 3. Core Implementation
-
-### 3.1 New Composite Grade Function in `botwell/core/grading.py`
+### 1. New Function in `grading.py`
+Add a new function to convert numeric grades to composite grade notation:
 
 ```python
-def get_composite_grade(numeric_grade: float) -> str:
+def numeric_to_composite_grade(numeric_grade: float) -> str:
     """
-    Return appropriate grade notation, including composite grades for values
-    between clear grade boundaries.
+    Convert a numeric grade to a composite letter grade notation when applicable.
+    
+    For grades that fall exactly between two standard grade points (e.g., 3.5),
+    returns a composite notation (e.g., "A-/B+"). For grades that are closer to
+    a standard grade point, returns the corresponding single letter grade.
+    
+    Examples:
+    - 3.5 (halfway between A- and B+) → "A-/B+"
+    - 3.125 (halfway between B+ and B) → "B+/B"
+    - 3.8 (closer to A than A-) → "A"
     
     Args:
-        numeric_grade (float): The numeric grade value (0-4.25 scale)
+        numeric_grade: A float representing the numeric grade (0.0-4.25)
         
     Returns:
-        str: Standard grade or composite grade notation
+        A string representing the letter grade or composite grade notation
     """
     # Standard grade boundaries
     grade_boundaries = {
@@ -120,9 +44,9 @@ def get_composite_grade(numeric_grade: float) -> str:
         0.0: "F"
     }
     
-    # Special case for N/A
-    if numeric_grade <= 0.001:
-        return "N/A"
+    # Check if the grade is exactly at a boundary
+    if numeric_grade in grade_boundaries:
+        return grade_boundaries[numeric_grade]
     
     # Find surrounding grades
     sorted_boundaries = sorted(grade_boundaries.items(), reverse=True)
@@ -133,207 +57,76 @@ def get_composite_grade(numeric_grade: float) -> str:
         
         # If grade falls between two standard boundaries
         if lower_bound < numeric_grade < upper_bound:
-            # Special case handlers for known composite grades
-            if 3.45 < numeric_grade < 3.55:  # A-/B+ (3.5)
-                return "A-/B+"
-            elif 3.1 < numeric_grade < 3.15:  # B+/B (3.125)
-                return "B+/B"
-            # Add more special cases as needed
-            
-            # General case: If score is within 0.05 of the midpoint between grades
+            # Calculate midpoint
             midpoint = (upper_bound + lower_bound) / 2
-            if abs(numeric_grade - midpoint) < 0.05:
+            
+            # If the grade is very close to the midpoint (within 0.01)
+            # Use composite notation
+            if abs(numeric_grade - midpoint) <= 0.01:
                 return f"{upper_grade}/{lower_grade}"
             
-            # Otherwise return the closest grade
-            return upper_grade if numeric_grade > midpoint else lower_grade
+            # If closer to upper boundary
+            elif numeric_grade > midpoint:
+                return upper_grade
+            
+            # If closer to lower boundary
+            else:
+                return lower_grade
     
-    # If we reach here, use standard grade mapping
-    for bound, grade in sorted_boundaries:
-        if numeric_grade >= bound:
-            return grade
-    
-    # Fallback
-    return "F"
-```
-
-### 3.2 Update Display Utilities
-
-Add a helper function to convert raw scores to display format:
-
-```python
-def format_grade_with_score(grade: str, numeric_grade: float, use_composite: bool = True) -> str:
-    """
-    Format a grade for display, optionally using composite notation.
-    
-    Args:
-        grade (str): The letter grade
-        numeric_grade (float): The raw numeric score
-        use_composite (bool): Whether to use composite grade notation
-        
-    Returns:
-        str: Formatted grade string for display
-    """
-    if use_composite:
-        # Use composite grade function if appropriate
-        display_grade = get_composite_grade(numeric_grade)
+    # Default fallback for any values outside the range
+    if numeric_grade > 4.25:
+        return "A+"
     else:
-        # Use standard grade
-        display_grade = grade
-        
-    # Return combined format
-    return f"{display_grade} ({numeric_grade:.2f})"
+        return "F"
 ```
 
-## 4. Integration Phase
+### 2. Integration Points
 
-### 4.1 Excel Reports Integration (`botwell/reporting/excel.py`)
+The new function will be used in these areas:
 
-Modify the Excel cell generation code:
+1. **Tables and Reports**:
+   - Update the cross-grading table generation to include composite grades where applicable
+   - Modify the raw numeric average column to show composite grades when appropriate
 
-```python
-def update_excel_cell_with_grade(cell, grade, numeric_grade, use_composite=True):
-    """Update Excel cell with properly formatted grade"""
-    if use_composite and numeric_grade > 0:
-        display_grade = get_composite_grade(numeric_grade)
-    else:
-        display_grade = grade
-        
-    # Format for display
-    display_value = f"{display_grade} ({numeric_grade:.2f})"
-    
-    apply_cell_style(
-        cell,
-        value=display_value,
-        alignment=CENTER_WRAP_ALIGNMENT,
-        border=THIN_BORDER
-    )
-```
+2. **Visualization**:
+   - Update label formatting for charts that display grades
+   - Ensure tooltips and legends properly display composite grades
 
-### 4.2 Tables Integration (`botwell/reporting/tables.py`)
+3. **API and Data Structures**:
+   - Ensure the JSON output includes composite grade notation
+   - Maintain backward compatibility with systems expecting single letter grades
 
-Update table generation to use composite grades:
+### 3. Testing
 
-```python
-def format_table_cell(grade, numeric_grade, use_composite=True):
-    """Format a grade cell for tables"""
-    if use_composite and numeric_grade > 0:
-        display_grade = get_composite_grade(numeric_grade)
-    else:
-        display_grade = grade
-        
-    return f"{display_grade} ({numeric_grade:.2f})"
-```
+1. **Unit Tests**:
+   - Create unit tests for the new `numeric_to_composite_grade` function
+   - Verify correct conversion of boundary cases (exact midpoints) and non-boundary cases
 
-### 4.3 Command Line Option
+2. **Integration Tests**:
+   - Verify the composite grades appear correctly in generated reports
+   - Check that visualization components properly handle composite grades
 
-Add a CLI flag to enable/disable composite grade notation:
+### 4. Documentation
 
-```python
-# In botwell/cli.py
-parser.add_argument('--use-composite-grades', 
-                   action='store_true',
-                   help='Use composite grade notation (A-/B+) for intermediate values')
-```
+1. **Update `grading.md`**:
+   - Explain the composite grade notation system
+   - Provide examples of composite grades and their numeric equivalents
 
-## 5. Testing & Validation
+2. **Update Technical Documentation**:
+   - Explain implementation details for developers
+   - Document any backward compatibility considerations
 
-### 5.1 Unit Tests
+## Timeline
 
-Create comprehensive tests for the composite grade functionality:
+1. Implementation of core function: 1 day
+2. Integration with existing systems: 1-2 days
+3. Testing and validation: 1 day
+4. Documentation updates: 0.5 day
 
-```python
-# In tests/test_unit.py
-def test_composite_grade_function():
-    """Test the composite grade function returns expected values"""
-    # Test standard grades
-    assert get_composite_grade(4.0) == "A"
-    assert get_composite_grade(3.25) == "B+"
-    
-    # Test composite grades
-    assert get_composite_grade(3.5) == "A-/B+"
-    assert get_composite_grade(3.125) == "B+/B"
-    
-    # Test edge cases
-    assert get_composite_grade(0.0) == "N/A"
-    assert get_composite_grade(4.25) == "A+"
-```
+Total estimated time: 3-4 days
 
-### 5.2 Integration Tests
+## Future Considerations
 
-Test full system outputs:
-
-```python
-# In tests/test_cli_commands.py
-def test_composite_grades_in_reports():
-    """Test that composite grades appear in reports when enabled"""
-    # Run test with composite grades enabled
-    result = run_cli_with_test_data(["run", "--domain", "test_domain_1", "--use-composite-grades"])
-    
-    # Verify outputs contain composite grades
-    assert "A-/B+" in result.output
-```
-
-### 5.3 Visual Validation
-
-Manually review generated reports to ensure:
-- Composite grades are displayed correctly
-- Formatting is consistent
-- Tables are readable and well-formatted
-
-## 6. Documentation
-
-### 6.1 Update `docs/grading.md`
-
-Add new section about composite grades:
-
-```markdown
-## Composite Grade Notation
-
-Starting with version X.Y.Z, the system can display composite grade notation for scores that fall between traditional grade boundaries:
-
-| Numeric Range | Composite Grade |
-|---------------|----------------|
-| 3.5           | A-/B+          |
-| 3.125         | B+/B           |
-| ...           | ...            |
-
-This provides finer-grained distinction in grading and better represents scores that fall between traditional grade boundaries.
-
-### Enabling Composite Grades
-
-Use the `--use-composite-grades` flag when running tests:
-
-```bash
-botwell run --domain pol_sci_1 --use-composite-grades
-```
-```
-
-### 6.2 Update README.md
-
-Add mention of the new feature in the README.
-
-## 7. Branch Management
-
-1. Create feature branch: `git checkout -b feature/composite-grades`
-2. Implement core functionality
-3. Integrate with reporting systems
-4. Write tests
-5. Update documentation
-6. Create PR for review
-
-## 8. Future Enhancements
-
-Future improvements could include:
-
-1. **Configuration Options**:
-   - Allow customization of composite grade boundaries
-   - Support different grading scales
-
-2. **Extended Visualization**:
-   - Add special color coding for composite grades in Excel reports
-   - Create histograms showing grade distribution with composite grades
-
-3. **Advanced Analytics**:
-   - Analyze whether models tend to give composite grades more than others
-   - Identify patterns in composite grade assignments
+- Consider adding a configuration option to enable/disable composite grade notation
+- Explore adding confidence intervals or uncertainty visualizations to complement the composite grades
+- Investigate more granular scoring systems if additional precision is needed

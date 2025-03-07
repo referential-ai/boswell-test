@@ -267,6 +267,7 @@ def main() -> None:
     print(f"  - Full results directory: {results['results_dir']}")
     print(f"  - Tables directory: {results['results_dir']}/grades_table.*")
     print(f"  - Essays directory: {results['results_dir']}/essays/")
+    print(f"  - Individual grading files: {results['results_dir']}/grades/[author]/[grader].json")
     print(f"  - Visualizations: {results['results_dir']}/charts/")
     
     return 0

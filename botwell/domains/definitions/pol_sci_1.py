@@ -32,13 +32,20 @@ Then, **assign a letter grade** (A+, A, A-, B+, B, B-, C+, C, or C-) on a separa
 Grade: <LetterGrade>
 ```
 
-where `<LetterGrade>` is one of the valid grades above.
+where `<LetterGrade>` is one of the valid grades above. 
+
+**Important**: If you believe the essay falls precisely between two grade levels, use a composite grade notation. For example:
+- "A-/B+" for an essay between A- and B+
+- "B+/B" for an essay between B+ and B
+- "A/A-" for an essay between A and A-
+
+Use this composite notation when you're genuinely torn between two adjacent grades, as it provides more precise evaluation.
 
 Here is the essay to grade:
 
 {essay}
 
-Use **only** the valid letter grades provided (no numeric or other scales)."
+Use only letter grades or the composite notation described above (no numeric scales)."
 """
 
 DOMAIN_INFO = {

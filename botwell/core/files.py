@@ -19,9 +19,11 @@ def create_results_directory(domain_name: str, timestamp: str, is_free_run: bool
     free_tag = "-free" if is_free_run else ""
     run_dir = f"results/{timestamp}-{domain_name}{free_tag}"
     essays_dir = f"{run_dir}/essays"
+    grades_dir = f"{run_dir}/grades"
     
     os.makedirs(run_dir, exist_ok=True)
     os.makedirs(essays_dir, exist_ok=True)
+    os.makedirs(grades_dir, exist_ok=True)
     
     return run_dir, essays_dir
 
@@ -43,8 +45,33 @@ def save_essay_with_grades(author: str, essay: str, grades: Dict[str, Dict[str, 
             f.write(f"## Graded by: {grader_name}\n\n")
             f.write(grade_info["feedback"])
             f.write(f"\n\n**Letter Grade:** {grade_info['grade']}\n")
-            f.write(f"**Numeric Grade:** {grade_info['numeric_grade']:.1f}\n\n")
+            f.write(f"**Numeric Grade:** {grade_info['numeric_grade']:.1f}\n")
+            f.write(f"**Complete grading data:** `grades/{author}/{grader_name}.json`\n\n")
             f.write("---\n\n")
+    
+    return filename
+
+
+def save_essay_grading_json(author: str, grader: str, grade_data: Dict[str, Any], run_dir: str) -> str:
+    """Save individual grading responses as JSON files.
+    
+    Args:
+        author: The essay author (model name)
+        grader: The grader model name
+        grade_data: The complete grading data including feedback, grade, and raw response
+        run_dir: The results directory for this run
+        
+    Returns:
+        The path to the saved JSON file
+    """
+    # Create author directory if it doesn't exist
+    author_dir = f"{run_dir}/grades/{author}"
+    os.makedirs(author_dir, exist_ok=True)
+    
+    # Save individual grade JSON file
+    filename = f"{author_dir}/{grader}.json"
+    with open(filename, 'w') as f:
+        json.dump(grade_data, f, indent=2)
     
     return filename
 

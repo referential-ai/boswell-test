@@ -1,5 +1,43 @@
 # Grading System Documentation
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Grade Scale](#grade-scale)
+- [Grade Conversion Methods](#grade-conversion-methods)
+  - [Letter Grade to Numeric Value](#letter-grade-to-numeric-value)
+  - [Raw Numeric Scores](#raw-numeric-scores)
+  - [Numeric Value to Percentage](#numeric-value-to-percentage)
+  - [Percentage to Letter Grade](#percentage-to-letter-grade)
+- [Grade Extraction](#grade-extraction)
+  - [Primary Extraction Patterns](#primary-extraction-patterns)
+  - [Multi-Pass Recovery Strategy](#multi-pass-recovery-strategy)
+  - [Semantic Descriptor Matching](#semantic-descriptor-matching)
+- [N/A Grade Handling](#na-grade-handling)
+  - [When N/A Grades Occur](#when-na-grades-occur)
+  - [Logging of N/A Grades](#logging-of-na-grades)
+  - [Standardized Display Format](#standardized-display-format)
+  - [Effect on Calculations](#effect-on-calculations)
+  - [Analysis Tools](#analysis-tools)
+- [Individual Grading Files](#individual-grading-files)
+  - [File Structure and Location](#file-structure-and-location)
+  - [Contents of Grading Files](#contents-of-grading-files)
+  - [Benefits of Individual Grading Files](#benefits-of-individual-grading-files)
+  - [References in Markdown Files](#references-in-markdown-files)
+- [Grading Bias](#grading-bias)
+  - [Bias Calculation](#bias-calculation)
+  - [Bias Categorization](#bias-categorization)
+- [Display Precision](#display-precision)
+- [Grade Scale Variations](#grade-scale-variations)
+- [Composite Grade Notation](#composite-grade-notation)
+  - [Composite Grade Implementation](#composite-grade-implementation)
+  - [Usage in Reports](#usage-in-reports)
+  - [Grading Prompt Instructions](#grading-prompt-instructions)
+- [Raw Numeric Averages](#raw-numeric-averages)
+- [Cross-Grading Table Generation](#cross-grading-table-generation)
+  - [Excel Table Features](#excel-table-features)
+  - [Raw Average Calculation](#raw-average-calculation)
+
 ## Overview
 
 The Boswell system uses a standardized grading system to evaluate AI model essays and calculate the Boswell Quotient. This document outlines the grading scale, conversion methods, how raw numeric grades are preserved, and how N/A grades are handled.
@@ -252,6 +290,73 @@ This standardization applies to all report types:
 - Excel spreadsheets
 - Boswell Quotient reports
 
+## Individual Grading Files
+
+In addition to the consolidated JSON results file, the system stores each grading interaction in an individual JSON file. This provides a more granular and accessible way to analyze grading data.
+
+### File Structure and Location
+
+Each grading response is stored as a separate JSON file with the following structure:
+
+```
+results/[timestamp]-[domain]/grades/[author]/[grader].json
+```
+
+For example, if Claude-3.7-Sonnet grades an essay by Qwen-Max, the grading data will be available at:
+
+```
+results/20250306-142820-pol_sci_1/grades/Qwen-Max/Claude-3.7-Sonnet.json
+```
+
+### Contents of Grading Files
+
+Each JSON file contains the complete grading interaction, including:
+
+```json
+{
+  "author": "Qwen-Max",
+  "grader": "Claude-3.7-Sonnet",
+  "feedback": "# Feedback on 'Strengths and Weaknesses of Global AI Policies...",
+  "grade": "A-",
+  "numeric_grade": 3.75,
+  "cost_info": {
+    "input_tokens": 927,
+    "output_tokens": 726,
+    "input_cost": 0.00046350000000000004,
+    "output_cost": 0.001089,
+    "total_cost": 0.0015525,
+    "duration": 21.27737593650818
+  },
+  "timestamp": "2025-03-06 14:39:54"
+}
+```
+
+### Benefits of Individual Grading Files
+
+This approach offers several advantages:
+
+1. **Offline Analysis**: Researchers can analyze individual grading responses without having to parse the monolithic JSON file
+2. **Iterative Improvements**: Facilitates iterating on grading prompt design by providing easy access to raw grading data
+3. **Debugging**: Makes it easier to identify issues with specific grader/author combinations
+4. **Model Comparison**: Enables direct comparison of how different models grade the same essay
+5. **Extensibility**: Additional analysis tools can easily process individual files without modifying the core system
+
+### References in Markdown Files
+
+Essay feedback markdown files include references to the corresponding individual grading files:
+
+```markdown
+## Graded by: Claude-3.7-Sonnet
+
+[feedback content...]
+
+**Letter Grade:** A-
+**Numeric Grade:** 3.75
+**Complete grading data:** `grades/Qwen-Max/Claude-3.7-Sonnet.json`
+```
+
+This allows users to easily find the complete grading data for further analysis.
+
 ### Effect on Calculations
 
 The system handles N/A grades in specific ways in different contexts:
@@ -337,6 +442,86 @@ The system uses two different grade scales in different contexts:
 
 The GPA scale is used primarily for converting between letter grades and numeric values in the Excel cross-grading table 
 generation, while the University Standard Scale is used for the core grading functions.
+
+## Composite Grade Notation
+
+The system now supports composite grade notation for scores that fall exactly between two standard grade points. This provides a more nuanced representation of model performance.
+
+### Composite Grade Implementation
+
+Composite grades are formed by combining two adjacent letter grades when a numeric score falls precisely at their midpoint:
+
+| Numeric Value | Composite Notation | Description |
+|---------------|-------------------|-------------|
+| 3.875         | A/A-              | Exactly between A (4.0) and A- (3.75) |
+| 3.5           | A-/B+             | Exactly between A- (3.75) and B+ (3.25) |
+| 3.125         | B+/B              | Exactly between B+ (3.25) and B (3.0) |
+| 2.875         | B/B-              | Exactly between B (3.0) and B- (2.75) |
+
+The system uses a small tolerance (±0.01) to determine if a score should receive composite notation:
+
+```python
+def numeric_to_composite_grade(numeric_grade: float) -> str:
+    """Convert a numeric grade to a composite letter grade notation when applicable."""
+    # Standard grade boundaries
+    grade_boundaries = {
+        4.25: "A+", 4.0: "A", 3.75: "A-",
+        3.25: "B+", 3.0: "B", 2.75: "B-",
+        # ... other boundaries
+    }
+    
+    # Find surrounding grades
+    sorted_boundaries = sorted(grade_boundaries.items(), reverse=True)
+    
+    for i in range(len(sorted_boundaries) - 1):
+        upper_bound, upper_grade = sorted_boundaries[i]
+        lower_bound, lower_grade = sorted_boundaries[i + 1]
+        
+        # If grade falls between two standard boundaries
+        if lower_bound < numeric_grade < upper_bound:
+            # Calculate midpoint
+            midpoint = (upper_bound + lower_bound) / 2
+            
+            # If the grade is very close to the midpoint (within 0.01)
+            # Use composite notation
+            if abs(numeric_grade - midpoint) <= 0.01:
+                return f"{upper_grade}/{lower_grade}"
+            
+            # If closer to upper or lower boundary, return that grade
+            # ...
+```
+
+### Usage in Reports
+
+Composite grade notation is used in:
+
+1. **Raw Numeric to Letter Grade Conversion**: When displaying letter grades derived from raw numeric averages
+2. **Median Calculations**: When the median falls exactly between two grade points
+3. **Aggregate Statistics**: When showing model performance across multiple domains
+
+This enhanced notation provides more precise differentiation between models with similar performance.
+|
+| ### Grading Prompt Instructions
+| 
+| The system instructs LLMs to use composite grade notation for borderline cases through explicit instructions in the grading prompts. For example, the Political Science domain prompt now includes:
+| 
+| ```
+| **Important**: If you believe the essay falls precisely between two grade levels, use a composite grade notation. For example:
+| - "A-/B+" for an essay between A- and B+
+| - "B+/B" for an essay between B+ and B
+| - "A/A-" for an essay between A and A-
+| 
+| Use this composite notation when you're genuinely torn between two adjacent grades, as it provides more precise evaluation.
+| ```
+| 
+| This explicit instruction accomplishes several goals:
+| 
+| 1. **Awareness**: Makes LLMs aware that composite grades are a valid option
+| 2. **Examples**: Provides clear examples of the expected format (e.g., "A-/B+")
+| 3. **Usage Guidance**: Explains when to use composite notation (when "genuinely torn between two adjacent grades")
+| 4. **Rationale**: Explains why composite grades are valuable ("provides more precise evaluation")
+| 
+| Combined with the existing extraction and display capabilities, these prompt instructions ensure that the full precision of the LLMs' judgments is captured in all reports and visualizations.
 
 ## Raw Numeric Averages
 
