@@ -84,6 +84,9 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument("--output", type=str, default="boswell_results.json",
                         help="Output file name (default: boswell_results.json)")
     
+    parser.add_argument("--raw", type=str, metavar="FILE",
+                        help="Save raw API responses to specified text file")
+    
     parser.add_argument("--models", type=str, nargs="+",
                         help="Specific models to test (default: all models)")
     
@@ -256,7 +259,8 @@ def main() -> None:
         selected_models=models_to_use,
         skip_verification=args.skip_verification,
         max_retries=args.max_retries,
-        is_free_run=args.free
+        is_free_run=args.free,
+        raw_output_file=args.raw
     )
     
     # Print summary

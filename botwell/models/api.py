@@ -7,26 +7,44 @@ import requests
 from typing import Dict, Any, List
 import concurrent.futures
 import os
+from inspect import getframeinfo, currentframe
 
 from botwell.models.config import MODELS
 from botwell.utils.tokenization import calculate_tokens
 from botwell.utils.model_standardization import standardize_model_name
-
+from botwell.utils.raw_writer import write_raw_response
 
 from botwell.utils.caching import cached_api_call
 
 @cached_api_call
-def call_openrouter_api(model_id: str, prompt: str, disable_cache: bool = False) -> Dict[str, Any]:
+def call_openrouter_api(model_id: str, prompt: str, disable_cache: bool = False, 
+                        request_type: str = None, additional_info: Dict[str, Any] = None) -> Dict[str, Any]:
     """Call OpenRouter API with the specified model and prompt.
     
     Args:
         model_id: The model identifier string
         prompt: The prompt text to send to the model
         disable_cache: If True, bypass the cache and make a fresh API call
+        request_type: The type of request for raw output logging (e.g., "Essay Generation")
+        additional_info: Additional information to include in raw output
         
     Returns:
         JSON response with added cost information
     """
+    # Try to determine the request type from the calling function if not provided
+    if request_type is None:
+        try:
+            caller = getframeinfo(currentframe().f_back)
+            caller_name = caller.function
+            if "essay" in caller_name.lower():
+                request_type = "Essay Generation"
+            elif "grad" in caller_name.lower():
+                request_type = "Grading"
+            else:
+                request_type = "API Call"
+        except:
+            request_type = "API Call"
+    
     API_KEY = os.environ.get("OPENROUTER_API_KEY")
     if not API_KEY:
         raise ValueError("OPENROUTER_API_KEY environment variable is not set")
@@ -57,6 +75,9 @@ def call_openrouter_api(model_id: str, prompt: str, disable_cache: bool = False)
         print(f"Error calling API: {response.status_code}")
         print(response.text)
         return {"error": response.text, "cost": 0.0, "duration": 0.0}
+    
+    # Get model name for logging
+    model_name = next((m["name"] for m in MODELS if m["model_id"] == model_id), model_id)
     
     result = response.json()
     
@@ -101,6 +122,15 @@ def call_openrouter_api(model_id: str, prompt: str, disable_cache: bool = False)
         "total_cost": total_cost,
         "duration": end_time - start_time
     }
+
+    # Write raw response to file if raw output is enabled
+    write_raw_response(
+        request_type=request_type,
+        model_name=model_name,
+        prompt=prompt,
+        response=result,
+        additional_info=additional_info
+    )
     
     return result
 

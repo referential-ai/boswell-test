@@ -5,6 +5,7 @@
 def medianOfList( lst ) :
     n , srtlst = len( lst ) , sorted( lst )
     return ( ( srtlst[ n // 2 ] + srtlst[ ( n - 1 ) // 2 ] ) / 2 )
+
 def getSingleGrade( g ) :
     d = 0
     if ( g == 'a' ) :  d += 4.
@@ -12,8 +13,10 @@ def getSingleGrade( g ) :
     elif ( g == 'c' ) :  d += 2.
     elif ( g == 'd' ) :  d += 1.
     return ( d )
+
 def getPmGrade( g ) :
     return ( 0.25 if ( g == '+' ) else -0.25 )
+
 def cnvrt2Dgt( grdLst ) :
     gd = [ ]
     for g in grdLst :
@@ -31,6 +34,7 @@ def cnvrt2Dgt( grdLst ) :
             d = ( d + d2 ) / 2
         gd.append( d )
     return ( gd )
+
 def medianOfLetterGrades( lst ) :
     dl = cnvrt2Dgt( lst )
     g = medianOfList( dl )
@@ -60,6 +64,8 @@ def medianOfLetterGrades( lst ) :
     elif ( g >= 0.51 ) : g = 'D-'
     else : g = 'F'
     return ( g )
+
+    
 medianOfLetterGrades( [ 'A-' , 'A-/B+' , 'A+' , 'B+/B' , 'B-/C+' ] ) , \
 medianOfLetterGrades( [ 'A-/B+' , 'A+' , 'B+/B' , 'B-/C+' , 'B' , 'A' ] )
 ```

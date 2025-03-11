@@ -10,6 +10,7 @@ from typing import List, Dict, Any, Optional
 
 from botwell.domains import load_domain, AVAILABLE_DOMAINS
 from botwell.models.api import call_openrouter_api
+from botwell.utils.raw_writer import initialize_raw_output, close_raw_output
 from botwell.core.files import create_results_directory, save_essay_with_grades, save_results
 from botwell.utils.model_standardization import standardize_model_name, standardize_model_names_in_dict
 from botwell.utils import median_of_list
@@ -43,7 +44,12 @@ def get_essay_from_model(model: Dict[str, str], essay_prompt: str, max_retries: 
     
     for retry in range(max_retries):
         try:
-            response = call_openrouter_api(model_id, essay_prompt)
+            response = call_openrouter_api(
+                model_id, 
+                essay_prompt,
+                request_type="Essay Generation",
+                additional_info={"model": model_name}
+            )
             
             if "error" in response:
                 if retry < max_retries - 1:
@@ -131,7 +137,12 @@ def retry_grade_extraction(grader_id: str, grader_name: str, author: str, essay:
     
     for retry in range(max_retries):
         try:
-            response = call_openrouter_api(grader_id, fallback_prompt)
+            response = call_openrouter_api(
+                grader_id, 
+                fallback_prompt,
+                request_type="Grade Extraction Retry",
+                additional_info={"grader": grader_name, "author": author}
+            )
             clarification = response.get("choices", [{}])[0].get("message", {}).get("content", "")
             
             grade = extract_grade(clarification, f"{grader_name}-retry")
@@ -171,7 +182,12 @@ def grade_essay(grader: Dict[str, str], author: str, essay: str, grading_prompt:
     
     for retry in range(max_retries):
         try:
-            response = call_openrouter_api(grader_id, formatted_grading_prompt)
+            response = call_openrouter_api(
+                grader_id, 
+                formatted_grading_prompt,
+                request_type="Essay Grading",
+                additional_info={"grader": grader_name, "author": author}
+            )
             
             if "error" in response:
                 if retry < max_retries - 1:
@@ -239,10 +255,16 @@ def grade_essay(grader: Dict[str, str], author: str, essay: str, grading_prompt:
 
 
 def run_boswell_test(domain_name: str, output_file: str, selected_models: List[str] = None, 
-                 skip_verification: bool = False, max_retries: int = 3, is_free_run: bool = False) -> Dict[str, Any]:
+                 skip_verification: bool = False, max_retries: int = 3, is_free_run: bool = False,
+                 raw_output_file: str = None) -> Dict[str, Any]:
     """Run the full Boswell Test and return results."""
     # Start timing the entire process
     run_start_time = time.time()
+    
+    # Initialize raw output file if provided
+    if raw_output_file:
+        print(f"Raw API responses will be saved to: {raw_output_file}")
+        initialize_raw_output(raw_output_file)
     
     # Load domain
     essay_prompt, grading_prompt, domain_info = load_domain(domain_name)
@@ -521,6 +543,11 @@ def run_boswell_test(domain_name: str, output_file: str, selected_models: List[s
     # Calculate and record total run time
     total_run_time = time.time() - run_start_time
     results["timing"]["step_durations"]["total"] = total_run_time
+
+    # Close raw output file if it was opened
+    if raw_output_file:
+        close_raw_output()
+        print(f"Raw API responses saved to: {raw_output_file}")
     
     # Return path to results directory in results
     results["results_dir"] = run_dir
@@ -565,7 +592,8 @@ def run_all_domains(args) -> None:
                 selected_models=models_to_use,
                 skip_verification=args.skip_verification,
                 max_retries=args.max_retries,
-                is_free_run=args.free
+                is_free_run=args.free,
+                raw_output_file=args.raw
             )
             
             # Store results
